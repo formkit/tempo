@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "target": "es2019",
+    "lib": ["es2019", "dom"],
+    "strict": true,
+    "allowJs": false,
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "types": [
+      "prismjs",
+      "node"
+    ]
+  },
+  "exclude": [
+    "examples"
+  ]
+}

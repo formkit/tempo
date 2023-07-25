@@ -1,0 +1,12 @@
+src
+api-extractor.json
+__tests__
+.editorconfig
+.gitignore
+rollup.config.js
+tsconfig.json
+yarn.lock
+docs
+.prettierrc
+.build.sh
+.github

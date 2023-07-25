@@ -1,0 +1,10 @@
+dist
+.DS_Store
+node_modules
+coverage
+temp
+*.log
+.vscode
+/.aws/credentials
+.yalc
+.idea
