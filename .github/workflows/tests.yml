@@ -1,4 +1,4 @@
-name: Github Tests
+name: Vitest
 on: [push, workflow_dispatch]
 jobs:
   vitest-run:
