@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cd ./docs && pnpm nuxt dev"
   },
   "keywords": [
     "date",
@@ -14,5 +15,12 @@
     "date format"
   ],
   "author": "Justin Schroeder <justin@formkit.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "install": "^0.13.0",
+    "monaco-editor": "^0.40.0"
+  }
 }
