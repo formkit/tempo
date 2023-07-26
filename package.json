@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cd ./docs && pnpm nuxt dev"
+    "dev": "cd ./docs && pnpm nuxt dev",
+    "build": "jiti build.ts"
   },
   "keywords": [
     "date",
@@ -17,10 +17,15 @@
   "author": "Justin Schroeder <justin@formkit.com>",
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "@types/node": "^20.4.5",
+    "consola": "^3.2.3",
+    "execa": "^7.1.1",
+    "jiti": "^1.19.1",
+    "rollup": "^3.26.3",
+    "shx": "^0.3.4",
+    "tslib": "^2.6.1",
     "typescript": "^5.1.6"
-  },
-  "dependencies": {
-    "install": "^0.13.0",
-    "monaco-editor": "^0.40.0"
   }
 }

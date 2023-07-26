@@ -9,7 +9,6 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "types": [
-      "prismjs",
       "node"
     ]
   },
