@@ -1,3 +1,5 @@
+import { describe, it, expect, beforeEach } from "vitest"
+
 import {
   iso8601,
   monthStart,
@@ -12,17 +14,17 @@ import {
   formatStr,
   sameDay,
   parse,
-  range,
   parts,
   date,
   offset,
-  validOffset,
+  range,
   applyOffset,
   removeOffset,
   nearestDay,
   yearDays,
   dayOfYear,
-} from "../tempo"
+} from "../index"
+import { validOffset } from "../common"
 
 /**
  * Create a new array of the given length filled with a specific type.
@@ -30,7 +32,7 @@ import {
  * @param fill - Fill with a given value
  * @returns
  */
-export function range<T>(length: number, fill: (index: number) => T): T[] {
+export function r<T>(length: number, fill: (index: number) => T): T[] {
   return new Array(length).fill("").map((_x, i) => fill(i))
 }
 
@@ -103,12 +105,16 @@ describe("validating ISO 8601", () => {
 })
 
 describe("date", () => {
-  expect(date("2022-01-22 00:00:00").toISOString()).toBe(
-    "2022-01-22T05:00:00.000Z"
-  )
-  expect(date("2022-01-22T00:00-0300").toISOString()).toBe(
-    "2022-01-22T03:00:00.000Z"
-  )
+  it("qualifies and re-timezones a date", () => {
+    expect(date("2022-01-22 00:00:00").toISOString()).toBe(
+      "2022-01-22T05:00:00.000Z"
+    )
+  })
+  it("accepts a time with a timezone offset", () => {
+    expect(date("2022-01-22T00:00-0300").toISOString()).toBe(
+      "2022-01-22T03:00:00.000Z"
+    )
+  })
 })
 
 describe("monthStart", () => {
@@ -983,8 +989,10 @@ describe("addYear", () => {
 })
 
 describe("validOffset", () => {
-  expect(validOffset("+0000")).toBe("+0000")
-  expect(validOffset("+0100")).toBe("+0100")
+  it("returns its own value when valid", () => {
+    expect(validOffset("+0000")).toBe("+0000")
+    expect(validOffset("+0100")).toBe("+0100")
+  })
 })
 
 describe("month ranges", () => {
