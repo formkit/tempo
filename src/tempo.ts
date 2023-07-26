@@ -235,14 +235,6 @@ const dayPeriodMap: Map<string, { am?: string; pm?: string }> = new Map()
 const styles: ReadonlyArray<FormatStyle> = ["full", "long", "medium", "short"]
 
 /**
- * Matches a given date with ISO 8601 compliance. Allows the "T" to be missing
- * and only requires year and month, other params are required with increasing
- * specificity.
- */
-const iso8601Match =
-  /^([0-9]{4})-([0-1][0-9])(?:-([0-3][0-9]))?(?:[T ]?([0-2][0-9])(?::([0-5][0-9]))?(?::([0-5][0-9]))?)?(?:\.[0-9]+)?(Z|(?:\+|\-)[0-9]{4})?$/
-
-/**
  * Creates a leading zero string of 2 digits.
  * @param n - A number.
  */
@@ -252,43 +244,6 @@ const two = (n: number) => String(n).padStart(2, "0")
  * @param n - A number.
  */
 const four = (n: number) => String(n).padStart(2, "0")
-
-/**
- * True when the date string is valid ISO 8601.
- * @param date - A date string.
- */
-export function iso8601(date: string): boolean {
-  const matches = date.match(iso8601Match)
-  if (matches) {
-    const month = Number(matches[2])
-    if (month < 1 || month > 12) return false
-
-    if (typeof matches[3] !== undefined) {
-      const date = Number(matches[3])
-      if (date < 1 || date > 31) return false
-    }
-    if (typeof matches[4] !== undefined) {
-      const hours = Number(matches[4])
-      if (hours < 0 || hours > 23) return false
-    }
-
-    return true
-  }
-  return false
-}
-
-/**
- * Normalizes a "short" date like 2012-01-01 to 2012-01-01T00:00:00 to prevent
- * automatic coercion to UTC.
- * @param date - A string representation of the date.
- */
-function normalize(date: string) {
-  const matches = date.match(iso8601Match)
-  if (matches && typeof matches[4] === "undefined") {
-    return (date += "T00:00:00")
-  }
-  return date
-}
 
 /**
  * A date to parse.
