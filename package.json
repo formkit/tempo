@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "cd ./docs && pnpm nuxt dev",
     "build": "jiti build.ts",
-    "test": "vitest"
+    "test": "TZ=\"America/New_York\" vitest"
   },
   "keywords": [
     "date",
