@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const props = defineProps<{ location: string }>()
+const props = defineProps<{ file: string }>()
 const code = ref("")
-const value = await import(/* @vite-ignore */ `${props.location}?raw`)
+const value = await import(`../examples/${props.file}.ts?raw`)
 code.value = value.default
 onMounted(() => {
   alert("here")

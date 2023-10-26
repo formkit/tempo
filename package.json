@@ -19,15 +19,15 @@
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.3",
-    "@rollup/plugin-typescript": "^11.1.2",
-    "@types/node": "^20.4.5",
+    "@rollup/plugin-typescript": "^11.1.4",
+    "@types/node": "^20.7.2",
     "consola": "^3.2.3",
-    "execa": "^7.1.1",
-    "jiti": "^1.19.1",
-    "rollup": "^3.26.3",
+    "execa": "^7.2.0",
+    "jiti": "^1.20.0",
+    "rollup": "^3.29.4",
     "shx": "^0.3.4",
-    "tslib": "^2.6.1",
-    "typescript": "^5.1.6",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
     "vitest": "^0.33.0"
   }
 }

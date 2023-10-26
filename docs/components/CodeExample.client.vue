@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import "../monaco-config"
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api"
-const props = defineProps<{ location: string }>()
+import "../monaco-config"
+const props = defineProps<{ file: string }>()
 const code = ref("")
 const el = ref<null | HTMLDivElement>(null)
-const value = await import(/* @vite-ignore */ `../${props.location}?raw`)
+const value = await import(`../examples/${props.file}.ts?raw`)
 code.value = value.default
 watch(el, () => {
   const code = el.value?.dataset.code

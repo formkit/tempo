@@ -4,9 +4,9 @@ import jsonWorker from "monaco-editor/esm/vs/language/json/json.worker?worker"
 import cssWorker from "monaco-editor/esm/vs/language/css/css.worker?worker"
 import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker"
 import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker"
+import tempoDeclarations from "../dist/index.d.ts?raw"
 
 if (typeof window !== "undefined") {
-  // @ts-ignore
   self.MonacoEnvironment = {
     getWorker(_: any, label: string) {
       if (label === "json") {
@@ -24,6 +24,10 @@ if (typeof window !== "undefined") {
       return new editorWorker()
     },
   }
-
   monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true)
+  monaco.languages.typescript.typescriptDefaults.addExtraLib(`
+    declare module '@formkit/tempo' {
+      ${tempoDeclarations}
+    }
+  `)
 }
