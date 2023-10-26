@@ -6,18 +6,25 @@ const code = ref("")
 const el = ref<null | HTMLDivElement>(null)
 const value = await import(`../examples/${props.file}.ts?raw`)
 code.value = value.default
-watch(el, () => {
-  const code = el.value?.dataset.code
-  monaco.editor.create(el.value!, {
-    value: code,
+const stopWatch = watch(el, () => {
+  const editor = monaco.editor.create(el.value!, {
+    value: code.value,
     language: "typescript",
     minimap: { enabled: false },
   })
+  stopWatch()
+  editor.onDidChangeModelContent(() => {
+    code.value = editor.getValue()
+  })
+
 })
 </script>
 
 <template>
-  <div class="chrome" ref="el" :data-code="code"></div>
+  <div class="chrome" ref="el"></div>
+  <pre>
+    {{ code }}
+  </pre>
 </template>
 
 <style scoped>
