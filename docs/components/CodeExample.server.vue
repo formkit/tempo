@@ -3,13 +3,10 @@ const props = defineProps<{ file: string }>()
 const code = ref("")
 const value = await import(`../examples/${props.file}.ts?raw`)
 code.value = value.default
-onMounted(() => {
-  alert("here")
-})
 </script>
 
 <template>
-  <div class="chrome" :data-code="code"></div>
+  <div class="chrome"></div>
 </template>
 
 <style scoped>

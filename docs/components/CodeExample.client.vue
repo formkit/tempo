@@ -11,6 +11,9 @@ const stopWatch = watch(el, () => {
     value: code.value,
     language: "typescript",
     minimap: { enabled: false },
+    lineNumbers: 'off',
+    glyphMargin: false,
+    folding: false,
   })
   stopWatch()
   editor.onDidChangeModelContent(() => {
@@ -21,10 +24,9 @@ const stopWatch = watch(el, () => {
 </script>
 
 <template>
-  <div class="chrome" ref="el"></div>
-  <pre>
-    {{ code }}
-  </pre>
+  <div class="p-4 rounded-md bg-slate-100 dark:bg-slate-700">
+    <div class="chrome" ref="el"></div>
+  </div>
 </template>
 
 <style scoped>

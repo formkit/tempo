@@ -5,6 +5,7 @@ import cssWorker from "monaco-editor/esm/vs/language/css/css.worker?worker"
 import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker"
 import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker"
 import tempoDeclarations from "../dist/index.d.ts?raw"
+import nightOwl from "~/src/night-owl"
 
 if (typeof window !== "undefined") {
   self.MonacoEnvironment = {
@@ -30,4 +31,6 @@ if (typeof window !== "undefined") {
       ${tempoDeclarations}
     }
   `)
+  monaco.editor.defineTheme("night-owl", nightOwl)
+  monaco.editor.setTheme("night-owl")
 }
