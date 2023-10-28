@@ -47,6 +47,10 @@ const stopWatch = watch(el, () => {
     code.value = editor.getValue()
     updateHeight()
   })
+  function runInsideWorker(code: string) {
+    var blob = new Blob(['self.onmessage = ', code], { type: 'text/javascript' });
+    var url = URL.createObjectURL(blob);
+  }
   updateHeight()
 })
 </script>
