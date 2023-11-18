@@ -6,6 +6,7 @@ import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker"
 import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker"
 import tempoDeclarations from "../dist/index.d.ts?raw"
 import nightOwl from "~/src/night-owl"
+import chromeTools from "~/src/chrome-tools"
 
 if (typeof window !== "undefined") {
   self.MonacoEnvironment = {
@@ -32,5 +33,11 @@ if (typeof window !== "undefined") {
     }
   `)
   monaco.editor.defineTheme("night-owl", nightOwl)
-  monaco.editor.setTheme("night-owl")
+  monaco.editor.defineTheme("chrome-dev-tools", chromeTools)
+  const isDarkMode = false
+  if (isDarkMode) {
+    monaco.editor.setTheme("night-owl")
+  } else {
+    monaco.editor.setTheme("chrome-dev-tools")
+  }
 }

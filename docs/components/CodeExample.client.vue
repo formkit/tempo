@@ -29,7 +29,6 @@ const stopWatch = watch(el, () => {
   })
   stopWatch()
 
-
   let ignoreEvent = false
   function updateHeight() {
     const width = container.clientWidth
@@ -48,8 +47,10 @@ const stopWatch = watch(el, () => {
     updateHeight()
   })
   function runInsideWorker(code: string) {
-    var blob = new Blob(['self.onmessage = ', code], { type: 'text/javascript' });
-    var url = URL.createObjectURL(blob);
+    var blob = new Blob(["self.onmessage = ", code], {
+      type: "text/javascript",
+    })
+    var url = URL.createObjectURL(blob)
   }
   updateHeight()
 })
