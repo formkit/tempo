@@ -5,7 +5,7 @@ export default {
   inherit: true,
   rules: [
     {
-      background: "FFFFFF",
+      background: "F2F5F9",
       token: "",
     },
     {
@@ -103,9 +103,9 @@ export default {
   ],
   colors: {
     "editor.foreground": "#000000",
-    "editor.background": "#FFFFFF",
+    "editor.background": "#F2F5F9",
     "editor.selectionBackground": "#BAD6FD",
-    "editor.lineHighlightBackground": "#0000001A",
+    "editor.lineHighlightBackground": "#00000000",
     "editorCursor.foreground": "#000000",
     "editorWhitespace.foreground": "#B3B3B3F4",
   },
