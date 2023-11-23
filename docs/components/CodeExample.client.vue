@@ -47,12 +47,17 @@ const stopWatch = watch(el, () => {
   editor.onDidChangeModelContent(() => {
     code.value = editor.getValue()
     updateSize()
+    runInsideWorker(code.value)
   })
   function runInsideWorker(code: string) {
-    const blob = new Blob(["self.onmessage = ", code], {
+    const blob = new Blob([`self.postMessage(${code})`], {
       type: "text/javascript",
     })
     const url = URL.createObjectURL(blob)
+    const worker = new Worker(url)
+    worker.onmessage = (e) => {
+      console.log(e.data)
+    }
   }
   updateSize()
 })
