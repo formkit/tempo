@@ -30,7 +30,7 @@ const stopWatch = watch(el, () => {
   stopWatch()
 
   let ignoreEvent = false
-  function updateHeight() {
+  function updateSize() {
     const width = container.clientWidth
     const contentHeight = Math.min(1000, editor.getContentHeight())
     container.style.height = `${contentHeight}px`
@@ -42,29 +42,31 @@ const stopWatch = watch(el, () => {
     }
   }
 
+  new ResizeObserver(updateSize).observe(el.value)
+
   editor.onDidChangeModelContent(() => {
     code.value = editor.getValue()
-    updateHeight()
+    updateSize()
   })
   function runInsideWorker(code: string) {
-    var blob = new Blob(["self.onmessage = ", code], {
+    const blob = new Blob(["self.onmessage = ", code], {
       type: "text/javascript",
     })
-    var url = URL.createObjectURL(blob)
+    const url = URL.createObjectURL(blob)
   }
-  updateHeight()
+  updateSize()
 })
 </script>
 
 <template>
-  <div class="p-4 rounded-md bg-slate-100 dark:bg-slate-800">
+  <div class="rounded-md bg-slate-100 dark:bg-slate-800">
     <div class="chrome" ref="el"></div>
   </div>
 </template>
 
 <style scoped>
 .chrome {
-  width: 500px;
+  width: 100%;
   height: 200px;
 }
 </style>
