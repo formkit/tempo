@@ -3,7 +3,15 @@
   "version": "0.1.0",
   "description": "📆 Parse, format, manipulate, and internationalize dates and times in JavaScript and TypeScript.",
   "main": "index.js",
-  "type": "module",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
   "scripts": {
     "dev": "cd ./docs && pnpm nuxt dev",
     "build": "jiti build.ts",
@@ -18,16 +26,17 @@
   "author": "Justin Schroeder <justin@formkit.com>",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.3",
-    "@rollup/plugin-typescript": "^11.1.4",
-    "@types/node": "^20.7.2",
+    "@nuxtjs/tailwindcss": "^6.11.2",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^20.11.10",
     "consola": "^3.2.3",
     "execa": "^7.2.0",
-    "jiti": "^1.20.0",
+    "jiti": "^1.21.0",
     "rollup": "^3.29.4",
     "shx": "^0.3.4",
     "tslib": "^2.6.2",
-    "typescript": "^5.2.2",
-    "vitest": "^0.33.0"
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.1"
   }
 }

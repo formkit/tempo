@@ -1,6 +1,6 @@
 <template>
-  <div class="hero">
-    <h1>TempoJS</h1>
+  <header>
+    <img src="~/assets/logo-light.svg" alt="Tempo" />
     <p>The easiest way to work with dates in JavaScript.</p>
-  </div>
+  </header>
 </template>

@@ -6,17 +6,18 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "vitest"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.11.2",
     "@types/node": "^18.17.0",
-    "autoprefixer": "^10.4.16",
-    "nuxt": "^3.6.5",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.5"
+    "nuxt": "^3.10.0",
+    "vitest": "^1.2.2"
   },
   "dependencies": {
+    "@formkit/tempo": "workspace:../",
     "monaco-editor": "^0.40.0"
   }
 }

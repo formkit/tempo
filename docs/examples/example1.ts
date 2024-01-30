@@ -1,3 +1,5 @@
 import { format } from "@formkit/tempo"
 
-format(new Date(), "MM/DD/YYYY")
+const x = format(new Date(), "MM/DD/YYYY")
+
+console.log(x)
