@@ -7,7 +7,7 @@ const code = ref("")
 const el = ref<null | HTMLDivElement>(null)
 const value = await import(`../examples/${props.file}.ts?raw`)
 code.value = value.default
-const result = ref()
+const result = ref<Array<string[]>>([])
 const error = ref("")
 
 const stopWatch = watch(el, () => {
@@ -31,6 +31,7 @@ const stopWatch = watch(el, () => {
     lineNumbers: "off",
     glyphMargin: false,
     folding: false,
+    renderLineHighlight: "none",
   })
   stopWatch()
 
@@ -55,7 +56,7 @@ const stopWatch = watch(el, () => {
     if (code === "") return
     code = processPlaygroundCode(code)
     if (worker) worker.terminate()
-    result.value = ""
+    result.value = []
     error.value = ""
 
     worker = new Worker(
@@ -64,20 +65,32 @@ const stopWatch = watch(el, () => {
         type: "module",
       }
     )
+
     worker.postMessage(code)
-    worker.onmessage = (e) => {
-      result.value = e.data
+    worker.onmessage = (e: {
+      data: { lineNumber: number; value: unknown }
+    }) => {
+      result.value[e.data.lineNumber] ??= []
+      if (e.data.value instanceof Date) {
+        result.value[e.data.lineNumber].push(
+          `Date: ${e.data.value.toISOString()}`
+        )
+      } else {
+        result.value[e.data.lineNumber].push(String(e.data.value))
+      }
     }
     worker.onerror = (e) => {
-      result.value = ""
+      result.value = []
       error.value = "Your code contains errors."
     }
   }
 
+  let debounceTimer: NodeJS.Timeout | number | null = null
   editor.onDidChangeModelContent(() => {
     code.value = editor.getValue()
     updateSize()
-    runInsideWorker(code.value)
+    if (debounceTimer) clearTimeout(debounceTimer)
+    debounceTimer = setTimeout(() => runInsideWorker(code.value), 500)
   })
   updateSize()
 
@@ -89,8 +102,12 @@ const stopWatch = watch(el, () => {
 <template>
   <div class="rounded-md bg-slate-100 dark:bg-slate-800 flex">
     <div class="w-1/2" ref="el"></div>
-    <div class="w-1/2 bg-slate-200 font-mono whitespace-pre p-4">
-      <div v-if="result">{{ result }}</div>
+    <div class="w-1/2 bg-slate-200 font-mono p-4 overflow-auto">
+      <ul v-if="result">
+        <li v-for="logs in result" class="text-nowrap h-6 text-slate-600">
+          {{ logs ? logs.join(", ") : "" }}
+        </li>
+      </ul>
       <div class="bg-red-500 font-mono p-4" v-else-if="error">
         {{ error }}
       </div>

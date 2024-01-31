@@ -1,3 +1,10 @@
+/**
+ * Preprocess source code examples for use in the playground. This allows us to
+ * use actual import statements, and also wrap all the functions a logging
+ * system so we get repl like behavior.
+ *
+ * @param rawSource - Source code to process
+ */
 export function processPlaygroundCode(rawSource: string): string {
   const fns = new Set<string>()
   // Replace the import statement with a dynamic import, and create a set of
@@ -38,6 +45,19 @@ export function processPlaygroundCode(rawSource: string): string {
   return `(async () => { ${code} })()`
 }
 
+/**
+ * Parses javascript code and wraps all the functions in the fns array with the
+ * wrapFn function call. The wrapFn function call will be passed the line number
+ * of the function call as the first argument. This is useful for logging out
+ * results of the function calls in the playground.
+ *
+ * This function is not perfect, but much small and faster than a full AST
+ * parser and manipulator.
+ *
+ * @param code - Source code to wrap
+ * @param fns - List of functions to wrap
+ * @param wrapFn - Wrap all the above functions in this function call
+ */
 function wrapFunctions(code: string, fns: string[], wrapFn: string): string {
   const chars = [...code]
   let quote = ""
@@ -98,6 +118,14 @@ function wrapFunctions(code: string, fns: string[], wrapFn: string): string {
   return chars.join("")
 }
 
+/**
+ * Checks if the next character could be part of a function name.
+ *
+ * @param char - The character to check
+ * @param currentFnStr - The current function string we are building
+ * @param fns - The list of functions we are looking for
+ * @param possibleFns - List of functions we have narrowed it down to
+ */
 function isNextChar(
   char: string,
   currentFnStr: string,
