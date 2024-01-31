@@ -79,4 +79,18 @@ logOut(1, foo("bar()", logOut(1, bar(
   ting(logOut(2, baz  ( bing())))))
 )) })()`)
   })
+
+  it("can perform multiple wraps", () => {
+    expect(
+      processPlaygroundCode(`import { parse, format } from "@formkit/tempo"
+for (let i; i<5; i++) {
+    format('2012-01-01', 'YYYY')
+}
+`)
+    ).toBe(`(async () => { const { parse, format } = await loadTempo()
+for (let i; i<5; i++) {
+    logOut(2, format('2012-01-01', 'YYYY'))
+}
+ })()`)
+  })
 })
