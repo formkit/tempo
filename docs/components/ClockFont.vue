@@ -6,8 +6,11 @@ defineProps<{
 
 <template>
   <div class="flex">
-    <svg v-for="char in chars" width="142" height="200">
-      <use :href="'#char-' + char" />
-    </svg>
+    <ClockCharacter
+      v-for="(char, i) in chars"
+      :key="char"
+      :char="char"
+      :settle-time="1000 + i * 750"
+    />
   </div>
 </template>

@@ -11,7 +11,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        body: "#EFEFEF",
+        body: "#efefef",
+        lcd: "#e1eaee",
       },
     },
   },
