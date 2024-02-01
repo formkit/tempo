@@ -1,8 +1,9 @@
 <template>
-  <div class="container">
-    <ClockFont chars="tempo" />
-    <TheHeader />
+  <TheHeader />
+  <ContainerSection>
     <TheNavigation />
-    <CodeExample file="example1" />
-  </div>
+    <main>
+      <CodeExample file="example1" />
+    </main>
+  </ContainerSection>
 </template>

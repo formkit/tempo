@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 defineProps<{
   chars: string
+  delay: number
 }>()
 </script>
 
@@ -10,7 +11,7 @@ defineProps<{
       v-for="(char, i) in chars"
       :key="char"
       :char="char"
-      :settle-time="1000 + i * 750"
+      :settle-time="delay + i * (delay / 2)"
     />
   </div>
 </template>

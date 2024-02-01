@@ -19,7 +19,7 @@ onMounted(() => {
       let easedTime = easeOutQuad(progress)
       let randomIndex = Math.floor(Math.random() * chars.length)
       currentChar.value = chars[randomIndex]
-      let nextUpdate = Math.round(easedTime * 150)
+      let nextUpdate = Math.round(easedTime * 50)
       setTimeout(updateChar, nextUpdate)
     } else {
       currentChar.value = props.char
@@ -32,14 +32,24 @@ onMounted(() => {
 </script>
 
 <template>
-  <svg width="142" height="200">
-    <use href="/font-sprite.svg#char-8" class="fill-lcd" />
-    <use href="/font-sprite.svg#char-i" class="fill-lcd" />
-    <use
-      v-if="currentChar"
-      :href="'/font-sprite.svg#char-' + currentChar"
-      :class="`transition-all fill-sky-500${finished ? '' : ' opacity-50'}`"
-      style="box-shadow: 0 0 1em rgba(0, 0, 255, 0.5)"
-    />
-  </svg>
+  <div class="block aspect-[0.71] w-[1em] relative">
+    <svg class="aspect-[0.71] absolute inset-0 z-20">
+      <use
+        v-if="currentChar"
+        :href="'/font-sprite.svg#char-' + currentChar"
+        :class="`transition-all fill-sky-500${finished ? '' : ' opacity-20'}`"
+      />
+    </svg>
+    <svg class="aspect-[0.71] absolute inset-0 blur-sm z-10">
+      <use
+        v-if="currentChar"
+        :href="'/font-sprite.svg#char-' + currentChar"
+        :class="`transition-all fill-sky-500${finished ? '' : ' opacity-20'}`"
+      />
+    </svg>
+    <svg class="aspect-[0.71] absolute inset-0 z-0">
+      <use href="/font-sprite.svg#char-8" class="fill-lcd" />
+      <use href="/font-sprite.svg#char-i" class="fill-lcd" />
+    </svg>
+  </div>
 </template>

@@ -5,3 +5,14 @@
 body {
   @apply bg-body;
 }
+
+.monaco-editor,
+.monaco-editor .margin {
+  @apply rounded-tl-lg;
+  @apply rounded-tr-lg;
+  @apply md:rounded-tr-none;
+  @apply md:rounded-bl-lg;
+}
+.monaco-scrollable-element {
+  @apply rounded-tr-lg;
+}

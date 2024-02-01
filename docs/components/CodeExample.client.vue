@@ -100,11 +100,16 @@ const stopWatch = watch(el, () => {
 </script>
 
 <template>
-  <div class="rounded-md bg-slate-100 dark:bg-slate-800 flex">
-    <div class="w-1/2" ref="el"></div>
-    <div class="w-1/2 bg-slate-200 font-mono p-4 overflow-auto">
+  <div class="flex flex-col md:flex-row rounded-lg">
+    <div class="md:w-1/2" ref="el"></div>
+    <div
+      class="md:w-1/2 bg-slate-200 font-mono p-4 overflow-auto rounded-bl-lg rounded-br-lg md:rounded-tr-lg md:rounded-bl-none"
+    >
       <ul v-if="result">
-        <li v-for="logs in result" class="text-nowrap h-6 text-slate-600">
+        <li
+          v-for="logs in result"
+          class="text-nowrap h-6 text-slate-600 empty:hidden md:empty:block"
+        >
           {{ logs ? logs.join(", ") : "" }}
         </li>
       </ul>
