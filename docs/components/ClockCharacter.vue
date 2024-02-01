@@ -40,16 +40,9 @@ onMounted(() => {
         :class="`transition-all fill-sky-500${finished ? '' : ' opacity-20'}`"
       />
     </svg>
-    <!-- <svg class="aspect-[0.71] absolute inset-0 blur-sm z-10">
-      <use
-        v-if="currentChar"
-        :href="'/font-sprite.svg#char-' + currentChar"
-        :class="`transition-all fill-sky-200${finished ? '' : ' opacity-20'}`"
-      />
-    </svg> -->
-    <!-- <svg class="aspect-[0.71] absolute inset-0 z-0">
-      <use href="/font-sprite.svg#char-8" class="fill-lcd" />
-      <use href="/font-sprite.svg#char-i" class="fill-lcd" />
-    </svg> -->
+    <svg class="aspect-[0.71] absolute inset-0 z-0">
+      <use href="/font-sprite.svg#char-8" class="fill-sky-500 opacity-5" />
+      <use href="/font-sprite.svg#char-i" class="fill-sky-500 opacity-5" />
+    </svg>
   </div>
 </template>

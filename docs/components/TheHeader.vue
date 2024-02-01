@@ -12,7 +12,7 @@ onMounted(() => {
   <ContainerSection>
     <header class="flex flex-col mb-[12%]">
       <div
-        class="super-header w-full mt-4 mb-[12%] flex justify-between items-center"
+        class="super-header w-full mt-4 mb-[12%] sm:mb-10 md:mb-14 lg:mb-20 flex justify-between items-center"
       >
         <NuxtLink
           to="https://formkit.com"
@@ -39,11 +39,40 @@ onMounted(() => {
         :delay="600"
       />
       <h1
-        class="tagline text-center leading-tight lg:leading-tight text-[6vw] lg:text-6xl font-bold max-w-2xl m-auto opacity-0 translate-y-4 transition-all duration-600 data-[show]:opacity-100 data-[show]:translate-y-0 text-slate-700"
+        class="tagline text-center leading-tight lg:leading-tight text-[6vw] lg:text-6xl font-bold max-w-2xl m-auto opacity-0 translate-y-4 transition-all duration-600 data-[show]:opacity-100 data-[show]:translate-y-0 text-slate-700 mb-10 md:mb-14 lg:mb-20"
         :data-show="showTagline"
       >
         The easiest way to work with dates in&nbsp;JavaScript.
       </h1>
+      <div
+        class="flex flex-col justify-center items-center gap-4 sm:flex-row sm:gap-8"
+      >
+        <a
+          class="bg-black py-3 px-6 text-white rounded-lg flex items-center text-sm"
+          href="#introduction"
+        >
+          Get started
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-5 h-5 ml-2"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 3a.75.75 0 0 1 .75.75v10.638l3.96-4.158a.75.75 0 1 1 1.08 1.04l-5.25 5.5a.75.75 0 0 1-1.08 0l-5.25-5.5a.75.75 0 1 1 1.08-1.04l3.96 4.158V3.75A.75.75 0 0 1 10 3Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
+        <a
+          href="#copy-code"
+          class="group font-mono text-sm text-fuchsia-700 shadow-lg py-3 px-6 bg-white rounded-lg flex items-center gap-4"
+        >
+          npm i @formkit/tempo
+          <IconCopy class="w-3 text-gray-400 group-hover:text-fuchsia-700" />
+        </a>
+      </div>
     </header>
   </ContainerSection>
 </template>
