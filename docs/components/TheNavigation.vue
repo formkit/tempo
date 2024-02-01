@@ -29,6 +29,7 @@ const results = ref<Array<{ title: string; description: string; id: string }>>([
     id: "#modifying",
   },
 ])
+const initialShow = ref<undefined | boolean>(undefined)
 
 onMounted(() => {
   search.value?.focus()
@@ -38,11 +39,18 @@ onMounted(() => {
       search.value?.focus()
     }
   })
+
+  setTimeout(() => {
+    initialShow.value = true
+  }, 2100)
 })
 </script>
 
 <template>
-  <div class="primary-navigation mb-10 max-w-3xl mx-auto">
+  <div
+    class="primary-navigation mb-10 max-w-3xl mx-auto duration-600 opacity-0 translate-y-4 data-[show]:opacity-100 data-[show]:translate-y-0 transition-all"
+    :data-show="initialShow"
+  >
     <div class="search-tray">
       <div
         class="input-wrapper flex bg-white p-2 rounded-md focus-within:outline-sky-500 focus-within:outline focus-within:outline-2 shadow-md mb-4"
@@ -79,16 +87,16 @@ onMounted(() => {
             <a
               :href="result.id"
               tabindex="0"
-              class="group px-4 py-3 bg-white rounded-lg flex justify-between items-center focus:outline focus:outline-sky-500 focus:outline-2"
+              class="group px-4 py-3 bg-white rounded-lg flex justify-between items-center focus:outline focus:outline-sky-500 focus:outline-2 transition-shadow hover:shadow-md"
             >
-              <div>
+              <div class="pr-4">
                 <div class="font-bold">{{ result.title }}</div>
                 <p class="text-sm text-slate-600">{{ result.description }}</p>
               </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                class="w-6 h-6 group-focus:fill-sky-500"
+                class="w-6 h-6 basis-6 group-focus:fill-sky-500 flex-shrink-0"
               >
                 <path
                   fill-rule="evenodd"

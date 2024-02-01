@@ -39,7 +39,7 @@ onMounted(() => {
         :delay="600"
       />
       <h1
-        class="tagline text-center leading-tight lg:leading-tight text-[6vw] lg:text-6xl font-bold max-w-2xl m-auto opacity-0 translate-y-4 transition-all data-[show]:opacity-100 data-[show]:translate-y-0 text-slate-700"
+        class="tagline text-center leading-tight lg:leading-tight text-[6vw] lg:text-6xl font-bold max-w-2xl m-auto opacity-0 translate-y-4 transition-all duration-600 data-[show]:opacity-100 data-[show]:translate-y-0 text-slate-700"
         :data-show="showTagline"
       >
         The easiest way to work with dates in&nbsp;JavaScript.
