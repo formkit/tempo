@@ -35,7 +35,7 @@ onMounted(() => {
       </div>
       <ClockFont
         chars="tempo"
-        class="text-[15vw] justify-center mb-[12%] max-w-3xl m-auto"
+        class="text-[10vw] justify-center mb-[12%] max-w-3xl m-auto"
         :delay="600"
       />
       <h1
