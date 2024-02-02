@@ -53,7 +53,7 @@ onMounted(() => {
   >
     <div class="search-tray">
       <div
-        class="input-wrapper flex bg-white p-2 rounded-md focus-within:outline-sky-500 focus-within:outline focus-within:outline-2 shadow-md mb-4"
+        class="input-wrapper flex bg-white p-2 pr-3 rounded-md focus-within:outline-sky-500 focus-within:outline focus-within:outline-2 shadow-md mb-4"
       >
         <svg
           width="24"

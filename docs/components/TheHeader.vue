@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const showTagline = ref<undefined | boolean>(undefined)
-const temporaryToggle = useTimedRef(4000)
+const showButtons = ref<undefined | boolean>(undefined)
+const didCopy = useTimedRef(4000)
 const code = ref<HTMLElement>()
 const packageManager = ref("npm i")
 const packageManagers = ["npm install", "yarn add", "pnpm add", "bun install"]
@@ -9,6 +10,9 @@ onMounted(() => {
   setTimeout(() => {
     showTagline.value = true
   }, 1750)
+  setTimeout(() => {
+    showButtons.value = true
+  }, 2000)
   setInterval(() => {
     packageManager.value =
       packageManagers[
@@ -20,7 +24,7 @@ onMounted(() => {
 
 function copyCode() {
   navigator.clipboard.writeText(`${packageManager.value} @formkit/tempo`)
-  temporaryToggle.value = true
+  didCopy.value = true
 }
 </script>
 
@@ -55,13 +59,14 @@ function copyCode() {
         :delay="600"
       />
       <h1
-        class="tagline text-center leading-tight lg:leading-tight text-[6vw] lg:text-6xl font-bold max-w-2xl m-auto opacity-0 translate-y-4 transition-all duration-600 data-[show]:opacity-100 data-[show]:translate-y-0 text-slate-700 mb-10 md:mb-14 lg:mb-20"
+        class="tagline text-center leading-tight lg:leading-tight text-[6vw] lg:text-6xl font-bold max-w-2xl m-auto opacity-0 translate-y-4 transition-all duration-700 data-[show]:opacity-100 data-[show]:translate-y-0 text-slate-700 mb-10 md:mb-14 lg:mb-20"
         :data-show="showTagline"
       >
         The easiest way to work with dates in&nbsp;JavaScript.
       </h1>
       <div
-        class="flex flex-col justify-center items-center gap-4 sm:flex-row sm:gap-8"
+        :data-show="showButtons"
+        class="flex flex-col justify-center items-center gap-4 sm:flex-row sm:gap-8 opacity-0 translate-y-4 transition-all duration-700 data-[show]:opacity-100 data-[show]:translate-y-0"
       >
         <a
           class="bg-black py-3 px-6 text-white rounded-lg flex items-center text-sm"
@@ -88,14 +93,37 @@ function copyCode() {
           class="group relative font-mono text-sm text-fuchsia-700 shadow-lg py-3 px-6 bg-white rounded-lg flex items-center"
         >
           <span
+            v-if="!didCopy"
             v-text="packageManager"
             :key="packageManager"
             class="whitespace-nowrap"
           />
-          <span class="ml-2 mr-4">@formkit/tempo</span>
+          <span class="ml-2 mr-4" v-if="!didCopy">@formkit/tempo</span>
           <IconCopy
+            v-if="!didCopy"
             class="w-3 basis-3 flex-shrink-0 text-gray-400 group-hover:text-fuchsia-700"
           />
+          <span
+            v-if="didCopy"
+            :key="packageManager"
+            class="whitespace-nowrap text-green-700 flex items-center gap-2"
+          >
+            Command copied!
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m4.5 12.75 6 6 9-13.5"
+              />
+            </svg>
+          </span>
         </a>
       </div>
     </header>
