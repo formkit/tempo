@@ -1,33 +1,49 @@
 <script lang="ts" setup>
-const props = defineProps<{
-  char: string
-  settleTime: number
-}>()
+const props = defineProps({
+  char: {
+    type: String,
+    required: true,
+  },
+  settleTime: {
+    type: Number,
+    required: true,
+  },
+  start: {
+    type: Boolean,
+    default: true,
+  },
+})
 const chars = "0123456789abcdefghijklmnopqrstuvwxyz"
 const currentChar = ref("")
 const finished = ref(false)
 
 onMounted(() => {
-  let startTime = Date.now()
-  let duration = props.settleTime
-  let easeOutQuad = (t: number) => t * (2 - t)
-
-  const updateChar = () => {
-    let elapsedTime = Date.now() - startTime
-    let progress = elapsedTime / duration
+  const easeOutQuad = (t: number) => t * (2 - t)
+  let startTime: number
+  let duration: number
+  let hasRun = false
+  const updateChar = (firstCall = false) => {
+    if (firstCall) {
+      startTime = Date.now()
+      duration = props.settleTime
+      hasRun = true
+    }
+    const elapsedTime = Date.now() - startTime
+    const progress = elapsedTime / duration
     if (progress < 1) {
-      let easedTime = easeOutQuad(progress)
-      let randomIndex = Math.floor(Math.random() * chars.length)
+      const easedTime = easeOutQuad(progress)
+      const randomIndex = Math.floor(Math.random() * chars.length)
       currentChar.value = chars[randomIndex]
-      let nextUpdate = Math.round(easedTime * 100)
+      const nextUpdate = Math.round(easedTime * 100)
       setTimeout(updateChar, nextUpdate)
     } else {
       currentChar.value = props.char
       finished.value = true
     }
   }
-
-  updateChar()
+  const stopWatch = watchEffect(() => {
+    props.start && !hasRun && updateChar(true)
+  })
 })
 </script>
 

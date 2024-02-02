@@ -13,6 +13,8 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.11.2",
     "@types/node": "^18.17.0",
+    "@vueuse/core": "^10.7.2",
+    "@vueuse/nuxt": "^10.7.2",
     "nuxt": "^3.10.0",
     "vitest": "^1.2.2"
   },

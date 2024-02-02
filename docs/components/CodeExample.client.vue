@@ -75,6 +75,7 @@ const stopWatch = watch(el, () => {
         sensibleError.value = e.data.error
         return
       } else {
+        sensibleError.value = ""
         result.value[e.data.lineNumber] ??= []
         if (e.data.value instanceof Date) {
           result.value[e.data.lineNumber].push(
