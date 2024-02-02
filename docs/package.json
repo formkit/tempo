@@ -13,7 +13,6 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.11.2",
     "@types/node": "^18.17.0",
-    "nuxi": "^3.10.0",
     "nuxt": "^3.10.0",
     "vitest": "^1.2.2"
   },
