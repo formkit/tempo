@@ -16,3 +16,11 @@ body {
 .monaco-scrollable-element {
   @apply rounded-tr-lg;
 }
+
+.page-section p {
+  @apply text-lg mb-4 text-slate-800;
+}
+
+.page-section p code {
+  @apply bg-slate-300 font-mono p-1 text-base rounded;
+}

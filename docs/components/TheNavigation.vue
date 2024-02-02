@@ -48,7 +48,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="primary-navigation mb-10 max-w-3xl mx-auto duration-600 opacity-0 translate-y-4 data-[show]:opacity-100 data-[show]:translate-y-0 transition-all"
+    class="primary-navigation mb-10 max-w-4xl mx-auto duration-600 opacity-0 translate-y-4 data-[show]:opacity-100 data-[show]:translate-y-0 transition-all"
     :data-show="initialShow"
   >
     <div class="search-tray">

@@ -9,6 +9,7 @@ const value = await import(`../examples/${props.file}.ts?raw`)
 code.value = value.default
 const result = ref<Array<string[]>>([])
 const error = ref("")
+const sensibleError = ref<string>()
 
 const stopWatch = watch(el, () => {
   if (!(el.value instanceof HTMLElement)) return
@@ -23,7 +24,7 @@ const stopWatch = watch(el, () => {
       vertical: "hidden",
       alwaysConsumeMouseWheel: false,
     },
-    value: code.value,
+    value: code.value.replace(/\n$/, ""),
     overviewRulerLanes: 0,
     language: "typescript",
     scrollBeyondLastLine: false,
@@ -68,15 +69,20 @@ const stopWatch = watch(el, () => {
 
     worker.postMessage(code)
     worker.onmessage = (e: {
-      data: { lineNumber: number; value: unknown }
+      data: { lineNumber: number; value: unknown } | { error: string }
     }) => {
-      result.value[e.data.lineNumber] ??= []
-      if (e.data.value instanceof Date) {
-        result.value[e.data.lineNumber].push(
-          `Date: ${e.data.value.toISOString()}`
-        )
+      if ("error" in e.data) {
+        sensibleError.value = e.data.error
+        return
       } else {
-        result.value[e.data.lineNumber].push(String(e.data.value))
+        result.value[e.data.lineNumber] ??= []
+        if (e.data.value instanceof Date) {
+          result.value[e.data.lineNumber].push(
+            `Date: ${e.data.value.toISOString()}`
+          )
+        } else {
+          result.value[e.data.lineNumber].push(String(e.data.value))
+        }
       }
     }
     worker.onerror = (e) => {
@@ -100,7 +106,9 @@ const stopWatch = watch(el, () => {
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row rounded-lg">
+  <div
+    class="flex flex-col md:flex-row rounded-lg my-8 md:my-12 mdl:-mx-8 lg:-mx-24 relative"
+  >
     <div class="md:w-1/2" ref="el"></div>
     <div
       class="md:w-1/2 bg-slate-200 font-mono p-4 overflow-auto rounded-bl-lg rounded-br-lg md:rounded-tr-lg md:rounded-bl-none"
@@ -116,6 +124,12 @@ const stopWatch = watch(el, () => {
       <div class="bg-red-500 font-mono p-4" v-else-if="error">
         {{ error }}
       </div>
+    </div>
+    <div
+      class="sensible-error bg-red-600 text-white font-mono font-sm p-2 text-xs z-50 absolute top-[calc(100%-5px)] left-0 w-full rounded-bl-lg rounded-br-lg"
+      v-if="sensibleError"
+    >
+      {{ sensibleError }}
     </div>
   </div>
 </template>

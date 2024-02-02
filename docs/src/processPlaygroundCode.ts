@@ -9,7 +9,8 @@ export function processPlaygroundCode(rawSource: string): string {
   const fns = new Set<string>()
   // Replace the import statement with a dynamic import, and create a set of
   // functions that we are importing from tempo.
-  let code = rawSource.replace(
+  let code = "try {"
+  code += rawSource.replace(
     /import(?:\s+)?{(.*)}(?:\s+)?from(?:\s+)?["']@formkit\/tempo['"]/,
     function replacer(_: string, p1: string) {
       const imports = p1.replace(
@@ -37,12 +38,12 @@ export function processPlaygroundCode(rawSource: string): string {
     }
   )
 
-  code = wrapFunctions(code, [...fns], "logOut")
+  code = wrapFunctions(code, [...fns, "console.log"], "logOut")
 
   // Replace any api statements with a wrapped log statement with the line
   // number explicitly added in.
 
-  return `(async () => { ${code} })()`
+  return `(async () => { ${code} } catch (e) { logError(e) } })()`
 }
 
 /**

@@ -4,8 +4,8 @@
   <TheHeader />
   <ContainerSection>
     <TheNavigation />
-    <main>
-      <CodeExample file="example1" />
+    <main class="mt-20">
+      <ContentIntroduction />
     </main>
   </ContainerSection>
 </template>

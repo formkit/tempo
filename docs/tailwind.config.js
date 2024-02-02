@@ -14,6 +14,9 @@ module.exports = {
         body: "#efefef",
         lcd: "#e1eaee",
       },
+      screens: {
+        mdl: "900px",
+      },
     },
   },
   plugins: [],
