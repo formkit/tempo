@@ -13,8 +13,8 @@ import { defineProps } from "vue"
     <p>
       Under the hood, Tempo mines JavaScript's
       <code>Intl.DateTimeFormat</code> to extract complex data like timezones
-      offsets and locale aware date formats giving you a simple API formatting
-      and parsing dates.
+      offsets and locale aware date formats giving you a simple API to format,
+      parse, and manipulates dates.
     </p>
     <CodeExample file="introduction" />
   </PageSection>

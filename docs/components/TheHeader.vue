@@ -14,7 +14,7 @@ onMounted(() => {
       <SuperHeader />
       <ClockFont
         chars="tempo"
-        class="text-[10vw] justify-center mb-[12%] max-w-3xl m-auto"
+        class="text-[10vw] justify-center mb-[12%] max-w-3xl m-auto text-sky-500"
         :delay="600"
       />
       <h1
