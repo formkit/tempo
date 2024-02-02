@@ -15,7 +15,8 @@
   "scripts": {
     "dev": "cd ./docs && pnpm nuxt dev",
     "build": "jiti build.ts",
-    "test": "TZ=\"America/New_York\" vitest"
+    "test": "TZ=\"America/New_York\" vitest",
+    "docs-build": "cd ./docs && nuxi build"
   },
   "keywords": [
     "date",
