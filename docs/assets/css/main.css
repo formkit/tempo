@@ -18,7 +18,7 @@ body {
 }
 
 .page-section p {
-  @apply text-lg mb-4 text-slate-800;
+  @apply text-lg mb-8 text-slate-800;
 }
 
 .page-section p code {

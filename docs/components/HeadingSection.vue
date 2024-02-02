@@ -4,7 +4,6 @@ defineProps<{
 }>()
 const heading = ref<HTMLElement>()
 const isInView = useElementVisibility(heading)
-watchEffect(() => console.log(isInView.value))
 </script>
 
 <template>
