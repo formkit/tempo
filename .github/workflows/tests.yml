@@ -9,5 +9,4 @@ jobs:
         with:
           version: 8
       - run: pnpm install
-      - run: pnpm docs-build
       - run: pnpm test
