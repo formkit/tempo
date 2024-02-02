@@ -1,11 +1,27 @@
 <script setup lang="ts">
 const showTagline = ref<undefined | boolean>(undefined)
+const temporaryToggle = useTimedRef(4000)
+const code = ref<HTMLElement>()
+const packageManager = ref("npm i")
+const packageManagers = ["npm install", "yarn add", "pnpm add", "bun install"]
 
 onMounted(() => {
   setTimeout(() => {
     showTagline.value = true
   }, 1750)
+  setInterval(() => {
+    packageManager.value =
+      packageManagers[
+        (packageManagers.indexOf(packageManager.value) + 1) %
+          packageManagers.length
+      ]
+  }, 3500)
 })
+
+function copyCode() {
+  navigator.clipboard.writeText(`${packageManager.value} @formkit/tempo`)
+  temporaryToggle.value = true
+}
 </script>
 
 <template>
@@ -67,10 +83,19 @@ onMounted(() => {
         </a>
         <a
           href="#copy-code"
-          class="group font-mono text-sm text-fuchsia-700 shadow-lg py-3 px-6 bg-white rounded-lg flex items-center gap-4"
+          @click.prevent="copyCode"
+          ref="code"
+          class="group relative font-mono text-sm text-fuchsia-700 shadow-lg py-3 px-6 bg-white rounded-lg flex items-center"
         >
-          npm i @formkit/tempo
-          <IconCopy class="w-3 text-gray-400 group-hover:text-fuchsia-700" />
+          <span
+            v-text="packageManager"
+            :key="packageManager"
+            class="whitespace-nowrap"
+          />
+          <span class="ml-2 mr-4">@formkit/tempo</span>
+          <IconCopy
+            class="w-3 basis-3 flex-shrink-0 text-gray-400 group-hover:text-fuchsia-700"
+          />
         </a>
       </div>
     </header>

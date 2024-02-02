@@ -17,6 +17,7 @@
     "vitest": "^1.2.2"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.1",
     "@formkit/tempo": "workspace:../",
     "monaco-editor": "^0.40.0"
   }
