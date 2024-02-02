@@ -25,6 +25,9 @@ devDependencies:
   '@types/node':
     specifier: ^18.17.0
     version: 18.17.1
+  nuxi:
+    specifier: ^3.10.0
+    version: 3.10.0
   nuxt:
     specifier: ^3.10.0
     version: 3.10.0(@types/node@18.17.1)(vite@4.3.9)
