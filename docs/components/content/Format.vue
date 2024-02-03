@@ -6,6 +6,19 @@ import { format } from "@formkit/tempo"
 <template>
   <PageSection id="format">
     <HeadingSection title="Format" class="text-sky-500" />
+    <FunctionReference
+      function="format"
+      :arguments="[
+        {
+          name: 'date',
+          type: 'Date | string',
+          comment: 'strings must be ISO 8601',
+        },
+        { name: 'format', type: 'string | object' },
+        { name: 'locale?', type: 'string' },
+      ]"
+      return="string"
+    />
     <p>Tempo’s <code>format()</code> function output’s dates in two ways:</p>
     <ul class="jump-list">
       <li>
