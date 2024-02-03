@@ -11,22 +11,22 @@ const results = ref<Array<{ title: string; description: string; id: string }>>([
     title: "Format",
     description:
       "Learn to format dates by locale shorthand or a custom tokens.",
-    id: "#formatting",
+    id: "#format",
   },
   {
     title: "Parse",
     description: "Learn to parse a date from any format.",
-    id: "#parsing",
+    id: "#parse",
   },
   {
     title: "Modify",
     description: "Learn to manipulate and change dates.",
-    id: "#modifying",
+    id: "#modify",
   },
   {
     title: "Timezones",
     description: "Learn to manipulate and change dates.",
-    id: "#modifying",
+    id: "#timezones",
   },
 ])
 const initialShow = ref<undefined | boolean>(undefined)

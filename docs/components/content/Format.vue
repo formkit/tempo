@@ -28,11 +28,20 @@ import { format } from "@formkit/tempo"
   <PageSection id="format-styles">
     <HeadingSection title="Format styles" size="sm" class="text-sky-500" />
     <p>
-      When displaying a dates to users it’s a good idea to show them dates they
-      feel familiar with. Tempo uses <code>Intl.DateTimeFormat</code>’s language
-      sensitive date and time formatting to make this easy.
+      When displaying a dates to users it’s a good idea to use the formats they
+      are familiar with. Tempo uses <code>Intl.DateTimeFormat</code>’s language
+      sensitive date and time formatting to make this easy. By using a date or
+      time "style" you indicate the level of specificity you’d like to show the
+      date to the end user with, but no further details. It’s then up to the
+      <code>Intl.DateTimeFormat</code> to decide how to most appropriately
+      display the date.
     </p>
     <h4>Date styles</h4>
+    <p>
+      When using the <code>format()</code> function, the second argument can be
+      any of the following date styles, or an object with a date property (ex:
+      <code>format(new Date(), { date: 'long' })</code>)
+    </p>
     <table>
       <thead>
         <tr>
@@ -83,7 +92,14 @@ import { format } from "@formkit/tempo"
         </tr>
       </tbody>
     </table>
+    <CodeExample file="format-styles-date" />
+
     <h4>Time styles</h4>
+    <p>
+      To use a time style format you must provide an object as the second
+      argument of the <code>format()</code> function with a time property. You
+      can also use the time property with the date property.
+    </p>
     <table>
       <thead>
         <tr>
@@ -146,6 +162,7 @@ import { format } from "@formkit/tempo"
         </tr>
       </tbody>
     </table>
+    <CodeExample file="format-styles-time" />
   </PageSection>
   <PageSection id="format-tokens">
     <HeadingSection title="Format tokens" size="sm" class="text-sky-500" />
