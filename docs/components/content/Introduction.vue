@@ -4,7 +4,7 @@ import { defineProps } from "vue"
 
 <template>
   <PageSection id="introduction">
-    <HeadingSection title="Introduction" />
+    <HeadingSection title="Introduction" class="text-sky-500" />
     <p>
       Tempo is a new library in a proud tradition of JavaScript date and time
       libraries. Inspired by the likes of moment.js, day.js, and date-fns Tempo

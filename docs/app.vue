@@ -3,10 +3,11 @@
 <template>
   <TheHeader />
   <ContainerSection>
-    <TheNavigation />
+    <TheSearch />
     <main class="mt-20">
       <ContentIntroduction />
       <ContentInstallation />
+      <ContentFormat />
     </main>
   </ContainerSection>
 </template>

@@ -18,9 +18,71 @@ body {
 }
 
 .page-section p {
-  @apply text-lg mb-8 text-slate-800;
+  @apply text-lg mb-8 text-slate-800 leading-8;
 }
 
-.page-section p code {
+.page-section p code,
+.page-section ul code {
   @apply bg-slate-300 font-mono p-1 text-base rounded;
+}
+
+.page-section > ul {
+  @apply pl-8 text-base text-slate-800 leading-7;
+}
+
+.page-section > ul > li {
+  @apply mb-4;
+}
+
+.jump-list a {
+  @apply block p-4 rounded-lg cursor-pointer bg-transparent duration-500 hover:bg-white hover:shadow-md transition-all;
+}
+
+.page-section > ul.jump-list {
+  @apply pl-4 -mt-4;
+}
+
+.page-section > ul.jump-list > li {
+  @apply mb-2;
+}
+
+.page-section h4 {
+  @apply text-lg font-bold mb-3;
+}
+.page-section table {
+  @apply w-full mb-10 text-base text-slate-700 rounded-lg shadow-sm;
+}
+.page-section table th {
+  @apply bg-gray-50 p-3 text-left text-black;
+}
+.page-section table th:first-child {
+  @apply rounded-tl-lg;
+}
+.page-section table th:last-child {
+  @apply rounded-tr-lg;
+}
+
+.page-section table td {
+  @apply bg-gray-50 py-2 px-3 leading-8;
+}
+
+.page-section table td:first-child {
+  @apply text-black;
+}
+.page-section table tr:nth-child(odd) td {
+  @apply bg-slate-100;
+}
+
+.page-section table tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+}
+.page-section table tr:last-child td:last-child {
+  @apply rounded-br-lg;
+}
+
+.page-section table code {
+  @apply bg-slate-100 font-mono p-1 text-base rounded;
+}
+.page-section table tr:nth-child(odd) code {
+  background: rgb(225, 236, 247);
 }

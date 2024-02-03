@@ -4,7 +4,7 @@ import { defineProps } from "vue"
 
 <template>
   <PageSection id="install">
-    <HeadingSection title="Install" />
+    <HeadingSection title="Install" class="text-sky-500" />
     <p>
       Pshhh, come on — you already know how to do this. All you’re looking for
       is the package name (it’s <code>@formkit/tempo</code>), but to make it

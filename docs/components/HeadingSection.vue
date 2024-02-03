@@ -1,13 +1,18 @@
 <script lang="ts" setup>
 defineProps<{
   title: string
+  size?: "sm"
 }>()
 const heading = ref<HTMLElement>()
 const isInView = useElementVisibility(heading)
 </script>
 
 <template>
-  <h2 class="text-2xl mb-8 text-sky-500" ref="heading">
+  <h2
+    class="text-2xl data-[size=sm]:text-base mb-8"
+    ref="heading"
+    :data-size="size"
+  >
     <span class="sr-only">{{ title }}</span>
     <ClockFont
       :chars="title.toLocaleLowerCase()"
