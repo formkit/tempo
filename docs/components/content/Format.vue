@@ -16,6 +16,7 @@ import { format } from "@formkit/tempo"
         },
         { name: 'format', type: 'string | object' },
         { name: 'locale?', type: 'string' },
+        { name: 'genitive?', type: 'boolean' },
       ]"
       return="string"
     />
@@ -37,6 +38,12 @@ import { format } from "@formkit/tempo"
         </a>
       </li>
     </ul>
+    <CalloutInfo>
+      The format function always operates in the local timezone. For example
+      <code>2013-01-01T00:00:00Z</code> formatted in the US Eastern timezone
+      will be <code>12/31/2012 7:00 PM</code>. Read
+      <a href="#timezones">more about timezones</a> for further information.
+    </CalloutInfo>
   </PageSection>
   <PageSection id="format-styles">
     <HeadingSection title="Format styles" size="sm" class="text-sky-500" />
@@ -179,5 +186,141 @@ import { format } from "@formkit/tempo"
   </PageSection>
   <PageSection id="format-tokens">
     <HeadingSection title="Format tokens" size="sm" class="text-sky-500" />
+    <p>
+      If you already know the format you need to display — Tempo’s formatting
+      tokens allow for any arbitrary format in a way you are already familiar
+      with (tokens are similar to day.js). These tokens automatically leverage
+      the user’s locale or the one specified in the format function.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Example</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>YY</code></td>
+          <td>{{ format(new Date(), "YY") }}</td>
+          <td>2 digit year</td>
+        </tr>
+        <tr>
+          <td><code>YYYY</code></td>
+          <td>{{ format(new Date(), "YYYY") }}</td>
+          <td>4 digit year</td>
+        </tr>
+        <tr>
+          <td><code>M</code></td>
+          <td>{{ format(new Date(), "M") }}</td>
+          <td>The month 1-12</td>
+        </tr>
+        <tr>
+          <td><code>MM</code></td>
+          <td>{{ format(new Date(), "MM") }}</td>
+          <td>The month 01-12</td>
+        </tr>
+        <tr>
+          <td><code>MMM</code></td>
+          <td>{{ format(new Date(), "MMM") }}</td>
+          <td>Short name Jan-Dec</td>
+        </tr>
+        <tr>
+          <td><code>MMMM</code></td>
+          <td>{{ format(new Date(), "MMMM") }}</td>
+          <td>Full name January - December</td>
+        </tr>
+        <tr>
+          <td><code>D</code></td>
+          <td>{{ format(new Date(), "D") }}</td>
+          <td>The day of the month 1-31</td>
+        </tr>
+        <tr>
+          <td><code>DD</code></td>
+          <td>{{ format(new Date(), "DD") }}</td>
+          <td>The day of the month 01-31</td>
+        </tr>
+        <tr>
+          <td><code>d</code></td>
+          <td>{{ format(new Date(), "d") }}</td>
+          <td>Single digit day "T"</td>
+        </tr>
+        <tr>
+          <td><code>ddd</code></td>
+          <td>{{ format(new Date(), "ddd") }}</td>
+          <td>Short day name</td>
+        </tr>
+        <tr>
+          <td><code>dddd</code></td>
+          <td>{{ format(new Date(), "dddd") }}</td>
+          <td>Full day name Wednesday</td>
+        </tr>
+        <tr>
+          <td><code>H</code></td>
+          <td>1, 13</td>
+          <td>Minimum hour digits, 24 hour, 0-23</td>
+        </tr>
+        <tr>
+          <td><code>HH</code></td>
+          <td>01, 13</td>
+          <td>2 hour digits, 24 hour, 00-23</td>
+        </tr>
+        <tr>
+          <td><code>h</code></td>
+          <td>1, 12</td>
+          <td>Minimum hour digits, 12 hour clock, 1-12</td>
+        </tr>
+        <tr>
+          <td><code>hh</code></td>
+          <td>01, 12</td>
+          <td>2 hour digits, 12 hour clock, 01-12</td>
+        </tr>
+        <tr>
+          <td><code>m</code></td>
+          <td>2, 33</td>
+          <td>The minute 0-59</td>
+        </tr>
+        <tr>
+          <td><code>mm</code></td>
+          <td>02, 33</td>
+          <td>The minute 00-59</td>
+        </tr>
+        <tr>
+          <td><code>s</code></td>
+          <td>7, 17</td>
+          <td>The second 0-59</td>
+        </tr>
+        <tr>
+          <td><code>ss</code></td>
+          <td>07, 17</td>
+          <td>The second 00-59</td>
+        </tr>
+        <tr>
+          <td><code>a</code></td>
+          <td>{{ format(new Date(), "a") }}</td>
+          <td>am/pm</td>
+        </tr>
+        <tr>
+          <td><code>A</code></td>
+          <td>{{ format(new Date(), "A") }}</td>
+          <td>AM/PM</td>
+        </tr>
+        <tr>
+          <td><code>Z</code></td>
+          <td>+0800, +0530, -1345</td>
+          <td>The timezone offset from GMT</td>
+        </tr>
+      </tbody>
+    </table>
+    <CodeExample file="format-tokens" />
+    <p>
+      The <code>format()</code> function accepts a fourth argument, a boolean
+      indicating whether or not genitive cases should be used. The genitive
+      option will format the month and day names in the genitive case. This is
+      useful for languages that have different forms of the month and day names
+      when used in a context that requires the genitive case.
+    </p>
+    <CodeExample file="format-genitive" />
   </PageSection>
 </template>

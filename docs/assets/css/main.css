@@ -22,8 +22,9 @@ body {
 }
 
 .page-section p code,
-.page-section ul code {
-  @apply bg-slate-300 font-mono p-1 text-base rounded;
+.page-section ul code,
+.page-section aside code {
+  @apply bg-black/10 font-mono p-1 text-base rounded;
 }
 
 .page-section > ul {
@@ -40,6 +41,14 @@ body {
 
 .page-section > ul.jump-list {
   @apply pl-4 -mt-4;
+}
+
+.page-section > ul.jump-list a {
+  @apply no-underline;
+}
+
+.page-section > ul.jump-list a strong {
+  @apply underline;
 }
 
 .page-section > ul.jump-list > li {
@@ -85,4 +94,7 @@ body {
 }
 .page-section table tr:nth-child(odd) code {
   background: rgb(225, 236, 247);
+}
+.page-section a {
+  @apply underline;
 }
