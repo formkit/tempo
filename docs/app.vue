@@ -8,6 +8,7 @@
       <ContentIntroduction />
       <ContentInstallation />
       <ContentFormat />
+      <ContentParse />
     </main>
   </ContainerSection>
 </template>
