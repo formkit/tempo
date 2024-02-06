@@ -1,4 +1,42 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const parseOptionsProperties = [
+  { name: "date", type: "string", jsdoc: [`A string representing a date.`] },
+  {
+    name: "format",
+    type: "Format",
+    jsdoc: [
+      "The format that should be used to parse the date.",
+      "This is a string composed of tokens.",
+    ],
+  },
+  {
+    name: "locale",
+    type: "string",
+    jsdoc: [`The locale used to parse the date.`],
+  },
+  {
+    name: "partFilter?",
+    type: "(part: Part) => boolean",
+    jsdoc: [
+      "A function that can be used to filter out",
+      "parts of the format. This is useful when using the format styles",
+      "like { date: 'full', time: 'full' } and not wanting to keep",
+      "all the parts of the given format.",
+    ],
+  },
+  {
+    name: "dateOverflow?",
+    type: '"forward" | "backward" | "throw"',
+    jsdoc: [
+      "The behavior to use when a date overflows a given month.",
+      "For example, if the date to parse is February 29, 2023 — there is",
+      'no 29th day of February. In this case overflow "forward" would',
+      'result in March 1, 2023, "backward" would result in',
+      'February 28, 2023 and "throw" would throw an error.',
+    ],
+  },
+]
+</script>
 
 <template>
   <PageSection id="parse">
@@ -33,5 +71,24 @@
       not a standardized format (like ISO 8601)
     </CalloutInfo>
     <CodeExample file="parse-basic" />
+    <h4>Parsing options</h4>
+    <p>
+      The <code>parse</code> function can optionally accept an object as the
+      only argument. This object can include the following properties:
+    </p>
+    <ObjectReference type="ParseOptions" :properties="parseOptionsProperties" />
+    <p>
+      The <code>date</code>, <code>format</code>, <code>locale</code> are
+      familiar, but what is <code>partFilter</code> and
+      <code>dataOverflow</code>?
+    </p>
+    <h4><code>partFilter</code></h4>
+    <p>
+      The <code>partFilter</code> option gives you fine grained control over
+      which pieces and parts of a date you’d like to include in the final parsed
+      date (remember, missing "parts" will default to the current date at
+      midnight local).
+    </p>
+    <CodeExample file="part-filter" />
   </PageSection>
 </template>
