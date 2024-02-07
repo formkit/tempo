@@ -13,6 +13,8 @@ import {
   addMinute,
   addSecond,
   addHour,
+  dayStart,
+  dayEnd,
   format,
   formatStr,
   sameDay,
@@ -1249,6 +1251,22 @@ describe("nearestDay", () => {
     }
     expect(nearestDay("2023-01-01", search, "year")!.toISOString()).toBe(
       "2023-12-31T05:00:00.000Z"
+    )
+  })
+})
+
+describe("dayStart", () => {
+  it("can become the start of the day", () => {
+    expect(dayStart("2023-02-22T12:00:00Z").toISOString()).toBe(
+      "2023-02-22T05:00:00.000Z"
+    )
+  })
+})
+
+describe("dayEnd", () => {
+  it("can become the start of the day", () => {
+    expect(dayEnd("2023-02-22T12:00:00Z").toISOString()).toBe(
+      "2023-02-23T04:59:59.999Z"
     )
   })
 })
