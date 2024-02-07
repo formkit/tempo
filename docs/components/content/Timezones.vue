@@ -2,7 +2,7 @@
 
 <template>
   <PageSection id="timezones">
-    <HeadingSection title="Data" class="text-sky-500" />
+    <HeadingSection title="Timezones" class="text-sky-500" />
     <p></p>
   </PageSection>
 </template>
