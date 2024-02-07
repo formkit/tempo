@@ -16,7 +16,7 @@ const props = defineProps<{
         >: <span class="text-sky-500">{{ arg.type }}</span
         >{{ index < props.arguments.length - 1 ? ", " : ""
         }}<span v-if="arg.comment" class="text-gray-400"
-          >// {{ arg.comment }}</span
+          >&nbsp;// {{ arg.comment }}</span
         >
       </div> </template
     >): <span class="text-sky-500">{{ props.return }}</span>

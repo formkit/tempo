@@ -82,7 +82,7 @@ const parseOptionsProperties = [
       familiar, but what is <code>partFilter</code> and
       <code>dataOverflow</code>?
     </p>
-    <h4><code>partFilter</code></h4>
+    <h4>partFilter</h4>
     <p>
       The <code>partFilter</code> option gives you fine grained control over
       which pieces and parts of a date you’d like to include in the final parsed
@@ -90,5 +90,13 @@ const parseOptionsProperties = [
       midnight local).
     </p>
     <CodeExample file="part-filter" />
+    <h4>dateOverflow</h4>
+    <p>
+      The <code>dateOverflow</code> option determines how an “out of range” date
+      should be parsed. Options are <code>backward</code> (default),
+      <code>forward</code>, <code>throw</code>.
+    </p>
+    <CodeExample file="date-overflow" />
+    <CodeExample file="date-overflow-throw" />
   </PageSection>
 </template>
