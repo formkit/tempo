@@ -79,10 +79,74 @@ const fns = {
     ],
     return: "Date | null",
   },
-  offset: {},
-  range: {},
-  sameDay: {},
-  yearDays: {},
+  offset: {
+    description:
+      "Returns the offset between two (IANA) timezones on a given date. The results are ISO8601 compatible string offsets like -0800 or +0530.",
+    arguments: [
+      {
+        name: "date",
+        type: "Date",
+      },
+      {
+        name: "tzA?",
+        type: "string",
+        comment: "// default: UTC, ex: America/New_York",
+      },
+      {
+        name: "tzB?",
+        type: "string",
+        comment: "// default: browser, ex: Europe/Paris",
+      },
+    ],
+    return: "string",
+  },
+  range: {
+    description:
+      "Returns an array of options for a given token in a given locale. For example, the token <code>MMMM</code> in the locale <code>en-US</code> would return <code>['January', 'February', 'March', ...]</code>.",
+    arguments: [
+      {
+        name: "token",
+        type: "string",
+      },
+      {
+        name: "locale",
+        type: "string",
+        comment: '// default: "en"',
+      },
+      {
+        name: "genitive?",
+        type: "boolean",
+        comment: "// default: false",
+      },
+    ],
+    return: "string[]",
+  },
+  sameDay: {
+    description:
+      "Checks if two dates are the same day. This function is useful for comparing dates but ignoring the time.",
+    arguments: [
+      {
+        name: "dateA",
+        type: "Date",
+      },
+      {
+        name: "dateB",
+        type: "Date",
+      },
+    ],
+    return: "boolean",
+  },
+  yearDays: {
+    description:
+      "Returns the number of days in a given year. Leap years and century years cause this to not always be 365.",
+    arguments: [
+      {
+        name: "date",
+        type: "Date",
+      },
+    ],
+    return: "number",
+  },
 }
 </script>
 
