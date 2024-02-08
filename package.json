@@ -26,7 +26,8 @@
     "release": "pnpm build && bumpp && pnpm publish"
   },
   "files": [
-    "dist"
+    "dist",
+    "docs/public/tempo.png"
   ],
   "keywords": [
     "date",

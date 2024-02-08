@@ -33,7 +33,7 @@ importers:
         specifier: ^0.8.1
         version: 0.8.1
       '@formkit/tempo':
-        specifier: workspace:../
+        specifier: 0.0.2
         version: link:..
       monaco-editor:
         specifier: ^0.40.0
