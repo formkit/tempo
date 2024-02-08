@@ -1,3 +1,5 @@
+<img src="docs/public/tempo.png" alt="TEMPO" width="400" height="156">
+
 [![Vitest](https://github.com/formkit/tempo/actions/workflows/tests.yml/badge.svg)](https://github.com/formkit/tempo/actions/workflows/tests.yml)
 
 # Tempo
