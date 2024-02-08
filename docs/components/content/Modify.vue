@@ -168,7 +168,7 @@ const fns = {
     ],
   },
   removeOffset: {
-    description: `Returns a new Date object with the inverse of the specified timezone offset removed. This can be helpful to normalize time information across timezones.`,
+    description: `Returns a new Date object with the inverse of the specified offset applied. This can be helpful to normalize time information across timezones.`,
     return: "Date",
     arguments: [
       {

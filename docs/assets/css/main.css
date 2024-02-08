@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply scroll-smooth;
+}
+
 body {
   @apply bg-body;
 }
@@ -28,11 +32,11 @@ body {
 }
 
 .page-section > ul {
-  @apply pl-8 text-base text-slate-800 leading-7;
+  @apply pl-8 text-base text-slate-800 leading-7 mb-8;
 }
 
 .page-section > ul > li {
-  @apply mb-4;
+  @apply mb-4 last:mb-0;
 }
 
 .jump-list a {

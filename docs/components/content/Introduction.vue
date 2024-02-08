@@ -11,10 +11,12 @@ import { defineProps } from "vue"
       is built from the ground up to be as small and easy to use as possible.
     </p>
     <p>
-      Under the hood, Tempo mines JavaScript's
-      <code>Intl.DateTimeFormat</code> to extract complex data like timezones
-      offsets and locale aware date formats giving you a simple API to format,
-      parse, and manipulates dates.
+      Tempo is best thought of as a collection of utilities for working with
+      <code>Date</code> objects — an important distinction from other libraries
+      that provide custom date primitives. Under the hood, Tempo mines
+      JavaScript's <code>Intl.DateTimeFormat</code> to extract complex data like
+      timezones offsets and locale aware date formats giving you a simple API to
+      format, parse, and manipulates dates.
     </p>
     <CodeExample file="introduction" />
   </PageSection>
