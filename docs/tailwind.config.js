@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       colors: {
         body: "#efefef",
+        footer: "#e2e2e2",
         lcd: "#e1eaee",
       },
       screens: {
