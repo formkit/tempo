@@ -4,15 +4,7 @@
   <TheHeader />
   <ContainerSection>
     <TheSearch />
-    <main class="mt-20">
-      <ContentIntroduction />
-      <ContentInstallation />
-      <ContentFormat />
-      <ContentParse />
-      <ContentModify />
-      <ContentData />
-      <ContentTimezones />
-    </main>
+    <NuxtPage />
   </ContainerSection>
   <TheFooter />
 </template>

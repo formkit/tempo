@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt"],
   app: {
     head: {
+      title: "Tempo • Dates by FormKit",
       htmlAttrs: {
         class: "dark:bg-slate-900 dark:text-white",
       },
