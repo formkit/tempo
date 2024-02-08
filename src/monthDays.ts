@@ -1,4 +1,5 @@
 import { monthEnd } from "./monthEnd"
+import type { DateInput } from "./types"
 
 /**
  * Returns the total number of days from a given month.

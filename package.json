@@ -1,23 +1,33 @@
 {
   "name": "@formkit/tempo",
-  "version": "0.1.0",
-  "description": "📆 Parse, format, manipulate, and internationalize dates and times in JavaScript and TypeScript.",
-  "main": "index.js",
-  "types": "dist/index.d.ts",
+  "version": "0.0.0",
+  "description": "The easiest way to work with dates in JavaScript and TypeScript.",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "types": "dist/index.d.cts",
   "exports": {
     ".": {
       "import": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
       }
     }
   },
   "scripts": {
     "dev": "cd ./docs && pnpm nuxt dev",
-    "build": "jiti build.ts",
+    "build": "tsup",
     "test": "TZ=\"America/New_York\" vitest",
-    "docs-build": "cd ./docs && pnpm run build"
+    "docs-build": "cd ./docs && pnpm run build",
+    "publint": "publint",
+    "release": "pnpm build && bumpp && pnpm publish"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "date",
     "time",
@@ -27,15 +37,10 @@
   "author": "Justin Schroeder <justin@formkit.com>",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
     "@types/node": "^20.11.10",
-    "consola": "^3.2.3",
-    "execa": "^7.2.0",
-    "jiti": "^1.21.0",
-    "rollup": "^3.29.4",
-    "shx": "^0.3.4",
-    "tslib": "^2.6.2",
+    "bumpp": "^9.3.0",
+    "publint": "^0.2.7",
+    "tsup": "^8.0.1",
     "typescript": "^5.3.3",
     "vitest": "^1.2.1"
   }

@@ -1,4 +1,5 @@
 import { iso8601, iso8601Match } from "./iso8601"
+import type { DateInput } from "./types"
 
 /**
  * Normalizes a "short" date like 2012-01-01 to 2012-01-01T00:00:00 to prevent

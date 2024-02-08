@@ -1,4 +1,5 @@
 import { date } from "./date"
+import type { DateInput } from "./types"
 
 /**
  * Get the number of days in the given date’s year.

@@ -1,4 +1,5 @@
 import { date } from "./date"
+import type { DateInput } from "./types"
 
 /**
  * Gets the what day of the year a given date is. For example, August 1st is

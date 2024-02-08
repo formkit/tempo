@@ -3,6 +3,7 @@ import { monthDays } from "./monthDays"
 import { yearDays } from "./yearDays"
 import { dayOfYear } from "./dayOfYear"
 import { addDay } from "./addDay"
+import type { DateInput } from "./types"
 
 /**
  * Performs a bidirectional search for the nearest date that passes a function.

@@ -1,17 +1,17 @@
 /**
  * The date format used as an input value. Either a date or an ISO8601 string.
  */
-declare type DateInput = Date | string
+export type DateInput = Date | string
 
 /**
  * Format parts with text names use these descriptors:
  */
-declare type NamedFormatOption = "long" | "short" | "narrow"
+export type NamedFormatOption = "long" | "short" | "narrow"
 
 /**
  * A registry of named format parts. Each type of part has every option.
  */
-declare interface NamedFormats {
+export interface NamedFormats {
   weekday: Record<string, NamedFormatOption>
   month: Record<string, NamedFormatOption>
   dayPeriod: Record<string, NamedFormatOption>
@@ -21,7 +21,7 @@ declare interface NamedFormats {
  * Internal format for "pieces" of a date form. Each part represents a single
  * logical grouping, like "month", or "seconds".
  */
-declare interface Part {
+export interface Part {
   /**
    * An object of partName to partValue For example:
    * ```js
@@ -57,12 +57,12 @@ declare interface Part {
 /**
  * A date part with an actual value applied.
  */
-declare type FilledPart = Part & { value: string }
+export type FilledPart = Part & { value: string }
 
 /**
  * A tuple describing a given formatting token.
  */
-declare type FormatPattern = [
+export type FormatPattern = [
   pattern: FormatToken | string,
   option: Partial<Record<Intl.DateTimeFormatPartTypes, string>>,
   exp?: RegExp
@@ -71,22 +71,22 @@ declare type FormatPattern = [
 /**
  * Possible options for a format style.
  */
-declare type FormatStyle = "full" | "long" | "medium" | "short"
+export type FormatStyle = "full" | "long" | "medium" | "short"
 
 /**
  * Possible objects for the dateStyle and timeStyle.
  */
-declare type FormatStyleObj =
+export type FormatStyleObj =
   | { date: FormatStyle; time: FormatStyle }
   | { date: FormatStyle }
   | { time: FormatStyle }
 
-declare type Format = FormatStyle | FormatStyleObj | string
+export type Format = FormatStyle | FormatStyleObj | string
 
 /**
  * A union of all available formatting tokens.
  */
-declare type FormatToken =
+export type FormatToken =
   | "YYYY"
   | "YY"
   | "MMMM"
@@ -111,7 +111,7 @@ declare type FormatToken =
   | "ZZ"
   | "Z"
 
-declare interface ParseOptions {
+export interface ParseOptions {
   /**
    * A string representing a date.
    */

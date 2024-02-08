@@ -1,5 +1,6 @@
 import { date } from "./date"
 import { normStr, minsToOffset } from "./common"
+import type { DateInput } from "./types"
 
 /**
  * Returns the offset between two timezones on a given date. The results are

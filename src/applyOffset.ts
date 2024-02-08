@@ -1,5 +1,6 @@
 import { date } from "./date"
 import { offsetToMins } from "./common"
+import type { DateInput } from "./types"
 
 /**
  * Apply a given offset to a date, returning a new date with the offset

@@ -1,5 +1,6 @@
 import { parts } from "./parts"
 import { escapeTokens } from "./common"
+import type { Format, Part } from "./types"
 
 /**
  * Return the string format for a given format. For example:

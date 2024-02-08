@@ -6,6 +6,14 @@ import { ap } from "./ap"
 import { range } from "./range"
 import { monthDays } from "./monthDays"
 import { parts } from "./parts"
+import type {
+  ParseOptions,
+  Format,
+  Part,
+  FormatStyle,
+  FilledPart,
+  FormatToken,
+} from "./types"
 
 export function parse(options: ParseOptions): Date | never
 export function parse(

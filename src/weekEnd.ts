@@ -1,4 +1,5 @@
 import { weekStart } from "./weekStart"
+import type { DateInput } from "./types"
 
 /**
  * Returns a Date object for the last day at the last second of the given week.

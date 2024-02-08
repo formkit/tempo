@@ -1,4 +1,5 @@
 import { date } from "./date"
+import type { DateInput } from "./types"
 
 /**
  * Returns a new date object 1/n seconds after the original one.

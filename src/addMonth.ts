@@ -1,5 +1,6 @@
 import { date } from "./date"
 import { monthDays } from "./monthDays"
+import type { DateInput } from "./types"
 
 /**
  * Returns a new date object 1/n months after the original one. Keep in mind if you

@@ -1,4 +1,5 @@
 import { date } from "./date"
+import type { DateInput } from "./types"
 
 /**
  * Returns a Date object for start of the given day.

@@ -1,4 +1,5 @@
 import { date } from "./date"
+import type { DateInput } from "./types"
 
 /**
  * Checks if two date objects refer to the same date. Ignores time.

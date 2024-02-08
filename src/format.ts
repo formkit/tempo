@@ -1,6 +1,7 @@
 import { date } from "./date"
 import { parts } from "./parts"
 import { fill } from "./common"
+import type { DateInput, Format, Part } from "./types"
 
 /**
  * Produce a formatted string. Available strings:

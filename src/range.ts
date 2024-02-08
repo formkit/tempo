@@ -1,6 +1,6 @@
 import { format } from "./format"
 import { ap } from "./ap"
-
+import type { FormatToken } from "./types"
 /**
  * Returns an array of options for a given token in a given locale.
  * @param token - Get the full range of options for a given token

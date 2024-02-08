@@ -8,11 +8,7 @@
     "allowJs": false,
     "moduleResolution": "node",
     "outDir": "dist",
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "exclude": [
-    "examples"
-  ]
+  "exclude": ["examples", "dist"]
 }
