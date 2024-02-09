@@ -316,10 +316,9 @@ import { format } from "@formkit/tempo"
     <CodeExample file="format-tokens" />
     <p>
       The <code>format()</code> function accepts a fourth argument, a boolean
-      indicating whether or not genitive cases should be used. The genitive
-      option will format the month and day names in the genitive case. This is
-      useful for languages that have different forms of the month and day names
-      when used in a context that requires the genitive case.
+      indicating whether or not genitive cases should be used. This is useful
+      for languages that have different forms of the month and day names when
+      used in a context that requires the genitive case.
     </p>
     <CodeExample file="format-genitive" />
   </PageSection>
