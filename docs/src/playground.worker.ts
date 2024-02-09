@@ -1,3 +1,4 @@
+const noop = Symbol()
 async function loadTempo() {
   return await import("@formkit/tempo")
 }
@@ -11,6 +12,27 @@ function logError(error: Error) {
   self.postMessage({ error: error.message })
 }
 
-self.onmessage = function (event) {
-  eval(event.data)
+function consoleOut(
+  type: "log" | "error" | "warn" | "info" | symbol,
+  ...args: unknown[]
+) {
+  if (typeof type !== "string") return
+  console[type](...args)
+  return args.join(", ")
 }
+
+class Playground {
+  init() {
+    self.onmessage = async (event) => {
+      eval(event.data)
+    }
+  }
+  dummy() {
+    loadTempo()
+    logOut(0, "")
+    logError(new Error(""))
+    consoleOut(noop)
+  }
+}
+
+new Playground().init()

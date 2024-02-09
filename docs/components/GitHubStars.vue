@@ -1,14 +1,12 @@
 <script setup lang="ts">
-const totalStars = ref<null | number>(null)
-onMounted(async () => {
-  await new Promise((r) => setTimeout(r, 1000))
-  totalStars.value = 69
-})
+const { data, pending, error } = useLazyFetch<{ stargazers_count: number }>(
+  "https://api.github.com/repos/formkit/tempo"
+)
 </script>
 
 <template>
   <div class="pr-2">
-    <div role="status" class="absolute top-[2.5px]" v-if="totalStars === null">
+    <div role="status" class="absolute top-[2.5px]" v-if="pending">
       <svg
         aria-hidden="true"
         class="block w-4 h-4 text-gray-200 animate-spin fill-black opacity-20"
@@ -31,14 +29,14 @@ onMounted(async () => {
       <svg
         viewBox="0 0 16 16"
         :class="`w-4 mr-1 fill-[#EAC54F] ${
-          totalStars === null ? 'opacity-0' : 'opacity-100'
+          pending ? 'opacity-0' : 'opacity-100'
         }`"
       >
         <path
           d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
         ></path>
       </svg>
-      {{ totalStars }}
+      {{ error ? "—" : data?.stargazers_count }}
     </div>
   </div>
 </template>

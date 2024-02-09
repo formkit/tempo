@@ -37,8 +37,8 @@ export function processPlaygroundCode(rawSource: string): string {
       return `const ${p1.trim()} = await loadTempo()`
     }
   )
-
-  code = wrapFunctions(code, [...fns, "console.log"], "logOut")
+  code = code.replace(/console\.(log|error|warn|info)\(/, "consoleOut('$1',")
+  code = wrapFunctions(code, [...fns, "consoleOut"], "logOut")
 
   // Replace any api statements with a wrapped log statement with the line
   // number explicitly added in.

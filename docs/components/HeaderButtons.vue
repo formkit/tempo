@@ -33,21 +33,14 @@ function copyCode() {
   >
     <a
       class="bg-black py-3 px-6 text-white rounded-lg flex items-center text-sm"
-      href="#introduction"
+      href="https://github.com/formkit/tempo"
     >
-      Get started
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="w-5 h-5 ml-2"
-      >
+      <svg viewBox="0 0 16 16" class="w-4 fill-[#EAC54F] mr-2">
         <path
-          fill-rule="evenodd"
-          d="M10 3a.75.75 0 0 1 .75.75v10.638l3.96-4.158a.75.75 0 1 1 1.08 1.04l-5.25 5.5a.75.75 0 0 1-1.08 0l-5.25-5.5a.75.75 0 1 1 1.08-1.04l3.96 4.158V3.75A.75.75 0 0 1 10 3Z"
-          clip-rule="evenodd"
-        />
+          d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
+        ></path>
       </svg>
+      Star on GitHub
     </a>
     <a
       href="#copy-code"

@@ -28,4 +28,9 @@ export default defineNuxtConfig({
   },
   css: ["~/assets/css/main.css"],
   devtools: { enabled: false },
+  vite: {
+    worker: {
+      format: "es",
+    },
+  },
 })
