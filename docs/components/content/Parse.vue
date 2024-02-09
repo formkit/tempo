@@ -59,11 +59,12 @@ const parseOptionsProperties = [
       <code>format</code> function — including style formats!
     </p>
     <p>
-      A <code>Date</code> object in JavaScript is always includes both date and
-      time. The <code>parse</code> function does not need to include both date
-      and time, but the resulting <code>Date</code> object will always include
-      both. For consistent behavior, the undefined portions of the full date
-      will use the current date at midnight local time.
+      A <code>Date</code> object in JavaScript is fundamentally a timestamp, in
+      other words, always includes both date and time. The
+      <code>parse</code> function does not need to include both date and time,
+      but the resulting <code>Date</code> object will always include both. For
+      consistent behavior, the undefined portions of the full date will use the
+      current date at midnight local time.
     </p>
     <CalloutInfo>
       Because date tokens are sensitive to the locale, you will generally want
