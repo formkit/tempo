@@ -102,7 +102,7 @@ for (let i; i<5; i++) {
 
   it("wrap a console.log", () => {
     expect(processPlaygroundCode("const x = 123\nconsole.log(x)")).toBe(
-      `(async () => { try {const x = 123\nlogOut(1, console.log(x)) } catch (e) { logError(e) } })()`
+      `(async () => { try {const x = 123\nlogOut(1, consoleOut('log',x)) } catch (e) { logError(e) } })()`
     )
   })
 })
