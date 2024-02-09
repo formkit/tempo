@@ -67,35 +67,35 @@ const parseOptionsProperties = [
       current date at midnight local time.
     </p>
     <CalloutInfo>
-      Because date tokens are sensitive to the locale, you will generally want
-      to include the <code>locale</code> option when parsing a date string that
-      not a standardized format (like ISO 8601)
+      Because formatting tokens are sensitive to the locale, you will generally
+      want to include the <code>locale</code> option when parsing a date string
+      that not a standardized format (like ISO 8601)
     </CalloutInfo>
     <CodeExample file="parse-basic" />
     <h4>Parsing options</h4>
     <p>
-      The <code>parse</code> function can optionally accept an object as the
-      only argument. This object can include the following properties:
+      The <code>parse</code> function can accept an object of options as its
+      argument:
     </p>
     <ObjectReference type="ParseOptions" :properties="parseOptionsProperties" />
     <p>
-      The <code>date</code>, <code>format</code>, <code>locale</code> are
-      familiar, but what is <code>partFilter</code> and
+      The <code>date</code>, <code>format</code>, <code>locale</code> options
+      are familiar, but what is <code>partFilter</code> and
       <code>dataOverflow</code>?
     </p>
     <h4>partFilter</h4>
     <p>
       The <code>partFilter</code> option gives you fine grained control over
-      which pieces and parts of a date you’d like to include in the final parsed
-      date (remember, missing "parts" will default to the current date at
-      midnight local).
+      which pieces and parts of a date you’d like to include in the resulting
+      <code>Date</code> object (remember, missing "parts" will default to the
+      today’s date at midnight local).
     </p>
     <CodeExample file="part-filter" />
     <h4>dateOverflow</h4>
     <p>
       The <code>dateOverflow</code> option determines how an “out of range” date
-      should be parsed. Options are <code>backward</code> (default),
-      <code>forward</code>, <code>throw</code>.
+      should be parsed (ex: February 30th). Options are
+      <code>backward</code> (default), <code>forward</code>, <code>throw</code>.
     </p>
     <CodeExample file="date-overflow" />
     <CodeExample file="date-overflow-throw" />
