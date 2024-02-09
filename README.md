@@ -8,7 +8,9 @@ Tempo is a new library in a proud tradition of JavaScript date and time librarie
 
 Tempo is best thought of as a collection of utilities for working with `Date` objects — an important distinction from other libraries that provide custom date primitives. Under the hood, Tempo mines JavaScript's `Intl.DateTimeFormat` to extract complex data like timezones offsets and locale aware date formats giving you a simple API to format, parse, and manipulates dates.
 
-[Read the docs](https://tempo.formkit.com)
+<a href="https://tempo.formkit.com">
+<img src="docs/public/read-the-docs.png" alt="Read the docs" width="200" height="43">
+</a>
 
 ---
 
