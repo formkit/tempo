@@ -56,7 +56,7 @@ const parseOptionsProperties = [
     <p>
       To convert a date string into a <code>Date</code> object we use the
       <code>parse</code> function. This allows us to parse any output from the
-      <code>format</code> function — including locale time styles!
+      <code>format</code> function — including style formats!
     </p>
     <p>
       A <code>Date</code> object in JavaScript is always includes both date and
