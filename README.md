@@ -1,6 +1,8 @@
 <img src="docs/public/tempo.png" alt="TEMPO" width="500" height="195">
 
 [![Vitest](https://github.com/formkit/tempo/actions/workflows/tests.yml/badge.svg)](https://github.com/formkit/tempo/actions/workflows/tests.yml)
+![GitHub Sponsors](https://img.shields.io/github/sponsors/formkit)
+![NPM Version](https://img.shields.io/npm/v/%40formkit%2Ftempo)
 
 # Tempo — The easiest way to work with dates in JavaScript (and TypeScript)
 
