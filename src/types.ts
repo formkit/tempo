@@ -140,3 +140,30 @@ export interface ParseOptions {
    */
   dateOverflow?: "forward" | "backward" | "throw"
 }
+
+export interface FormatOptions {
+  /**
+   * A date object or ISO 8601 string.
+   */
+  date: DateInput
+  /**
+   * A format string or object.
+   */
+  format: Format
+  /**
+   * A locale or en by default.
+   */
+  locale?: "en"
+  /**
+   * Whether or not to escape literals.
+   */
+  genitive?: false
+  /**
+   * A function to filter parts.
+   */
+  tz?: string
+  /**
+   * A function to filter parts.
+   */
+  partFilter?: (part: Part) => boolean
+}
