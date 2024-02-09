@@ -4,10 +4,35 @@
 
 html {
   @apply scroll-smooth;
+  @apply bg-slate-100;
+}
+html::before {
+  @apply bg-slate-100;
+  content: "";
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  width: 100dvw;
+  height: 100dvh;
+  opacity: 0.4;
+  background-image: radial-gradient(
+      circle at 50% 40%,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.35)
+    ),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 10000 10000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  filter: contrast(100%) brightness(130%);
 }
 
-body {
-  @apply bg-body;
+@media (prefers-color-scheme: dark) {
+  html {
+    @apply bg-slate-900;
+  }
+  html::before {
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+    filter: contrast(120%) brightness(130%);
+  }
 }
 
 .monaco-editor,

@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <footer class="bg-footer py-8">
+  <footer class="bg-slate-50 py-8 border-t border-t-slate-200">
     <div class="w-[calc(100%-4em)] max-w-3xl mx-auto my-16">
       <div class="sm:flex items-start justify-between">
         <div class="mb-8">

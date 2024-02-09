@@ -49,16 +49,32 @@ onMounted(() => {
 
 <template>
   <div class="block aspect-[0.71] w-[1em] relative">
-    <svg class="aspect-[0.71] absolute inset-0 z-20" fill="currentColor">
+    <svg
+      class="aspect-[0.71] absolute inset-0 z-20 opacity-0 dark:text-sky-500 dark:blur-[12px] dark:opacity-100"
+      fill="currentColor"
+    >
       <use
         v-if="currentChar"
         :href="'/font-sprite.svg#char-' + currentChar"
         :class="`transition-all ${finished ? '' : ' opacity-20'}`"
       />
     </svg>
-    <svg class="aspect-[0.71] absolute inset-0 z-0" fill="currentColor">
-      <use href="/font-sprite.svg#char-8" class="opacity-5" />
-      <use href="/font-sprite.svg#char-i" class="opacity-5" />
+    <svg
+      class="aspect-[0.71] absolute inset-0 z-30 text-sky-500 dark:text-sky-100"
+      fill="currentColor"
+    >
+      <use
+        v-if="currentChar"
+        :href="'/font-sprite.svg#char-' + currentChar"
+        :class="`transition-all ${finished ? '' : ' opacity-20'}`"
+      />
+    </svg>
+    <svg
+      class="aspect-[0.71] absolute inset-0 z-0 text-slate-200 opacity-50 dark:text-slate-950"
+      fill="currentColor"
+    >
+      <use href="/font-sprite.svg#char-8" />
+      <use href="/font-sprite.svg#char-i" />
     </svg>
   </div>
 </template>

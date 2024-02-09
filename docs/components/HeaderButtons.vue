@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const showButtons = ref<undefined | boolean>(undefined)
+const pause = ref(false)
 const didCopy = useTimedRef(4000)
 const code = ref<HTMLElement>()
 const packageManager = ref<string>("npm i")
@@ -10,6 +11,7 @@ onMounted(() => {
     showButtons.value = true
   }, 2000)
   setInterval(() => {
+    if (pause.value) return
     packageManager.value =
       packageManagers[
         (packageManagers.indexOf(packageManager.value) + 1) %
@@ -50,8 +52,10 @@ function copyCode() {
     <a
       href="#copy-code"
       @click.prevent="copyCode"
+      @mouseenter="pause = true"
+      @mouseleave="pause = false"
       ref="code"
-      class="group relative font-mono text-sm text-fuchsia-700 shadow-lg py-3 px-6 bg-white rounded-lg flex items-center"
+      class="group relative font-mono text-sm text-fuchsia-700 shadow-lg py-3 px-6 bg-white rounded-lg flex items-center min-w-[300px]"
     >
       <span
         v-if="!didCopy"
@@ -62,7 +66,7 @@ function copyCode() {
       <span class="ml-2 mr-4" v-if="!didCopy">@formkit/tempo</span>
       <IconCopy
         v-if="!didCopy"
-        class="w-3 basis-3 flex-shrink-0 text-gray-400 group-hover:text-fuchsia-700"
+        class="w-3 basis-3 flex-shrink-0 ml-auto text-gray-400 group-hover:text-sky-700"
       />
       <span
         v-if="didCopy"
