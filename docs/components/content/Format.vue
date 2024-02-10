@@ -16,7 +16,12 @@ import { format } from "@formkit/tempo"
         },
         { name: 'format', type: 'string | object' },
         { name: 'locale?', type: 'string' },
-        { name: 'genitive?', type: 'boolean' },
+      ]"
+      :overload="[
+        {
+          name: 'options',
+          type: 'FormatOptions',
+        },
       ]"
       return="string"
     />
