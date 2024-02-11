@@ -61,6 +61,17 @@ const fns: Record<
     ],
     return: "number",
   },
+  iso8601: {
+    description:
+      "Validates that a given date passes “acceptable” levels of ISO 8601 compatibility and can be utilized within Tempo. This allows incomplete dates but must include at least the year and month. Does not require the <code>T</code> separator.",
+    arguments: [
+      {
+        name: "date",
+        type: "Date",
+      },
+    ],
+    return: "string",
+  },
   monthDays: {
     description: "Returns the number of days in a given month.",
     arguments: [

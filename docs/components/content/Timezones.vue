@@ -9,9 +9,13 @@
       <li>2. They involve a lot of geography, history, and politics.</li>
     </ul>
     <p>
-      Tempo ships 3 Timezone offset functions that allow you to solve nearly any
-      Timezone problem while maintaining the simplicity of using native
-      <code>Date</code> objects.
+      Tempo provides timezone support via the
+      <code>tz</code> option of the <code>format()</code> function. Additionally
+      you can create dates for any given timezone using the
+      <code>tzDate()</code> function. Additionally, Tempo provides the
+      <code>offset</code>, <code>removeOffset</code>, and
+      <code>applyOffset</code> functions to work with timezones in even more
+      nuanced ways.
     </p>
     <HeadingSection title="Key concept" size="sm" class="text-sky-500" />
     <p>
@@ -24,6 +28,18 @@
       region.
     </p>
     <HeadingSection title="Using timezones" size="sm" class="text-sky-500" />
+    <h4>Creating timezone dates</h4>
+    <p>
+      The most basic timezone aware function is <code>tzDate</code> which allows
+      you to create a new Date object at in a particular timezone.
+    </p>
+    <CodeExample file="tzDate" />
+    <h4>Formatting timezones</h4>
+    <p>
+      The <code>format</code> function can accept a <code>tz</code> option to
+      format a date in a specific timezone.
+    </p>
+    <CodeExample file="tzFormat" />
     <h4>Calculating offsets</h4>
     <p>
       Tempo uses the <code>Intl.DateTimeFormat</code> API to extract timezone
