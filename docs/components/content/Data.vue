@@ -131,6 +131,7 @@ const fns: Record<
       },
     ],
     return: "string[]",
+    example: "range",
   },
   sameDay: {
     description:

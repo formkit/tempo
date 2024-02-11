@@ -149,7 +149,7 @@ const fns: Record<
       },
     ],
     example: "date",
-    tip: 'To produce a date in a given timezone either include the offset in the date string (ex: "2021-01-01T00:00:00.000-0800") or use the <code>tzDate</code> function.',
+    tip: 'To produce a date in a given timezone either include the offset in the date string (ex: "2021-01-01T00:00:00-0800") or use the <code>tzDate</code> function.',
   },
   dayStart: {
     description: `Returns a new Date object with the time set to 00:00:00.000 (local time).`,
@@ -274,7 +274,9 @@ const fns: Record<
       />
       <p v-html="def.description" />
       <CodeExample v-if="def.example" :file="def.example" />
-      <CalloutInfo v-if="def.tip" v-html="def.tip" />
+      <CalloutInfo v-if="def.tip">
+        <span v-html="def.tip" />
+      </CalloutInfo>
     </div>
   </PageSection>
 </template>
