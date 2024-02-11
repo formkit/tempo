@@ -1,5 +1,15 @@
 <script lang="ts" setup>
-const fns = {
+import type { FunctionRef } from "../../src/types"
+const fns: Record<
+  string,
+  {
+    description: string
+    return: string
+    arguments: FunctionRef["arguments"]
+    example?: string
+    tip?: string
+  }
+> = {
   ap: {
     description: "Returns either am or pm but in any given locale.",
     return: "Date",
@@ -13,6 +23,7 @@ const fns = {
         type: "string",
       },
     ],
+    example: "ap",
   },
   dayOfYear: {
     description: `Gets the what day of the year a given date is. For example, August 1st is the 213th day of the year on non-leapyears and 214th on leapyears.`,
@@ -160,12 +171,14 @@ const fns = {
     </p>
     <div v-for="(def, fn) in fns">
       <h4>{{ fn }}</h4>
-      <p v-html="def.description" />
       <FunctionReference
         :function="fn"
         :arguments="def.arguments"
         :return="def.return"
       />
+      <p v-html="def.description" />
+      <CodeExample v-if="def.example" :file="def.example" />
+      <CalloutInfo v-if="def.tip" v-html="def.tip" />
     </div>
   </PageSection>
 </template>

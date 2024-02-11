@@ -46,11 +46,12 @@ const parseOptionsProperties = [
       :arguments="[
         {
           name: 'date',
-          type: 'string | ParseOptions',
+          type: 'string',
         },
         { name: 'format', type: 'string | { date?: string, time?: string }' },
         { name: 'locale?', type: 'string' },
       ]"
+      :overload="[{ name: 'options', type: 'ParseOptions' }]"
       return="Date"
     />
     <p>

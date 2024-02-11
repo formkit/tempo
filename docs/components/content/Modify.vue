@@ -7,6 +7,7 @@ const fns: Record<
     return: string
     arguments: FunctionRef["arguments"]
     example?: string
+    tip?: string
   }
 > = {
   addDay: {
@@ -148,6 +149,7 @@ const fns: Record<
       },
     ],
     example: "date",
+    tip: 'To produce a date in a given timezone either include the offset in the date string (ex: "2021-01-01T00:00:00.000-0800") or use the <code>tzDate</code> function.',
   },
   dayStart: {
     description: `Returns a new Date object with the time set to 00:00:00.000 (local time).`,
@@ -206,7 +208,7 @@ const fns: Record<
     ],
   },
   tzDate: {
-    description: `Converts an ISO 8601 like string into a Date object with a timezone applied. For example, <code>tzDate('2021-01-01T00:00:00.000', 'America/Los_Angeles')</code> will return a Date object representing 2021-01-01 00:00:00 in L.A. which equates to <code>2021-01-01T00:00:00.000</code>.`,
+    description: `Converts an ISO 8601 like string into a Date object with a timezone applied. For example, <code>tzDate('2021-01-01T00:00', 'America/Los_Angeles')</code> will return a Date object representing 2021-01-01 00:00 in L.A.`,
     return: "Date",
     arguments: [
       {
@@ -272,6 +274,7 @@ const fns: Record<
       />
       <p v-html="def.description" />
       <CodeExample v-if="def.example" :file="def.example" />
+      <CalloutInfo v-if="def.tip" v-html="def.tip" />
     </div>
   </PageSection>
 </template>
