@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const props = defineProps<{
+defineProps<{
   type: string
   properties: { name: string; type: string; jsdoc: string[] }[]
 }>()

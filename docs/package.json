@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
-    "@formkit/tempo": "0.0.2",
+    "@formkit/tempo": "0.0.3",
     "monaco-editor": "^0.40.0"
   }
 }

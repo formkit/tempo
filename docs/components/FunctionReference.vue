@@ -1,16 +1,8 @@
 <script lang="ts" setup>
-const props = withDefaults(
-  defineProps<{
-    function: string
-    arguments: Array<{ name: string; type: string; comment?: string }>
-    overload?: Array<{ name: string; type: string; comment?: string }>
-    return: string
-    wrapper?: boolean
-  }>(),
-  {
-    wrapper: true,
-  }
-)
+import type { FunctionRef } from "../src/types"
+const props = withDefaults(defineProps<FunctionRef>(), {
+  wrapper: true,
+})
 </script>
 
 <template>

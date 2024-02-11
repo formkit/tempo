@@ -319,11 +319,77 @@ import { format } from "@formkit/tempo"
       </tbody>
     </table>
     <CodeExample file="format-tokens" />
+    <h4>Format options</h4>
     <p>
-      The <code>format()</code> function accepts a fourth argument, a boolean
-      indicating whether or not genitive cases should be used. This is useful
-      for languages that have different forms of the month and day names when
-      used in a context that requires the genitive case.
+      The <code>format()</code> function can accept an object of options as its
+      argument to provide more control over the output.
+    </p>
+    <ObjectReference
+      type="FormatOptions"
+      :properties="[
+        {
+          name: 'date',
+          type: 'string | Date',
+          jsdoc: ['An ISO 8601 date string or a Date object.'],
+        },
+        {
+          name: 'format',
+          type: 'string | { date?: string, time?: string }',
+          jsdoc: ['The format can be either format styles or format tokens.'],
+        },
+        {
+          name: 'locale?',
+          type: 'string',
+          jsdoc: ['The locale to use when formatting.'],
+        },
+        {
+          name: 'tz?',
+          type: 'string',
+          jsdoc: [
+            'Converts the given date option to the timezone provided.',
+            'For example, if the provided date option is 2021-01-01T00:00:00Z',
+            'and the tz option is America/New_York and the format option is',
+            'YYYY-MM-DD HH:mm:ss, the output will be 2020-12-31 19:00:00',
+          ],
+        },
+        {
+          name: 'genitive?',
+          type: 'boolean',
+          jsdoc: [
+            'When true, the month and weekday names will be in the',
+            'genitive case for locales where it is applicable.',
+          ],
+        },
+        {
+          name: 'partFilter?',
+          type: '(part: Part) => boolean',
+          jsdoc: [
+            'A function that filters the parts of the formatted date.',
+            'The function is called with each part of the formatted date',
+            'and should return true to include the part in the output.',
+          ],
+        },
+      ]"
+    />
+    <h4>Timezone</h4>
+    <p>
+      The <code>tz</code> option allows you to format the provided date from the
+      perspective of any given timezone.
+    </p>
+    [CODE EXAMPLE HERE]
+    <h4>Part filter</h4>
+    <p>
+      The <code>partFilter</code> option allows you to filter out parts of the
+      formatted date. The function is called with each "part" of the formatted
+      date and should return a boolean indicating whether or not to include that
+      part in final formatted string.
+    </p>
+    [CODE EXAMPLE HERE]
+    <h4>Genitive case</h4>
+    <p>
+      Some languages have a genitive case for months and weekdays. When the
+      genitive option is set to true, the month and weekday names will be in the
+      genitive case for locales where it is applicable.
     </p>
     <CodeExample file="format-genitive" />
   </PageSection>

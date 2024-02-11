@@ -1,5 +1,14 @@
 <script lang="ts" setup>
-const fns = {
+import type { FunctionRef } from "../../src/types"
+const fns: Record<
+  string,
+  {
+    description: string
+    return: string
+    arguments: FunctionRef["arguments"]
+    example?: string
+  }
+> = {
   addDay: {
     description:
       "Returns a new Date object with a positive or negative number of days applied to date argument. To subtract days, use a negative number.",
@@ -14,6 +23,7 @@ const fns = {
         type: "number",
       },
     ],
+    example: "addDay",
   },
   addHour: {
     description:
@@ -126,6 +136,18 @@ const fns = {
         comment: "+-HHmm, ex: -0800",
       },
     ],
+    example: "applyOffset",
+  },
+  date: {
+    description: `Converts an ISO 8601 like string into a Date object (noop on <code>Date</code> objects). ISO 8601 strings do not need to be complete to be accepted, but you need at least a year and month.`,
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date",
+      },
+    ],
+    example: "date",
   },
   dayStart: {
     description: `Returns a new Date object with the time set to 00:00:00.000 (local time).`,
@@ -136,6 +158,7 @@ const fns = {
         type: "string | Date",
       },
     ],
+    example: "dayStart",
   },
   dayEnd: {
     description: `Returns a new Date object with the time set to 23:59:59 (local).`,
@@ -182,6 +205,22 @@ const fns = {
       },
     ],
   },
+  tzDate: {
+    description: `Converts an ISO 8601 like string into a Date object with a timezone applied. For example, <code>tzDate('2021-01-01T00:00:00.000', 'America/Los_Angeles')</code> will return a Date object representing 2021-01-01 00:00:00 in L.A. which equates to <code>2021-01-01T00:00:00.000</code>.`,
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date",
+      },
+      {
+        name: "tz",
+        type: "string",
+        comment: 'IANA timezone, ex: "America/Los_Angeles"',
+      },
+    ],
+    example: "tzDate",
+  },
   weekStart: {
     description: `Returns a new Date object with the date set to the first day of the current week with the time set to 00:00:00 (local).`,
     return: "Date",
@@ -226,12 +265,13 @@ const fns = {
     </p>
     <div v-for="(def, fn) in fns">
       <h4>{{ fn }}</h4>
-      <p v-html="def.description" />
       <FunctionReference
         :function="fn"
         :arguments="def.arguments"
         :return="def.return"
       />
+      <p v-html="def.description" />
+      <CodeExample v-if="def.example" :file="def.example" />
     </div>
   </PageSection>
 </template>

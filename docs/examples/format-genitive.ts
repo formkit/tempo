@@ -3,6 +3,11 @@ import { format } from "@formkit/tempo"
 const t = "2013-03-15"
 
 // The month name
-format(t, "MMMM", "ru")
+format({ date: t, format: "MMMM", locale: "ru" })
 // The genitive form of the month name
-format(t, "MMMM", "ru", true)
+format({
+  date: t,
+  format: "MMMM",
+  locale: "ru",
+  genitive: true,
+})

@@ -40,7 +40,9 @@ export function format(options: FormatOptions): string
 export function format(
   inputDate: DateInput,
   format?: Format,
-  locale?: string
+  locale?: string,
+  genitive?: boolean,
+  partFilter?: (part: Part) => boolean
 ): string
 export function format(
   inputDateOrOptions: DateInput | FormatOptions,

@@ -153,11 +153,11 @@ export interface FormatOptions {
   /**
    * A locale or en by default.
    */
-  locale?: "en"
+  locale?: string
   /**
    * Whether or not to escape literals.
    */
-  genitive?: false
+  genitive?: boolean
   /**
    * A function to filter parts.
    */
