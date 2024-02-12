@@ -6,6 +6,7 @@ export default defineNuxtConfig({
       title: "Tempo • Dates by FormKit",
       htmlAttrs: {
         class: "dark:bg-slate-900 dark:text-white",
+        lang: "en",
       },
     },
   },

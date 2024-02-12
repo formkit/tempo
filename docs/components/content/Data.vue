@@ -182,7 +182,7 @@ const fns: Record<
       data that is commonly needed to build applications.
     </p>
     <div v-for="(def, fn) in fns">
-      <h4>{{ fn }}</h4>
+      <h3>{{ fn }}</h3>
       <FunctionReference
         :function="fn"
         :arguments="def.arguments"

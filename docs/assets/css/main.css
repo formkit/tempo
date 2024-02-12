@@ -90,7 +90,7 @@ html.dark::before {
   @apply mb-2;
 }
 
-.page-section h4 {
+.page-section h3 {
   @apply text-lg font-bold mb-3 dark:text-gray-100;
 }
 .page-section table {

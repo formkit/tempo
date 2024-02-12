@@ -28,19 +28,19 @@
       region.
     </p>
     <HeadingSection title="Using timezones" size="sm" class="text-sky-500" />
-    <h4>Creating timezone dates</h4>
+    <h3>Creating timezone dates</h3>
     <p>
       The most basic timezone aware function is <code>tzDate</code> which allows
       you to create a new Date object at in a particular timezone.
     </p>
     <CodeExample file="tzDate" />
-    <h4>Formatting timezones</h4>
+    <h3>Formatting timezones</h3>
     <p>
       The <code>format</code> function can accept a <code>tz</code> option to
       format a date in a specific timezone.
     </p>
     <CodeExample file="tzFormat" />
-    <h4>Calculating offsets</h4>
+    <h3>Calculating offsets</h3>
     <p>
       Tempo uses the <code>Intl.DateTimeFormat</code> API to extract timezone
       information, that makes working with timezones as simple as possible. The
@@ -48,7 +48,7 @@
       two timezones (given in <code>+-HHmm</code>).
     </p>
     <CodeExample file="offset" />
-    <h4>Removing offsets</h4>
+    <h3>Removing offsets</h3>
     <p>
       To display the time of a <code>Date</code> object in a specific timezone
       you only need to remove the relative offset. Since Tempo operates with
@@ -63,7 +63,7 @@
       <code>offset</code> function is useful for formatting and display purposes
       but actually represents a fundamentally different absolute moment in time.
     </CalloutWarning>
-    <h4>Applying offsets</h4>
+    <h3>Applying offsets</h3>
     <p>
       If you are creating a car rental booking app you want the pickup time to
       always be relative to the local time of the pickup location. The

@@ -14,26 +14,46 @@ import { defineProps } from "vue"
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
       <CopyCode>
         <div class="flex items-center">
-          <img src="~/assets/pnpm.svg" aria-hidden class="w-4 mr-3" />pnpm add
-          @formkit/tempo
+          <img
+            src="~/assets/pnpm.svg"
+            loading="lazy"
+            aria-hidden
+            class="w-4 mr-3"
+            alt="pnpm"
+          />pnpm add @formkit/tempo
         </div>
       </CopyCode>
       <CopyCode>
         <div class="flex items-center">
-          <img src="~/assets/npm.svg" aria-hidden class="w-4 mr-3" />npm install
-          @formkit/tempo
+          <img
+            src="~/assets/npm.svg"
+            loading="lazy"
+            aria-hidden
+            class="w-4 mr-3"
+            alt="npm"
+          />npm install @formkit/tempo
         </div>
       </CopyCode>
       <CopyCode>
         <div class="flex items-center">
-          <img src="~/assets/yarn.svg" aria-hidden class="w-4 mr-3" />yarn add
-          @formkit/tempo
+          <img
+            src="~/assets/yarn.svg"
+            loading="lazy"
+            aria-hidden
+            class="w-4 mr-3"
+            alt="yarn"
+          />yarn add @formkit/tempo
         </div>
       </CopyCode>
       <CopyCode>
         <div class="flex items-center">
-          <img src="~/assets/bun.svg" aria-hidden class="w-4 mr-3" />bun install
-          @formkit/tempo
+          <img
+            src="~/assets/bun.svg"
+            loading="lazy"
+            aria-hidden
+            class="w-4 mr-3"
+            alt="bun"
+          />bun install @formkit/tempo
         </div>
       </CopyCode>
     </div>
