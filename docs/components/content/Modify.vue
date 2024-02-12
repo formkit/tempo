@@ -257,7 +257,7 @@ const fns: Record<
 </script>
 
 <template>
-  <PageSection id="modify">
+  <PageSection>
     <HeadingSection title="Modify" class="text-sky-500" />
     <p>
       Tempo includes a number of (tree-shakable) utility functions to assist you

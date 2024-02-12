@@ -4,7 +4,7 @@ import { format } from "@formkit/tempo"
 </script>
 
 <template>
-  <PageSection id="format">
+  <PageSection>
     <HeadingSection title="Format" class="text-sky-500" />
     <FunctionReference
       function="format"
@@ -50,7 +50,7 @@ import { format } from "@formkit/tempo"
       <a href="#timezones">more about timezones</a> for further information.
     </CalloutInfo>
   </PageSection>
-  <PageSection id="format-styles">
+  <PageSection>
     <HeadingSection title="Format styles" size="sm" class="text-sky-500" />
     <p>
       When displaying a dates to users it’s a good idea to use the formats they
@@ -189,7 +189,7 @@ import { format } from "@formkit/tempo"
     </table>
     <CodeExample file="format-styles-time" />
   </PageSection>
-  <PageSection id="format-tokens">
+  <PageSection>
     <HeadingSection title="Format tokens" size="sm" class="text-sky-500" />
     <p>
       If you already know the format you need to display — Tempo’s formatting

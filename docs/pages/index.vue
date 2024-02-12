@@ -6,7 +6,7 @@ definePageMeta({
 </script>
 
 <template>
-  <main class="mt-20">
+  <main class="-mt-16">
     <ContentIntroduction />
     <ContentInstallation />
     <ContentFormat />

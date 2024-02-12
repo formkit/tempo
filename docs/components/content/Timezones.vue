@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <PageSection id="timezones">
+  <PageSection>
     <HeadingSection title="Timezones" class="text-sky-500" />
     <p>Timezones are challenging for 2 reasons:</p>
     <ul>

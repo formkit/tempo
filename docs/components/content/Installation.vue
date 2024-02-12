@@ -3,7 +3,7 @@ import { defineProps } from "vue"
 </script>
 
 <template>
-  <PageSection id="install">
+  <PageSection>
     <HeadingSection title="Install" class="text-sky-500" />
     <p>
       Pshhh, come on — you already know how to do this. All you’re looking for

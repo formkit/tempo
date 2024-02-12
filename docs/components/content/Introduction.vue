@@ -3,7 +3,7 @@ import { defineProps } from "vue"
 </script>
 
 <template>
-  <PageSection id="introduction">
+  <PageSection>
     <HeadingSection title="Introduction" class="text-sky-500" />
     <p>
       Tempo is a new library in a proud tradition of JavaScript date and time

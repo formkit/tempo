@@ -117,8 +117,9 @@ const stopWatch = watch(el, () => {
       rounded-lg
       my-8
       md:my-12
-      mdl:-mx-8
-      lg:-mx-24
+      mdl:-mr-8
+      lg:-mr-28
+      xl:-mr-48
       shadow-sm
       bg-[#f9f9f9] ${'' /* --vs-editor-background */}
       after:-z-10

@@ -5,7 +5,7 @@ const results = ref<Array<{ title: string; description: string; id: string }>>([
   {
     title: "Install",
     description: "Learn how to get started with Tempo.",
-    id: "#installation",
+    id: "#install",
   },
   {
     title: "Format",

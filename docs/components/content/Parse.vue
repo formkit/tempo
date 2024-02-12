@@ -39,7 +39,7 @@ const parseOptionsProperties = [
 </script>
 
 <template>
-  <PageSection id="parse">
+  <PageSection>
     <HeadingSection title="Parse" class="text-sky-500" />
     <FunctionReference
       function="parse"
