@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/tailwindcss": "^6.11.2",
     "@types/node": "^18.17.0",
     "@vueuse/core": "^10.7.2",

@@ -1,7 +1,9 @@
 <script lang="ts" setup></script>
 
 <template>
-  <footer class="bg-footer py-8">
+  <footer
+    class="bg-slate-50 py-8 border-t border-t-slate-200 dark:bg-black/25 dark:border-t-purple-950"
+  >
     <div class="w-[calc(100%-4em)] max-w-3xl mx-auto my-16">
       <div class="sm:flex items-start justify-between">
         <div class="mb-8">
@@ -9,49 +11,53 @@
             chars="tempo"
             :start="true"
             :delay="0"
-            class="text-sky-500 text-3xl mb-4"
+            class="text-3xl mb-4"
           />
           <NuxtLink
             to="https://formkit.com"
-            class="head-message text-sm grayscale flex text-stone-400 hover:text-stone-800 transition-all hover:grayscale-0"
+            class="head-message text-sm flex text-slate-500 hover:text-slate-800 transition-all dark:text-purple-200/75 dark:hover:text-slate-200"
           >
             <LogoMark class="w-3 mr-2 fill-[#FCAB5E]" /> Made with ♥ by the
             FormKit team.
           </NuxtLink>
         </div>
         <div>
-          <h4 class="font-bold mb-4 text-stone-700">Our Projects</h4>
-          <ul class="text-stone-600 mb-8 sm:mr-20">
+          <h4 class="font-bold mb-4 text-slate-700 dark:text-slate-300">
+            Our Projects
+          </h4>
+          <ul class="text-slate-600 mb-8 sm:mr-20 dark:text-slate-200">
             <li class="mb-2">
               <a
                 href="https://formkit.com"
-                class="border-b-2 border-stone-300 hover:border-stone-500"
+                class="border-b-2 border-slate-300 hover:border-slate-500 dark:border-slate-400 dark:hover:border-purple-300"
                 >FormKit</a
               >
             </li>
             <li class="mb-2">
               <a
                 href="https://auto-animate.formkit.com"
-                class="border-b-2 border-stone-300 hover:border-stone-500"
+                class="border-b-2 border-slate-300 hover:border-slate-500 dark:border-slate-400 dark:hover:border-purple-300"
                 >AutoAnimate</a
               >
             </li>
             <li class="mb-2">
               <a
                 href="https://arrowjs.com"
-                class="border-b-2 border-stone-300 hover:border-stone-500"
+                class="border-b-2 border-slate-300 hover:border-slate-500 dark:border-slate-400 dark:hover:border-purple-300"
                 >ArrowJS</a
               >
             </li>
           </ul>
         </div>
         <div class="">
-          <h4 class="font-bold mb-4 text-stone-700">Connect</h4>
-          <ul class="socials mb-4 text-stone-400">
+          <h4 class="font-bold mb-4 text-slate-700 dark:text-slate-300">
+            Connect
+          </h4>
+          <ul class="socials mb-4 text-slate-400 dark:text-slate-300">
             <li class="mb-2">
               <a
                 href="https://x.com/formkit"
-                class="hover:text-stone-500 flex items-center gap-2"
+                class="hover:text-slate-500 flex items-center gap-2 dark:hover:text-purple-300"
               >
                 <svg
                   width="1200"
@@ -72,7 +78,7 @@
             <li class="mb-2">
               <a
                 href="https://discord.gg/Vhu97pAC76"
-                class="hover:text-stone-500 flex items-center gap-2"
+                class="hover:text-slate-500 flex items-center gap-2 dark:hover:text-purple-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +96,7 @@
             <li class="mb-2">
               <a
                 href="https://www.youtube.com/formkit"
-                class="hover:text-stone-500 flex items-center gap-2"
+                class="hover:text-slate-500 flex items-center gap-2 dark:hover:text-purple-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +114,7 @@
             <li class="mb-2">
               <a
                 href="https://github.com/formkit/tempo"
-                class="hover:text-stone-500 flex items-center gap-2"
+                class="hover:text-slate-500 flex items-center gap-2 dark:hover:text-purple-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -127,7 +133,7 @@
         </div>
       </div>
 
-      <span class="text-stone-400 block mt-4 text-sm">
+      <span class="text-slate-400 block mt-4 text-sm dark:text-purple-200/50">
         Released under the MIT License. &copy;
         {{ new Date().getFullYear() }} FormKit. All rights reserved.
       </span>

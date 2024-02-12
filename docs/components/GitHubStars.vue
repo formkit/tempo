@@ -25,10 +25,12 @@ const { data, pending, error } = useLazyFetch<{ stargazers_count: number }>(
       </svg>
       <span class="sr-only">Loading...</span>
     </div>
-    <div class="text-sm flex items-center text-gray-400 group-hover:text-black">
+    <div
+      class="text-sm flex items-center text-gray-400 group-hover:text-black dark:text-purple-600 dark:group-hover:text-purple-400"
+    >
       <svg
         viewBox="0 0 16 16"
-        :class="`w-4 mr-1 fill-[#EAC54F] ${
+        :class="`w-4 mr-1 fill-yellow-500 ${
           pending ? 'opacity-0' : 'opacity-100'
         }`"
       >

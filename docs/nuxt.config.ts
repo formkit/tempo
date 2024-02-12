@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt"],
+  modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt", "@nuxtjs/color-mode"],
   app: {
     head: {
       title: "Tempo • Dates by FormKit",
@@ -18,6 +18,10 @@ export default defineNuxtConfig({
         },
       },
     },
+  },
+  colorMode: {
+    classSuffix: "",
+    storageKey: "tempo-color-mode",
   },
   experimental: {
     componentIslands: true,
