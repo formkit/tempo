@@ -18,10 +18,33 @@ onMounted(() => {
         :delay="500"
       />
       <h1
-        class="tagline text-center lg:leading-none text-[6vw] lg:text-6xl font-bold max-w-2xl m-auto opacity-0 translate-y-4 transition-all duration-700 data-[show]:opacity-100 data-[show]:translate-y-0 text-slate-700 mb-10 md:mb-14 lg:mb-20"
+        :class="`
+          tagline
+          text-center
+          text-[6vw]
+          font-bold
+          max-w-2xl
+          m-auto
+          opacity-0
+          translate-y-4
+          transition-all
+          duration-700
+          data-[show]:opacity-100
+          data-[show]:translate-y-0
+          text-slate-700
+          mb-10
+          md:mb-14
+          lg:leading-none
+          lg:text-6xl
+          lg:mb-20
+
+          dark:text-purple-100
+        `"
         :data-show="showTagline"
       >
-        The easiest way to work with dates in&nbsp;JavaScript.
+        The <span class="italic">easiest</span> way to work with
+        <span class="text-sky-600 dark:text-purple-500">dates</span>
+        in&nbsp;JavaScript.
       </h1>
       <HeaderButtons />
     </header>

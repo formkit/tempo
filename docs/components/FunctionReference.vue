@@ -7,18 +7,38 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="bg-white rounded-lg p-3 font-mono text-base mb-8">
-    <span class="text-blue-700">function </span>
-    <span class="text-fuchsia-700">{{ props.function }}</span
+  <div
+    :class="`
+      bg-white
+      rounded-lg
+      p-3
+      font-mono
+      text-base
+      mb-8
+      border
+      border-slate-300
+
+      dark:text-gray-200
+      dark:bg-black/20
+      dark:border-purple-950
+    `"
+  >
+    <span class="text-blue-700 dark:text-sky-400">function </span>
+    <span class="text-fuchsia-700 dark:text-fuchsia-400">{{
+      props.function
+    }}</span
     >(<br /><template v-for="(arg, index) in props.arguments" :key="arg.name">
       <div class="ml-4">
-        <span class="text-fuchsia-700">{{ arg.name }}</span
-        >: <span class="text-sky-500">{{ arg.type }}</span
+        <span class="text-fuchsia-700 dark:text-fuchsia-400">{{
+          arg.name
+        }}</span
+        >: <span class="text-sky-500 dark:text-emerald-400">{{ arg.type }}</span
         >{{ index < props.arguments.length - 1 ? ", " : ""
-        }}<span v-if="arg.comment" class="text-gray-400"
+        }}<span v-if="arg.comment" class="text-gray-400 dark:text-gray-300"
           >&nbsp;// {{ arg.comment }}</span
         >
       </div> </template
-    >): <span class="text-sky-500">{{ props.return }}</span>
+    >):
+    <span class="text-sky-500 dark:text-emerald-400">{{ props.return }}</span>
   </div>
 </template>

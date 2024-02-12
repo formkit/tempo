@@ -16,7 +16,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="inline-flex py-5 px-10rounded-2xl">
+  <div class="inline-flex">
     <ClockCharacter
       v-for="(char, i) in chars"
       :key="char"

@@ -34,7 +34,7 @@ if (typeof window !== "undefined") {
   `)
   monaco.editor.defineTheme("night-owl", nightOwl)
   monaco.editor.defineTheme("chrome-dev-tools", chromeTools)
-  const isDarkMode = false
+  const isDarkMode = document.documentElement.classList.contains("dark")
   if (isDarkMode) {
     monaco.editor.setTheme("night-owl")
   } else {

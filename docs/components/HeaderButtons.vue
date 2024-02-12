@@ -9,7 +9,7 @@ const packageManagers = ["npm install", "yarn add", "pnpm add", "bun install"]
 onMounted(() => {
   setTimeout(() => {
     showButtons.value = true
-  }, 2000)
+  }, 1750)
   setInterval(() => {
     if (pause.value) return
     packageManager.value =
@@ -32,7 +32,7 @@ function copyCode() {
     class="flex flex-col justify-center items-center gap-4 sm:flex-row sm:gap-8 opacity-0 translate-y-4 transition-all duration-700 data-[show]:opacity-100 data-[show]:translate-y-0"
   >
     <a
-      class="bg-black py-3 px-6 text-white rounded-lg flex items-center text-sm"
+      class="bg-black py-3 px-6 text-white rounded-lg flex items-center text-sm dark:bg-purple-900"
       href="https://github.com/formkit/tempo"
     >
       <svg viewBox="0 0 16 16" class="w-4 fill-[#EAC54F] mr-2">
@@ -48,7 +48,7 @@ function copyCode() {
       @mouseenter="pause = true"
       @mouseleave="pause = false"
       ref="code"
-      class="group relative font-mono text-sm text-fuchsia-700 shadow-lg py-3 px-6 bg-white rounded-lg flex items-center min-w-[300px]"
+      class="group relative font-mono text-sm text-fuchsia-700 shadow-lg py-3 px-6 bg-white rounded-lg flex items-center min-w-[300px] dark:bg-purple-950 dark:border dark:border-purple-900 dark:text-fuchsia-400"
     >
       <span
         v-if="!didCopy"
@@ -59,12 +59,12 @@ function copyCode() {
       <span class="ml-2 mr-4" v-if="!didCopy">@formkit/tempo</span>
       <IconCopy
         v-if="!didCopy"
-        class="w-3 basis-3 flex-shrink-0 ml-auto text-gray-400 group-hover:text-sky-700"
+        class="w-3 basis-3 flex-shrink-0 ml-auto text-gray-400 group-hover:text-sky-700 dark:group-hover:text-sky-400"
       />
       <span
         v-if="didCopy"
         :key="packageManager"
-        class="whitespace-nowrap text-green-700 flex items-center gap-2"
+        class="whitespace-nowrap text-green-700 flex w-full items-center gap-2 dark:text-green-400"
       >
         Command copied!
         <svg
@@ -73,7 +73,7 @@ function copyCode() {
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="w-4 h-4"
+          class="w-4 h-4 ml-auto"
         >
           <path
             stroke-linecap="round"

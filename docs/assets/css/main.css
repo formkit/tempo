@@ -5,34 +5,38 @@
 html {
   @apply scroll-smooth;
   @apply bg-slate-100;
+  @apply selection:bg-sky-500;
+  @apply selection:text-white;
+}
+html.dark {
+  @apply bg-purple-950;
+  @apply selection:bg-fuchsia-600;
 }
 html::before {
   @apply bg-slate-100;
+  @apply opacity-40;
+  @apply mix-blend-normal;
+  @apply contrast-100;
+  @apply brightness-[130%];
   content: "";
   position: fixed;
   z-index: -1;
   inset: 0;
   width: 100dvw;
   height: 100dvh;
-  opacity: 0.4;
   background-image: radial-gradient(
       circle at 50% 40%,
       rgba(0, 0, 0, 0),
       rgba(0, 0, 0, 0.35)
     ),
     url("data:image/svg+xml,%3Csvg viewBox='0 0 10000 10000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  filter: contrast(100%) brightness(130%);
 }
-
-@media (prefers-color-scheme: dark) {
-  html {
-    @apply bg-slate-900;
-  }
-  html::before {
-    mix-blend-mode: overlay;
-    opacity: 0.5;
-    filter: contrast(120%) brightness(130%);
-  }
+html.dark::before {
+  @apply bg-purple-950;
+  @apply opacity-100;
+  @apply mix-blend-multiply;
+  @apply contrast-[120%];
+  @apply brightness-[120%];
 }
 
 .monaco-editor,
@@ -47,25 +51,27 @@ html::before {
 }
 
 .page-section p {
-  @apply text-lg mb-8 text-slate-800 leading-8;
+  @apply text-lg mb-8 text-slate-800 leading-8 dark:text-slate-200;
 }
 
 .page-section p code,
 .page-section ul code,
 .page-section aside code {
-  @apply bg-black/10 font-mono p-1 text-base rounded;
+  @apply bg-black/10 font-mono p-1 text-base rounded dark:bg-black/30 dark:border dark:border-purple-950 dark:text-fuchsia-300;
 }
 
 .page-section > ul {
   @apply pl-8 text-base text-slate-800 leading-7 mb-8;
+  @apply dark:text-slate-200;
 }
 
 .page-section > ul > li {
-  @apply mb-4 last:mb-0;
+  @apply mb-2 last:mb-0;
 }
 
 .jump-list a {
-  @apply block p-4 rounded-lg cursor-pointer bg-transparent duration-500 hover:bg-white hover:shadow-md transition-all;
+  @apply block p-4 rounded-lg cursor-pointer bg-transparent duration-500 border border-slate-300 bg-slate-50 hover:bg-white hover:shadow-md transition-all;
+  @apply dark:border-purple-950 dark:bg-black/10 dark:hover:bg-purple-950 dark:text-gray-200;
 }
 
 .page-section > ul.jump-list {
@@ -85,13 +91,15 @@ html::before {
 }
 
 .page-section h4 {
-  @apply text-lg font-bold mb-3;
+  @apply text-lg font-bold mb-3 dark:text-gray-100;
 }
 .page-section table {
-  @apply w-full mb-10 text-base text-slate-700 rounded-lg shadow-sm;
+  @apply w-full mb-10 text-base text-slate-700 rounded-lg shadow-md border border-slate-300 border-separate border-spacing-0;
+  @apply dark:border-purple-950 dark:shadow-none dark:text-slate-200;
 }
 .page-section table th {
   @apply bg-gray-50 p-3 text-left text-black;
+  @apply dark:bg-black/25 dark:text-gray-100;
 }
 .page-section table th:first-child {
   @apply rounded-tl-lg;
@@ -102,13 +110,18 @@ html::before {
 
 .page-section table td {
   @apply bg-gray-50 py-2 px-3 leading-8;
+  @apply dark:bg-black/25;
 }
-
 .page-section table td:first-child {
   @apply text-black;
 }
+.page-section table tbody tr td {
+  @apply border-t border-slate-300;
+  @apply dark:border-purple-950;
+}
 .page-section table tr:nth-child(odd) td {
   @apply bg-slate-100;
+  @apply dark:bg-black/10;
 }
 
 .page-section table tr:last-child td:first-child {
@@ -120,9 +133,11 @@ html::before {
 
 .page-section table code {
   @apply bg-slate-100 font-mono p-1 text-base rounded;
+  @apply dark:bg-purple-950 dark:text-slate-100;
 }
 .page-section table tr:nth-child(odd) code {
   background: rgb(225, 236, 247);
+  @apply dark:bg-purple-950;
 }
 .page-section a {
   @apply underline;

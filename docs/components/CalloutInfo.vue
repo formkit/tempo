@@ -1,5 +1,7 @@
 <template>
-  <aside class="bg-sky-200 p-4 rounded-lg text-slate-800 leading-8 mb-8">
+  <aside
+    class="bg-sky-200 p-4 rounded-lg text-slate-800 leading-8 mb-8 dark:bg-sky-800 dark:text-sky-50 dark:[&_code]:!border-0 dark:[&_code]:!text-sky-400"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

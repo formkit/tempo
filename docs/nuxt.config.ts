@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   },
   tailwindcss: {
     config: {
+      darkMode: "class",
       theme: {
         fontFamily: {
           mono: ["Menlo", "Monaco", "Courier New", "monospace"],
@@ -19,9 +20,8 @@ export default defineNuxtConfig({
     },
   },
   colorMode: {
-    preference: "system", // default value of $colorMode.preference
-    fallback: "light", // fallback value if not system preference found
     classSuffix: "",
+    storageKey: "tempo-color-mode",
   },
   experimental: {
     componentIslands: true,

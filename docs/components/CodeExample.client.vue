@@ -108,16 +108,50 @@ const stopWatch = watch(el, () => {
 
 <template>
   <div
-    class="flex flex-col md:flex-row rounded-lg my-8 md:my-12 mdl:-mx-8 lg:-mx-24 relative"
+    :class="`
+      relative
+      flex
+      flex-col
+      md:flex-row
+      rounded-lg
+      my-8
+      md:my-12
+      mdl:-mx-8
+      lg:-mx-24
+      shadow-sm
+      after:-z-10
+      after:absolute
+      after:-inset-1
+      after:bg-sky-600
+      after:rounded-lg
+
+      dark:after:-inset-px
+      dark:after:bg-purple-900
+    `"
   >
     <div class="md:w-1/2" ref="el"></div>
     <div
-      class="md:w-1/2 bg-slate-200 font-mono p-4 overflow-auto rounded-bl-lg rounded-br-lg md:rounded-tr-lg md:rounded-bl-none"
+      :class="`
+        md:w-1/2
+        bg-slate-200
+        border
+        border-l-slate-300
+        font-mono
+        p-4
+        overflow-auto
+        rounded-bl-lg
+        rounded-br-lg
+        md:rounded-tr-lg
+        md:rounded-bl-none
+
+        dark:bg-black/40
+        dark:border-0
+      `"
     >
       <ul v-if="result">
         <li
           v-for="logs in result"
-          class="text-nowrap h-6 text-slate-600 empty:hidden md:empty:block"
+          class="text-nowrap h-6 text-slate-800 empty:hidden md:empty:block dark:text-purple-300"
         >
           {{ logs ? logs.join(", ") : "" }}
         </li>
@@ -127,7 +161,7 @@ const stopWatch = watch(el, () => {
       </div>
     </div>
     <div
-      class="sensible-error bg-red-600 text-white font-mono font-sm p-2 text-xs z-50 absolute top-[calc(100%-5px)] left-0 w-full rounded-bl-lg rounded-br-lg"
+      class="sensible-error bg-red-600 text-white font-mono font-sm p-2 text-xs z-50 absolute top-[calc(100%-5px)] left-0 w-auto rounded-lg border border-red-400 shadow-md"
       v-if="sensibleError"
     >
       {{ sensibleError }}

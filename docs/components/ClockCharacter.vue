@@ -50,7 +50,7 @@ onMounted(() => {
 <template>
   <div class="block aspect-[0.71] w-[1em] relative">
     <svg
-      class="aspect-[0.71] absolute inset-0 z-20 opacity-0 dark:text-sky-500 dark:blur-[12px] dark:opacity-100"
+      class="aspect-[0.71] absolute inset-0 z-20 opacity-0 dark:text-fuchsia-500 dark:blur-[12px] dark:opacity-100"
       fill="currentColor"
     >
       <use
@@ -60,7 +60,7 @@ onMounted(() => {
       />
     </svg>
     <svg
-      class="aspect-[0.71] absolute inset-0 z-30 text-sky-500 dark:text-sky-100"
+      class="aspect-[0.71] absolute inset-0 z-30 text-sky-600 dark:text-violet-50"
       fill="currentColor"
     >
       <use
@@ -70,7 +70,7 @@ onMounted(() => {
       />
     </svg>
     <svg
-      class="aspect-[0.71] absolute inset-0 z-0 text-slate-200 opacity-50 dark:text-slate-950"
+      class="aspect-[0.71] absolute inset-0 z-0 text-slate-200 opacity-50 dark:text-gray-950 dark:opacity-30"
       fill="currentColor"
     >
       <use href="/font-sprite.svg#char-8" />

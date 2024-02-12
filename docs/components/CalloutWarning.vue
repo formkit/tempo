@@ -1,5 +1,19 @@
 <template>
-  <aside class="bg-yellow-200 p-4 rounded-lg text-slate-800 leading-8 mb-8">
+  <aside
+    :class="`
+    bg-yellow-200
+    p-4
+    rounded-lg
+    text-slate-800
+    leading-8 
+    mb-8
+
+    dark:bg-pink-900
+    dark:text-gray-100
+    dark:[&_code]:!border-0
+    dark:[&_code]:!text-pink-300
+  `"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

@@ -42,7 +42,7 @@ onMounted(() => {
 
   setTimeout(() => {
     initialShow.value = true
-  }, 2100)
+  }, 2200)
 })
 </script>
 
@@ -53,7 +53,22 @@ onMounted(() => {
   >
     <div class="search-tray">
       <div
-        class="input-wrapper flex bg-white p-2 pr-3 rounded-md focus-within:outline-sky-500 focus-within:outline focus-within:outline-2 shadow-md mb-4"
+        :class="`
+          input-wrapper
+          flex
+          bg-white
+          p-2
+          pr-3
+          rounded-md
+          focus-within:outline-sky-500
+          focus-within:outline
+          focus-within:outline-2
+          shadow-md
+          mb-4
+
+          dark:bg-purple-900
+          dark:focus-within:outline-fuchsia-500
+        `"
       >
         <svg
           width="24"
@@ -63,7 +78,7 @@ onMounted(() => {
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="text-slate-300 relative top-0.5"
+          class="text-slate-400 relative top-0.5 dark:text-purple-300"
           aria-hidden="true"
         >
           <path d="m19 19-3.5-3.5"></path>
@@ -72,11 +87,13 @@ onMounted(() => {
         <input
           type="text"
           aria-label="Search documentation"
-          class="flex-grow focus:outline-none px-2 placeholder:text-gray-300"
+          class="flex-grow focus:outline-none px-2 placeholder:text-slate-300 bg-transparent dark:placeholder:text-purple-400 dark:text-gray-300"
           placeholder="Quick search..."
           ref="search"
         />
-        <kbd class="inline-flex text-slate-300 gap-1 items-center">
+        <kbd
+          class="inline-flex text-slate-400 gap-1 items-center dark:text-purple-300"
+        >
           <abbr title="Command" class="text-lg no-underline">⌘</abbr>
           <span class="text-sm">K</span>
         </kbd>
@@ -87,16 +104,40 @@ onMounted(() => {
             <a
               :href="result.id"
               tabindex="0"
-              class="group px-4 py-3 bg-white rounded-lg flex justify-between items-center focus:outline focus:outline-sky-500 focus:outline-2 transition-shadow hover:shadow-md"
+              :class="`
+                group
+                px-4
+                py-3
+                bg-white
+                shadow-sm
+                rounded-lg
+                flex
+                justify-between
+                items-center
+                focus:outline
+                focus:outline-sky-500
+                focus:outline-2
+                transition-shadow
+                hover:shadow-md
+
+                dark:bg-purple-950
+                dark:focus:outline-fuchsia-500
+                dark:border
+                dark:border-purple-900
+              `"
             >
               <div class="pr-4">
-                <div class="font-bold">{{ result.title }}</div>
-                <p class="text-sm text-slate-600">{{ result.description }}</p>
+                <div class="font-bold dark:text-purple-100">
+                  {{ result.title }}
+                </div>
+                <p class="text-sm text-slate-600 dark:text-purple-300">
+                  {{ result.description }}
+                </p>
               </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                class="w-6 h-6 basis-6 group-focus:fill-sky-500 flex-shrink-0"
+                class="w-6 h-6 basis-6 group-focus:fill-sky-500 flex-shrink-0 dark:group-focus:fill-fuchsia-500"
               >
                 <path
                   fill-rule="evenodd"
