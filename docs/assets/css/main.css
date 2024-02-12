@@ -35,10 +35,10 @@ html::before {
 }
 html.dark::before {
   @apply bg-purple-950;
-  @apply opacity-100;
-  @apply mix-blend-multiply;
-  @apply contrast-[120%];
-  @apply brightness-[120%];
+  @apply opacity-40;
+  @apply mix-blend-normal;
+  @apply contrast-[250%];
+  @apply brightness-[55%];
 }
 
 .monaco-editor,
