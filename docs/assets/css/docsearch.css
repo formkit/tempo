@@ -15,7 +15,7 @@ body.DocSearch--active > *:not(.DocSearch-Container) {
 
 button.DocSearch-Button {
   @apply flex bg-white mb-2 p-3 border border-slate-100 shadow-sm rounded-md items-center w-full;
-  @apply bg-purple-900 border-purple-800;
+  @apply dark:bg-purple-900 dark:border-purple-800;
 }
 .DocSearch-Button-Container {
   @apply flex flex-grow gap-2 text-slate-400 items-center;
