@@ -1,3 +1,20 @@
+input[type="search"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
 body.DocSearch--active::before {
   z-index: 99;
   content: "";
@@ -11,6 +28,42 @@ body.DocSearch--active::before {
 
 body.DocSearch--active > *:not(.DocSearch-Container) {
   filter: blur(5px);
+}
+
+.DocSearch-NoResults {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-style: italic;
+}
+
+.DocSearch-NoResults-Prefill-List {
+  display: block;
+  width: 100%;
+  margin-top: 1em;
+}
+
+.DocSearch-NoResults-Prefill-List li {
+  display: block;
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+}
+.DocSearch-NoResults-Prefill-List li::before {
+  content: "•";
+  margin-left: -1em;
+  margin-right: 0.5em;
+}
+.DocSearch-NoResults-Prefill-List li button {
+  text-decoration: underline;
+  text-decoration-color: #888;
+}
+.DocSearch-NoResults-Prefill-List li button:hover {
+  text-decoration-color: #555;
+}
+.DocSearch-NoResults svg {
+  width: 1em;
+  height: auto;
+  margin-right: 0.5em;
 }
 
 button.DocSearch-Button {
@@ -29,8 +82,12 @@ button.DocSearch-Button {
   @apply text-slate-800;
   @apply dark:text-purple-400;
 }
+.DocSearch-Container[role="button"] {
+  cursor: default;
+}
 .DocSearch-Container {
   position: fixed;
+  cursor: default;
   width: calc(100% - 4em);
   top: 50%;
   left: 50%;

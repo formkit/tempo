@@ -7,6 +7,17 @@ onMounted(() => {
     indexName: "tempo-formkit",
     apiKey: "57bf4858266f8e7c7037df759ac8df2f",
   })
+  document.addEventListener("click", (e) => {
+    if (
+      e.target instanceof HTMLBodyElement &&
+      e.target.classList.contains("DocSearch--active")
+    ) {
+      const closeButton = document.querySelector(".DocSearch-Cancel")
+      if (closeButton instanceof HTMLElement) {
+        closeButton.click()
+      }
+    }
+  })
 })
 </script>
 
