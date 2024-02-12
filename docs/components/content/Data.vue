@@ -174,7 +174,7 @@ const fns: Record<
 </script>
 
 <template>
-  <PageSection id="modify">
+  <PageSection>
     <HeadingSection title="Data" class="text-sky-500" />
     <p>
       Tempo also includes functions to extract date information. These functions
@@ -182,7 +182,7 @@ const fns: Record<
       data that is commonly needed to build applications.
     </p>
     <div v-for="(def, fn) in fns">
-      <h3 :id="fn">{{ fn }}</h3>
+      <h3>{{ fn }}</h3>
       <FunctionReference
         :function="fn"
         :arguments="def.arguments"

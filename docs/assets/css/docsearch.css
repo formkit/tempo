@@ -14,16 +14,20 @@ body.DocSearch--active > *:not(.DocSearch-Container) {
 }
 
 button.DocSearch-Button {
-  @apply flex bg-white mb-2 p-3 rounded-md items-center w-full;
+  @apply flex bg-white mb-2 p-3 border border-slate-100 shadow-sm rounded-md items-center w-full;
+  @apply bg-purple-900 border-purple-800;
 }
 .DocSearch-Button-Container {
   @apply flex flex-grow gap-2 text-slate-400 items-center;
+  @apply dark:text-purple-500;
 }
 .DocSearch-Button-Keys {
   @apply text-sm px-2 text-slate-400 border rounded space-x-1;
+  @apply dark:text-purple-400 border-purple-500;
 }
 .DocSearch-Search-Icon {
   @apply text-slate-800;
+  @apply dark:text-purple-400;
 }
 .DocSearch-Container {
   position: fixed;
@@ -36,11 +40,15 @@ button.DocSearch-Button {
   border-radius: 0.6em;
   max-width: 700px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+
+  @apply dark:bg-purple-950 dark:border dark:border-purple-900;
 }
 .DocSearch-SearchBar {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #e0e0e0;
+
+  @apply dark:border-purple-900;
 }
 .DocSearch-Cancel {
   display: block;
@@ -68,6 +76,8 @@ button.DocSearch-Button {
   border: 1px solid #e0e0e0;
   border-radius: 0.5em;
   line-height: 1.8em;
+
+  @apply dark:border-purple-800 dark:text-purple-400;
 }
 .DocSearch-SearchBar form {
   flex-grow: 1;
@@ -82,12 +92,20 @@ button.DocSearch-Button {
   appearance: none;
   padding: 0.25em;
   flex-grow: 1;
+  background: transparent;
+
+  @apply dark:text-purple-100 dark:placeholder:text-purple-700;
 }
 
 .DocSearch-Dropdown {
   padding: 0.5em 1em;
+
+  @apply dark:text-purple-200;
 }
 
+.DocSearch-Hit {
+  @apply dark:bg-white/10;
+}
 .DocSearch-Hit-Container {
   display: flex;
   align-items: center;
