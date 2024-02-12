@@ -142,3 +142,14 @@ html.dark::before {
 .page-section a {
   @apply underline;
 }
+
+.monaco-editor .line-numbers {
+  opacity: 0.33;
+  font-size: 0.9rem;
+}
+.monaco-editor .line-numbers.active-line-number {
+  opacity: 0.66;
+}
+.monaco-editor .editor-scrollable {
+  margin-left: 0.5rem;
+}
