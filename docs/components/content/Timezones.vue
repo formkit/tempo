@@ -9,13 +9,9 @@
       <li>2. They involve a lot of geography, history, and politics.</li>
     </ul>
     <p>
-      Tempo provides timezone support via the
-      <code>tz</code> option of the <code>format()</code> function. Additionally
-      you can create dates for any given timezone using the
-      <code>tzDate()</code> function. Additionally, Tempo provides the
-      <code>offset</code>, <code>removeOffset</code>, and
-      <code>applyOffset</code> functions to work with timezones in even more
-      nuanced ways.
+      Tempo provides timezone support via <code>format()</code>,
+      <code>tzDate()</code>, <code>offset</code>, <code>applyOffset</code>, and
+      <code>removeOffset</code> functions.
     </p>
     <HeadingSection title="Key concept" size="sm" class="text-sky-500" />
     <p>

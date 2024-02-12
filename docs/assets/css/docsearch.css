@@ -1,0 +1,135 @@
+body.DocSearch--active::before {
+  z-index: 99;
+  content: "";
+  position: fixed;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+body.DocSearch--active > *:not(.DocSearch-Container) {
+  filter: blur(5px);
+}
+
+button.DocSearch-Button {
+  @apply flex bg-white mb-2 p-3 rounded-md items-center w-full;
+}
+.DocSearch-Button-Container {
+  @apply flex flex-grow gap-2 text-slate-400 items-center;
+}
+.DocSearch-Button-Keys {
+  @apply text-sm px-2 text-slate-400 border rounded space-x-1;
+}
+.DocSearch-Search-Icon {
+  @apply text-slate-800;
+}
+.DocSearch-Container {
+  position: fixed;
+  width: calc(100% - 4em);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 100;
+  border-radius: 0.6em;
+  max-width: 700px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+.DocSearch-SearchBar {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+.DocSearch-Cancel {
+  display: block;
+  overflow: hidden;
+  text-indent: -999px;
+  width: 3em;
+  height: 2em;
+  margin-right: 1em;
+  position: relative;
+  font-size: 0.75rem;
+}
+.DocSearch-Cancel::before {
+  content: "esc";
+  flex-grow: 1;
+  align-items: center;
+  jusityfy-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+  text-indent: 0;
+  width: 3em;
+  height: 2em;
+  color: #555;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.5em;
+  line-height: 1.8em;
+}
+.DocSearch-SearchBar form {
+  flex-grow: 1;
+  display: flex;
+  gap: 0.25em;
+  align-items: center;
+  padding: 0.75em 1em;
+  border-radius: 0.5em;
+}
+
+.DocSearch-SearchBar form input {
+  appearance: none;
+  padding: 0.25em;
+  flex-grow: 1;
+}
+
+.DocSearch-Dropdown {
+  padding: 0.5em 1em;
+}
+
+.DocSearch-Hit-Container {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.DocSearch-Hit-content-wrapper {
+  flex-grow: 1;
+  margin-left: 0.5em;
+}
+.DocSearch-Hit-Container svg {
+  width: 1em;
+  height: auto;
+  fill: #888;
+}
+.DocSearch-Hit-source {
+  font-weight: bold;
+  margin-bottom: 1em;
+  padding-left: 0.5em;
+}
+.DocSearch-Hit-title {
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+}
+.DocSearch-Hit {
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+.DocSearch-Hit[aria-selected="true"] {
+  @apply bg-slate-100;
+}
+
+.DocSearch-Hit-path {
+  display: block;
+  font-size: 14px;
+  color: #888;
+}
+
+.DocSearch-SearchBar form input:focus {
+  outline: none;
+}
+.DocSearch-Footer {
+  display: none;
+}

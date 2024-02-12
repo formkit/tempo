@@ -8,6 +8,13 @@ export default defineNuxtConfig({
         class: "dark:bg-slate-900 dark:text-white",
         lang: "en",
       },
+      link: [
+        {
+          rel: "preconnect",
+          crossorigin: "",
+          href: "https://tempo-formkit-dsn.algolia.net",
+        },
+      ],
     },
   },
   tailwindcss: {

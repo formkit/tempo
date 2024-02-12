@@ -32,14 +32,6 @@ const results = ref<Array<{ title: string; description: string; id: string }>>([
 const initialShow = ref<undefined | boolean>(undefined)
 
 onMounted(() => {
-  search.value?.focus()
-  document.addEventListener("keydown", (event) => {
-    if (event.metaKey && event.key === "k") {
-      event.preventDefault()
-      search.value?.focus()
-    }
-  })
-
   setTimeout(() => {
     initialShow.value = true
   }, 2200)
@@ -52,7 +44,8 @@ onMounted(() => {
     :data-show="initialShow"
   >
     <div class="search-tray">
-      <div
+      <div id="docsearch" />
+      <!-- <div
         :class="`
           input-wrapper
           flex
@@ -84,12 +77,8 @@ onMounted(() => {
           <path d="m19 19-3.5-3.5"></path>
           <circle cx="11" cy="11" r="6"></circle>
         </svg>
-        <input
-          type="text"
-          aria-label="Search documentation"
+        <div
           class="flex-grow focus:outline-none px-2 placeholder:text-slate-300 bg-transparent dark:placeholder:text-purple-400 dark:text-gray-300"
-          placeholder="Quick search..."
-          ref="search"
         />
         <kbd
           class="inline-flex text-slate-400 gap-1 items-center dark:text-purple-300"
@@ -97,7 +86,7 @@ onMounted(() => {
           <abbr title="Command" class="text-lg no-underline">⌘</abbr>
           <span class="text-sm">K</span>
         </kbd>
-      </div>
+      </div> -->
       <div class="search-results">
         <ul v-if="results.length">
           <li v-for="result in results" class="mb-2">
