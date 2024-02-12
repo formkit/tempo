@@ -29,7 +29,8 @@ const stopWatch = watch(el, () => {
     language: "typescript",
     scrollBeyondLastLine: false,
     minimap: { enabled: false },
-    lineNumbers: "off",
+    lineNumbers: "on",
+    lineNumbersMinChars: 3,
     glyphMargin: false,
     folding: false,
     renderLineHighlight: "none",
@@ -119,12 +120,14 @@ const stopWatch = watch(el, () => {
       mdl:-mx-8
       lg:-mx-24
       shadow-sm
+      bg-[#f9f9f9] ${'' /* --vs-editor-background */}
       after:-z-10
       after:absolute
-      after:-inset-1
-      after:bg-sky-600
+      after:-inset-px
+      after:bg-sky-600/50
       after:rounded-lg
 
+      dark:bg-[#180626] ${'' /* --vs-editor-background */}
       dark:after:-inset-px
       dark:after:bg-purple-900
     `"
@@ -144,8 +147,11 @@ const stopWatch = watch(el, () => {
         md:rounded-tr-lg
         md:rounded-bl-none
 
-        dark:bg-black/40
-        dark:border-0
+        dark:bg-purple-600/5
+        dark:border-t-0
+        dark:border-r-0
+        dark:border-b-0
+        dark:border-l-purple-950/50
       `"
     >
       <ul v-if="result">

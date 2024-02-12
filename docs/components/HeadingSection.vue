@@ -16,7 +16,7 @@ const isInView = useElementVisibility(heading)
     <span class="sr-only">{{ title }}</span>
     <ClockFont
       :chars="title.toLocaleLowerCase()"
-      :delay="200"
+      :delay="120"
       :start="isInView"
     />
   </h2>
