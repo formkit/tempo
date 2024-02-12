@@ -23,7 +23,7 @@ button.DocSearch-Button {
 }
 .DocSearch-Button-Keys {
   @apply text-sm px-2 text-slate-400 border rounded space-x-1;
-  @apply dark:text-purple-400 border-purple-500;
+  @apply dark:text-purple-400 dark:border-purple-500;
 }
 .DocSearch-Search-Icon {
   @apply text-slate-800;
