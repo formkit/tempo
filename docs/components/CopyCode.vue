@@ -28,7 +28,7 @@ function copyCode() {
         flex
         items-center
 
-        dark:bg-purple-950
+        dark:bg-purple-950/50
         dark:border-purple-900
         dark:text-fuchsia-400
         dark:data-[success]:text-green-400

@@ -137,7 +137,7 @@ onMounted(() => {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                class="w-6 h-6 basis-6 group-focus:fill-sky-500 flex-shrink-0 dark:group-focus:fill-fuchsia-500"
+                class="w-6 h-6 basis-6 group-focus:fill-sky-500 flex-shrink-0 dark:fill-fuchsia-200 dark:group-focus:fill-fuchsia-500"
               >
                 <path
                   fill-rule="evenodd"

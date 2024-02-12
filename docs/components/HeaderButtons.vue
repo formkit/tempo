@@ -48,7 +48,7 @@ function copyCode() {
       @mouseenter="pause = true"
       @mouseleave="pause = false"
       ref="code"
-      class="group relative font-mono text-sm text-fuchsia-700 shadow-lg py-3 px-6 bg-white rounded-lg flex items-center min-w-[300px] dark:bg-purple-950 dark:border dark:border-purple-900 dark:text-fuchsia-400"
+      class="group relative font-mono text-sm text-fuchsia-700 shadow-lg py-3 px-6 bg-white rounded-lg flex items-center min-w-[300px] dark:bg-purple-950/50 dark:border dark:border-purple-900 dark:text-fuchsia-400"
     >
       <span
         v-if="!didCopy"
