@@ -266,7 +266,7 @@ const fns: Record<
       do not change the date argument).
     </p>
     <div v-for="(def, fn) in fns">
-      <h3>{{ fn }}</h3>
+      <h3 :id="fn">{{ fn }}</h3>
       <FunctionReference
         :function="fn"
         :arguments="def.arguments"
