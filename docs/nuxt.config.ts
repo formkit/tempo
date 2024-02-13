@@ -61,7 +61,7 @@ export default defineNuxtConfig({
         },
         {
           name: "twitter:image",
-          content: "https://tempo.formkit.dev/og.png",
+          content: "https://tempo.formkit.com/og.png",
         },
       ],
     },
