@@ -36,8 +36,8 @@ importers:
         specifier: ^0.8.1
         version: 0.8.1
       '@formkit/tempo':
-        specifier: 0.0.3
-        version: 0.0.3
+        specifier: 0.0.5
+        version: link:..
       monaco-editor:
         specifier: ^0.40.0
         version: 0.40.0
@@ -1060,10 +1060,6 @@ packages:
 
   /@formkit/auto-animate@0.8.1:
     resolution: {integrity: sha512-0/Z2cuNXWVVIG/l0SpcHAWFhGdvLJ8DRvEfRWvmojtmRWfEy+LWNwgDazbZqY0qQYtkHcoEK3jBLkhiZaB/4Ig==}
-    dev: false
-
-  /@formkit/tempo@0.0.3:
-    resolution: {integrity: sha512-DFlM3KzNE7DnGOhpdI2rsREZKgUhsupSNXWUY5kLSIvKsAIbm6HAXUWwry6ZSbSSfTObiouyYuvcfctQFuuP+w==}
     dev: false
 
   /@ioredis/commands@1.2.0:
