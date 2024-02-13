@@ -14,5 +14,6 @@ definePageMeta({
     <ContentModify />
     <ContentData />
     <ContentTimezones />
+    <ContentSupport />
   </main>
 </template>
