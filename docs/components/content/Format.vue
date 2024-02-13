@@ -374,9 +374,9 @@ import { format } from "@formkit/tempo"
     <h3>Timezone</h3>
     <p>
       The <code>tz</code> option allows you to format the provided date from the
-      perspective of any given timezone.
+      “perspective” of any given timezone.
     </p>
-    [CODE EXAMPLE HERE]
+    <CodeExample file="format-tz" />
     <h3>Part filter</h3>
     <p>
       The <code>partFilter</code> option allows you to filter out parts of the
@@ -384,7 +384,7 @@ import { format } from "@formkit/tempo"
       date and should return a boolean indicating whether or not to include that
       part in final formatted string.
     </p>
-    [CODE EXAMPLE HERE]
+    <CodeExample file="format-part-filter" />
     <h3>Genitive case</h3>
     <p>
       Some languages have a genitive case for months and weekdays. When the
