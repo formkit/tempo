@@ -26,7 +26,7 @@ const fns: Record<
     example: "ap",
   },
   dayOfYear: {
-    description: `Gets the what day of the year a given date is. For example, August 1st is the 213th day of the year on non-leapyears and 214th on leapyears.`,
+    description: `Gets the day of the year a given date is. For example, August 1st is the 213th day of the year on non-leap years and 214th on leap years.`,
     arguments: [
       {
         name: "date",
@@ -52,7 +52,7 @@ const fns: Record<
   },
   fourDigitYear: {
     description:
-      "Converts a 2 digit year into a 4 digit year. This function assumes years 20 years into the future belong to the current century, and the past 80 are in the past.",
+      "Converts a 2 digit year into a 4 digit year. This function assumes years 20 years into the future belong to the current century, and the past 80 are in the past century.",
     arguments: [
       {
         name: "year",
@@ -103,7 +103,7 @@ const fns: Record<
   },
   offset: {
     description:
-      "Returns the offset between two (IANA) timezones on a given date. The results are ISO8601 compatible string offsets like -0800 or +0530.",
+      "Returns the offset between two (IANA) timezones on a given date. The results are ISO 8601 compatible string offsets like -0800 or +0530.",
     arguments: [
       {
         name: "date",
@@ -112,12 +112,12 @@ const fns: Record<
       {
         name: "tzA?",
         type: "string",
-        comment: "// default: UTC, ex: America/New_York",
+        comment: "default: UTC, ex: America/New_York",
       },
       {
         name: "tzB?",
         type: "string",
-        comment: "// default: browser, ex: Europe/Paris",
+        comment: "default: browser, ex: Europe/Paris",
       },
     ],
     return: "string",
@@ -133,12 +133,12 @@ const fns: Record<
       {
         name: "locale",
         type: "string",
-        comment: '// default: "en"',
+        comment: 'default: "en"',
       },
       {
         name: "genitive?",
         type: "boolean",
-        comment: "// default: false",
+        comment: "default: false",
       },
     ],
     return: "string[]",

@@ -438,10 +438,11 @@ import { format } from "@formkit/tempo"
     <CodeExample file="format-tz" />
     <h3 id="format-part-filter">Part filter</h3>
     <p>
-      The <code>partFilter</code> option allows you to filter out parts of the
-      formatted date. The function is called with each "part" of the formatted
-      date and should return a boolean indicating whether or not to include that
-      part in final formatted string.
+      The <code>partFilter</code> option allows you to filter out
+      <a href="https://tc39.es/ecma402/#table-datetimeformat-resolvedoptions-properties">parts</a>
+      of the formatted date. The function is called with each "part" of the
+      formatted date and should return a boolean indicating whether or not to
+      include that part in final formatted string.
     </p>
     <CodeExample file="format-part-filter" />
     <h3 id="format-genitive">Genitive case</h3>
