@@ -55,21 +55,31 @@ function openDocSearch() {
   <aside
     :class="`
       docs-sidebar
-      flex
+      hidden
+      lg:flex
       flex-col
       border-r
       pt-16
       border-r-slate-300
-      ml-[2%]
       min-[1400px]:ml-[5%]
       min-[1600px]:ml-auto
       dark:border-r-purple-950
       w-full
-      max-w-[250px]
+      max-w-[200px]
+      min-[1400px]:max-w-[250px]
     `"
   >
     <nav
-      class="docs-sidebar-nav sticky pr-5 min-[1400px]:pr-10 pl-5 pt-0 top-2 max-h-[calc(100dvh-0.5rem)] overflow-auto"
+      :class="`
+        docs-sidebar-nav
+        sticky
+        min-[1400px]:pr-10
+        px-2
+        pt-0
+        top-2
+        max-h-[calc(100dvh-0.5rem)]
+        overflow-auto
+      `"
     >
       <div
         :class="`

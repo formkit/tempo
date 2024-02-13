@@ -17,8 +17,9 @@
             to="https://formkit.com"
             class="head-message text-sm flex text-slate-500 hover:text-slate-800 transition-all dark:text-purple-200/75 dark:hover:text-slate-200"
           >
-            <LogoMark class="w-3 mr-2 fill-[#FCAB5E]" /> Made with ♥ by the
-            FormKit team.
+            <LogoMark class="w-3 mr-2 fill-[#FCAB5E]" /> Made with ♥ by
+            <span class="hidden sm:inline sm:mx-[0.5ch]">the</span> FormKit
+            <span class="hidden sm:inline sm:ml-[0.5ch]">team</span>
           </NuxtLink>
         </div>
         <div>

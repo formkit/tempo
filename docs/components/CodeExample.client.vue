@@ -117,9 +117,14 @@ const stopWatch = watch(el, () => {
       rounded-lg
       my-8
       md:my-12
-      mdl:-mr-8
-      lg:-mr-28
-      xl:-mr-48
+      md:-mr-2
+      min-[850px]:-mr-10
+      min-[900px]:-mr-20
+      min-[1000px]:-mr-40
+      lg:-mr-4
+      min-[1100px]:-mr-[10vw]
+      min-[1200px]:-mr-[16vw]
+      min-[1600px]:-mr-64
       shadow-sm
       bg-[#f9f9f9] ${'' /* --vs-editor-background */}
       after:-z-10
@@ -133,15 +138,18 @@ const stopWatch = watch(el, () => {
       dark:after:bg-purple-900
     `"
   >
-    <div class="md:w-1/2" ref="el"></div>
+    <div class="md:w-2/3 min-[1200px]:w-1/2" ref="el"></div>
     <div
       :class="`
-        md:w-1/2
+        md:w-1/3
+        min-[1200px]:w-1/2
         bg-slate-200
         border
         border-l-slate-300
         font-mono
-        text-sm
+        text-xs
+        md:text-sm
+        lg:text-base
         p-4
         overflow-auto
         rounded-bl-lg

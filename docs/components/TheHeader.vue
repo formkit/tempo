@@ -10,19 +10,22 @@ onMounted(() => {
 
 <template>
   <ContainerSection>
-    <header class="flex flex-col mb-24">
+    <header class="flex flex-col mb-14 md:mb-20 lg:mb-24">
       <SuperHeader />
       <ClockFont
         chars="tempo"
-        class="text-[10vw] justify-center mb-4 max-w-3xl m-auto text-sky-500 !px-20 !py-16 !rounded-2xl"
+        class="text-[15vw] md:text-[10vw] justify-center mb-4 max-w-2xl m-auto text-sky-500 !px-0 !py-[10%] lg:px-20 lg:py-16 !rounded-2xl"
         :delay="500"
       />
       <h1
         :class="`
           tagline
           text-center
-          text-[6vw]
+          text-[10vw]
+          sm:text-[8vw]
+          md:text-[6vw]
           font-bold
+          leading-none
           max-w-2xl
           m-auto
           opacity-0
@@ -32,8 +35,7 @@ onMounted(() => {
           data-[show]:opacity-100
           data-[show]:translate-y-0
           text-slate-700
-          mb-10
-          md:mb-14
+          mb-14
           lg:leading-none
           lg:text-6xl
           lg:mb-20
