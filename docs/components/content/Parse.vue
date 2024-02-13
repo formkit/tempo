@@ -73,7 +73,7 @@ const parseOptionsProperties = [
       that not a standardized format (like ISO 8601)
     </CalloutInfo>
     <CodeExample file="parse-basic" />
-    <h3>Parsing options</h3>
+    <h3 id="parse-options">Parsing options</h3>
     <p>
       The <code>parse</code> function can accept an object of options as its
       argument:
@@ -84,7 +84,7 @@ const parseOptionsProperties = [
       are familiar, but what is <code>partFilter</code> and
       <code>dataOverflow</code>?
     </p>
-    <h3>partFilter</h3>
+    <h3 id="parse-part-filter">partFilter</h3>
     <p>
       The <code>partFilter</code> option gives you fine grained control over
       which pieces and parts of a date you’d like to include in the resulting
@@ -92,7 +92,7 @@ const parseOptionsProperties = [
       today’s date at midnight local).
     </p>
     <CodeExample file="part-filter" />
-    <h3>dateOverflow</h3>
+    <h3 id="dateOverflow">dateOverflow</h3>
     <p>
       The <code>dateOverflow</code> option determines how an “out of range” date
       should be parsed (ex: February 30th). Options are

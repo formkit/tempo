@@ -61,7 +61,7 @@ import { format } from "@formkit/tempo"
       <code>Intl.DateTimeFormat</code> to decide how to most appropriately
       display the date.
     </p>
-    <h3>Date styles</h3>
+    <h3 id="date-styles">Date styles</h3>
     <p>
       When using the <code>format()</code> function, the second argument can be
       any of the following date styles, or an object with a date property (ex:
@@ -119,7 +119,7 @@ import { format } from "@formkit/tempo"
     </table>
     <CodeExample file="format-styles-date" />
 
-    <h3>Time styles</h3>
+    <h3 id="time-styles">Time styles</h3>
     <p>
       To use a time style format you must provide an object as the second
       argument of the <code>format()</code> function with a time property. You
@@ -319,7 +319,7 @@ import { format } from "@formkit/tempo"
       </tbody>
     </table>
     <CodeExample file="format-tokens" />
-    <h3>Format options</h3>
+    <h3 id="format-options">Format options</h3>
     <p>
       The <code>format()</code> function can accept an object of options as its
       argument to provide more control over the output.
@@ -371,13 +371,13 @@ import { format } from "@formkit/tempo"
         },
       ]"
     />
-    <h3>Timezone</h3>
+    <h3 id="format-timezone">Timezone</h3>
     <p>
       The <code>tz</code> option allows you to format the provided date from the
       “perspective” of any given timezone.
     </p>
     <CodeExample file="format-tz" />
-    <h3>Part filter</h3>
+    <h3 id="format-part-filter">Part filter</h3>
     <p>
       The <code>partFilter</code> option allows you to filter out parts of the
       formatted date. The function is called with each "part" of the formatted
@@ -385,7 +385,7 @@ import { format } from "@formkit/tempo"
       part in final formatted string.
     </p>
     <CodeExample file="format-part-filter" />
-    <h3>Genitive case</h3>
+    <h3 id="format-genitive">Genitive case</h3>
     <p>
       Some languages have a genitive case for months and weekdays. When the
       genitive option is set to true, the month and weekday names will be in the
