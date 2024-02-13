@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const props = defineProps<{ baseDelay: number }>()
 const results = ref<Array<{ title: string; description: string; id: string }>>([
   {
     title: "Install",
@@ -32,7 +33,7 @@ const initialShow = ref<undefined | boolean>(undefined)
 onMounted(() => {
   setTimeout(() => {
     initialShow.value = true
-  }, 2200)
+  }, props.baseDelay * 4.1)
 })
 </script>
 

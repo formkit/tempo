@@ -26,9 +26,6 @@ onMounted(async () => {
 
 <template>
   <TheHeader />
-  <ContainerSection>
-    <TheSearch />
-  </ContainerSection>
   <div
     class="docs-layout flex w-full max-w-full mt-20 border-t border-t-slate-300 dark:border-t-purple-950"
   >
