@@ -5,7 +5,7 @@
 
 html {
   @apply scroll-smooth;
-  @apply bg-slate-100;
+  @apply bg-slate-200;
   @apply selection:bg-sky-500;
   @apply selection:text-white;
   scroll-padding: 1em;
@@ -15,10 +15,10 @@ html.dark {
   @apply selection:bg-fuchsia-600;
 }
 html::before {
-  @apply bg-slate-100;
+  @apply bg-slate-200;
   @apply opacity-40;
   @apply mix-blend-normal;
-  @apply contrast-100;
+  @apply contrast-[120%];
   @apply brightness-[130%];
   content: "";
   position: fixed;
