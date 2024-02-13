@@ -49,6 +49,7 @@ const fns: Record<
       },
     ],
     return: "string",
+    example: "format-str",
   },
   fourDigitYear: {
     description:
