@@ -86,10 +86,11 @@ const parseOptionsProperties = [
     </p>
     <h3 id="parse-part-filter">partFilter</h3>
     <p>
-      The <code>partFilter</code> option gives you fine grained control over
-      which pieces and parts of a date you’d like to include in the resulting
-      <code>Date</code> object (remember, missing "parts" will default to the
-      today’s date at midnight local).
+      The <code>partFilter</code> option gives you fine-grained control over
+      which pieces and <a href="https://tc39.es/ecma402/#table-datetimeformat-resolvedoptions-properties">parts</a>
+      of a date you’d like to include in the resulting <code>Date</code> object
+      (remember, missing "parts" will default to the today’s date at midnight
+      local).
     </p>
     <CodeExample file="part-filter" />
     <h3 id="dateOverflow">dateOverflow</h3>

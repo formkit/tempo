@@ -1,10 +1,13 @@
 <script setup lang="ts">
 const showTagline = ref<undefined | boolean>(undefined)
-
+const baseDelay = ref(500)
+if (typeof window !== "undefined" && window.scrollY > 100) {
+  baseDelay.value = 0
+}
 onMounted(() => {
   setTimeout(() => {
     showTagline.value = true
-  }, 1450)
+  }, 3 * baseDelay.value)
 })
 </script>
 
@@ -15,7 +18,7 @@ onMounted(() => {
       <ClockFont
         chars="tempo"
         class="text-[15vw] md:text-[10vw] justify-center mb-4 max-w-2xl m-auto text-sky-500 !px-0 !py-[10%] lg:!px-20 lg:!py-16 !rounded-2xl"
-        :delay="500"
+        :delay="baseDelay"
       />
       <h1
         :class="`
@@ -48,7 +51,8 @@ onMounted(() => {
         <span class="text-sky-600 dark:text-purple-500">dates</span>
         in&nbsp;JavaScript.
       </h1>
-      <HeaderButtons />
+      <HeaderButtons :base-delay="baseDelay" />
     </header>
+    <TheSearch :base-delay="baseDelay" />
   </ContainerSection>
 </template>

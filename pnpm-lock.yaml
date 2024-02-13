@@ -63,6 +63,9 @@ importers:
       nuxt:
         specifier: ^3.10.0
         version: 3.10.0(@types/node@18.19.14)(typescript@5.3.3)(vite@5.0.12)
+      nuxt-fathom:
+        specifier: ^0.0.1
+        version: 0.0.1
       vitest:
         specifier: ^1.2.2
         version: 1.2.2(@types/node@18.19.14)
@@ -3613,6 +3616,10 @@ packages:
       reusify: 1.0.4
     dev: true
 
+  /fathom-client@3.6.0:
+    resolution: {integrity: sha512-/mrgmVvpw4HqDCcqUfPulERhONKgnJGL74RAxfqKDuRQ+7w9lKoTHMzqBWE7WNBvmsgZEthQWJFOWOEjv+T3gA==}
+    dev: true
+
   /file-uri-to-path@1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
     dev: true
@@ -5161,6 +5168,17 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.3
+    dev: true
+
+  /nuxt-fathom@0.0.1:
+    resolution: {integrity: sha512-yEUJVfQEFc1Pm/9nVQgMgCPi4oY2mnzBOkpFn7XU02AEHyafqRdXQ1isqOVY08vZJyWgQqvr3iDWqQljamliFw==}
+    dependencies:
+      '@nuxt/kit': 3.10.0
+      defu: 6.1.4
+      fathom-client: 3.6.0
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
     dev: true
 
   /nuxt@3.10.0(@types/node@18.19.14)(typescript@5.3.3)(vite@5.0.12):

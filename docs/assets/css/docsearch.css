@@ -161,6 +161,13 @@ button.DocSearch-Button {
   @apply dark:text-purple-200;
 }
 
+.DocSearch-Dropdown:empty::before {
+  content: "Start typing to search — for example 'format', or 'parse'.";
+  padding: 1em 0;
+  display: block;
+  font-style: italic;
+}
+
 .DocSearch-Hit {
   @apply dark:bg-white/5;
 }

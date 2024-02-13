@@ -8,6 +8,7 @@ onMounted(async () => {
     indexName: "tempo-formkit",
     apiKey: "57bf4858266f8e7c7037df759ac8df2f",
     maxResultsPerGroup: 4,
+    disableUserPersonalization: true,
   })
   document.addEventListener("click", (e) => {
     if (
@@ -25,9 +26,6 @@ onMounted(async () => {
 
 <template>
   <TheHeader />
-  <ContainerSection>
-    <TheSearch />
-  </ContainerSection>
   <div
     class="docs-layout flex w-full max-w-full mt-20 border-t border-t-slate-300 dark:border-t-purple-950"
   >

@@ -3,7 +3,15 @@ const description =
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt", "@nuxtjs/color-mode"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@vueuse/nuxt",
+    "@nuxtjs/color-mode",
+    "nuxt-fathom",
+  ],
+  fathom: {
+    siteId: "SJEMUVGK",
+  },
   app: {
     head: {
       title: "Tempo • Dates by FormKit",

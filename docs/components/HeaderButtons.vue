@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const props = defineProps<{ baseDelay: number }>()
 const showButtons = ref<undefined | boolean>(undefined)
 const pause = ref(false)
 const didCopy = useTimedRef(4000)
@@ -9,7 +10,7 @@ const packageManagers = ["npm install", "yarn add", "pnpm add", "bun install"]
 onMounted(() => {
   setTimeout(() => {
     showButtons.value = true
-  }, 1750)
+  }, props.baseDelay * 3.25)
   setInterval(() => {
     if (pause.value) return
     packageManager.value =
