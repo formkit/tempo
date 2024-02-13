@@ -3,7 +3,7 @@ import type { DateInput } from "./types"
 
 /**
  * Gets the what day of the year a given date is. For example, August 1st is
- * the 213th day of the year on non-leapyears and 214th on leapyears.
+ * the 213th day of the year on non- years and 214th on leap years.
  * @param inputDate - The input date.
  */
 export function dayOfYear(inputDate: DateInput): number {

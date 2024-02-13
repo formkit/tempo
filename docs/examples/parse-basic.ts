@@ -1,6 +1,6 @@
 import { parse, format } from "@formkit/tempo"
 
-// ISO8601 is the default a format
+// ISO 8601 is the default format
 parse("1987-12-17")
 
 // Sample date formats
