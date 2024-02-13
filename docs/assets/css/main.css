@@ -25,7 +25,8 @@ html::before {
   z-index: -1;
   inset: 0;
   width: 100dvw;
-  height: 100dvh;
+  height: 150dvh;
+  background-size: cover;
   background-image: radial-gradient(
       circle at 50% 40%,
       rgba(0, 0, 0, 0),
