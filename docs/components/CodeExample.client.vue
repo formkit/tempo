@@ -19,7 +19,7 @@ const stopWatch = watch(el, () => {
       top: 16,
       bottom: 16,
     },
-    fontSize: 16,
+    fontSize: 14,
     scrollbar: {
       vertical: "hidden",
       alwaysConsumeMouseWheel: false,
@@ -141,6 +141,7 @@ const stopWatch = watch(el, () => {
         border
         border-l-slate-300
         font-mono
+        text-sm
         p-4
         overflow-auto
         rounded-bl-lg
@@ -158,7 +159,7 @@ const stopWatch = watch(el, () => {
       <ul v-if="result">
         <li
           v-for="logs in result"
-          class="text-nowrap h-6 text-slate-800 empty:hidden md:empty:block dark:text-purple-300"
+          class="text-nowrap h-6 text-slate-800 text-sm empty:hidden md:empty:block dark:text-purple-300"
         >
           {{ logs ? logs.join(", ") : "" }}
         </li>
