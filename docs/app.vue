@@ -7,6 +7,7 @@ onMounted(async () => {
     appId: "TIC56YZVU3",
     indexName: "tempo-formkit",
     apiKey: "57bf4858266f8e7c7037df759ac8df2f",
+    maxResultsPerGroup: 4,
   })
   document.addEventListener("click", (e) => {
     if (
