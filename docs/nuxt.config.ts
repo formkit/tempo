@@ -79,7 +79,7 @@ export default defineNuxtConfig({
       darkMode: "class",
       theme: {
         fontFamily: {
-          mono: ["Menlo", "Monaco", "Courier New", "monospace"],
+          mono: ["Menlo", "Monaco", "monospace"],
         },
       },
     },
