@@ -156,7 +156,8 @@ button.DocSearch-Button {
 
 .DocSearch-Dropdown {
   padding: 0.5em 1em;
-
+  overflow: auto;
+  max-height: clamp(200px, 50vh, 800px);
   @apply dark:text-purple-200;
 }
 
