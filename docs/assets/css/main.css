@@ -5,28 +5,31 @@
 
 html {
   @apply scroll-smooth;
+  scroll-padding: 1em;
+}
+
+body {
+  @apply text-sm min-[1400px]:text-base;
   @apply bg-slate-200;
   @apply selection:bg-sky-500;
   @apply selection:text-white;
-  scroll-padding: 1em;
 }
-html.dark {
+html.dark body {
   @apply bg-purple-950;
   @apply selection:bg-fuchsia-600;
 }
-html::before {
-  @apply bg-slate-200;
-  @apply opacity-40;
-  @apply mix-blend-normal;
-  @apply contrast-[120%];
-  @apply brightness-[130%];
+html body::before {
+  @apply opacity-100;
+  @apply contrast-[300%];
+  @apply mix-blend-overlay;
+  @apply brightness-[100%];
   content: "";
   position: fixed;
-  z-index: -1;
   inset: 0;
-  width: 100dvw;
-  height: 150dvh;
-  background-size: cover;
+  z-index: -1;
+  width: 100vw;
+  height: 150vh;
+  background-size: 100% 100%;
   background-image: radial-gradient(
       circle at 50% 40%,
       rgba(0, 0, 0, 0),
@@ -34,16 +37,11 @@ html::before {
     ),
     url("data:image/svg+xml,%3Csvg viewBox='0 0 10000 10000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
-html.dark::before {
-  @apply bg-purple-950;
-  @apply opacity-40;
-  @apply mix-blend-normal;
-  @apply contrast-[250%];
-  @apply brightness-[55%];
-}
-
-body {
-  @apply text-sm min-[1400px]:text-base;
+html.dark body::before {
+  @apply opacity-100;
+  @apply mix-blend-multiply;
+  @apply contrast-[150%];
+  @apply brightness-[70%];
 }
 
 .monaco-editor,
