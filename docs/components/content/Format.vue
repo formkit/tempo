@@ -25,7 +25,7 @@ import { format } from "@formkit/tempo"
       ]"
       return="string"
     />
-    <p>Tempo’s <code>format()</code> function output’s dates in two ways:</p>
+    <p>Tempo’s <code>format()</code> function outputs dates in two ways:</p>
     <ul class="jump-list">
       <li>
         <a href="#format-styles">
@@ -53,13 +53,13 @@ import { format } from "@formkit/tempo"
   <PageSection>
     <HeadingSection title="Format styles" size="sm" class="text-sky-500" />
     <p>
-      When displaying a dates to users it’s a good idea to use the formats they
-      are familiar with. Tempo uses <code>Intl.DateTimeFormat</code>’s language
-      sensitive date and time formatting to make this easy. By using a date or
-      time "style" you indicate the level of specificity you’d like to show the
-      date to the end user with, but no further details. It’s then up to the
-      <code>Intl.DateTimeFormat</code> to decide how to most appropriately
-      display the date.
+      When displaying dates to users, it’s a good idea to use the formats they
+      are familiar with. Tempo uses <code>Intl.DateTimeFormat</code>’s
+      language-sensitive date and time formatting to make this easy. By using a
+      date or time "style", you indicate the level of specificity you’d like to
+      show the date to the end user with, but no further details. It’s then up
+      to the <code>Intl.DateTimeFormat</code> to decide how to most
+      appropriately display the date.
     </p>
     <h3 id="date-styles">Date styles</h3>
     <p>
