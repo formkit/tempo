@@ -149,7 +149,6 @@ const stopWatch = watch(el, () => {
         font-mono
         text-xs
         md:text-sm
-        lg:text-base
         p-4
         overflow-auto
         rounded-bl-lg
@@ -167,7 +166,7 @@ const stopWatch = watch(el, () => {
       <ul v-if="result">
         <li
           v-for="logs in result"
-          class="text-nowrap h-6 text-slate-800 text-sm empty:hidden md:empty:block dark:text-purple-300"
+          class="text-nowrap h-[21px] text-slate-800 text-sm empty:hidden md:empty:block dark:text-purple-300"
         >
           {{ logs ? logs.join(", ") : "" }}
         </li>
