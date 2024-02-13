@@ -41,6 +41,10 @@ html.dark::before {
   @apply brightness-[55%];
 }
 
+body {
+  @apply text-sm min-[1400px]:text-base;
+}
+
 .monaco-editor,
 .monaco-editor .margin {
   @apply rounded-tl-lg;
@@ -53,17 +57,17 @@ html.dark::before {
 }
 
 .page-section p {
-  @apply text-lg mb-8 text-slate-800 leading-8 dark:text-slate-200;
+  @apply lg:text-base mb-8 text-slate-800 leading-6 lg:leading-8 dark:text-slate-200;
 }
 
 .page-section p code,
 .page-section ul code,
 .page-section aside code {
-  @apply bg-black/10 font-mono p-1 text-base rounded dark:bg-black/30 dark:border dark:border-purple-950 dark:text-fuchsia-300;
+  @apply bg-black/10 font-mono p-1 min-[1400px]:text-base rounded dark:bg-black/30 dark:border dark:border-purple-950 dark:text-fuchsia-300;
 }
 
 .page-section > ul {
-  @apply pl-8 text-base text-slate-800 leading-7 mb-8;
+  @apply pl-8 min-[1400px]:text-base text-slate-800 leading-7 mb-8;
   @apply dark:text-slate-200;
 }
 
@@ -96,7 +100,7 @@ html.dark::before {
   @apply text-lg font-bold mb-3 dark:text-gray-100;
 }
 .page-section table {
-  @apply w-full mb-10 text-base text-slate-700 rounded-lg shadow-sm border border-slate-300 border-separate border-spacing-0;
+  @apply w-full mb-10 min-[1400px]:text-base text-slate-700 rounded-lg shadow-sm border border-slate-300 border-separate border-spacing-0;
   @apply dark:border-purple-950 dark:shadow-none dark:text-slate-200;
 }
 .page-section table th {
@@ -134,7 +138,7 @@ html.dark::before {
 }
 
 .page-section table code {
-  @apply bg-slate-100 font-mono p-1 text-base rounded;
+  @apply bg-slate-100 font-mono p-1 min-[1400px]:text-base rounded;
   @apply dark:bg-purple-950 dark:text-slate-100;
 }
 .page-section table tr:nth-child(odd) code {
