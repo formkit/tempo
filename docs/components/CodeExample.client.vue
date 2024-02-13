@@ -140,10 +140,10 @@ const stopWatch = watch(el, () => {
       dark:after:bg-purple-900
     `"
   >
-    <div class="md:w-2/3 min-[1200px]:w-1/2" ref="el"></div>
+    <div class="md:w-3/5 min-[1200px]:w-1/2" ref="el"></div>
     <div
       :class="`
-        md:w-1/3
+        md:w-2/5
         min-[1200px]:w-1/2
         bg-slate-200
         border
