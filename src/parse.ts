@@ -30,7 +30,7 @@ export function parse(
 export function parse(
   dateStrOrOptions: string | ParseOptions,
   format: Format = "ISO8601",
-  locale = "en"
+  locale = "device"
 ): Date | never {
   let partFilter: (part: Part) => boolean = () => true
   let dateStr: string
@@ -39,7 +39,7 @@ export function parse(
     ;({
       date: dateStr,
       format = "ISO8601",
-      locale = "en",
+      locale = "device",
       dateOverflow = "backward",
       partFilter = () => true,
     } = dateStrOrOptions)
