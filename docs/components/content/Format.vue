@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from "vue"
 import { format } from "@formkit/tempo"
 </script>
 
@@ -80,9 +79,15 @@ import { format } from "@formkit/tempo"
             <code>full</code>
           </td>
           <td>
-            <code>en</code> {{ format(new Date(), "full", "en") }}<br />
-            <code>de</code> {{ format(new Date(), "full", "de") }}<br />
-            <code>zh</code> {{ format(new Date(), "full", "zh") }}<br />
+            <code>en</code>
+            <ClientOnly>{{ format(new Date(), "full", "en") }}</ClientOnly
+            ><br />
+            <code>de</code>
+            <ClientOnly>{{ format(new Date(), "full", "de") }}</ClientOnly
+            ><br />
+            <code>zh</code>
+            <ClientOnly>{{ format(new Date(), "full", "zh") }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -90,9 +95,15 @@ import { format } from "@formkit/tempo"
             <code>long</code>
           </td>
           <td>
-            <code>en</code> {{ format(new Date(), "long", "en") }}<br />
-            <code>de</code> {{ format(new Date(), "long", "de") }}<br />
-            <code>zh</code> {{ format(new Date(), "long", "zh") }}<br />
+            <code>en</code>
+            <ClientOnly>{{ format(new Date(), "long", "en") }}</ClientOnly
+            ><br />
+            <code>de</code>
+            <ClientOnly>{{ format(new Date(), "long", "de") }}</ClientOnly
+            ><br />
+            <code>zh</code>
+            <ClientOnly>{{ format(new Date(), "long", "zh") }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -100,9 +111,15 @@ import { format } from "@formkit/tempo"
             <code>medium</code>
           </td>
           <td>
-            <code>en</code> {{ format(new Date(), "medium", "en") }}<br />
-            <code>de</code> {{ format(new Date(), "medium", "de") }}<br />
-            <code>zh</code> {{ format(new Date(), "medium", "zh") }}<br />
+            <code>en</code>
+            <ClientOnly>{{ format(new Date(), "medium", "en") }}</ClientOnly
+            ><br />
+            <code>de</code>
+            <ClientOnly>{{ format(new Date(), "medium", "de") }}</ClientOnly
+            ><br />
+            <code>zh</code>
+            <ClientOnly>{{ format(new Date(), "medium", "zh") }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -110,9 +127,15 @@ import { format } from "@formkit/tempo"
             <code>short</code>
           </td>
           <td>
-            <code>en</code> {{ format(new Date(), "short", "en") }}<br />
-            <code>de</code> {{ format(new Date(), "short", "de") }}<br />
-            <code>zh</code> {{ format(new Date(), "short", "zh") }}<br />
+            <code>en</code>
+            <ClientOnly>{{ format(new Date(), "short", "en") }}</ClientOnly
+            ><br />
+            <code>de</code>
+            <ClientOnly>{{ format(new Date(), "short", "de") }}</ClientOnly
+            ><br />
+            <code>zh</code>
+            <ClientOnly>{{ format(new Date(), "short", "zh") }}</ClientOnly
+            ><br />
           </td>
         </tr>
       </tbody>
@@ -138,12 +161,21 @@ import { format } from "@formkit/tempo"
             <code>full</code>
           </td>
           <td>
-            <code>en</code> {{ format(new Date(), { time: "full" }, "en")
-            }}<br />
-            <code>de</code> {{ format(new Date(), { time: "full" }, "de")
-            }}<br />
-            <code>zh</code> {{ format(new Date(), { time: "full" }, "zh")
-            }}<br />
+            <code>en</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "full" }, "en")
+            }}</ClientOnly
+            ><br />
+            <code>de</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "full" }, "de")
+            }}</ClientOnly
+            ><br />
+            <code>zh</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "full" }, "zh")
+            }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -151,12 +183,21 @@ import { format } from "@formkit/tempo"
             <code>long</code>
           </td>
           <td>
-            <code>en</code> {{ format(new Date(), { time: "long" }, "en")
-            }}<br />
-            <code>de</code> {{ format(new Date(), { time: "long" }, "de")
-            }}<br />
-            <code>zh</code> {{ format(new Date(), { time: "long" }, "zh")
-            }}<br />
+            <code>en</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "long" }, "en")
+            }}</ClientOnly
+            ><br />
+            <code>de</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "long" }, "de")
+            }}</ClientOnly
+            ><br />
+            <code>zh</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "long" }, "zh")
+            }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -164,12 +205,21 @@ import { format } from "@formkit/tempo"
             <code>medium</code>
           </td>
           <td>
-            <code>en</code> {{ format(new Date(), { time: "medium" }, "en")
-            }}<br />
-            <code>de</code> {{ format(new Date(), { time: "medium" }, "de")
-            }}<br />
-            <code>zh</code> {{ format(new Date(), { time: "medium" }, "zh")
-            }}<br />
+            <code>en</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "medium" }, "en")
+            }}</ClientOnly
+            ><br />
+            <code>de</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "medium" }, "de")
+            }}</ClientOnly
+            ><br />
+            <code>zh</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "medium" }, "zh")
+            }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -177,12 +227,21 @@ import { format } from "@formkit/tempo"
             <code>short</code>
           </td>
           <td>
-            <code>en</code> {{ format(new Date(), { time: "short" }, "en")
-            }}<br />
-            <code>de</code> {{ format(new Date(), { time: "short" }, "de")
-            }}<br />
-            <code>zh</code> {{ format(new Date(), { time: "short" }, "zh")
-            }}<br />
+            <code>en</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "short" }, "en")
+            }}</ClientOnly
+            ><br />
+            <code>de</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "short" }, "de")
+            }}</ClientOnly
+            ><br />
+            <code>zh</code>
+            <ClientOnly>{{
+              format(new Date(), { time: "short" }, "zh")
+            }}</ClientOnly
+            ><br />
           </td>
         </tr>
       </tbody>
