@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const search = ref<HTMLInputElement | null>(null)
-
 const results = ref<Array<{ title: string; description: string; id: string }>>([
   {
     title: "Install",
@@ -45,48 +43,6 @@ onMounted(() => {
   >
     <div class="search-tray">
       <div id="docsearch" />
-      <!-- <div
-        :class="`
-          input-wrapper
-          flex
-          bg-white
-          p-2
-          pr-3
-          rounded-md
-          focus-within:outline-sky-500
-          focus-within:outline
-          focus-within:outline-2
-          shadow-md
-          mb-4
-
-          dark:bg-purple-900
-          dark:focus-within:outline-fuchsia-500
-        `"
-      >
-        <svg
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="text-slate-400 relative top-0.5 dark:text-purple-300"
-          aria-hidden="true"
-        >
-          <path d="m19 19-3.5-3.5"></path>
-          <circle cx="11" cy="11" r="6"></circle>
-        </svg>
-        <div
-          class="flex-grow focus:outline-none px-2 placeholder:text-slate-300 bg-transparent dark:placeholder:text-purple-400 dark:text-gray-300"
-        />
-        <kbd
-          class="inline-flex text-slate-400 gap-1 items-center dark:text-purple-300"
-        >
-          <abbr title="Command" class="text-lg no-underline">⌘</abbr>
-          <span class="text-sm">K</span>
-        </kbd>
-      </div> -->
       <div class="search-results">
         <ul v-if="results.length">
           <li v-for="result in results" class="mb-2">
