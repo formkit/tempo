@@ -23,7 +23,12 @@
       way to express that moment relative the geography and politics of a given
       region.
     </p>
-    <HeadingSection title="Using timezones" size="sm" class="text-sky-500" />
+    <HeadingSection
+      title="Using timezones"
+      size="sm"
+      :sidebar-exclude="true"
+      class="text-sky-500"
+    />
     <h3 id="timezones-dates">Creating timezone dates</h3>
     <p>
       The most basic timezone aware function is <code>tzDate</code> which allows

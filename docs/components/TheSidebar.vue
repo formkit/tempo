@@ -7,9 +7,13 @@ const headingsTree = new Map<HTMLElement, HTMLElement[]>()
 
 onMounted(() => {
   h2s.value =
-    (Array.from(document.querySelectorAll("h2")) as HTMLElement[]) || []
+    (Array.from(
+      document.querySelectorAll("h2:not([data-sidebar-exclude=true])")
+    ) as HTMLElement[]) || []
   h3s.value =
-    (Array.from(document.querySelectorAll("h3")) as HTMLElement[]) || []
+    (Array.from(
+      document.querySelectorAll("h3:not([data-sidebar-exclude=true])")
+    ) as HTMLElement[]) || []
 
   // add ids to all headings based on their text content
   const headings = Array.from(document.querySelectorAll("h2, h3"))
