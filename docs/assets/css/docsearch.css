@@ -161,7 +161,7 @@ button.DocSearch-Button {
 }
 
 .DocSearch-Hit {
-  @apply dark:bg-white/10;
+  @apply dark:bg-white/5;
 }
 .DocSearch-Hit-Container {
   display: flex;
@@ -193,7 +193,7 @@ button.DocSearch-Button {
   border-radius: 0.5em;
 }
 .DocSearch-Hit[aria-selected="true"] {
-  @apply bg-slate-100;
+  @apply bg-slate-100 dark:bg-purple-900;
 }
 
 .DocSearch-Hit-path {

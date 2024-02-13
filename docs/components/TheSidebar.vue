@@ -42,6 +42,13 @@ onMounted(() => {
     }, 800)
   }
 })
+
+function openDocSearch() {
+  const openButton = document.querySelector("#docsearch button")
+  if (openButton instanceof HTMLElement) {
+    openButton.click()
+  }
+}
 </script>
 
 <template>
@@ -72,6 +79,7 @@ onMounted(() => {
           dark:bg-purple-900
           dark:focus-within:outline-fuchsia-500
         `"
+        @click="openDocSearch"
       >
         <svg
           width="24"
@@ -87,11 +95,11 @@ onMounted(() => {
           <path d="m19 19-3.5-3.5"></path>
           <circle cx="11" cy="11" r="6"></circle>
         </svg>
-        <input
+        <div
           type="text"
           aria-label="Search documentation"
-          class="flex-grow focus:outline-none px-2 placeholder:text-slate-300 bg-transparent dark:placeholder:text-purple-400 dark:text-gray-300"
-          placeholder="Quick search..."
+          class="flex-grow focus:outline-none px-2 text-slate-300 bg-transparent dark:text-purple-400"
+          v-text="`Quick search...`"
           ref="search"
         />
         <kbd
