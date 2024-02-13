@@ -14,7 +14,7 @@
             class="text-3xl mb-4"
           />
           <NuxtLink
-            to="https://formkit.com"
+            to="https://formkit.com?utm_source=tempo&utm_medium=website&utm_campaign=footer"
             class="head-message text-sm flex text-slate-500 hover:text-slate-800 transition-all dark:text-purple-200/75 dark:hover:text-slate-200"
           >
             <LogoMark class="w-3 mr-2 fill-[#FCAB5E]" /> Made with ♥ by

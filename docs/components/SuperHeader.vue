@@ -16,7 +16,7 @@
     `"
   >
     <NuxtLink
-      to="https://formkit.com"
+      to="https://formkit.com?utm_source=tempo&utm_medium=website&utm_campaign=header"
       :class="`
         group/logo
         head-message
