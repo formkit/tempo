@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import docsearch from "@docsearch/js"
-onMounted(() => {
-  docsearch({
+// import "@docsearch/css"
+onMounted(async () => {
+  const docsearch = await import("@docsearch/js")
+  docsearch.default({
     container: "#docsearch",
     appId: "TIC56YZVU3",
     indexName: "tempo-formkit",

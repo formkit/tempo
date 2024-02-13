@@ -66,6 +66,7 @@ function openDocSearch() {
 
           input-wrapper
           flex
+          items-center
           bg-white
           p-2
           pr-3
@@ -75,6 +76,7 @@ function openDocSearch() {
           focus-within:outline-2
           shadow-md
           mb-4
+          cursor-pointer
 
           dark:bg-purple-900
           dark:focus-within:outline-fuchsia-500
@@ -98,7 +100,7 @@ function openDocSearch() {
         <div
           type="text"
           aria-label="Search documentation"
-          class="flex-grow focus:outline-none px-2 text-slate-300 bg-transparent dark:text-purple-400"
+          class="flex-grow whitespace-nowrap focus:outline-none px-2 text-slate-300 bg-transparent dark:text-purple-400"
           v-text="`Quick search...`"
           ref="search"
         />

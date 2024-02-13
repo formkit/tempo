@@ -196,6 +196,10 @@ button.DocSearch-Button {
   @apply bg-slate-100 dark:bg-purple-900;
 }
 
+.DocSearch-Hit-action-button {
+  @apply block p-1 hover:bg-slate-200;
+}
+
 .DocSearch-Hit-path {
   display: block;
   font-size: 14px;
