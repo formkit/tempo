@@ -114,8 +114,10 @@ const stopWatch = watch(el, () => {
       flex
       flex-col
       md:flex-row
+      md:flex-wrap
       rounded-lg
-      my-8
+      mt-8
+      mb-12
       md:my-12
       md:-mr-2
       min-[850px]:-mr-10
@@ -166,7 +168,7 @@ const stopWatch = watch(el, () => {
       <ul v-if="result">
         <li
           v-for="logs in result"
-          class="text-nowrap h-[21px] text-slate-800 text-sm empty:hidden md:empty:block dark:text-purple-300"
+          class="text-nowrap h-[] text-slate-800 text-sm empty:hidden md:empty:block dark:text-purple-300"
         >
           {{ logs ? logs.join(", ") : "" }}
         </li>
@@ -176,7 +178,7 @@ const stopWatch = watch(el, () => {
       </div>
     </div>
     <div
-      class="sensible-error bg-red-600 text-white font-mono font-sm p-2 text-xs z-50 absolute top-[calc(100%-5px)] left-0 w-auto rounded-lg border border-red-400 shadow-md"
+      class="sensible-error bg-red-600 text-white font-mono font-sm p-2 text-xs relative -top-3 -mb-10 h-9 leading-0 z-50 w-auto rounded-lg border border-red-400 shadow-md"
       v-if="sensibleError"
     >
       {{ sensibleError }}
