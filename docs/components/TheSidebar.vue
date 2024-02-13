@@ -114,7 +114,7 @@ function openDocSearch() {
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="text-slate-400 relative top-0.5 dark:text-purple-300"
+          class="text-slate-400 flex-shrink-0 dark:text-purple-300"
           aria-hidden="true"
         >
           <path d="m19 19-3.5-3.5"></path>
@@ -123,12 +123,12 @@ function openDocSearch() {
         <div
           type="text"
           aria-label="Search documentation"
-          class="flex-grow whitespace-nowrap focus:outline-none px-2 text-slate-300 bg-transparent dark:text-purple-400"
-          v-text="`Quick search...`"
+          class="w-full min-w-0 shrink whitespace-nowrap focus:outline-none px-2 text-slate-300 bg-transparent dark:text-purple-400"
+          v-text="`Quick search`"
           ref="search"
         />
         <kbd
-          class="inline-flex text-slate-400 gap-1 items-center dark:text-purple-300"
+          class="inline-flex text-slate-400 shrink-0 gap-1 items-center dark:text-purple-300"
         >
           <abbr title="Command" class="text-lg no-underline">⌘</abbr>
           <span class="text-sm">K</span>
