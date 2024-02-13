@@ -5,7 +5,8 @@
     p-4
     rounded-lg
     text-slate-800
-    leading-8 
+    leading-normal 
+    lg:leading-8
     mb-8
 
     dark:bg-pink-900

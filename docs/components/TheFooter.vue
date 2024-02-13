@@ -17,8 +17,9 @@
             to="https://formkit.com"
             class="head-message text-sm flex text-slate-500 hover:text-slate-800 transition-all dark:text-purple-200/75 dark:hover:text-slate-200"
           >
-            <LogoMark class="w-3 mr-2 fill-[#FCAB5E]" /> Made with ♥ by the
-            FormKit team.
+            <LogoMark class="w-3 mr-2 fill-[#FCAB5E]" /> Made with ♥ by
+            <span class="hidden sm:inline sm:mx-[0.5ch]">the</span> FormKit
+            <span class="hidden sm:inline sm:ml-[0.5ch]">team</span>
           </NuxtLink>
         </div>
         <div>
@@ -28,21 +29,21 @@
           <ul class="text-slate-600 mb-8 sm:mr-20 dark:text-slate-200">
             <li class="mb-2">
               <a
-                href="https://formkit.com"
+                href="https://formkit.com?utm_source=tempo&utm_medium=website&utm_campaign=footer"
                 class="border-b-2 border-slate-300 hover:border-slate-500 dark:border-slate-400 dark:hover:border-purple-300"
                 >FormKit</a
               >
             </li>
             <li class="mb-2">
               <a
-                href="https://auto-animate.formkit.com"
+                href="https://auto-animate.formkit.com?utm_source=tempo&utm_medium=website&utm_campaign=footer"
                 class="border-b-2 border-slate-300 hover:border-slate-500 dark:border-slate-400 dark:hover:border-purple-300"
                 >AutoAnimate</a
               >
             </li>
             <li class="mb-2">
               <a
-                href="https://arrowjs.com"
+                href="https://arrow-js.com?utm_source=tempo&utm_medium=website&utm_campaign=footer"
                 class="border-b-2 border-slate-300 hover:border-slate-500 dark:border-slate-400 dark:hover:border-purple-300"
                 >ArrowJS</a
               >
@@ -77,7 +78,7 @@
 
             <li class="mb-2">
               <a
-                href="https://discord.gg/Vhu97pAC76"
+                href="https://discord.formkit.com"
                 class="hover:text-slate-500 flex items-center gap-2 dark:hover:text-purple-300"
               >
                 <svg

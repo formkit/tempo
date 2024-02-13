@@ -20,7 +20,8 @@
       :class="`
         group/logo
         head-message
-        text-sm
+        text-xs
+        md:text-sm
         flex
         transition-all
         text-slate-600
@@ -37,7 +38,9 @@
       <LogoMark
         class="w-3 mr-2 fill-[#FCAB5E] grayscale group-hover/logo:grayscale-0"
       />
-      Made with <span class="text-pink-400 mx-1">♥</span> by the FormKit team.
+      Made with ♥ by
+      <span class="hidden sm:inline sm:mx-[0.5ch]">the</span> FormKit
+      <span class="hidden sm:inline sm:ml-[0.5ch]">team</span>
     </NuxtLink>
     <ul class="flex gap-4">
       <li>
@@ -47,7 +50,7 @@
         >
           <GitHubStars />
           <GitHubLogo
-            class="text-slate-500 opacity-60 group-hover/github:opacity-100 w-5 h-5 dark:text-purple-500"
+            class="text-slate-500 opacity-60 group-hover/github:opacity-100 w-4 h-4 sm:w-5 sm:h-5 dark:text-purple-500"
           />
         </NuxtLink>
       </li>

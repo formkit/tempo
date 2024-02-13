@@ -14,7 +14,8 @@ const props = withDefaults(defineProps<FunctionRef>(), {
       rounded-lg
       p-3
       font-mono
-      text-sm
+      text-xs
+      md:text-sm
       mb-8
       border
       border-slate-300

@@ -12,7 +12,8 @@ defineProps<{
       rounded-lg
       p-3
       font-mono
-      text-base
+      text-xs
+      md:text-sm
       mb-8
       border
       border-slate-300

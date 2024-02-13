@@ -9,7 +9,7 @@ const { data, pending, error } = useLazyFetch<{ stargazers_count: number }>(
     <div role="status" class="absolute top-[2.5px]" v-if="pending">
       <svg
         aria-hidden="true"
-        class="block w-4 h-4 text-gray-200 animate-spin fill-black opacity-20"
+        class="block w-3 h-3 sm:w-4 sm:h-4 text-gray-200 animate-spin fill-black opacity-20"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
