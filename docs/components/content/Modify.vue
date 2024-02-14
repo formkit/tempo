@@ -151,8 +151,8 @@ const fns: Record<
     example: "date",
     tip: 'To produce a date in a given timezone either include the offset in the date string (ex: "2021-01-01T00:00:00-0800") or use the <code>tzDate</code> function.',
   },
-  minuteStart: {
-    description: `Returns a new Date object with the seconds part of the time set to 00.000 (local time).`,
+  dayEnd: {
+    description: `Returns a new Date object with the time set to 23:59:59.999 (local time).`,
     return: "Date",
     arguments: [
       {
@@ -161,18 +161,8 @@ const fns: Record<
       },
     ],
   },
-  minuteEnd: {
-    description: `Returns a new Date object with the seconds part of the time set to 59.999 (local time).`,
-    return: "Date",
-    arguments: [
-      {
-        name: "date",
-        type: "string | Date",
-      },
-    ],
-  },
-  hourStart: {
-    description: `Returns a new Date object with the minutes part of the time set to 00:00.000 (local time).`,
+  dayStart: {
+    description: `Returns a new Date object with the time set to 00:00:00.000 (local time).`,
     return: "Date",
     arguments: [
       {
@@ -191,8 +181,8 @@ const fns: Record<
       },
     ],
   },
-  dayStart: {
-    description: `Returns a new Date object with the time set to 00:00:00.000 (local time).`,
+  hourStart: {
+    description: `Returns a new Date object with the minutes part of the time set to 00:00.000 (local time).`,
     return: "Date",
     arguments: [
       {
@@ -200,10 +190,19 @@ const fns: Record<
         type: "string | Date",
       },
     ],
-
   },
-  dayEnd: {
-    description: `Returns a new Date object with the time set to 23:59:59.999 (local time).`,
+  minuteEnd: {
+    description: `Returns a new Date object with the seconds part of the time set to 59.999 (local time).`,
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date",
+      },
+    ],
+  },
+  minuteStart: {
+    description: `Returns a new Date object with the seconds part of the time set to 00.000 (local time).`,
     return: "Date",
     arguments: [
       {
