@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  @apply text-sm min-[1400px]:text-base;
+  @apply text-base min-[1400px]:text-base;
   @apply bg-slate-200;
   @apply selection:bg-sky-500;
   @apply selection:text-white;
@@ -28,8 +28,8 @@ html body::before {
   inset: 0;
   z-index: -1;
   width: 100vw;
-  height: 150vh;
-  background-size: 100% 100%;
+  height: 100vh;
+  background-size: cover;
   background-image: radial-gradient(
       circle at 50% 40%,
       rgba(0, 0, 0, 0),
