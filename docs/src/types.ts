@@ -5,3 +5,8 @@ export type FunctionRef = {
   return: string
   wrapper?: boolean
 }
+
+export type ObjectRef = {
+  type: string
+  properties: { name: string; type: string; jsdoc: string[] }[]
+}

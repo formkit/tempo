@@ -82,6 +82,19 @@ const stopWatch = watch(el, () => {
           result.value[e.data.lineNumber].push(
             `Date: ${e.data.value.toISOString()}`
           )
+        } else if (e.data.value && typeof e.data.value === "object") {
+          result.value[e.data.lineNumber].push(
+            JSON.stringify(
+              e.data.value,
+              function (key, value) {
+                if (value instanceof RegExp) {
+                  return value.toString()
+                }
+                return value
+              },
+              1
+            )
+          )
         } else {
           result.value[e.data.lineNumber].push(String(e.data.value))
         }

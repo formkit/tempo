@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import type { FunctionRef } from "../../src/types"
+import type { FunctionRef, ObjectRef } from "../../src/types"
 const fns: Record<
   string,
   {
     description: string
     return: string
     arguments: FunctionRef["arguments"]
+    objectReference?: ObjectRef
     example?: string
     tip?: string
   }
@@ -123,6 +124,64 @@ const fns: Record<
     ],
     return: "string",
   },
+  parts: {
+    description:
+      'Given a format and locale, this function produces an array of "parts". Similar to <code>Intl.DateTimeFormat.formatToParts()</code> but it accepts style formats and token formats and returns parts with granular data such as the part’s token and a regex to match for it.',
+    arguments: [
+      {
+        name: "format",
+        type: "string",
+      },
+      {
+        name: "locale",
+        type: "string",
+      },
+    ],
+    example: "parts",
+    objectReference: {
+      type: "Part",
+      properties: [
+        {
+          name: "hour12",
+          type: "boolean",
+          jsdoc: ["Does this part require a 12 hour clock?"],
+        },
+        {
+          name: "option",
+          type: "Partial<Record<Intl.DateTimeFormatPartTypes, string>>",
+          jsdoc: [
+            "An object of partName to partValue For example:",
+            "{ hour: '2-digit' }",
+          ],
+        },
+        {
+          name: "partName",
+          type: "Intl.DateTimeFormatPartTypes",
+          jsdoc: ["The type of part. For example: month or timeZoneName."],
+        },
+        {
+          name: "partValue",
+          type: "string",
+          jsdoc: [
+            'The value of a given part. For example "2-digit", or "narrow".',
+          ],
+        },
+        {
+          name: "pattern",
+          type: "RegExp",
+          jsdoc: ["A regular expression for matching the above token."],
+        },
+        {
+          name: "token",
+          type: "string",
+          jsdoc: [
+            "The Tempo token for this part. For example: <code>MMMM</code>.",
+          ],
+        },
+      ],
+    },
+    return: "Part[]",
+  },
   range: {
     description:
       "Returns an array of options for a given token in a given locale. For example, the token <code>MMMM</code> in the locale <code>en-US</code> would return <code>['January', 'February', 'March', ...]</code>.",
@@ -192,6 +251,11 @@ const fns: Record<
       <p v-html="def.description" />
       <CodeExample v-if="def.example" :file="def.example" />
       <CalloutInfo v-if="def.tip" v-html="def.tip" />
+      <ObjectReference
+        v-if="def.objectReference"
+        :type="def.objectReference.type"
+        :properties="def.objectReference.properties"
+      />
     </div>
   </PageSection>
 </template>
