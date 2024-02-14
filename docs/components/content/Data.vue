@@ -124,6 +124,32 @@ const fns: Record<
     ],
     return: "string",
   },
+  parseParts: {
+    description:
+      'Given a date string like "2019/12/31" and the parts (like those returned from the <a href="#parts"><code>parts</code> function</a>) this function returns the parts with the appropriate values extracted from the date string and added to a <code>value</code> property.',
+    arguments: [
+      {
+        name: "dateString",
+        type: "string",
+      },
+      {
+        name: "parts",
+        type: "Part[]",
+      },
+    ],
+    objectReference: {
+      type: "FilledPart extends Part",
+      properties: [
+        {
+          name: "value",
+          type: "string",
+          jsdoc: ["The value of the part extracted from the date string."],
+        },
+      ],
+    },
+    return: "FilledPart[]",
+    example: "parseParts",
+  },
   parts: {
     description:
       'Given a format and locale, this function produces an array of "parts". Similar to <code>Intl.DateTimeFormat.formatToParts()</code> but it accepts style formats and token formats and returns parts with granular data such as the part’s token and a regex to match for it.',

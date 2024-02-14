@@ -87,7 +87,11 @@ const parseOptionsProperties = [
     <h3 id="parse-part-filter">partFilter</h3>
     <p>
       The <code>partFilter</code> option gives you fine-grained control over
-      which pieces and <a href="https://tc39.es/ecma402/#table-datetimeformat-resolvedoptions-properties">parts</a>
+      which pieces and
+      <a
+        href="https://tc39.es/ecma402/#table-datetimeformat-resolvedoptions-properties"
+        >parts</a
+      >
       of a date you’d like to include in the resulting <code>Date</code> object
       (remember, missing "parts" will default to the today’s date at midnight
       local).
@@ -101,5 +105,11 @@ const parseOptionsProperties = [
     </p>
     <CodeExample file="date-overflow" />
     <CodeExample file="date-overflow-throw" />
+    <CalloutInfo>
+      Need even more control? You can use the
+      <code><a href="#parts">parts</a></code> and
+      <code><a href="#parseparts">parseParts</a></code> functions to manually
+      destructure a date string and build a <code>Date</code> object yourself.
+    </CalloutInfo>
   </PageSection>
 </template>

@@ -23,7 +23,7 @@
   "dependencies": {
     "@docsearch/js": "3",
     "@formkit/auto-animate": "^0.8.1",
-    "@formkit/tempo": "0.0.7",
+    "@formkit/tempo": "workspace:*",
     "monaco-editor": "^0.40.0"
   }
 }
