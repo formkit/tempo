@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
       const data = (await res.json()) as { stargazers_count: number }
       await useStorage("kv").setItem(
         "tempo-stars",
-        `${data.stargazers_count}|${Date.now()}`
+        `${Date.now()}|${data.stargazers_count}`
       )
       return { stars: data.stargazers_count }
     }
