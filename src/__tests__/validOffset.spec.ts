@@ -7,4 +7,7 @@ describe("validOffset", () => {
     expect(validOffset("+0000")).toBe("+0000")
     expect(validOffset("+0100")).toBe("+0100")
   })
+  it("throws on invalid offset", () => {
+      expect(() => { validOffset("+3969") }).toThrow("Invalid offset: +3969")
+  })
 })
