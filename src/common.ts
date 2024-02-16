@@ -108,50 +108,6 @@ export const styles: ReadonlyArray<FormatStyle> = [
 ]
 
 /**
- * A map with all the ISO 8601 offsets
- */
-const ISO8601Offsets: Record<string, boolean> = {
-  "-1200": true,
-  "-1100": true,
-  "-1000": true,
-  "-0930": true,
-  "-0900": true,
-  "-0800": true,
-  "-0700": true,
-  "-0600": true,
-  "-0500": true,
-  "-0400": true,
-  "-0330": true,
-  "-0300": true,
-  "-0200": true,
-  "-0100": true,
-  "+0000": true,
-  "+0100": true,
-  "+0200": true,
-  "+0300": true,
-  "+0330": true,
-  "+0400": true,
-  "+0430": true,
-  "+0500": true,
-  "+0530": true,
-  "+0545": true,
-  "+0600": true,
-  "+0630": true,
-  "+0700": true,
-  "+0800": true,
-  "+0845": true,
-  "+0900": true,
-  "+0930": true,
-  "+1000": true,
-  "+1030": true,
-  "+1100": true,
-  "+1200": true,
-  "+1245": true,
-  "+1300": true,
-  "+1400": true,
-}
-
-/**
  * Creates a leading zero string of 2 digits.
  * @param n - A number.
  */
@@ -334,7 +290,7 @@ export function offsetToMins(offset: string): number {
  * @param offset - The offset to validate.
  */
 export function validOffset(offset: string) {
-  const valid = !!ISO8601Offsets[offset]
+  const valid = /^([+-])[0-1][0-9][0-5][0-9]$/.test(offset)
   if (!valid) throw new Error(`Invalid offset: ${offset}`)
   return offset
 }
