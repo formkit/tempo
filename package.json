@@ -27,7 +27,8 @@
   },
   "files": [
     "dist",
-    "docs/public"
+    "docs/public/read-the-docs.png",
+    "docs/public/tempo.png"
   ],
   "keywords": [
     "date",
