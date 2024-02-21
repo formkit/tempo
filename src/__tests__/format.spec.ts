@@ -204,5 +204,12 @@ describe("format with a timezone", () => {
         tz: "America/New_York",
       })
     ).toBe("20 10:15 am -0500")
+    expect(
+      format({
+        date: new Date("2024-02-16T11:00:00Z"),
+        format: "YYYY-MM-DDTHH:mm:ssZ",
+        tz: "Europe/Stockholm",
+      })
+    ).toBe("2024-02-16T12:00:00+0100")
   })
 })
