@@ -136,12 +136,15 @@ export function normStr(
  * @param inputDate - The date to fill parts for
  * @param parts - An array of parts to fill
  * @param locale - The locale to fill with.
+ * @param genitive - Whether to use genitive tokens values or not.
+ * @param offset - The explicit offset to fill with (ignores the date’s true offset).
  */
 export function fill(
   inputDate: DateInput,
   parts: Part[],
   locale: string,
-  genitive = false
+  genitive = false,
+  offset: string | null = null
 ): FilledPart[] {
   const partMap = createPartMap(inputDate, parts, locale, genitive)
   const d = date(inputDate)
@@ -170,7 +173,7 @@ export function fill(
       return token === "A" ? p.toUpperCase() : p.toLowerCase()
     }
     if (partName === "timeZoneName") {
-      return minsToOffset(-1 * d.getTimezoneOffset())
+      return offset ?? minsToOffset(-1 * d.getTimezoneOffset())
     }
     return value
   }

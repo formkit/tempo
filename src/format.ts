@@ -51,7 +51,7 @@ export function format(
   genitive: boolean | undefined = false,
   partFilter?: (part: Part) => boolean
 ): string {
-  let tz
+  let tz, forceOffset
 
   if (
     typeof inputDateOrOptions === "object" &&
@@ -76,6 +76,7 @@ export function format(
       inputDateOrOptions,
       offset(inputDateOrOptions, tz)
     )
+    forceOffset = offset(inputDateOrOptions, "utc", tz)
   }
 
   if (!locale || locale === "device") {
@@ -86,7 +87,8 @@ export function format(
     inputDateOrOptions,
     parts(format, locale).filter(partFilter ?? (() => true)),
     locale,
-    genitive
+    genitive,
+    forceOffset
   )
     .map((p) => p.value)
     .join("")

@@ -188,4 +188,21 @@ describe("format with a timezone", () => {
       })
     ).toBe("30 03:30:50")
   })
+
+  it("uses the proper offset when using tz with the Z token (#14)", () => {
+    expect(
+      format({
+        date: "2022-10-29T11:30:50Z",
+        format: "Z",
+        tz: "Asia/Kolkata",
+      })
+    ).toBe("+0530")
+    expect(
+      format({
+        date: "2023-02-20T10:15:00",
+        format: "D hh:mm a Z",
+        tz: "America/New_York",
+      })
+    ).toBe("20 10:15 am -0500")
+  })
 })
