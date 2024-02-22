@@ -121,8 +121,7 @@ const stopWatch = watch(el, () => {
 </script>
 
 <template>
-  <div
-    :class="`
+  <div :class="`
       relative
       flex
       flex-col
@@ -142,20 +141,18 @@ const stopWatch = watch(el, () => {
       min-[1600px]:-mr-64
       shadow-sm
       bg-[#f9f9f9] ${'' /* --vs-editor-background */}
-      after:-z-10
-      after:absolute
-      after:-inset-px
-      after:bg-sky-600/50
-      after:rounded-lg
+            after:-z-10
+            after:absolute
+            after:-inset-px
+            after:bg-sky-600/50
+            after:rounded-lg
 
-      dark:bg-[#180626] ${'' /* --vs-editor-background */}
+            dark:bg-[#180626] ${'' /* --vs-editor-background */}
       dark:after:-inset-px
       dark:after:bg-purple-900
-    `"
-  >
+    `">
     <div class="md:w-3/5 min-[1200px]:w-1/2" ref="el"></div>
-    <div
-      :class="`
+    <div :class="`
         md:w-2/5
         min-[1200px]:w-1/2
         bg-slate-200
@@ -176,13 +173,10 @@ const stopWatch = watch(el, () => {
         dark:border-r-0
         dark:border-b-0
         dark:border-l-purple-950/50
-      `"
-    >
+      `">
       <ul v-if="result">
-        <li
-          v-for="logs in result"
-          class="text-nowrap h-[21px] text-slate-800 text-sm empty:hidden md:empty:block dark:text-purple-300"
-        >
+        <li v-for="logs in result"
+          class="text-nowrap h-[21px] text-slate-800 text-sm empty:hidden md:empty:block dark:text-purple-300 whitespace-nowrap">
           {{ logs ? logs.join(", ") : "" }}
         </li>
       </ul>
@@ -191,12 +185,12 @@ const stopWatch = watch(el, () => {
       </div>
     </div>
     <div
-      class="sensible-error bg-red-600 text-white font-mono font-sm p-2 text-xs relative -top-3 -mb-10 h-9 leading-0 z-50 w-auto rounded-lg border border-red-400 shadow-md"
-      v-if="sensibleError"
-    >
+      class="sensible-error bg-red-600 text-white font-mono font-sm p-2 text-xs relative -top-3 -mb-10 min-h-9 leading-0 z-50 w-auto rounded-lg border border-red-400 shadow-md flex items-center"
+      v-if="sensibleError">
       {{ sensibleError }}
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
