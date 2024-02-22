@@ -25,17 +25,8 @@
     "publint": "publint",
     "release": "pnpm build && bumpp && pnpm publish"
   },
-  "files": [
-    "dist",
-    "docs/public/read-the-docs.png",
-    "docs/public/tempo.png"
-  ],
-  "keywords": [
-    "date",
-    "time",
-    "internationalization",
-    "date format"
-  ],
+  "files": ["dist", "docs/public/read-the-docs.png", "docs/public/tempo.png"],
+  "keywords": ["date", "time", "internationalization", "date format"],
   "author": "Justin Schroeder <justin@formkit.com>",
   "license": "MIT",
   "devDependencies": {
