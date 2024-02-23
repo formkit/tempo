@@ -1,4 +1,13 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import IconSun from "@/assets/sun.svg"
+import IconMoon from "@/assets/moon.svg"
+
+const colorMode = useColorMode()
+
+const handleColorModeChange = () => {
+  colorMode.preference = colorMode.value === "light" ? "dark" : "light"
+}
+</script>
 
 <template>
   <div
@@ -42,19 +51,36 @@
       <span class="hidden sm:inline sm:mx-[0.5ch]">the</span> FormKit
       <span class="hidden sm:inline sm:ml-[0.5ch]">team</span>
     </NuxtLink>
-    <ul class="flex gap-4">
-      <li>
-        <NuxtLink
-          to="https://github.com/formkit/tempo"
-          class="group/github flex items-center relative"
-        >
-          <GitHubStars />
-          <GitHubLogo
-            class="text-slate-500 opacity-60 group-hover/github:opacity-100 w-4 h-4 sm:w-5 sm:h-5 dark:text-purple-500"
-          />
-        </NuxtLink>
-      </li>
-    </ul>
+    <div class="flex items-center gap-3">
+      <ul class="flex gap-4">
+        <li>
+          <NuxtLink
+            to="https://github.com/formkit/tempo"
+            class="group/github flex items-center relative"
+          >
+            <GitHubStars />
+            <GitHubLogo
+              class="text-slate-500 opacity-60 group-hover/github:opacity-100 w-4 h-4 sm:w-5 sm:h-5 dark:text-purple-500"
+            />
+          </NuxtLink>
+        </li>
+      </ul>
+
+      <button
+        @click="handleColorModeChange"
+        aria-label="Toggle color mode"
+        class="w-5 text-slate-400 hover:text-sky-500 dark:text-purple-700 dark:hover:text-purple-500 outline-none"
+      >
+        <IconSun
+          v-if="colorMode.preference === 'light'"
+          class="block text-xl !m-0"
+        />
+        <IconMoon
+          v-else-if="colorMode.preference === 'dark'"
+          class="block text-xl !m-0"
+        />
+      </button>
+    </div>
   </div>
 </template>
 

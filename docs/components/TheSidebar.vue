@@ -56,8 +56,7 @@ function openDocSearch() {
 </script>
 
 <template>
-  <aside
-    :class="`
+  <aside :class="`
       docs-sidebar
       hidden
       lg:flex
@@ -71,10 +70,8 @@ function openDocSearch() {
       w-full
       max-w-[200px]
       min-[1400px]:max-w-[250px]
-    `"
-  >
-    <nav
-      :class="`
+    `">
+    <nav :class="`
         docs-sidebar-nav
         sticky
         min-[1400px]:pr-10
@@ -83,10 +80,8 @@ function openDocSearch() {
         top-2
         max-h-[calc(100dvh-0.5rem)]
         overflow-auto
-      `"
-    >
-      <div
-        :class="`
+      `">
+      <div :class="`
           sticky
           top-0
           z-10
@@ -107,55 +102,33 @@ function openDocSearch() {
 
           dark:bg-purple-900
           dark:focus-within:outline-fuchsia-500
-        `"
-        @click="openDocSearch"
-      >
-        <svg
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="text-slate-400 flex-shrink-0 dark:text-purple-300"
-          aria-hidden="true"
-        >
+        `" @click="openDocSearch">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" class="text-slate-400 flex-shrink-0 dark:text-purple-300" aria-hidden="true">
           <path d="m19 19-3.5-3.5"></path>
           <circle cx="11" cy="11" r="6"></circle>
         </svg>
-        <div
-          type="text"
-          aria-label="Search documentation"
+        <div type="text" aria-label="Search documentation"
           class="w-full min-w-0 shrink whitespace-nowrap focus:outline-none px-2 text-slate-300 bg-transparent dark:text-purple-400"
-          v-text="`Quick search`"
-          ref="search"
-        />
-        <kbd
-          class="inline-flex text-slate-400 shrink-0 gap-1 items-center dark:text-purple-300"
-        >
+          v-text="`Quick search`" ref="search" />
+        <kbd class="inline-flex text-slate-400 shrink-0 gap-1 items-center dark:text-purple-300">
           <abbr title="Command" class="text-lg no-underline">⌘</abbr>
           <span class="text-sm">K</span>
         </kbd>
       </div>
-      <ul class="pb-5 pl-2">
+
+      <ul class="pb-5 pl-2 mt-4">
         <li v-for="section in h2s">
-          <a
-            :href="`#${section.id}`"
-            class="inline-block text-base text-slate-800 hover:text-sky-600 py-1 dark:text-purple-300 dark:hover:text-purple-100"
-          >
+          <a :href="`#${section.id}`"
+            class="inline-block text-base text-slate-800 hover:text-sky-600 py-1 dark:text-purple-300 dark:hover:text-purple-100">
             {{ section.textContent }}
           </a>
 
-          <ul
-            v-if="headingsTree.get(section)"
-            class="relative ml-5 before:w-px before:bg-slate-300 before:absolute before:top-2 before:bottom-2 before:-left-5 dark:before:bg-purple-950"
-          >
+          <ul v-if="headingsTree.get(section)"
+            class="relative ml-5 before:w-px before:bg-slate-300 before:absolute before:top-2 before:bottom-2 before:-left-5 dark:before:bg-purple-950">
             <li v-for="subSection in headingsTree.get(section)">
-              <a
-                :href="`#${subSection.id}`"
-                class="inline-block text-sm text-slate-600 hover:text-sky-600 py-1 dark:text-purple-300/50 dark:hover:text-purple-300"
-              >
+              <a :href="`#${subSection.id}`"
+                class="inline-block text-sm text-slate-600 hover:text-sky-600 py-1 dark:text-purple-300/50 dark:hover:text-purple-300">
                 {{ subSection.textContent }}
               </a>
             </li>

@@ -1,5 +1,4 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <PageSection>
@@ -18,6 +17,7 @@
       timezones offsets and locale aware date formats, giving you a simple API to
       format, parse, and manipulate dates.
     </p>
+
     <CodeExample file="introduction" />
   </PageSection>
 </template>
