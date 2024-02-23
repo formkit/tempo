@@ -1,5 +1,15 @@
 <script lang="ts" setup>
+import IconSun from '@/assets/sun.svg'
+import IconMoon from '@/assets/moon.svg'
+import IconSystem from '@/assets/system.svg'
+
 const colorMode = useColorMode()
+
+const handleColorModeChange = () => {
+  const nextType = colorMode.preference === 'system' ? 'light' : colorMode.preference === 'light' ? 'dark' : 'system'
+
+  colorMode.preference = nextType
+}
 </script>
 
 <template>
@@ -48,11 +58,12 @@ const colorMode = useColorMode()
         </li>
       </ul>
 
-      <select v-model="colorMode.preference">
-        <option value="system">System</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
+      <button @click="handleColorModeChange"
+        class="size-10 flex items-center justify-center rounded text-blue-600 dark:text-purple-500 outline-none focus:ring-2 ring-blue-400 dark:ring-purple-600">
+        <IconSun v-if="colorMode.preference === 'light'" class="text-xl" />
+        <IconMoon v-else-if="colorMode.preference === 'dark'" class="text-xl" />
+        <IconSystem v-else class="text-xl" />
+      </button>
     </div>
   </div>
 </template>
