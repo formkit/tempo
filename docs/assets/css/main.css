@@ -151,7 +151,7 @@ html.dark body::before {
 }
 
 .page-section table code {
-  @apply rounded bg-slate-100 p-1 font-mono min-[1400px]:text-base;
+  @apply me-2 rounded bg-slate-100 p-1 font-mono min-[1400px]:text-base;
   @apply dark:bg-purple-950 dark:text-slate-100;
 }
 .page-section table tr:nth-child(odd) code {
