@@ -1,25 +1,5 @@
 <script lang="ts" setup>
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-
-import {
-  ComputerIcon,
-  MoonIcon,
-  SunIcon,
-} from 'lucide-vue-next';
-
 const colorMode = useColorMode()
-
-type ColorMode = 'system' | 'light' | 'dark';
-
-function handleColorModeChange(type: ColorMode) {
-  colorMode.preference = type;
-}
 </script>
 
 <template>
@@ -67,28 +47,12 @@ function handleColorModeChange(type: ColorMode) {
           </NuxtLink>
         </li>
       </ul>
-      <DropdownMenu>
-        <DropdownMenuTrigger as-child>
-          <UiButton variant="ghost" size="icon" class="transition-none">
-            <ComputerIcon v-if="colorMode.preference === 'system'" class="size-5" />
-            <MoonIcon v-else-if="colorMode.preference === 'dark'" class="size-5" />
-            <SunIcon v-else class="size-5" />
-          </UiButton>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent class="w-36">
-          <DropdownMenuGroup>
-            <DropdownMenuItem @click="handleColorModeChange('system')">
-              <ComputerIcon class="me-2 size-4" /> System
-            </DropdownMenuItem>
-            <DropdownMenuItem @click="handleColorModeChange('light')">
-              <SunIcon class="me-2 size-4" /> Light
-            </DropdownMenuItem>
-            <DropdownMenuItem @click="handleColorModeChange('dark')">
-              <MoonIcon class="me-2 size-4" /> Dark
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+
+      <select v-model="colorMode.preference">
+        <option value="system">System</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
     </div>
   </div>
 </template>
