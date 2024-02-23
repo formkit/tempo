@@ -2,11 +2,6 @@ import { date } from "./date"
 import type { DateInput } from "./types"
 
 /**
- * @name isEqual
- * @category Common Helpers
- * @summary Are the given dates equal?
- *
- * @description
  * Are the given dates equal?
  *
  * @param dateLeft - The first date to compare
