@@ -56,17 +56,17 @@ html.dark body::before {
 }
 
 .page-section p {
-  @apply lg:text-base mb-8 text-slate-800 leading-6 lg:leading-8 dark:text-slate-200;
+  @apply mb-8 leading-6 text-slate-800 lg:text-base lg:leading-8 dark:text-slate-200;
 }
 
 .page-section p code,
 .page-section ul code,
 .page-section aside code {
-  @apply bg-black/10 font-mono p-1 min-[1400px]:text-base rounded dark:bg-black/30 dark:border dark:border-purple-950 dark:text-fuchsia-300;
+  @apply rounded bg-black/10 p-1 font-mono min-[1400px]:text-base dark:border dark:border-purple-950 dark:bg-black/30 dark:text-fuchsia-300;
 }
 
 .page-section > ul {
-  @apply pl-8 min-[1400px]:text-base text-slate-800 leading-7 mb-8;
+  @apply mb-8 pl-8 leading-7 text-slate-800 min-[1400px]:text-base;
   @apply dark:text-slate-200;
 }
 
@@ -75,12 +75,12 @@ html.dark body::before {
 }
 
 .jump-list a {
-  @apply block p-4 rounded-lg cursor-pointer bg-transparent duration-300 border border-slate-300 bg-slate-50 hover:bg-white hover:shadow-md transition-all;
-  @apply dark:border-purple-950 dark:bg-black/10 dark:hover:bg-purple-950 dark:text-gray-200;
+  @apply block cursor-pointer rounded-lg border border-slate-300 bg-slate-50 bg-transparent p-4 transition-all duration-300 hover:bg-white hover:shadow-md;
+  @apply dark:border-purple-950 dark:bg-black/10 dark:text-gray-200 dark:hover:bg-purple-950;
 }
 
 .page-section > ul.jump-list {
-  @apply pl-4 -mt-4;
+  @apply -mt-4 pl-4;
 }
 
 .page-section > ul.jump-list a {
@@ -96,11 +96,11 @@ html.dark body::before {
 }
 
 .page-section h3 {
-  @apply text-lg font-bold mb-3 dark:text-gray-100;
+  @apply mb-3 text-lg font-bold dark:text-gray-100;
 }
 .page-section table {
-  @apply w-full mb-10 min-[1400px]:text-base text-slate-700 rounded-lg shadow-sm border border-slate-300 border-separate border-spacing-0;
-  @apply dark:border-purple-950 dark:shadow-none dark:text-slate-200;
+  @apply mb-10 w-full border-separate border-spacing-0 rounded-lg border border-slate-300 text-slate-700 shadow-sm min-[1400px]:text-base;
+  @apply dark:border-purple-950 dark:text-slate-200 dark:shadow-none;
 }
 .page-section table th {
   @apply bg-gray-50 p-3 text-left text-black;
@@ -114,7 +114,7 @@ html.dark body::before {
 }
 
 .page-section table td {
-  @apply bg-gray-50 py-2 px-3 leading-8;
+  @apply bg-gray-50 px-3 py-2 leading-8;
   @apply dark:bg-black/25;
 }
 .page-section table td:first-child {
@@ -137,7 +137,7 @@ html.dark body::before {
 }
 
 .page-section table code {
-  @apply bg-slate-100 font-mono p-1 min-[1400px]:text-base rounded;
+  @apply rounded bg-slate-100 p-1 font-mono min-[1400px]:text-base;
   @apply dark:bg-purple-950 dark:text-slate-100;
 }
 .page-section table tr:nth-child(odd) code {
