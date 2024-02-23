@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxtjs/color-mode",
     "nuxt-fathom",
+    "shadcn-nuxt",
   ],
   fathom: {
     siteId: "SJEMUVGK",
@@ -107,5 +108,9 @@ export default defineNuxtConfig({
         apiToken: process.env.KV_API_TOKEN,
       },
     },
+  },
+  shadcn: {
+    prefix: "ui",
+    componentDir: "./components/ui",
   },
 })

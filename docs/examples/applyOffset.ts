@@ -5,7 +5,7 @@ import { offset, applyOffset, date } from "@formkit/tempo"
 // Notice that the time has no offset, thus it is "local":
 const d = "2025-03-25 09:30"
 
-// Convert the string to a date (just for example):
+// local time:
 date(d)
 
 // Lisbon is at UTC+0:
