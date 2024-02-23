@@ -63,7 +63,7 @@ const fns: Record<
 
 <template>
   <PageSection>
-    <HeadingSection title="Common Helpers" class="text-sky-500" />
+    <HeadingSection title="Helpers" class="text-sky-500" />
     <p>
       Tempo includes a number of (tree-shakable) helper functions to assist you
       in your date workarounds. These functions all accept either an ISO
