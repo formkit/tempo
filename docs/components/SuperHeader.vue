@@ -69,7 +69,7 @@ const handleColorModeChange = () => {
       <button
         @click="handleColorModeChange"
         aria-label="Toggle color mode"
-        class="w-5 text-slate-400 hover:text-sky-500 dark:text-purple-700 dark:hover:text-purple-500 outline-none"
+        class="w-5 text-slate-400 hover:text-sky-600 dark:text-purple-700 dark:hover:text-purple-500 outline-none"
       >
         <IconSun
           v-if="colorMode.preference === 'light'"
