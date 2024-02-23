@@ -12,7 +12,6 @@ const result = ref<Array<string[]>>([])
 const error = ref("")
 const sensibleError = ref<string>()
 
-const globalDate = useState('globalDate', () => new Date());
 const colorMode = useColorMode()
 
 const stopWatch = watch(el, () => {
@@ -122,15 +121,6 @@ const stopWatch = watch(el, () => {
   // Run the initial code
   runInsideWorker(editor.getValue())
 
-  watch(globalDate, (newDate: Date) => {
-    const newCode = code.value.replace(
-      /(?<=new\sDate\()(\d+|)(?=\))/g,
-      newDate.getTime().toString()
-    );
-
-    editor.setValue(newCode)
-  })
-
   watch(colorMode, () => {
     nextTick(() => {
       const isDarkMode = document.documentElement.classList.contains("dark")
@@ -165,13 +155,13 @@ const stopWatch = watch(el, () => {
       min-[1600px]:-mr-64
       shadow-sm
       bg-[#f9f9f9] ${'' /* --vs-editor-background */}
-                                                                                                  after:-z-10
-                                                                                                  after:absolute
-                                                                                                  after:-inset-px
-                                                                                                  after:bg-sky-600/50
-                                                                                                  after:rounded-lg
+      after:-z-10
+      after:absolute
+      after:-inset-px
+      after:bg-sky-600/50
+      after:rounded-lg
 
-                                                                                                  dark:bg-[#180626] ${'' /* --vs-editor-background */}
+      dark:bg-[#180626] ${'' /* --vs-editor-background */}
       dark:after:-inset-px
       dark:after:bg-purple-900
     `">

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { format } from "@formkit/tempo"
-
-const globalDate = useState('globalDate', () => new Date());
 </script>
 
 <template>
@@ -77,11 +75,11 @@ const globalDate = useState('globalDate', () => new Date());
           </td>
           <td>
             <code>en</code>
-            <ClientOnly>{{ format(globalDate, "full", "en") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "full", "en") }}</ClientOnly><br />
             <code>de</code>
-            <ClientOnly>{{ format(globalDate, "full", "de") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "full", "de") }}</ClientOnly><br />
             <code>zh</code>
-            <ClientOnly>{{ format(globalDate, "full", "zh") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "full", "zh") }}</ClientOnly><br />
           </td>
         </tr>
         <tr>
@@ -90,11 +88,11 @@ const globalDate = useState('globalDate', () => new Date());
           </td>
           <td>
             <code>en</code>
-            <ClientOnly>{{ format(globalDate, "long", "en") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "long", "en") }}</ClientOnly><br />
             <code>de</code>
-            <ClientOnly>{{ format(globalDate, "long", "de") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "long", "de") }}</ClientOnly><br />
             <code>zh</code>
-            <ClientOnly>{{ format(globalDate, "long", "zh") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "long", "zh") }}</ClientOnly><br />
           </td>
         </tr>
         <tr>
@@ -103,11 +101,11 @@ const globalDate = useState('globalDate', () => new Date());
           </td>
           <td>
             <code>en</code>
-            <ClientOnly>{{ format(globalDate, "medium", "en") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "medium", "en") }}</ClientOnly><br />
             <code>de</code>
-            <ClientOnly>{{ format(globalDate, "medium", "de") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "medium", "de") }}</ClientOnly><br />
             <code>zh</code>
-            <ClientOnly>{{ format(globalDate, "medium", "zh") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "medium", "zh") }}</ClientOnly><br />
           </td>
         </tr>
         <tr>
@@ -116,11 +114,11 @@ const globalDate = useState('globalDate', () => new Date());
           </td>
           <td>
             <code>en</code>
-            <ClientOnly>{{ format(globalDate, "short", "en") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "short", "en") }}</ClientOnly><br />
             <code>de</code>
-            <ClientOnly>{{ format(globalDate, "short", "de") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "short", "de") }}</ClientOnly><br />
             <code>zh</code>
-            <ClientOnly>{{ format(globalDate, "short", "zh") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "short", "zh") }}</ClientOnly><br />
           </td>
         </tr>
       </tbody>
@@ -148,15 +146,15 @@ const globalDate = useState('globalDate', () => new Date());
           <td>
             <code>en</code>
             <ClientOnly>{{
-              format(globalDate, { time: "full" }, "en")
+              format(new Date(), { time: "full" }, "en")
             }}</ClientOnly><br />
             <code>de</code>
             <ClientOnly>{{
-              format(globalDate, { time: "full" }, "de")
+              format(new Date(), { time: "full" }, "de")
             }}</ClientOnly><br />
             <code>zh</code>
             <ClientOnly>{{
-              format(globalDate, { time: "full" }, "zh")
+              format(new Date(), { time: "full" }, "zh")
             }}</ClientOnly><br />
           </td>
         </tr>
@@ -167,15 +165,15 @@ const globalDate = useState('globalDate', () => new Date());
           <td>
             <code>en</code>
             <ClientOnly>{{
-              format(globalDate, { time: "long" }, "en")
+              format(new Date(), { time: "long" }, "en")
             }}</ClientOnly><br />
             <code>de</code>
             <ClientOnly>{{
-              format(globalDate, { time: "long" }, "de")
+              format(new Date(), { time: "long" }, "de")
             }}</ClientOnly><br />
             <code>zh</code>
             <ClientOnly>{{
-              format(globalDate, { time: "long" }, "zh")
+              format(new Date(), { time: "long" }, "zh")
             }}</ClientOnly><br />
           </td>
         </tr>
@@ -186,15 +184,15 @@ const globalDate = useState('globalDate', () => new Date());
           <td>
             <code>en</code>
             <ClientOnly>{{
-              format(globalDate, { time: "medium" }, "en")
+              format(new Date(), { time: "medium" }, "en")
             }}</ClientOnly><br />
             <code>de</code>
             <ClientOnly>{{
-              format(globalDate, { time: "medium" }, "de")
+              format(new Date(), { time: "medium" }, "de")
             }}</ClientOnly><br />
             <code>zh</code>
             <ClientOnly>{{
-              format(globalDate, { time: "medium" }, "zh")
+              format(new Date(), { time: "medium" }, "zh")
             }}</ClientOnly><br />
           </td>
         </tr>
@@ -205,15 +203,15 @@ const globalDate = useState('globalDate', () => new Date());
           <td>
             <code>en</code>
             <ClientOnly>{{
-              format(globalDate, { time: "short" }, "en")
+              format(new Date(), { time: "short" }, "en")
             }}</ClientOnly><br />
             <code>de</code>
             <ClientOnly>{{
-              format(globalDate, { time: "short" }, "de")
+              format(new Date(), { time: "short" }, "de")
             }}</ClientOnly><br />
             <code>zh</code>
             <ClientOnly>{{
-              format(globalDate, { time: "short" }, "zh")
+              format(new Date(), { time: "short" }, "zh")
             }}</ClientOnly><br />
           </td>
         </tr>
@@ -240,57 +238,57 @@ const globalDate = useState('globalDate', () => new Date());
       <tbody>
         <tr>
           <td><code>YY</code></td>
-          <td>{{ format(globalDate, "YY") }}</td>
+          <td>{{ format(new Date(), "YY") }}</td>
           <td>2 digit year</td>
         </tr>
         <tr>
           <td><code>YYYY</code></td>
-          <td>{{ format(globalDate, "YYYY") }}</td>
+          <td>{{ format(new Date(), "YYYY") }}</td>
           <td>4 digit year</td>
         </tr>
         <tr>
           <td><code>M</code></td>
-          <td>{{ format(globalDate, "M") }}</td>
+          <td>{{ format(new Date(), "M") }}</td>
           <td>The month 1-12</td>
         </tr>
         <tr>
           <td><code>MM</code></td>
-          <td>{{ format(globalDate, "MM") }}</td>
+          <td>{{ format(new Date(), "MM") }}</td>
           <td>The month 01-12</td>
         </tr>
         <tr>
           <td><code>MMM</code></td>
-          <td>{{ format(globalDate, "MMM") }}</td>
+          <td>{{ format(new Date(), "MMM") }}</td>
           <td>Short name Jan-Dec</td>
         </tr>
         <tr>
           <td><code>MMMM</code></td>
-          <td>{{ format(globalDate, "MMMM") }}</td>
+          <td>{{ format(new Date(), "MMMM") }}</td>
           <td>Full name January - December</td>
         </tr>
         <tr>
           <td><code>D</code></td>
-          <td>{{ format(globalDate, "D") }}</td>
+          <td>{{ format(new Date(), "D") }}</td>
           <td>The day of the month 1-31</td>
         </tr>
         <tr>
           <td><code>DD</code></td>
-          <td>{{ format(globalDate, "DD") }}</td>
+          <td>{{ format(new Date(), "DD") }}</td>
           <td>The day of the month 01-31</td>
         </tr>
         <tr>
           <td><code>d</code></td>
-          <td>{{ format(globalDate, "d") }}</td>
+          <td>{{ format(new Date(), "d") }}</td>
           <td>Single digit day "T"</td>
         </tr>
         <tr>
           <td><code>ddd</code></td>
-          <td>{{ format(globalDate, "ddd") }}</td>
+          <td>{{ format(new Date(), "ddd") }}</td>
           <td>Short day name</td>
         </tr>
         <tr>
           <td><code>dddd</code></td>
-          <td>{{ format(globalDate, "dddd") }}</td>
+          <td>{{ format(new Date(), "dddd") }}</td>
           <td>Full day name Wednesday</td>
         </tr>
         <tr>
@@ -335,12 +333,12 @@ const globalDate = useState('globalDate', () => new Date());
         </tr>
         <tr>
           <td><code>a</code></td>
-          <td>{{ format(globalDate, "a") }}</td>
+          <td>{{ format(new Date(), "a") }}</td>
           <td>am/pm</td>
         </tr>
         <tr>
           <td><code>A</code></td>
-          <td>{{ format(globalDate, "A") }}</td>
+          <td>{{ format(new Date(), "A") }}</td>
           <td>AM/PM</td>
         </tr>
         <tr>

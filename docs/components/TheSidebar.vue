@@ -53,8 +53,6 @@ function openDocSearch() {
     openButton.click()
   }
 }
-
-const date = useState('globalDate', () => new Date());
 </script>
 
 <template>
@@ -118,8 +116,6 @@ const date = useState('globalDate', () => new Date());
           <span class="text-sm">K</span>
         </kbd>
       </div>
-
-      <DateTime v-model="date" />
 
       <ul class="pb-5 pl-2 mt-4">
         <li v-for="section in h2s">
