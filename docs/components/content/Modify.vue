@@ -262,6 +262,21 @@ const fns: Record<
     ],
     example: "tzDate",
   },
+  weekEnd: {
+    description: `Returns a new Date object with the date set to the last day of the current week with the time set to 23:59:59 (local).`,
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date",
+      },
+      {
+        name: "startOfWeekDay",
+        type: "number",
+        comment: "0-6, 0 is Sunday",
+      },
+    ],
+  },
   weekStart: {
     description: `Returns a new Date object with the date set to the first day of the current week with the time set to 00:00:00 (local).`,
     return: "Date",
@@ -277,18 +292,23 @@ const fns: Record<
       },
     ],
   },
-  weekEnd: {
-    description: `Returns a new Date object with the date set to the last day of the current week with the time set to 23:59:59 (local).`,
+  yearEnd: {
+    description: "Returns a new Date object with the date set to the end of the year",
     return: "Date",
     arguments: [
       {
         name: "date",
         type: "string | Date",
       },
+    ],
+  },
+  yearStart: {
+    description: "Returns a new Date object with the date set to the start of the year",
+    return: "Date",
+    arguments: [
       {
-        name: "startOfWeekDay",
-        type: "number",
-        comment: "0-6, 0 is Sunday",
+        name: "date",
+        type: "string | Date",
       },
     ],
   },
