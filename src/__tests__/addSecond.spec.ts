@@ -13,4 +13,9 @@ describe("addSecond", () => {
       "2022-01-02T02:11:01.000Z"
     )
   })
+  it("can decrement to the previous day of previous year by providing negative seconds count", () => {
+    expect(addSecond("2022-01-01T00:00:30Z", -60).toISOString()).toBe(
+      "2021-12-31T23:59:30.000Z"
+    )
+  })
 })

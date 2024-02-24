@@ -18,4 +18,9 @@ describe("monthEnd", () => {
       "2020-01-31T05:00:00.000Z"
     )
   })
+  it("gets the correct last day when starting from the last day", () => {
+    expect(monthEnd("2020-01-31T05:00:00.000Z").toISOString()).toBe(
+      "2020-01-31T05:00:00.000Z"
+    )
+  })
 })
