@@ -3,6 +3,7 @@ import type { FunctionRef, ObjectRef } from "../../src/types"
 const fns: Record<
   string,
   {
+    name: string
     description: string
     return: string
     arguments: FunctionRef["arguments"]
@@ -12,6 +13,7 @@ const fns: Record<
   }
 > = {
   ap: {
+    name: "ap",
     description: "Returns either am or pm but in any given locale.",
     return: "Date",
     arguments: [
@@ -27,6 +29,7 @@ const fns: Record<
     example: "ap",
   },
   dayOfYear: {
+    name: "day-of-year",
     description: `Gets the day of the year a given date is. For example, August 1st is the 213th day of the year on non-leap years and 214th on leap years.`,
     arguments: [
       {
@@ -37,6 +40,7 @@ const fns: Record<
     return: "number",
   },
   formatStr: {
+    name: "format-str",
     description:
       "This little gem of a function returns the token format for a given format style.",
     arguments: [
@@ -53,6 +57,7 @@ const fns: Record<
     example: "format-str",
   },
   fourDigitYear: {
+    name: "four-digit-year",
     description:
       "Converts a 2 digit year into a 4 digit year. This function assumes years 20 years into the future belong to the current century, and the past 80 are in the past century.",
     arguments: [
@@ -64,6 +69,7 @@ const fns: Record<
     return: "number",
   },
   iso8601: {
+    name: "iso-8601",
     description:
       "Validates that a given date passes “acceptable” levels of ISO 8601 compatibility and can be utilized within Tempo. This allows incomplete dates but must include at least the year and month. Does not require the <code>T</code> separator.",
     arguments: [
@@ -75,6 +81,7 @@ const fns: Record<
     return: "string",
   },
   monthDays: {
+    name: "month-days",
     description: "Returns the number of days in a given month.",
     arguments: [
       {
@@ -85,6 +92,7 @@ const fns: Record<
     return: "number",
   },
   nearestDay: {
+    name: "nearest-day",
     description:
       "Performs a bidirectional search for the nearest date that passes a given search function. It stops searching when it finds a result or when it reaches the constraint bounds (on both sides).",
     arguments: [
@@ -104,6 +112,7 @@ const fns: Record<
     return: "Date | null",
   },
   offset: {
+    name: "offset",
     description:
       "Returns the offset between two (IANA) timezones on a given date. The results are ISO 8601 compatible string offsets like -0800 or +0530.",
     arguments: [
@@ -125,6 +134,7 @@ const fns: Record<
     return: "string",
   },
   parseParts: {
+    name: "parse-parts",
     description:
       'Given a date string like "2019/12/31" and the parts (like those returned from the <a href="#parts"><code>parts</code> function</a>) this function returns the parts with the appropriate values extracted from the date string and added to a <code>value</code> property.',
     arguments: [
@@ -151,6 +161,7 @@ const fns: Record<
     example: "parseParts",
   },
   parts: {
+    name: "parts",
     description:
       'Given a format and locale, this function produces an array of "parts". Similar to <code>Intl.DateTimeFormat.formatToParts()</code> but it accepts style formats and token formats and returns parts with granular data such as the part’s token and a regex to match for it.',
     arguments: [
@@ -209,6 +220,7 @@ const fns: Record<
     return: "Part[]",
   },
   range: {
+    name: "range",
     description:
       "Returns an array of options for a given token in a given locale. For example, the token <code>MMMM</code> in the locale <code>en-US</code> would return <code>['January', 'February', 'March', ...]</code>.",
     arguments: [
@@ -231,6 +243,7 @@ const fns: Record<
     example: "range",
   },
   sameDay: {
+    name: "same-day",
     description:
       "Checks if two dates are the same day. This function is useful for comparing dates but ignoring the time.",
     arguments: [
@@ -246,6 +259,7 @@ const fns: Record<
     return: "boolean",
   },
   yearDays: {
+    name: "year-days",
     description:
       "Returns the number of days in a given year. Leap years and century years cause this to not always be 365.",
     arguments: [
@@ -268,20 +282,13 @@ const fns: Record<
       data that is commonly needed to build applications.
     </p>
     <div v-for="(def, fn) in fns">
-      <h3 :id="fn">{{ fn }}</h3>
-      <FunctionReference
-        :function="fn"
-        :arguments="def.arguments"
-        :return="def.return"
-      />
+      <h3 :id="def?.name">{{ fn }}</h3>
+      <FunctionReference :function="fn" :arguments="def.arguments" :return="def.return" />
       <p v-html="def.description" />
       <CodeExample v-if="def.example" :file="def.example" />
       <CalloutInfo v-if="def.tip" v-html="def.tip" />
-      <ObjectReference
-        v-if="def.objectReference"
-        :type="def.objectReference.type"
-        :properties="def.objectReference.properties"
-      />
+      <ObjectReference v-if="def.objectReference" :type="def.objectReference.type"
+        :properties="def.objectReference.properties" />
     </div>
   </PageSection>
 </template>
