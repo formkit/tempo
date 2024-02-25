@@ -18,7 +18,6 @@
     "@vueuse/nuxt": "^10.7.2",
     "nuxt": "^3.10.0",
     "nuxt-fathom": "^0.0.1",
-    "nuxt-svgo": "^4.0.0",
     "vitest": "^1.2.2"
   },
   "dependencies": {

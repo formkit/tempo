@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import IconSun from "@/assets/sun.svg"
-import IconMoon from "@/assets/moon.svg"
+// import IconSun from "@/assets/sun.svg"
+// import IconMoon from "@/assets/moon.svg"
 
 const colorMode = useColorMode()
 
