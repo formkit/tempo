@@ -13,4 +13,9 @@ describe("addMinute", () => {
       "2022-01-02T02:12:00.000Z"
     )
   })
+  it("can decrement to the last hours of the previous of previous year by providing negative number of minutes", () => {
+    expect(addMinute("2022-01-01T00:10:00Z", -60).toISOString()).toBe(
+      "2021-12-31T23:10:00.000Z"
+    )
+  })
 })

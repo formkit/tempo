@@ -35,4 +35,14 @@ describe("addMonth", () => {
       "2020-02-29T05:00:00.000Z"
     )
   })
+  it("can subtract multiple months", () => {
+    expect(addMonth("2020-01-31", -2).toISOString()).toBe(
+      "2019-11-30T05:00:00.000Z"
+    )
+  })
+  it("can subtract multiple months and allow overflow", () => {
+    expect(addMonth("2020-01-31", -2, true).toISOString()).toBe(
+      "2019-12-01T05:00:00.000Z"
+    )
+  })
 })
