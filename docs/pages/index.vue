@@ -13,6 +13,7 @@ definePageMeta({
     <ContentParse />
     <ContentModify />
     <ContentData />
+    <ContentHelpers />
     <ContentTimezones />
     <ContentSupport />
   </main>

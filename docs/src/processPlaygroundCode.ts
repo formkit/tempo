@@ -17,7 +17,7 @@ export function processPlaygroundCode(rawSource: string): string {
         /(.*?)(?:\s+)?as(?:\s+)?(.*?),?/g,
         function (_, original: string, replacement: string) {
           return `${original}:${replacement}`
-        }
+        },
       )
       imports.split(",").forEach((imp) => {
         if (imp.includes(":")) {
@@ -28,16 +28,19 @@ export function processPlaygroundCode(rawSource: string): string {
         }
       })
       return `const { ${imports.trim()} } = await loadTempo()`
-    }
+    },
   )
   code = code.replace(
     /import(?:\s+)?\*(?:\s+)?as(?:\s+)?(.*?)from(\s+)?['"]@formkit\/tempo['"]/g,
     function replacer(_: string, p1: string) {
       fns.add(p1.trim())
       return `const ${p1.trim()} = await loadTempo()`
-    }
+    },
   )
-  code = code.replaceAll(/console\.(log|error|warn|info)\(/g, "consoleOut('$1',")
+  code = code.replaceAll(
+    /console\.(log|error|warn|info)\(/g,
+    "consoleOut('$1',",
+  )
   code = wrapFunctions(code, [...fns, "consoleOut"], "logOut")
 
   // Replace any api statements with a wrapped log statement with the line
@@ -131,7 +134,7 @@ function isNextChar(
   char: string,
   currentFnStr: string,
   fns: string[],
-  possibleFns: string[]
+  possibleFns: string[],
 ): string[] {
   const setToUse = currentFnStr ? possibleFns : fns
   const str = currentFnStr + char

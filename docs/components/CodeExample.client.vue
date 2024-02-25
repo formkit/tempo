@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import * as monacoGlobal from "monaco-editor"
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api"
 import "../monaco-config"
 import { processPlaygroundCode } from "~/src/processPlaygroundCode"
@@ -10,6 +11,8 @@ code.value = value.default
 const result = ref<Array<string[]>>([])
 const error = ref("")
 const sensibleError = ref<string>()
+
+const colorMode = useColorMode()
 
 const stopWatch = watch(el, () => {
   if (!(el.value instanceof HTMLElement)) return
@@ -117,6 +120,17 @@ const stopWatch = watch(el, () => {
 
   // Run the initial code
   runInsideWorker(editor.getValue())
+
+  watch(colorMode, () => {
+    nextTick(() => {
+      const isDarkMode = document.documentElement.classList.contains("dark")
+      if (isDarkMode) {
+        editor.updateOptions({ ...editor.getOptions(), theme: "night-owl" })
+      } else {
+        editor.updateOptions({ ...editor.getOptions(), theme: "chrome-dev-tools" })
+      }
+    })
+  })
 })
 </script>
 
@@ -141,13 +155,13 @@ const stopWatch = watch(el, () => {
       min-[1600px]:-mr-64
       shadow-sm
       bg-[#f9f9f9] ${'' /* --vs-editor-background */}
-            after:-z-10
-            after:absolute
-            after:-inset-px
-            after:bg-sky-600/50
-            after:rounded-lg
+              after:-z-10
+              after:absolute
+              after:-inset-px
+              after:bg-sky-600/50
+              after:rounded-lg
 
-            dark:bg-[#180626] ${'' /* --vs-editor-background */}
+              dark:bg-[#180626] ${'' /* --vs-editor-background */}
       dark:after:-inset-px
       dark:after:bg-purple-900
     `">

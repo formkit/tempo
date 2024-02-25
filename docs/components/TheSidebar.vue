@@ -116,7 +116,8 @@ function openDocSearch() {
           <span class="text-sm">K</span>
         </kbd>
       </div>
-      <ul class="pb-5 pl-2">
+
+      <ul class="pb-5 pl-2 mt-4">
         <li v-for="section in h2s">
           <a :href="`#${section.id}`"
             class="inline-block text-base text-slate-800 hover:text-sky-600 py-1 dark:text-purple-300 dark:hover:text-purple-100">
