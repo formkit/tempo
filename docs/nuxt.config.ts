@@ -99,7 +99,6 @@ export default defineNuxtConfig({
       format: "es",
     },
   },
-  debug: true,
   nitro: {
     storage: {
       kv: {
