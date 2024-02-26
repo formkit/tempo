@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxtjs/color-mode",
     "nuxt-fathom",
-    "nuxt-svgo",
   ],
   fathom: {
     siteId: "SJEMUVGK",
