@@ -230,21 +230,6 @@ const fns: Record<
     return: "string[]",
     example: "range",
   },
-  sameDay: {
-    description:
-      "Checks if two dates are the same day. This function is useful for comparing dates but ignoring the time.",
-    arguments: [
-      {
-        name: "dateA",
-        type: "Date",
-      },
-      {
-        name: "dateB",
-        type: "Date",
-      },
-    ],
-    return: "boolean",
-  },
   yearDays: {
     description:
       "Returns the number of days in a given year. Leap years and century years cause this to not always be 365.",
@@ -269,19 +254,12 @@ const fns: Record<
     </p>
     <div v-for="(def, fn) in fns">
       <h3 :id="fn">{{ fn }}</h3>
-      <FunctionReference
-        :function="fn"
-        :arguments="def.arguments"
-        :return="def.return"
-      />
+      <FunctionReference :function="fn" :arguments="def.arguments" :return="def.return" />
       <p v-html="def.description" />
       <CodeExample v-if="def.example" :file="def.example" />
       <CalloutInfo v-if="def.tip" v-html="def.tip" />
-      <ObjectReference
-        v-if="def.objectReference"
-        :type="def.objectReference.type"
-        :properties="def.objectReference.properties"
-      />
+      <ObjectReference v-if="def.objectReference" :type="def.objectReference.type"
+        :properties="def.objectReference.properties" />
     </div>
   </PageSection>
 </template>
