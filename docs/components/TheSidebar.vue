@@ -15,10 +15,10 @@ onMounted(() => {
       document.querySelectorAll("h3:not([data-sidebar-exclude=true])")
     ) as HTMLElement[]) || []
 
-  // add ids to all headings based on their text content
+  // add ids to all headings based on their text content if id is not already present
   const headings = Array.from(document.querySelectorAll("h2, h3"))
   headings.forEach((heading) => {
-    const id = heading.textContent?.toLowerCase().replace(/\s/g, "-")
+    const id = heading?.id ?? heading.textContent?.toLowerCase().replace(/\s/g, "-")
     if (id) {
       heading.id = id
     }

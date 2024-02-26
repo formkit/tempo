@@ -26,13 +26,9 @@ onMounted(async () => {
 
 <template>
   <TheHeader />
-  <div
-    class="docs-layout flex w-full max-w-full mt-20 border-t border-t-slate-300 dark:border-t-purple-950"
-  >
+  <div class="docs-layout flex w-full max-w-full mt-20 border-t border-t-slate-300 dark:border-t-purple-950">
     <TheSidebar />
-    <NuxtPage
-      class="min-w-0 pr-4 mr-auto pt-20 w-full max-w-[1000px] ml-6 min-[1400px]:ml-10"
-    />
+    <NuxtPage class="min-w-0 pr-4 mr-auto pt-20 w-full max-w-[1000px] ml-6 min-[1400px]:ml-10" />
   </div>
   <TheFooter />
 </template>

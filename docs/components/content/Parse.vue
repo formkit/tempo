@@ -41,19 +41,14 @@ const parseOptionsProperties = [
 <template>
   <PageSection>
     <HeadingSection title="Parse" class="text-sky-500" />
-    <FunctionReference
-      function="parse"
-      :arguments="[
-        {
-          name: 'date',
-          type: 'string',
-        },
-        { name: 'format', type: 'string | { date?: string, time?: string }' },
-        { name: 'locale?', type: 'string' },
-      ]"
-      :overload="[{ name: 'options', type: 'ParseOptions' }]"
-      return="Date"
-    />
+    <FunctionReference function="parse" :arguments="[
+      {
+        name: 'date',
+        type: 'string',
+      },
+      { name: 'format', type: 'string | { date?: string, time?: string }' },
+      { name: 'locale?', type: 'string' },
+    ]" :overload="[{ name: 'options', type: 'ParseOptions' }]" return="Date" />
     <p>
       To convert a date string into a <code>Date</code> object we use the
       <code>parse</code> function. This allows us to parse any output from the
@@ -88,16 +83,13 @@ const parseOptionsProperties = [
     <p>
       The <code>partFilter</code> option gives you fine-grained control over
       which pieces and
-      <a
-        href="https://tc39.es/ecma402/#table-datetimeformat-resolvedoptions-properties"
-        >parts</a
-      >
+      <a href="https://tc39.es/ecma402/#table-datetimeformat-resolvedoptions-properties">parts</a>
       of a date you’d like to include in the resulting <code>Date</code> object
       (remember, missing "parts" will default to the today’s date at midnight
       local).
     </p>
     <CodeExample file="part-filter" />
-    <h3 id="dateOverflow">dateOverflow</h3>
+    <h3 id="date-overflow">dateOverflow</h3>
     <p>
       The <code>dateOverflow</code> option determines how an “out of range” date
       should be parsed (ex: February 30th). Options are
