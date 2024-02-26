@@ -10,6 +10,81 @@ const fns: Record<
     tip?: string
   }
 > = {
+  sameSecond: {
+    description:
+      "Checks if two dates are the same second. This function is useful for comparing dates but ignoring the milliseconds.",
+    arguments: [
+      {
+        name: "dateA",
+        type: "Date",
+      },
+      {
+        name: "dateB",
+        type: "Date",
+      },
+    ],
+    return: "boolean",
+  },
+  sameMinute: {
+    description:
+      "Checks if two dates are the same minute. This function is useful for comparing dates but ignoring the seconds and milliseconds.",
+    arguments: [
+      {
+        name: "dateA",
+        type: "Date",
+      },
+      {
+        name: "dateB",
+        type: "Date",
+      },
+    ],
+    return: "boolean",
+  },
+  sameHour: {
+    description:
+      "Checks if two dates are the same hour. This function is useful for comparing dates but ignoring the minutes, seconds, and milliseconds.",
+    arguments: [
+      {
+        name: "dateA",
+        type: "Date",
+      },
+      {
+        name: "dateB",
+        type: "Date",
+      },
+    ],
+    return: "boolean",
+  },
+  sameDay: {
+    description:
+      "Checks if two dates are the same day. This function is useful for comparing dates but ignoring the time.",
+    arguments: [
+      {
+        name: "dateA",
+        type: "Date",
+      },
+      {
+        name: "dateB",
+        type: "Date",
+      },
+    ],
+    return: "boolean",
+  },
+  sameYear: {
+    description:
+      "Checks if two dates are the same year. This function is useful for comparing dates but ignoring the month, day, and time.",
+    arguments: [
+      {
+        name: "dateA",
+        type: "Date",
+      },
+      {
+        name: "dateB",
+        type: "Date",
+      },
+    ],
+    return: "boolean",
+  },
   isBefore: {
     description:
       "Returns true if the first date is before the second date, otherwise false.",
