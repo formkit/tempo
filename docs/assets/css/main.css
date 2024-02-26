@@ -19,16 +19,15 @@ html.dark body {
   @apply selection:bg-fuchsia-600;
 }
 html body::before {
-  @apply opacity-100;
+  @apply h-lvh w-screen opacity-100;
   @apply contrast-[300%];
   @apply mix-blend-overlay;
   @apply brightness-[100%];
+  @apply inset-0;
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-  width: 100vw;
-  height: 100vh;
   background-size: cover;
   background-image: radial-gradient(
       circle at 50% 40%,
@@ -42,6 +41,19 @@ html.dark body::before {
   @apply mix-blend-multiply;
   @apply contrast-[150%];
   @apply brightness-[70%];
+  @apply inset-0;
+}
+
+.DocSearch-Reset {
+  @apply text-white;
+}
+
+.DocSearch-SearchBar {
+  @apply grid grid-cols-[minmax(0,1fr)_auto];
+}
+
+.DocSearch-SearchBar form {
+  @apply grid grid-cols-[auto_0_minmax(0,1fr)_auto];
 }
 
 .monaco-editor,
@@ -137,7 +149,7 @@ html.dark body::before {
 }
 
 .page-section table code {
-  @apply rounded bg-slate-100 p-1 font-mono min-[1400px]:text-base;
+  @apply me-2 rounded bg-slate-100 p-1 font-mono min-[1400px]:text-base;
   @apply dark:bg-purple-950 dark:text-slate-100;
 }
 .page-section table tr:nth-child(odd) code {

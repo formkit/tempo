@@ -6,12 +6,13 @@ code.value = value.default
 </script>
 
 <template>
-  <div class="chrome"></div>
+  <div class="chrome" :style="{
+    height: `${Math.min(1000, code.split('\n').length * 21)}px`
+  }"></div>
 </template>
 
 <style scoped>
 .chrome {
   width: 500px;
-  height: 300px;
 }
 </style>
