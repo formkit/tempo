@@ -242,22 +242,6 @@ const fns: Record<
     return: "string[]",
     example: "range",
   },
-  sameDay: {
-    name: "same-day",
-    description:
-      "Checks if two dates are the same day. This function is useful for comparing dates but ignoring the time.",
-    arguments: [
-      {
-        name: "dateA",
-        type: "Date",
-      },
-      {
-        name: "dateB",
-        type: "Date",
-      },
-    ],
-    return: "boolean",
-  },
   yearDays: {
     name: "year-days",
     description:
