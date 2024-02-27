@@ -34,7 +34,7 @@ function relativeTime(d: Date, timeZone: string): Date {
     parts[part.type as keyof typeof parts] = part.value
   })
   return new Date(
-    `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}Z`
+    `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}Z`,
   )
 }
 
@@ -49,7 +49,7 @@ function relativeTime(d: Date, timeZone: string): Date {
 export function offset(
   utcTime: DateInput,
   tzA = "UTC",
-  tzB = "device"
+  tzB = "device",
 ): string {
   tzB = tzB === "device" ? deviceTZ() : tzB
   const d = date(utcTime)
