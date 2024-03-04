@@ -23,7 +23,8 @@
     "test": "TZ=\"America/New_York\" vitest",
     "docs-build": "cd ./docs && pnpm run build",
     "publint": "publint",
-    "release": "pnpm build && bumpp && pnpm publish"
+    "release": "pnpm build && bumpp && pnpm publish",
+    "size": "npm run build && size-limit"
   },
   "files": [
     "dist",
@@ -39,9 +40,11 @@
   "author": "Justin Schroeder <justin@formkit.com>",
   "license": "MIT",
   "devDependencies": {
+    "@size-limit/preset-small-lib": "^11.0.2",
     "@types/node": "^20.11.10",
     "bumpp": "^9.3.0",
     "publint": "^0.2.7",
+    "size-limit": "^11.0.2",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
     "vitest": "^1.2.1"
