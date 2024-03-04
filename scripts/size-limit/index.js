@@ -1,4 +1,5 @@
 import path from "path"
+import fs from "fs"
 import sizeLimit from "size-limit"
 import filePlugin from "@size-limit/file"
 import esbuildPlugin from "@size-limit/esbuild"
@@ -6,7 +7,7 @@ import bytes from "bytes-iec"
 
 import * as funcs from "../../dist/index.cjs"
 
-function formatBytes(size) {
+const formatBytes = (size) => {
   return bytes.format(size, { unitSeparator: " " })
 }
 
@@ -19,9 +20,7 @@ const getConfigFromIndexFile = (pathToIndexFile, functionNames) => {
 
       return {
         path: pathToIndexFile,
-        import: {
-          [pathToIndexFile]: `{ ${name} }`,
-        },
+        import: { [pathToIndexFile]: `{ ${name} }` },
         name,
         files: [pathToIndexFile],
       }
@@ -40,41 +39,52 @@ const cjsFiles = getConfigFromIndexFile(cjsPath, functionNames)
 
 const allImports = [
   {
-    path: "./dist/index.mjs",
+    path: esmPath,
     limit: "5.1 kb",
-    import: {
-      "/Users/aleksandrkarpov/Documents/myprojects/tempo/dist/index.mjs": "*",
-    },
+    import: { [esmPath]: "*" },
     name: "all esm",
-    files: ["/Users/aleksandrkarpov/Documents/myprojects/tempo/dist/index.mjs"],
+    files: [esmPath],
     sizeLimit: 5100,
   },
   {
-    path: "./dist/index.cjs",
+    path: cjsPath,
     limit: "5.4 kb",
-    import: {
-      "/Users/aleksandrkarpov/Documents/myprojects/tempo/dist/index.cjs": "*",
-    },
+    import: { [cjsPath]: "*" },
     name: "all cjs",
-    files: ["/Users/aleksandrkarpov/Documents/myprojects/tempo/dist/index.cjs"],
+    files: [cjsPath],
     sizeLimit: 5400,
   },
 ]
 
 const allFiles = [...esmFiles, ...cjsFiles, ...allImports]
 
-sizeLimit([filePlugin, esbuildPlugin], {
-  cwd: "/Users/aleksandrkarpov/Documents/myprojects/tempo",
-  configPath: ".size-limit.cjs",
-  checks: allFiles,
-}).then((results) => {
-  results.forEach((funcSize, index) => {
+const getFuncSizes = async () => {
+  const result = await sizeLimit([filePlugin, esbuildPlugin], {
+    cwd: "/Users/aleksandrkarpov/Documents/myprojects/tempo",
+    configPath: ".size-limit.cjs",
+    checks: allFiles,
+  })
+
+  const funcs = {}
+
+  result.forEach((funcSize, index) => {
     const funcItem = allFiles[index]
     const { size } = funcSize
     const { name, path } = funcItem
 
     const importType = path === esmPath ? "esm" : "cjs"
 
+    if (!funcs[name]) funcs[name] = {}
+
+    funcs[name][importType] = { size, formattedSize: formatBytes(size) }
+
     console.log("\n  " + name, importType, size, formatBytes(size))
   })
+
+  return funcs
+}
+
+getFuncSizes().then((sizes) => {
+  const pathToSave = path.resolve(baseDir, "docs/assets/func-sizes.json")
+  fs.writeFileSync(pathToSave, JSON.stringify(sizes, null, 2))
 })
