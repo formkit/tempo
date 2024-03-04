@@ -169,7 +169,7 @@ export function fill(
       return `0${value}`
     }
     if (partName === "dayPeriod") {
-      const p = ap(d.getHours() < 12 ? "am" : "pm", locale)
+      const p = ap(d.getUTCHours() < 12 ? "am" : "pm", locale)
       return token === "A" ? p.toUpperCase() : p.toLowerCase()
     }
     if (partName === "timeZoneName") {
@@ -210,14 +210,17 @@ function createPartMap(
     valueParts.push(
       ...new Intl.DateTimeFormat(
         preciseLocale,
-        requestedParts.reduce((options, part) => {
-          if (part.partName === "literal") return options
-          // Side effect! Genitive parts get shoved into a separate array.
-          if (genitive && genitiveTokens.includes(part.token)) {
-            genitiveParts.push(part)
-          }
-          return Object.assign(options, part.option)
-        }, {} as Intl.DateTimeFormatOptions),
+        requestedParts.reduce(
+          (options, part) => {
+            if (part.partName === "literal") return options
+            // Side effect! Genitive parts get shoved into a separate array.
+            if (genitive && genitiveTokens.includes(part.token)) {
+              genitiveParts.push(part)
+            }
+            return Object.assign(options, part.option)
+          },
+          { timeZone: "UTC" } as Intl.DateTimeFormatOptions
+        )
       )
         .formatToParts(d)
         .map(normStr),
@@ -229,6 +232,7 @@ function createPartMap(
           case "MMMM":
             formattedParts = new Intl.DateTimeFormat(preciseLocale, {
               dateStyle: "long",
+              timeZone: "UTC",
             })
               .formatToParts(d)
               .map(normStr)
@@ -236,6 +240,7 @@ function createPartMap(
           case "MMM":
             formattedParts = new Intl.DateTimeFormat(preciseLocale, {
               dateStyle: "medium",
+              timeZone: "UTC",
             })
               .formatToParts(d)
               .map(normStr)
