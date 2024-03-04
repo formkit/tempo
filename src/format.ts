@@ -5,6 +5,7 @@ import type { DateInput, Format, FormatOptions, Part } from "./types"
 import { offset } from "./offset"
 import { removeOffset } from "./removeOffset"
 import { deviceLocale } from "./deviceLocale"
+import { deviceTZ } from "./deviceTZ"
 
 /**
  * Produce a formatted string. Available strings:
@@ -71,12 +72,16 @@ export function format(
   if (format === "ISO8601") return date(inputDateOrOptions).toISOString()
 
   if (tz) {
-    // If a timezone is provided, we need to apply the offset to the date.
+    forceOffset = offset(inputDateOrOptions, "utc", tz)
+  }
+
+  // We need to apply an offset to the date so that it can be formatted as UTC.
+  tz ??= deviceTZ()
+  if (tz.toLowerCase() !== "utc") {
     inputDateOrOptions = removeOffset(
       inputDateOrOptions,
-      offset(inputDateOrOptions, tz)
+      offset(inputDateOrOptions, tz, "utc")
     )
-    forceOffset = offset(inputDateOrOptions, "utc", tz)
   }
 
   if (!locale || locale === "device") {

@@ -212,4 +212,14 @@ describe("format with a timezone", () => {
       })
     ).toBe("2024-02-16T12:00:00+0100")
   })
+
+  it("can format times during device DST gaps", () => {
+    expect(
+      format({
+        date: new Date("2024-03-10T02:30:00Z"),
+        format: "HH:mm:ssZ",
+        tz: "UTC",
+      })
+    ).toBe("02:30:00+0000")
+  })
 })
