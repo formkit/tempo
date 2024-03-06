@@ -77,7 +77,7 @@ export function format(
 
   // We need to apply an offset to the date so that it can be formatted as UTC.
   tz ??= deviceTZ()
-  if (tz.toLowerCase() !== "utc") {
+  if (tz?.toLowerCase() !== "utc") {
     inputDateOrOptions = removeOffset(
       inputDateOrOptions,
       offset(inputDateOrOptions, tz, "utc")
