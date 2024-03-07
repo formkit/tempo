@@ -52,7 +52,7 @@ export function format(
   genitive: boolean | undefined = false,
   partFilter?: (part: Part) => boolean
 ): string {
-  let tz, forceOffset
+  let tz: string | undefined, forceOffset: string | undefined
 
   if (
     typeof inputDateOrOptions === "object" &&
