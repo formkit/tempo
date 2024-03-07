@@ -15,5 +15,5 @@ import { DateInput } from "./types"
  */
 export function tzDate(inputDate: DateInput, tz: string) {
   const d = date(inputDate)
-  return applyOffset(d, offset(d, tz))
+  return applyOffset(d, offset(d, "UTC", tz))
 }
