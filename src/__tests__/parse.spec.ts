@@ -84,6 +84,14 @@ describe("parse", () => {
       }:22:00.000Z`
     )
   })
+  it("can parse [+-]HH:mm", () => {
+    expect(
+      parse("1994-06-22T04:22:32+09:00", "YYYY-MM-DDTHH:mm:ssZ").toISOString()
+    ).toBe("1994-06-21T19:22:32.000Z")
+    expect(
+      parse("1994-06-22T04:22:32+09:00").toISOString()
+    ).toBe("1994-06-21T19:22:32.000Z")
+  })
   it("can parse the string month in en", () => {
     let h: number | string = new Date("2019-01-01").getTimezoneOffset() / 60
     h = h < 10 ? `0${h}` : h
