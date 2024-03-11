@@ -372,16 +372,7 @@ const fns: Record<
     <div v-for="(def, fn) in fns">
       <div class="flex items-center justify-between mb-3">
         <h3 :id="def?.name" class="!m-0">{{ fn }}</h3>
-
-        <div class="flex items-center">
-          <p class="!text-sm !m-0 bg-slate-300 p-2 rounded-md shrink-0 !leading-6">
-            <span class="pr-2">size </span>
-            <span class="font-bold">{{ def.size }}</span>
-          </p>
-          <div class="p-2 bg-slate-300 ml-3 rounded-md">
-            <IconGitHub class="opacity-70"/>
-          </div>
-        </div>
+        <GithubLinkAndSize githubLink="/test" functionSize="123 B"/>
       </div>
 
       <FunctionReference
