@@ -1,5 +1,7 @@
 <script lang="ts" setup>
+import sizes from "../../assets/func-sizes.json"
 import type { FunctionRef } from "../../src/types"
+
 const fns: Record<
   string,
   {
@@ -145,7 +147,14 @@ const fns: Record<
       8601 string or a Date object and return a <em>boolean</em>.
     </p>
     <div v-for="(def, fn) in fns">
-      <h3 :id="fn">{{ fn }}</h3>
+      <div class="flex items-center justify-between mb-3">
+        <h3 :id="fn" class="!m-0">{{ fn }}</h3>
+        <GithubLinkAndSize
+          :githubLink="'https://github.com/formkit/tempo/blob/main/src/' + fn + '.ts'"
+          :functionSize="sizes[fn]?.esm?.formattedSize"
+        />
+      </div>
+
       <FunctionReference :function="fn" :arguments="def.arguments" :return="def.return" />
       <p v-html="def.description" />
       <CodeExample v-if="def.example" :file="def.example" />
