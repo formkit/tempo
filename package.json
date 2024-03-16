@@ -20,6 +20,7 @@
   "scripts": {
     "dev": "cd ./docs && pnpm nuxt dev",
     "build": "tsup",
+    "post:build": "node scripts/size-limit/index.js",
     "test": "TZ=\"America/New_York\" vitest",
     "docs-build": "cd ./docs && pnpm run build",
     "publint": "publint",
