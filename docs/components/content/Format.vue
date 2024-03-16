@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import { format } from "@formkit/tempo"
+import sizes from "../../assets/func-sizes.json"
 </script>
 
 <template>
   <PageSection>
-    <HeadingSection title="Format" class="text-sky-500" />
+    <div class="flex items-center justify-between mb-8">
+      <HeadingSection title="Format" class="text-sky-500 !mb-0" />
+      <GithubLinkAndSize
+        githubLink="https://github.com/formkit/tempo/blob/main/src/format.ts"
+        :functionSize="sizes.format.esm.formattedSize"
+      />
+    </div>
+
     <FunctionReference function="format" :arguments="[
       {
         name: 'date',
