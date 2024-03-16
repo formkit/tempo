@@ -60,7 +60,7 @@ const allFiles = [...esmFiles, ...cjsFiles, ...allImports]
 
 const getFuncSizes = async () => {
   const result = await sizeLimit([filePlugin, esbuildPlugin], {
-    cwd: "/Users/aleksandrkarpov/Documents/myprojects/tempo",
+    cwd: process.cwd(),
     configPath: ".size-limit.cjs",
     checks: allFiles,
   })
