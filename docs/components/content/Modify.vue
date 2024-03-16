@@ -1,5 +1,7 @@
 <script lang="ts" setup>
+import sizes from "../../assets/func-sizes.json"
 import type { FunctionRef } from "../../src/types"
+
 const fns: Record<
   string,
   {
@@ -16,7 +18,6 @@ const fns: Record<
     description:
       "Returns a new Date object with a positive or negative number of days applied to date argument. To subtract days, use a negative number.",
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -34,7 +35,6 @@ const fns: Record<
     description:
       "Returns a new Date object with a positive or negative number of hours applied to date argument. To subtract hours, use a negative number.",
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -51,7 +51,6 @@ const fns: Record<
     description:
       "Returns a new Date object with a positive or negative number of minutes applied to date argument. To subtract minutes, use a negative number.",
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -74,7 +73,6 @@ const fns: Record<
     to "overflow" into March by setting <code>dateOverflow</code> to
     <code>true</code>.`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -95,7 +93,6 @@ const fns: Record<
     description:
       "Returns a new Date object with a positive or negative number of seconds applied to date argument. To subtract seconds, use a negative number.",
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -118,7 +115,6 @@ const fns: Record<
       you could opt for it to "overflow" into March by setting
       <code>dateOverflow</code> to <code>true</code>.`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -140,7 +136,6 @@ const fns: Record<
       — this function does fundamentally change the date but can be very useful
       when working with timezones. Read more in the timezone section.`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -158,7 +153,6 @@ const fns: Record<
     name: 'date',
     description: `Converts an ISO 8601 like string into a Date object (noop on <code>Date</code> objects). ISO 8601 strings do not need to be complete to be accepted, but you need at least a year and month.`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -172,7 +166,6 @@ const fns: Record<
     name: 'day-end',
     description: `Returns a new Date object with the time set to 23:59:59.999 (local time).`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -184,7 +177,6 @@ const fns: Record<
     name: 'day-start',
     description: `Returns a new Date object with the time set to 00:00:00.000 (local time).`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -196,7 +188,6 @@ const fns: Record<
     name: 'hour-end',
     description: `Returns a new Date object with the minutes part of the time set to 59:59.999 (local time).`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -208,7 +199,6 @@ const fns: Record<
     name: 'hour-start',
     description: `Returns a new Date object with the minutes part of the time set to 00:00.000 (local time).`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -220,7 +210,6 @@ const fns: Record<
     name: 'minute-end',
     description: `Returns a new Date object with the seconds part of the time set to 59.999 (local time).`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -232,7 +221,6 @@ const fns: Record<
     name: 'minute-start',
     description: `Returns a new Date object with the seconds part of the time set to 00.000 (local time).`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -244,7 +232,6 @@ const fns: Record<
     name: 'month-end',
     description: `Returns a new Date object with the date set to the last day of the current month (does not modify the time).`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -256,7 +243,6 @@ const fns: Record<
     name: 'month-start',
     description: `Returns a new Date object with the date set to the first day of the current month and the time set to 00:00:00 (local).`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -268,7 +254,6 @@ const fns: Record<
     name: 'remove-offset',
     description: `Returns a new Date object with the inverse of the specified offset applied. This can be helpful to normalize time information across timezones.`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -285,7 +270,6 @@ const fns: Record<
     name: 'tz-date',
     description: `Converts an ISO 8601 like string into a Date object with a timezone applied. For example, <code>tzDate('2021-01-01T00:00', 'America/Los_Angeles')</code> will return a Date object representing 2021-01-01 00:00 in L.A.`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -303,7 +287,6 @@ const fns: Record<
     name: 'week-end',
     description: `Returns a new Date object with the date set to the last day of the current week with the time set to 23:59:59 (local).`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -320,7 +303,6 @@ const fns: Record<
     name: 'week-start',
     description: `Returns a new Date object with the date set to the first day of the current week with the time set to 00:00:00 (local).`,
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -337,7 +319,6 @@ const fns: Record<
     name: 'year-end',
     description: "Returns a new Date object with the date set to the end of the year",
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -349,7 +330,6 @@ const fns: Record<
     name: 'year-start',
     description: "Returns a new Date object with the date set to the start of the year",
     return: "Date",
-    size: "390 B",
     arguments: [
       {
         name: "date",
@@ -372,7 +352,10 @@ const fns: Record<
     <div v-for="(def, fn) in fns">
       <div class="flex items-center justify-between mb-3">
         <h3 :id="def?.name" class="!m-0">{{ fn }}</h3>
-        <GithubLinkAndSize githubLink="/test" functionSize="123 B"/>
+        <GithubLinkAndSize
+          :githubLink="'https://github.com/formkit/tempo/blob/main/src/' + fn + '.ts'"
+          :functionSize="sizes[fn]?.esm?.formattedSize"
+        />
       </div>
 
       <FunctionReference
