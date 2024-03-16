@@ -7,6 +7,8 @@ import bytes from "bytes-iec"
 
 import * as funcs from "../../dist/index.cjs"
 
+const OUTPUT_FILE = "docs/assets/func-sizes.json"
+
 const formatBytes = (size) => {
   return bytes.format(size, { unitSeparator: " " })
 }
@@ -85,6 +87,6 @@ const getFuncSizes = async () => {
 }
 
 getFuncSizes().then((sizes) => {
-  const pathToSave = path.resolve(baseDir, "docs/assets/func-sizes.json")
+  const pathToSave = path.resolve(baseDir, OUTPUT_FILE)
   fs.writeFileSync(pathToSave, JSON.stringify(sizes, null, 2))
 })
