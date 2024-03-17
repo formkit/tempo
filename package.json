@@ -41,9 +41,12 @@
   "author": "Justin Schroeder <justin@formkit.com>",
   "license": "MIT",
   "devDependencies": {
+    "@size-limit/esbuild": "^11.1.1",
+    "@size-limit/file": "^11.1.1",
     "@size-limit/preset-small-lib": "^11.0.2",
     "@types/node": "^20.11.10",
     "bumpp": "^9.3.0",
+    "bytes-iec": "^3.1.1",
     "publint": "^0.2.7",
     "size-limit": "^11.0.2",
     "tsup": "^8.0.1",

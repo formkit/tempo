@@ -6,20 +6,19 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex items-center">
-    <p
+  <div class="flex items-stretch gap-2">
+    <span
       v-if="functionSize"
-      class="!text-xs !m-0 bg-slate-300 p-1 rounded-md shrink-0 !leading-4"
+      class="flex items-center gap-x-1.5 py-0.5 rounded-md text-sky-500 dark:text-lime-500"
+      title="Tree shaken size of this function."
     >
-      <span class="pr-1">size </span>
-      <span class="font-bold">{{ functionSize }}</span>
-    </p>
+      <span class="font-bold text-sm">{{ functionSize }}</span>
+    </span>
     <a
       :href="githubLink"
-      class="p-1 bg-slate-300 ml-3 rounded-md"
-      target="_blank"
+      class="flex items-center gap-x-1.5 py-0.5 rounded-md dark:hover:bg-purple-800 dark:text-white"
     >
-      <IconGitHub class="opacity-70" />
+      <IconGitHub />
     </a>
   </div>
 </template>
