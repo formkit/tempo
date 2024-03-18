@@ -1,5 +1,5 @@
 import { date } from "./date"
-import { validate, styles, fixedLength, four, two, validOffset } from "./common"
+import { validate, styles, fixedLength, four, two, validOffset, fixedLengthByOffset } from "./common"
 import { formatStr } from "./formatStr"
 import { fourDigitYear } from "./fourDigitYear"
 import { ap } from "./ap"
@@ -172,6 +172,8 @@ export function parseParts(dateStr: string, formatParts: Part[]): FilledPart[] {
     if (current.partName === "literal") {
       // Literals can be discarded
       len = current.partValue.length
+    } else if (current.partName === "timeZoneName") {
+      len = fixedLengthByOffset(dateStr.substring(pos))
     } else if (current.token in fixedLength) {
       // Fixed length parse
       len = fixedLength[current.token as keyof typeof fixedLength]
