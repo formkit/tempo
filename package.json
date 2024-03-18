@@ -1,6 +1,6 @@
 {
   "name": "@formkit/tempo",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "The easiest way to work with dates in JavaScript and TypeScript.",
   "type": "module",
   "main": "dist/index.cjs",
