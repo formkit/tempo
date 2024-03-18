@@ -71,7 +71,23 @@ export const fixedLength = {
   hh: 2,
   mm: 2,
   ss: 2,
-  Z: 5,
+}
+
+/**
+ * token Z can have variable length depending on the actual value, so it's
+ */
+export function fixedLengthByOffset(offsetString: string): number {
+  // starts with [+-]xx:xx
+  if (/^[+-]\d{2}:\d{2}/.test(offsetString)) {
+    return 6
+  }
+
+  // starts with [+-]xxxx
+  if (/^[+-]\d{4}/.test(offsetString)) {
+    return 5
+  }
+
+  throw new Error("Invalid offset format")
 }
 
 /**
@@ -297,11 +313,11 @@ export function offsetToMins(offset: string): number {
 
 /**
  * Validates that an offset is valid according to the format:
- * [+-]HHmm
+ * [+-]HHmm or [+-]HH:mm
  * @param offset - The offset to validate.
  */
 export function validOffset(offset: string) {
-  const valid = /^([+-])[0-3][0-9][0-6][0-9]$/.test(offset)
+  const valid = /^([+-])[0-3][0-9]:?[0-6][0-9]$/.test(offset)
   if (!valid) throw new Error(`Invalid offset: ${offset}`)
   return offset
 }
