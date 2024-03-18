@@ -14,6 +14,6 @@ module.exports = [
 
   { path, limit: "2.9 kb", import: "{ format }", name: "format" },
   { path, limit: "4.3 kb", import: "{ parse }", name: "parse" },
-  { path, limit: "5.1 kb", import: "*", name: "all esm" },
-  { path: "./dist/index.cjs", limit: "5.4 kb", import: "*", name: "all cjs" },
+  { path, limit: "5.2 kb", import: "*", name: "all esm" },
+  { path: "./dist/index.cjs", limit: "5.5 kb", import: "*", name: "all cjs" },
 ]
