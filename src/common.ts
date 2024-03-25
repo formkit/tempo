@@ -175,7 +175,8 @@ export function fill(
     if (partName === "literal") return partValue
     const value = partMap[partName]
     if (partName === "hour" && token === "H") {
-      return value.replace(/^0/, "")
+      const replacedHour = value.replace(/^0/, "")
+      return replacedHour === "" ? "0" : replacedHour
     }
     if (
       (partName === "minute" || partName === "second") &&
