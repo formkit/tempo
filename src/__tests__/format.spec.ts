@@ -137,8 +137,8 @@ describe("format", () => {
   })
   it("can render a long time in Japanese", () => {
     expect(
-      format("2010-06-09T15:32:00Z", { time: "full" }, "ja")
-    ).toBe("0時32分00秒 +0900")
+      format("2010-06-09T04:32:00Z", { time: "full" }, "ja")
+    ).toBe("0時32分00秒 -0400")
   })
   it("can format the russian month of february", () => {
     expect(format("2023-03-14", { date: "medium" }, "ru")).toBe(
