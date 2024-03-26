@@ -175,8 +175,7 @@ export function fill(
     if (partName === "literal") return partValue
     const value = partMap[partName]
     if (partName === "hour" && token === "H") {
-      const replacedHour = value.replace(/^0/, "")
-      return replacedHour === "" ? "0" : replacedHour
+      return value.replace(/^0/, "") || "0"
     }
     if (["mm", "ss", "MM"].includes(token) && value.length === 1) {
       // Some tokens are supposed to have leading zeros, but Intl doesn't
