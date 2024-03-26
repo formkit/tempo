@@ -102,10 +102,10 @@ export const genitiveTokens = ["MMMM", "MMM", "dddd", "ddd"]
 /**
  * A map of FormatPattern tuples to their respective token.
  */
-export const tokens = new Map(
-  [...clockAgnostic, ...clock24, ...clock12].map((format) => {
+export const tokens = /* @__PURE__ */ new Map(
+  /* @__PURE__ */ [...clockAgnostic, ...clock24, ...clock12].map((format) => {
     return [format[0], format]
-  }),
+  })
 )
 
 /**
@@ -139,7 +139,7 @@ export const four = (n: number) => String(n).padStart(2, "0")
  * @param part - The part to normalize.
  */
 export function normStr(
-  part: Intl.DateTimeFormatPart,
+  part: Intl.DateTimeFormatPart
 ): Intl.DateTimeFormatPart {
   if (part.type === "literal") {
     part.value = part.value.normalize("NFKC")
@@ -160,7 +160,7 @@ export function fill(
   parts: Part[],
   locale: string,
   genitive = false,
-  offset: string | null = null,
+  offset: string | null = null
 ): FilledPart[] {
   const partMap = createPartMap(inputDate, parts, locale, genitive)
   const d = date(inputDate)
@@ -213,7 +213,7 @@ function createPartMap(
   inputDate: DateInput,
   parts: Part[],
   locale: string,
-  genitive = false,
+  genitive = false
 ): Record<keyof Intl.DateTimeFormatPartTypesRegistry, string> {
   const d = date(inputDate)
   const hour12 = parts.filter((part) => part.hour12)
@@ -239,7 +239,7 @@ function createPartMap(
         )
       )
         .formatToParts(d)
-        .map(normStr),
+        .map(normStr)
     )
     if (genitive && genitiveParts.length) {
       for (const part of genitiveParts) {
@@ -263,7 +263,7 @@ function createPartMap(
             break
         }
         const genitiveFormattedPart = formattedParts.find(
-          (p) => p.type === part.partName,
+          (p) => p.type === part.partName
         )
         const index = valueParts.findIndex((p) => p.type === part.partName)
         if (genitiveFormattedPart && index > -1) {
@@ -276,13 +276,10 @@ function createPartMap(
   if (hour12.length) addValues(hour12, true)
   if (hour24.length) addValues(hour24)
 
-  return valueParts.reduce(
-    (map, part) => {
-      map[part.type] = part.value
-      return map
-    },
-    {} as Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>,
-  )
+  return valueParts.reduce((map, part) => {
+    map[part.type] = part.value
+    return map
+  }, {} as Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>)
 }
 
 /**
@@ -293,7 +290,7 @@ function createPartMap(
 export function minsToOffset(timeDiffInMins: number): string {
   const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(
     2,
-    "0",
+    "0"
   )
   const mins = String(Math.abs(timeDiffInMins % 60)).padStart(2, "0")
   const sign = timeDiffInMins < 0 ? "-" : "+"
@@ -366,7 +363,7 @@ export function validate(parts: Part[]): Part[] | never {
         !(isNumeric(lastPart) && part.token.toLowerCase() === "a")
       ) {
         throw new Error(
-          `Illegal adjacent tokens (${lastPart.token}, ${part.token})`,
+          `Illegal adjacent tokens (${lastPart.token}, ${part.token})`
         )
       }
     }
