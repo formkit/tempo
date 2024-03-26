@@ -222,4 +222,7 @@ describe("format with a timezone", () => {
       })
     ).toBe("02:30:00+0000")
   })
+  it("can render a double character zero with leading zeros in zh (#41)", () => {
+    expect(format("2022-04-10", "YYYY-MM", "zh")).toBe("2022-04")
+  })
 })

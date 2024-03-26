@@ -177,11 +177,9 @@ export function fill(
     if (partName === "hour" && token === "H") {
       return value.replace(/^0/, "")
     }
-    if (
-      (partName === "minute" || partName === "second") &&
-      (token === "mm" || token === "ss") &&
-      value.length === 1
-    ) {
+    if (["mm", "ss", "MM"].includes(token) && value.length === 1) {
+      // Some tokens are supposed to have leading zeros, but Intl doesn't
+      // always return them, depending on the locale and the format.
       return `0${value}`
     }
     if (partName === "dayPeriod") {
