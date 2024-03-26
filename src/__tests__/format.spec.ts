@@ -135,6 +135,11 @@ describe("format", () => {
       format("2100-05-03T04:04:01", { date: "full", time: "short" }, "ja")
     ).toBe("2100年5月3日月曜日 4:04")
   })
+  it("can render a long time in Japanese", () => {
+    expect(
+      format("2010-06-09T04:32:00Z", { time: "full" }, "ja")
+    ).toBe("0時32分00秒 -0400")
+  })
   it("can format the russian month of february", () => {
     expect(format("2023-03-14", { date: "medium" }, "ru")).toBe(
       "14 мар. 2023 г."
