@@ -65,7 +65,7 @@ export type FilledPart = Part & { value: string }
 export type FormatPattern = [
   pattern: FormatToken | string,
   option: Partial<Record<Intl.DateTimeFormatPartTypes, string>>,
-  exp?: RegExp
+  exp?: RegExp,
 ]
 
 /**
@@ -159,11 +159,25 @@ export interface FormatOptions {
    */
   genitive?: boolean
   /**
-   * A function to filter parts.
+   * Converts the given date option to the timezone provided.
    */
   tz?: string
   /**
    * A function to filter parts.
    */
   partFilter?: (part: Part) => boolean
+}
+
+export interface RelativeFormatOptions extends Intl.RelativeTimeFormatOptions {
+  /**
+   * A unit of time to format the date relative to.
+   * ```js
+   * ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second']
+   * ```
+   */
+  unit?: Intl.RelativeTimeFormatUnit
+  /**
+   * A locale or 'device' by default.
+   */
+  locale?: string
 }
