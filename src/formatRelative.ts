@@ -5,6 +5,7 @@ import { deviceLocale } from "./deviceLocale"
 export function formatRelative(
   inputDate: DateInput,
   options?: RelativeFormatOptions,
+  originDate?: DateInput,
 ) {
   let { unit, locale } = options || {}
 
@@ -20,12 +21,10 @@ export function formatRelative(
     ) as Intl.RelativeTimeFormatUnit
 
   const date1 = date(inputDate)
-
-  // Allow dates or times to be passed
-  const timeMs = date1.getTime()
+  const date2 = originDate ? date(originDate) : date(new Date())
 
   // Get the amount of seconds between the given date and now
-  const deltaSeconds = Math.round((timeMs - Date.now()) / 1000)
+  const deltaSeconds = Math.round((date1.getTime() - date2.getTime()) / 1000)
 
   // Array reprsenting one minute, hour, day, week, month, etc in seconds
   const cutoffs = [
@@ -62,7 +61,6 @@ export function formatRelative(
 
   // Intl.RelativeTimeFormat do its magic
   const rtf = new Intl.RelativeTimeFormat(locale, options)
-  const rounder = deltaSeconds < 0 ? Math.ceil : Math.floor
 
-  return rtf.format(rounder(deltaSeconds / divisor), units[unitIndex])
+  return rtf.format(Math.round(deltaSeconds / divisor), units[unitIndex])
 }
