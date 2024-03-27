@@ -71,7 +71,23 @@ export const fixedLength = {
   hh: 2,
   mm: 2,
   ss: 2,
-  Z: 5,
+}
+
+/**
+ * token Z can have variable length depending on the actual value, so it's
+ */
+export function fixedLengthByOffset(offsetString: string): number {
+  // starts with [+-]xx:xx
+  if (/^[+-]\d{2}:\d{2}/.test(offsetString)) {
+    return 6
+  }
+
+  // starts with [+-]xxxx
+  if (/^[+-]\d{4}/.test(offsetString)) {
+    return 5
+  }
+
+  throw new Error("Invalid offset format")
 }
 
 /**
@@ -86,10 +102,10 @@ export const genitiveTokens = ["MMMM", "MMM", "dddd", "ddd"]
 /**
  * A map of FormatPattern tuples to their respective token.
  */
-export const tokens = new Map(
-  [...clockAgnostic, ...clock24, ...clock12].map((format) => {
+export const tokens = /* @__PURE__ */ new Map(
+  /* @__PURE__ */ [...clockAgnostic, ...clock24, ...clock12].map((format) => {
     return [format[0], format]
-  }),
+  })
 )
 
 /**
@@ -123,7 +139,7 @@ export const four = (n: number) => String(n).padStart(2, "0")
  * @param part - The part to normalize.
  */
 export function normStr(
-  part: Intl.DateTimeFormatPart,
+  part: Intl.DateTimeFormatPart
 ): Intl.DateTimeFormatPart {
   if (part.type === "literal") {
     part.value = part.value.normalize("NFKC")
@@ -144,7 +160,7 @@ export function fill(
   parts: Part[],
   locale: string,
   genitive = false,
-  offset: string | null = null,
+  offset: string | null = null
 ): FilledPart[] {
   const partMap = createPartMap(inputDate, parts, locale, genitive)
   const d = date(inputDate)
@@ -159,17 +175,15 @@ export function fill(
     if (partName === "literal") return partValue
     const value = partMap[partName]
     if (partName === "hour" && token === "H") {
-      return value.replace(/^0/, "")
+      return value.replace(/^0/, "") || "0"
     }
-    if (
-      (partName === "minute" || partName === "second") &&
-      (token === "mm" || token === "ss") &&
-      value.length === 1
-    ) {
+    if (["mm", "ss", "MM"].includes(token) && value.length === 1) {
+      // Some tokens are supposed to have leading zeros, but Intl doesn't
+      // always return them, depending on the locale and the format.
       return `0${value}`
     }
     if (partName === "dayPeriod") {
-      const p = ap(d.getHours() < 12 ? "am" : "pm", locale)
+      const p = ap(d.getUTCHours() < 12 ? "am" : "pm", locale)
       return token === "A" ? p.toUpperCase() : p.toLowerCase()
     }
     if (partName === "timeZoneName") {
@@ -197,7 +211,7 @@ function createPartMap(
   inputDate: DateInput,
   parts: Part[],
   locale: string,
-  genitive = false,
+  genitive = false
 ): Record<keyof Intl.DateTimeFormatPartTypesRegistry, string> {
   const d = date(inputDate)
   const hour12 = parts.filter((part) => part.hour12)
@@ -210,17 +224,20 @@ function createPartMap(
     valueParts.push(
       ...new Intl.DateTimeFormat(
         preciseLocale,
-        requestedParts.reduce((options, part) => {
-          if (part.partName === "literal") return options
-          // Side effect! Genitive parts get shoved into a separate array.
-          if (genitive && genitiveTokens.includes(part.token)) {
-            genitiveParts.push(part)
-          }
-          return Object.assign(options, part.option)
-        }, {} as Intl.DateTimeFormatOptions),
+        requestedParts.reduce(
+          (options, part) => {
+            if (part.partName === "literal") return options
+            // Side effect! Genitive parts get shoved into a separate array.
+            if (genitive && genitiveTokens.includes(part.token)) {
+              genitiveParts.push(part)
+            }
+            return Object.assign(options, part.option)
+          },
+          { timeZone: "UTC" } as Intl.DateTimeFormatOptions
+        )
       )
         .formatToParts(d)
-        .map(normStr),
+        .map(normStr)
     )
     if (genitive && genitiveParts.length) {
       for (const part of genitiveParts) {
@@ -229,6 +246,7 @@ function createPartMap(
           case "MMMM":
             formattedParts = new Intl.DateTimeFormat(preciseLocale, {
               dateStyle: "long",
+              timeZone: "UTC",
             })
               .formatToParts(d)
               .map(normStr)
@@ -236,13 +254,14 @@ function createPartMap(
           case "MMM":
             formattedParts = new Intl.DateTimeFormat(preciseLocale, {
               dateStyle: "medium",
+              timeZone: "UTC",
             })
               .formatToParts(d)
               .map(normStr)
             break
         }
         const genitiveFormattedPart = formattedParts.find(
-          (p) => p.type === part.partName,
+          (p) => p.type === part.partName
         )
         const index = valueParts.findIndex((p) => p.type === part.partName)
         if (genitiveFormattedPart && index > -1) {
@@ -255,13 +274,10 @@ function createPartMap(
   if (hour12.length) addValues(hour12, true)
   if (hour24.length) addValues(hour24)
 
-  return valueParts.reduce(
-    (map, part) => {
-      map[part.type] = part.value
-      return map
-    },
-    {} as Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>,
-  )
+  return valueParts.reduce((map, part) => {
+    map[part.type] = part.value
+    return map
+  }, {} as Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>)
 }
 
 /**
@@ -272,7 +288,7 @@ function createPartMap(
 export function minsToOffset(timeDiffInMins: number): string {
   const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(
     2,
-    "0",
+    "0"
   )
   const mins = String(Math.abs(timeDiffInMins % 60)).padStart(2, "0")
   const sign = timeDiffInMins < 0 ? "-" : "+"
@@ -292,11 +308,11 @@ export function offsetToMins(offset: string): number {
 
 /**
  * Validates that an offset is valid according to the format:
- * [+-]HHmm
+ * [+-]HHmm or [+-]HH:mm
  * @param offset - The offset to validate.
  */
 export function validOffset(offset: string) {
-  const valid = /^([+-])[0-3][0-9][0-6][0-9]$/.test(offset)
+  const valid = /^([+-])[0-3][0-9]:?[0-6][0-9]$/.test(offset)
   if (!valid) throw new Error(`Invalid offset: ${offset}`)
   return offset
 }
@@ -345,7 +361,7 @@ export function validate(parts: Part[]): Part[] | never {
         !(isNumeric(lastPart) && part.token.toLowerCase() === "a")
       ) {
         throw new Error(
-          `Illegal adjacent tokens (${lastPart.token}, ${part.token})`,
+          `Illegal adjacent tokens (${lastPart.token}, ${part.token})`
         )
       }
     }

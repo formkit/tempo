@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import sizes from "../../assets/func-sizes.json"
+
 const parseOptionsProperties = [
   { name: "date", type: "string", jsdoc: [`A string representing a date.`] },
   {
@@ -40,7 +42,14 @@ const parseOptionsProperties = [
 
 <template>
   <PageSection>
-    <HeadingSection title="Parse" class="text-sky-500" />
+    <div class="flex items-center justify-between mb-8">
+      <HeadingSection title="Parse" class="text-sky-500 !mb-0" />
+      <GithubLinkAndSize
+        githubLink="https://github.com/formkit/tempo/blob/main/src/parse.ts"
+        :functionSize="sizes.parse.esm.formattedSize"
+      />
+    </div>
+
     <FunctionReference function="parse" :arguments="[
       {
         name: 'date',

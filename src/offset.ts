@@ -51,7 +51,7 @@ export function offset(
   tzA = "UTC",
   tzB = "device",
 ): string {
-  tzB = tzB === "device" ? deviceTZ() : tzB
+  tzB = tzB === "device" ? deviceTZ() ?? "utc" : tzB
   const d = date(utcTime)
   const timeA = relativeTime(d, tzA)
   const timeB = relativeTime(d, tzB)

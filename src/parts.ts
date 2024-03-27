@@ -257,6 +257,7 @@ function partStyle(
         if (style === "long" || style === "short") {
           const genitiveFormattedParts = new Intl.DateTimeFormat(locale, {
             dateStyle: style === "short" ? "medium" : "long",
+            timeZone: "UTC",
           })
             .formatToParts(date)
             .map(normStr)
