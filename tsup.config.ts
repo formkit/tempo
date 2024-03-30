@@ -5,7 +5,7 @@ export default defineConfig([
   // for bundlers like vite, rollup, esbuild, webpack etc
   {
     entry: ["src/**.ts"],
-    format: ["cjs", "esm"],
+    format: ["esm"],
     splitting: false,
     sourcemap: true,
     clean: true,
@@ -13,13 +13,25 @@ export default defineConfig([
     outExtension: ({ format }) => ({ js: format === "cjs" ? ".cjs" : ".mjs" }),
     esbuildPlugins: [fpe()],
   },
+  // common js for node and other backend runtimes
+  {
+    entry: ["src/index.ts"],
+    format: ["cjs"],
+    splitting: false,
+    sourcemap: true,
+    clean: true,
+    dts: true,
+    outExtension: ({ format }) => ({
+      js: format === "cjs" ? ".cjs" : ".mjs",
+    }),
+  },
 
-  // creating a bundle.js for browsers & cdn
+  // bundle js for browsers/cdn
   {
     entry: {
       bundle: "src/index.ts",
     },
-    format: ["cjs", "esm"],
+    format: ["esm"],
     splitting: false,
     sourcemap: true,
     clean: true,

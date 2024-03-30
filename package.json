@@ -5,6 +5,8 @@
   "type": "module",
   "main": "dist/index.cjs",
   "types": "dist/index.d.cts",
+  "browser": "dist/bundle.mjs",
+  "unpkg": "dist/bundle.mjs",
   "exports": {
     ".": {
       "import": {
@@ -14,6 +16,10 @@
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
+      },
+      "browser": {
+        "types": "./dist/bundle.d.ts",
+        "default": "./dist/bundle.mjs"
       }
     }
   },
