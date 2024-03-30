@@ -1,5 +1,5 @@
 {
-  "name": "@formkit/tempo",
+  "name": "@wilcosp/formkit-tempo",
   "version": "0.0.19",
   "description": "The easiest way to work with dates in JavaScript and TypeScript.",
   "type": "module",
