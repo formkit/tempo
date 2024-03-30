@@ -1,16 +1,31 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});// src/parts.ts
+"use strict";
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-
-
-
-
-
-
-
-
-var _commoncjs = require('./common.cjs');
+// src/parts.ts
+var parts_exports = {};
+__export(parts_exports, {
+  parts: () => parts
+});
+module.exports = __toCommonJS(parts_exports);
+var import_common = require("./common.cjs");
 function parts(format, locale) {
-  if (_commoncjs.styles.includes(format) || typeof format === "object") {
+  if (import_common.styles.includes(format) || typeof format === "object") {
     return styleParts(format, locale);
   }
   let f = format;
@@ -49,10 +64,10 @@ function parts(format, locale) {
       hour12
     };
   }
-  const found24Patterns = _commoncjs.clockAgnostic.filter(testPattern).concat(_commoncjs.clock24.filter(testPattern)).map(createPart.bind(null, false));
+  const found24Patterns = import_common.clockAgnostic.filter(testPattern).concat(import_common.clock24.filter(testPattern)).map(createPart.bind(null, false));
   const parts2 = validate(
     found24Patterns.concat(
-      _commoncjs.clock12.filter(testPattern).map(createPart.bind(null, true))
+      import_common.clock12.filter(testPattern).map(createPart.bind(null, true))
     )
   );
   const extractIndex = /^\{!(\d+)!\}$/;
@@ -84,8 +99,8 @@ function styleParts(format, locale) {
       options.timeStyle = format.time;
   }
   const formatter = new Intl.DateTimeFormat(locale, options);
-  const segments = formatter.formatToParts(new Date(_commoncjs.specDate)).map(_commoncjs.normStr);
-  const hourTypeSegments = formatter.formatToParts(/* @__PURE__ */ new Date("1999-04-05T23:05:01.000Z")).map(_commoncjs.normStr);
+  const segments = formatter.formatToParts(new Date(import_common.specDate)).map(import_common.normStr);
+  const hourTypeSegments = formatter.formatToParts(/* @__PURE__ */ new Date("1999-04-05T23:05:01.000Z")).map(import_common.normStr);
   const hourPart = hourTypeSegments.find((segment) => segment.type === "hour");
   const hourType = hourPart && hourPart.value === "23" ? 24 : 12;
   return segments.map((part) => {
@@ -119,51 +134,51 @@ function guessPattern(partName, partValue, locale, hour) {
   let style;
   switch (partName) {
     case "year":
-      return l === 2 ? _commoncjs.tokens.get("YY") : _commoncjs.tokens.get("YYYY");
+      return l === 2 ? import_common.tokens.get("YY") : import_common.tokens.get("YYYY");
     case "month":
       if (n)
-        return l === 1 ? _commoncjs.tokens.get("M") : _commoncjs.tokens.get("MM");
+        return l === 1 ? import_common.tokens.get("M") : import_common.tokens.get("MM");
       style = partStyle(locale, partName, partValue);
       switch (style) {
         case "long":
-          return _commoncjs.tokens.get("MMMM");
+          return import_common.tokens.get("MMMM");
         default:
-          return _commoncjs.tokens.get("MMM");
+          return import_common.tokens.get("MMM");
       }
     case "day":
-      return l === 1 ? _commoncjs.tokens.get("D") : _commoncjs.tokens.get("DD");
+      return l === 1 ? import_common.tokens.get("D") : import_common.tokens.get("DD");
     case "weekday":
       style = partStyle(locale, partName, partValue);
       switch (style) {
         case "narrow":
-          return _commoncjs.tokens.get("d");
+          return import_common.tokens.get("d");
         case "short":
-          return _commoncjs.tokens.get("ddd");
+          return import_common.tokens.get("ddd");
         default:
-          return _commoncjs.tokens.get("dddd");
+          return import_common.tokens.get("dddd");
       }
     case "hour":
       if (hour === 12)
-        return l === 1 ? _commoncjs.tokens.get("h") : _commoncjs.tokens.get("hh");
-      return l === 1 ? _commoncjs.tokens.get("H") : _commoncjs.tokens.get("HH");
+        return l === 1 ? import_common.tokens.get("h") : import_common.tokens.get("hh");
+      return l === 1 ? import_common.tokens.get("H") : import_common.tokens.get("HH");
     case "minute":
-      return l === 1 ? _commoncjs.tokens.get("m") : _commoncjs.tokens.get("mm");
+      return l === 1 ? import_common.tokens.get("m") : import_common.tokens.get("mm");
     case "second":
-      return l === 1 ? _commoncjs.tokens.get("s") : _commoncjs.tokens.get("ss");
+      return l === 1 ? import_common.tokens.get("s") : import_common.tokens.get("ss");
     case "dayPeriod":
-      return /^[A-Z]+$/u.test(partValue) ? _commoncjs.tokens.get("A") : _commoncjs.tokens.get("a");
+      return /^[A-Z]+$/u.test(partValue) ? import_common.tokens.get("A") : import_common.tokens.get("a");
     case "literal":
       return [partValue, { literal: partValue }, new RegExp("")];
     case "timeZoneName":
       const offset = partValue.split("-");
-      return offset.length === 2 && offset[1].length === 4 ? _commoncjs.tokens.get("ZZ") : _commoncjs.tokens.get("Z");
+      return offset.length === 2 && offset[1].length === 4 ? import_common.tokens.get("ZZ") : import_common.tokens.get("Z");
     default:
       return void 0;
   }
 }
 function partStyle(locale, part, value) {
-  if (!_commoncjs.memoParts.has(locale)) {
-    const date = new Date(_commoncjs.specDate);
+  if (!import_common.memoParts.has(locale)) {
+    const date = new Date(import_common.specDate);
     const weekdays = [3, 8, 9, 7, 6, 4, 3];
     const parts2 = ["weekday", "month", "dayPeriod"];
     const partStyles = ["long", "short", "narrow"];
@@ -180,12 +195,12 @@ function partStyle(locale, part, value) {
             (options, part2) => Object.assign(options, { [part2]: style }),
             { hour12: true, timeZone: "UTC" }
           )
-        ).formatToParts(date).map(_commoncjs.normStr);
+        ).formatToParts(date).map(import_common.normStr);
         if (style === "long" || style === "short") {
           const genitiveFormattedParts = new Intl.DateTimeFormat(locale, {
             dateStyle: style === "short" ? "medium" : "long",
             timeZone: "UTC"
-          }).formatToParts(date).map(_commoncjs.normStr);
+          }).formatToParts(date).map(import_common.normStr);
           const genitiveMonth = genitiveFormattedParts.find(
             (part2) => part2.type === "month"
           );
@@ -203,12 +218,13 @@ function partStyle(locale, part, value) {
         });
       }
     }
-    _commoncjs.memoParts.set(locale, formats2);
+    import_common.memoParts.set(locale, formats2);
   }
-  const formats = _commoncjs.memoParts.get(locale);
+  const formats = import_common.memoParts.get(locale);
   return formats ? formats[part][value] : void 0;
 }
-
-
-exports.parts = parts;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  parts
+});
 //# sourceMappingURL=parts.cjs.map

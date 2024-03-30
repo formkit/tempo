@@ -1,6 +1,50 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});// src/common.ts
-var _datecjs = require('./date.cjs');
-var _apcjs = require('./ap.cjs');
+"use strict";
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/common.ts
+var common_exports = {};
+__export(common_exports, {
+  clock12: () => clock12,
+  clock24: () => clock24,
+  clockAgnostic: () => clockAgnostic,
+  dayPeriodMap: () => dayPeriodMap,
+  escapeTokens: () => escapeTokens,
+  fill: () => fill,
+  fixedLength: () => fixedLength,
+  fixedLengthByOffset: () => fixedLengthByOffset,
+  four: () => four,
+  genitiveTokens: () => genitiveTokens,
+  isNumeric: () => isNumeric,
+  memoParts: () => memoParts,
+  minsToOffset: () => minsToOffset,
+  normStr: () => normStr,
+  offsetToMins: () => offsetToMins,
+  specDate: () => specDate,
+  styles: () => styles,
+  tokens: () => tokens,
+  two: () => two,
+  validOffset: () => validOffset,
+  validate: () => validate
+});
+module.exports = __toCommonJS(common_exports);
+var import_date = require("./date.cjs");
+var import_ap = require("./ap.cjs");
 var specDate = "1999-03-04T02:05:01.000Z";
 var memoParts = /* @__PURE__ */ new Map();
 var clockAgnostic = [
@@ -73,7 +117,7 @@ function normStr(part) {
 }
 function fill(inputDate, parts, locale, genitive = false, offset = null) {
   const partMap = createPartMap(inputDate, parts, locale, genitive);
-  const d = _datecjs.date.call(void 0, inputDate);
+  const d = (0, import_date.date)(inputDate);
   function value({ partName, partValue, token }) {
     if (partName === "literal")
       return partValue;
@@ -85,7 +129,7 @@ function fill(inputDate, parts, locale, genitive = false, offset = null) {
       return `0${value2}`;
     }
     if (partName === "dayPeriod") {
-      const p = _apcjs.ap.call(void 0, d.getUTCHours() < 12 ? "am" : "pm", locale);
+      const p = (0, import_ap.ap)(d.getUTCHours() < 12 ? "am" : "pm", locale);
       return token === "A" ? p.toUpperCase() : p.toLowerCase();
     }
     if (partName === "timeZoneName") {
@@ -101,7 +145,7 @@ function fill(inputDate, parts, locale, genitive = false, offset = null) {
   });
 }
 function createPartMap(inputDate, parts, locale, genitive = false) {
-  const d = _datecjs.date.call(void 0, inputDate);
+  const d = (0, import_date.date)(inputDate);
   const hour12 = parts.filter((part) => part.hour12);
   const hour24 = parts.filter((part) => !part.hour12);
   const valueParts = [];
@@ -206,27 +250,28 @@ function validate(parts) {
   }
   return parts;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-exports.clock12 = clock12; exports.clock24 = clock24; exports.clockAgnostic = clockAgnostic; exports.dayPeriodMap = dayPeriodMap; exports.escapeTokens = escapeTokens; exports.fill = fill; exports.fixedLength = fixedLength; exports.fixedLengthByOffset = fixedLengthByOffset; exports.four = four; exports.genitiveTokens = genitiveTokens; exports.isNumeric = isNumeric; exports.memoParts = memoParts; exports.minsToOffset = minsToOffset; exports.normStr = normStr; exports.offsetToMins = offsetToMins; exports.specDate = specDate; exports.styles = styles; exports.tokens = tokens; exports.two = two; exports.validOffset = validOffset; exports.validate = validate;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  clock12,
+  clock24,
+  clockAgnostic,
+  dayPeriodMap,
+  escapeTokens,
+  fill,
+  fixedLength,
+  fixedLengthByOffset,
+  four,
+  genitiveTokens,
+  isNumeric,
+  memoParts,
+  minsToOffset,
+  normStr,
+  offsetToMins,
+  specDate,
+  styles,
+  tokens,
+  two,
+  validOffset,
+  validate
+});
 //# sourceMappingURL=common.cjs.map

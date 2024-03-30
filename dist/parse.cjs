@@ -1,12 +1,37 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});// src/parse.ts
-var _datecjs = require('./date.cjs');
-var _commoncjs = require('./common.cjs');
-var _formatStrcjs = require('./formatStr.cjs');
-var _fourDigitYearcjs = require('./fourDigitYear.cjs');
-var _apcjs = require('./ap.cjs');
-var _rangecjs = require('./range.cjs');
-var _monthDayscjs = require('./monthDays.cjs');
-var _partscjs = require('./parts.cjs');
+"use strict";
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/parse.ts
+var parse_exports = {};
+__export(parse_exports, {
+  parse: () => parse,
+  parseParts: () => parseParts
+});
+module.exports = __toCommonJS(parse_exports);
+var import_date = require("./date.cjs");
+var import_common = require("./common.cjs");
+var import_formatStr = require("./formatStr.cjs");
+var import_fourDigitYear = require("./fourDigitYear.cjs");
+var import_ap = require("./ap.cjs");
+var import_range = require("./range.cjs");
+var import_monthDays = require("./monthDays.cjs");
+var import_parts = require("./parts.cjs");
 function parse(dateStrOrOptions, format = "ISO8601", locale = "device") {
   let partFilter = () => true;
   let dateStr;
@@ -27,19 +52,19 @@ function parse(dateStrOrOptions, format = "ISO8601", locale = "device") {
     throw new Error("parse() requires a date string.");
   const invalid = () => {
     throw new Error(
-      `Date (${dateStr}) does not match format (${_formatStrcjs.formatStr.call(void 0, format, locale)})`
+      `Date (${dateStr}) does not match format (${(0, import_formatStr.formatStr)(format, locale)})`
     );
   };
   if (format === "ISO8601")
-    return _datecjs.date.call(void 0, dateStr);
-  const genitive = _commoncjs.styles.includes(format) || typeof format === "object";
-  const formatParts = _commoncjs.validate.call(void 0, _partscjs.parts.call(void 0, format, locale).filter(partFilter));
+    return (0, import_date.date)(dateStr);
+  const genitive = import_common.styles.includes(format) || typeof format === "object";
+  const formatParts = (0, import_common.validate)((0, import_parts.parts)(format, locale).filter(partFilter));
   if (!formatParts.length)
     throw new Error("parse() requires a pattern.");
   let parsedParts;
   try {
     parsedParts = parseParts(dateStr, formatParts);
-  } catch (e) {
+  } catch {
     return invalid();
   }
   const now = /* @__PURE__ */ new Date();
@@ -62,7 +87,7 @@ function parse(dateStrOrOptions, format = "ISO8601", locale = "device") {
     if (parsed.has(part.token)) {
       parsed.set(part.token, v);
     } else if (part.token === "YY") {
-      parsed.set("YYYY", _fourDigitYearcjs.fourDigitYear.call(void 0, part.value));
+      parsed.set("YYYY", (0, import_fourDigitYear.fourDigitYear)(part.value));
     } else {
       const t = part.token;
       if (t.startsWith("d")) {
@@ -74,11 +99,11 @@ function parse(dateStrOrOptions, format = "ISO8601", locale = "device") {
       } else if (t === "M") {
         parsed.set("MM", v);
       } else if (t === "a" || t === "A") {
-        a = part.value.toLowerCase() === _apcjs.ap.call(void 0, "am", locale).toLowerCase();
+        a = part.value.toLowerCase() === (0, import_ap.ap)("am", locale).toLowerCase();
       } else if (t === "Z") {
-        offset = _commoncjs.validOffset.call(void 0, part.value);
+        offset = (0, import_common.validOffset)(part.value);
       } else {
-        const values = _rangecjs.range.call(void 0, t, locale, genitive);
+        const values = (0, import_range.range)(t, locale, genitive);
         const index = values.indexOf(part.value);
         if (index !== -1) {
           switch (t) {
@@ -100,13 +125,13 @@ function parse(dateStrOrOptions, format = "ISO8601", locale = "device") {
   }
   parsed.set("MM", (parsed.get("MM") || 1) - 1);
   let [Y, M, D, h, m, s] = Array.from(parsed.values());
-  const maxDaysInMonth = _monthDayscjs.monthDays.call(void 0, /* @__PURE__ */ new Date(`${_commoncjs.four.call(void 0, Y)}-${_commoncjs.two.call(void 0, M + 1)}-10`));
+  const maxDaysInMonth = (0, import_monthDays.monthDays)(/* @__PURE__ */ new Date(`${(0, import_common.four)(Y)}-${(0, import_common.two)(M + 1)}-10`));
   if (maxDaysInMonth < D && dateOverflow === "throw")
-    throw new Error(`Invalid date ${_commoncjs.four.call(void 0, Y)}-${_commoncjs.two.call(void 0, M + 1)}-${_commoncjs.two.call(void 0, D)}`);
+    throw new Error(`Invalid date ${(0, import_common.four)(Y)}-${(0, import_common.two)(M + 1)}-${(0, import_common.two)(D)}`);
   D = dateOverflow === "backward" ? Math.min(D, maxDaysInMonth) : D;
-  const isoString = `${_commoncjs.four.call(void 0, Y)}-${_commoncjs.two.call(void 0, M + 1)}-${_commoncjs.two.call(void 0, D)}T${_commoncjs.two.call(void 0, h)}:${_commoncjs.two.call(void 0, 
+  const isoString = `${(0, import_common.four)(Y)}-${(0, import_common.two)(M + 1)}-${(0, import_common.two)(D)}T${(0, import_common.two)(h)}:${(0, import_common.two)(
     m
-  )}:${_commoncjs.two.call(void 0, s)}${offset}`;
+  )}:${(0, import_common.two)(s)}${offset}`;
   const d = new Date(isoString);
   if (isFinite(+d))
     return d;
@@ -128,9 +153,9 @@ function parseParts(dateStr, formatParts) {
     if (current.partName === "literal") {
       len = current.partValue.length;
     } else if (current.partName === "timeZoneName") {
-      len = _commoncjs.fixedLengthByOffset.call(void 0, dateStr.substring(pos));
-    } else if (current.token in _commoncjs.fixedLength) {
-      len = _commoncjs.fixedLength[current.token];
+      len = (0, import_common.fixedLengthByOffset)(dateStr.substring(pos));
+    } else if (current.token in import_common.fixedLength) {
+      len = import_common.fixedLength[current.token];
     } else if (next) {
       if (next.partName === "literal") {
         len = dateStr.indexOf(next.partValue, pos) - pos;
@@ -156,8 +181,9 @@ function parseParts(dateStr, formatParts) {
   } while (n);
   return parsed;
 }
-
-
-
-exports.parse = parse; exports.parseParts = parseParts;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  parse,
+  parseParts
+});
 //# sourceMappingURL=parse.cjs.map

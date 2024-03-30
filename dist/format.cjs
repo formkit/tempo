@@ -1,11 +1,35 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});// src/format.ts
-var _datecjs = require('./date.cjs');
-var _partscjs = require('./parts.cjs');
-var _commoncjs = require('./common.cjs');
-var _offsetcjs = require('./offset.cjs');
-var _removeOffsetcjs = require('./removeOffset.cjs');
-var _deviceLocalecjs = require('./deviceLocale.cjs');
-var _deviceTZcjs = require('./deviceTZ.cjs');
+"use strict";
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/format.ts
+var format_exports = {};
+__export(format_exports, {
+  format: () => format
+});
+module.exports = __toCommonJS(format_exports);
+var import_date = require("./date.cjs");
+var import_parts = require("./parts.cjs");
+var import_common = require("./common.cjs");
+var import_offset = require("./offset.cjs");
+var import_removeOffset = require("./removeOffset.cjs");
+var import_deviceLocale = require("./deviceLocale.cjs");
+var import_deviceTZ = require("./deviceTZ.cjs");
 function format(inputDateOrOptions, format2 = "long", locale = "device", genitive = false, partFilter) {
   let tz, forceOffset;
   if (typeof inputDateOrOptions === "object" && !(inputDateOrOptions instanceof Date)) {
@@ -20,29 +44,30 @@ function format(inputDateOrOptions, format2 = "long", locale = "device", genitiv
     } = inputDateOrOptions);
   }
   if (format2 === "ISO8601")
-    return _datecjs.date.call(void 0, inputDateOrOptions).toISOString();
+    return (0, import_date.date)(inputDateOrOptions).toISOString();
   if (tz) {
-    forceOffset = _offsetcjs.offset.call(void 0, inputDateOrOptions, "utc", tz);
+    forceOffset = (0, import_offset.offset)(inputDateOrOptions, "utc", tz);
   }
-  tz != null ? tz : tz = _deviceTZcjs.deviceTZ.call(void 0, );
+  tz != null ? tz : tz = (0, import_deviceTZ.deviceTZ)();
   if ((tz == null ? void 0 : tz.toLowerCase()) !== "utc") {
-    inputDateOrOptions = _removeOffsetcjs.removeOffset.call(void 0, 
+    inputDateOrOptions = (0, import_removeOffset.removeOffset)(
       inputDateOrOptions,
-      _offsetcjs.offset.call(void 0, inputDateOrOptions, tz, "utc")
+      (0, import_offset.offset)(inputDateOrOptions, tz, "utc")
     );
   }
   if (!locale || locale === "device") {
-    locale = _deviceLocalecjs.deviceLocale.call(void 0, );
+    locale = (0, import_deviceLocale.deviceLocale)();
   }
-  return _commoncjs.fill.call(void 0, 
+  return (0, import_common.fill)(
     inputDateOrOptions,
-    _partscjs.parts.call(void 0, format2, locale).filter(partFilter != null ? partFilter : () => true),
+    (0, import_parts.parts)(format2, locale).filter(partFilter != null ? partFilter : () => true),
     locale,
     genitive,
     forceOffset
   ).map((p) => p.value).join("");
 }
-
-
-exports.format = format;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  format
+});
 //# sourceMappingURL=format.cjs.map

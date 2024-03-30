@@ -1171,4 +1171,4 @@ function isEqual(dateLeft, dateRight) {
   yearEnd,
   yearStart
 });
-//# sourceMappingURL=tempo.bundle.cjs.map
+//# sourceMappingURL=bundle.cjs.map
