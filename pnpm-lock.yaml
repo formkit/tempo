@@ -26,6 +26,9 @@ importers:
       bytes-iec:
         specifier: ^3.1.1
         version: 3.1.1
+      esbuild-plugin-file-path-extensions:
+        specifier: ^2.0.0
+        version: 2.0.0
       publint:
         specifier: ^0.2.7
         version: 0.2.7
@@ -3716,6 +3719,11 @@ packages:
 
   /error-stack-parser-es@0.1.1:
     resolution: {integrity: sha512-g/9rfnvnagiNf+DRMHEVGuGuIBlCIMDFoTA616HaP2l9PlCjGjVhD98PNbVSJvmK4TttqT5mV5tInMhoFgi+aA==}
+    dev: true
+
+  /esbuild-plugin-file-path-extensions@2.0.0:
+    resolution: {integrity: sha512-VzVJhuegxLeg8VhsHmxRXtz1Kxf3QMQb1xIuKWivGHoOmZdU6O6xJ5iHhfCDyR+Vs+JE5GrvSpCsZ3GvaqlkUA==}
+    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: true
 
   /esbuild@0.19.12:

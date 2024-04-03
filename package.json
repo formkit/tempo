@@ -5,6 +5,8 @@
   "type": "module",
   "main": "dist/index.cjs",
   "types": "dist/index.d.cts",
+  "browser": "dist/bundle.mjs",
+  "unpkg": "dist/bundle.mjs",
   "exports": {
     ".": {
       "import": {
@@ -14,6 +16,10 @@
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
+      },
+      "browser": {
+        "types": "./dist/bundle.d.ts",
+        "default": "./dist/bundle.mjs"
       }
     }
   },
@@ -47,6 +53,7 @@
     "@types/node": "^20.11.10",
     "bumpp": "^9.3.0",
     "bytes-iec": "^3.1.1",
+    "esbuild-plugin-file-path-extensions": "^2.0.0",
     "publint": "^0.2.7",
     "size-limit": "^11.0.2",
     "tsup": "^8.0.1",
