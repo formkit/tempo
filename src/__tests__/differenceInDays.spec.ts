@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { differenceInDays } from "../differenceInDays"
 
-describe("differenceInSeconds", () => {
+describe("differenceInDays", () => {
   it("difference is 3 days", () => {
     expect(differenceInDays("2024-04-10", "2024-04-07")).toBe(3)
   })
