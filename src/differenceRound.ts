@@ -9,5 +9,6 @@ export function differenceRound(
   value: number,
   method: DifferenceRoundingMethod = "trunc"
 ) {
-  return Math[method](value)
+  const r = Math[method](value)
+  return r == 0 ? 0 : r
 }
