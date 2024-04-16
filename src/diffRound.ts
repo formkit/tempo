@@ -5,7 +5,7 @@ export type DifferenceRoundingMethod = "trunc" | "round" | "floor" | "ceil"
  * @param value the value to round
  * @param method the rounding method
  */
-export function differenceRound(
+export function diffRound(
   value: number,
   method: DifferenceRoundingMethod = "trunc"
 ) {

@@ -1,5 +1,5 @@
-import { differenceInMilliseconds } from "./differenceInMilliseconds"
-import { DifferenceRoundingMethod, differenceRound } from "./differenceRound"
+import { diffMilliseconds } from "./diffMilliseconds"
+import { DifferenceRoundingMethod, diffRound } from "./diffRound"
 import { DateInput } from "./types"
 
 /**
@@ -8,13 +8,10 @@ import { DateInput } from "./types"
  * @param rightDate A date to compare with the left date
  * @param roundingMethod the rounding method to use, default: trunc
  */
-export function differenceInSeconds(
+export function diffSeconds(
   leftDate: DateInput,
   rightDate: DateInput,
   roundingMethod?: DifferenceRoundingMethod
 ) {
-  return differenceRound(
-    differenceInMilliseconds(leftDate, rightDate) / 1000,
-    roundingMethod
-  )
+  return diffRound(diffMilliseconds(leftDate, rightDate) / 1000, roundingMethod)
 }
