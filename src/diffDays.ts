@@ -1,6 +1,6 @@
 import { diffMilliseconds } from "./diffMilliseconds"
 import { DateInput } from "./types"
-import { diffRound, type DifferenceRoundingMethod } from "./diffRound"
+import { diffRound, type DiffRoundingMethod } from "./diffRound"
 
 /**
  * Returns the difference between 2 dates in days.
@@ -11,7 +11,7 @@ import { diffRound, type DifferenceRoundingMethod } from "./diffRound"
 export function diffDays(
   leftDate: DateInput,
   rightDate: DateInput,
-  roundingMethod?: DifferenceRoundingMethod
+  roundingMethod?: DiffRoundingMethod
 ) {
   return diffRound(
     diffMilliseconds(leftDate, rightDate) / 86_400_000, // hour * 24

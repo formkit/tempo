@@ -1,5 +1,5 @@
 import { diffMilliseconds } from "./diffMilliseconds"
-import { diffRound, type DifferenceRoundingMethod } from "./diffRound"
+import { diffRound, type DiffRoundingMethod } from "./diffRound"
 import { DateInput } from "./types"
 
 /**
@@ -11,7 +11,7 @@ import { DateInput } from "./types"
 export function diffHours(
   leftDate: DateInput,
   rightDate: DateInput,
-  roundingMethod?: DifferenceRoundingMethod
+  roundingMethod?: DiffRoundingMethod
 ) {
   return diffRound(
     diffMilliseconds(leftDate, rightDate) / 3_600_000, // 1000 * 60 * 60
