@@ -17,9 +17,9 @@ describe("getOffsetFormat", () => {
     expect(getOffsetFormat("short")).toBe("Z")
   })
 
-  it("should return 'Z' for formats { date: 'full', time: 'full' }, { date: 'full' }, and { time: 'full' }", () => {
+  it("should return 'Z' for formats { date: 'full', time: 'full' }, and { time: 'full' }", () => {
     expect(getOffsetFormat({ date: "full", time: "full" })).toBe("Z")
-    expect(getOffsetFormat({ date: "full" })).toBe("Z")
+    expect(getOffsetFormat({ date: "full" })).toBe("ZZ")
     expect(getOffsetFormat({ time: "full" })).toBe("Z")
   })
 })

@@ -88,9 +88,9 @@ describe("parse", () => {
     expect(
       parse("1994-06-22T04:22:32+09:00", "YYYY-MM-DDTHH:mm:ssZ").toISOString()
     ).toBe("1994-06-21T19:22:32.000Z")
-    expect(
-      parse("1994-06-22T04:22:32+09:00").toISOString()
-    ).toBe("1994-06-21T19:22:32.000Z")
+    expect(parse("1994-06-22T04:22:32+09:00").toISOString()).toBe(
+      "1994-06-21T19:22:32.000Z"
+    )
   })
   it("can parse the string month in en", () => {
     let h: number | string = new Date("2019-01-01").getTimezoneOffset() / 60
@@ -257,16 +257,25 @@ describe("parse", () => {
     ).toThrow()
   })
   it("should throws an error if the Z token is specified and [+-]HHmm", () => {
-    expect(
-      () => parse("1994-06-22T04:22:32-0900", "YYYY-MM-DDTHH:mm:ssZ")
+    expect(() =>
+      parse("1994-06-22T04:22:32-0900", "YYYY-MM-DDTHH:mm:ssZ")
     ).toThrow("Invalid offset: -0900")
   })
   it("should throws an error when a FormatStyle is specified for [+-]HHmm", () => {
-    expect(
-      () => parse("Friday, May 5, 2023 at 1:30:10 AM -0600", {
+    expect(() =>
+      parse("Friday, May 5, 2023 at 1:30:10 AM -0600", {
         date: "full",
         time: "full",
       })
     ).toThrow("Invalid offset: -0600")
+  })
+  it("parses a long time format by using the ZZ token", () => {
+    expect(
+      parse(
+        "12/19/89, 1:30:10 AM -0600",
+        { date: "short", time: "long" },
+        "en"
+      ).toISOString()
+    ).toBe("1989-12-19T07:30:10.000Z")
   })
 })

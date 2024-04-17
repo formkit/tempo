@@ -136,9 +136,9 @@ describe("format", () => {
     ).toBe("2100年5月3日月曜日 4:04")
   })
   it("can render a long time in Japanese", () => {
-    expect(
-      format("2010-06-09T04:32:00Z", { time: "full" }, "ja")
-    ).toBe("0時32分00秒 -04:00")
+    expect(format("2010-06-09T04:32:00Z", { time: "full" }, "ja")).toBe(
+      "0時32分00秒 -04:00"
+    )
   })
   it("can format the russian month of february", () => {
     expect(format("2023-03-14", { date: "medium" }, "ru")).toBe(
@@ -260,5 +260,15 @@ describe("format with a timezone", () => {
   })
   it("can render a double character zero with leading zeros in zh (#41)", () => {
     expect(format("2022-04-10", "YYYY-MM", "zh")).toBe("2022-04")
+  })
+  it('can render "long" time format as the ZZ token', () => {
+    expect(
+      format({
+        date: "1989-12-19T07:30:10.000Z",
+        format: { date: "short", time: "long" },
+        locale: "en",
+        tz: "America/Chicago",
+      })
+    ).toBe("12/19/89, 1:30:10 AM -0600")
   })
 })

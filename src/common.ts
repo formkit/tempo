@@ -39,7 +39,7 @@ export const clockAgnostic: FormatPattern[] = [
   ["m", { minute: "numeric" }],
   ["ss", { second: "2-digit" }],
   ["s", { second: "numeric" }],
-  ["ZZ", { timeZoneName: "long"}],
+  ["ZZ", { timeZoneName: "long" }],
   ["Z", { timeZoneName: "short" }],
 ]
 
@@ -51,7 +51,7 @@ const timeZoneTokens = ["Z", "ZZ"] as const
 /**
  * Timezone token type.
  */
-export type TimezoneToken = typeof timeZoneTokens[number]
+export type TimezoneToken = (typeof timeZoneTokens)[number]
 
 /**
  * 24 hour click format patterns.
@@ -297,7 +297,10 @@ function createPartMap(
  * @param timeDiffInMins - The difference in minutes between two timezones.
  * @returns
  */
-export function minsToOffset(timeDiffInMins: number, token: string = "Z"): string {
+export function minsToOffset(
+  timeDiffInMins: number,
+  token: string = "Z"
+): string {
   const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(
     2,
     "0"
@@ -319,7 +322,9 @@ export function minsToOffset(timeDiffInMins: number, token: string = "Z"): strin
  */
 export function offsetToMins(offset: string, token: TimezoneToken): number {
   validOffset(offset, token)
-  const [_, sign, hours, mins] = offset.match(/([+-])([0-3][0-9]):?([0-6][0-9])/)!
+  const [_, sign, hours, mins] = offset.match(
+    /([+-])([0-3][0-9]):?([0-6][0-9])/
+  )!
   const offsetInMins = Number(hours) * 60 + Number(mins)
   return sign === "+" ? offsetInMins : -offsetInMins
 }
@@ -406,5 +411,5 @@ export function getOffsetFormat(format: Format): TimezoneToken {
   if (typeof format === "string") {
     return format.includes("ZZ") ? "ZZ" : "Z"
   }
-  return "Z"
+  return "time" in format && format.time === "full" ? "Z" : "ZZ"
 }
