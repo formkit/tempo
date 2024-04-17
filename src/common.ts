@@ -7,6 +7,7 @@ import type {
   FormatStyle,
   Part,
   FilledPart,
+  Format,
 } from "./types"
 
 /**
@@ -38,8 +39,19 @@ export const clockAgnostic: FormatPattern[] = [
   ["m", { minute: "numeric" }],
   ["ss", { second: "2-digit" }],
   ["s", { second: "numeric" }],
+  ["ZZ", { timeZoneName: "long" }],
   ["Z", { timeZoneName: "short" }],
 ]
+
+/**
+ * Timezone tokens.
+ */
+const timeZoneTokens = ["Z", "ZZ"] as const
+
+/**
+ * Timezone token type.
+ */
+export type TimezoneToken = (typeof timeZoneTokens)[number]
 
 /**
  * 24 hour click format patterns.
@@ -76,7 +88,7 @@ export const fixedLength = {
 /**
  * token Z can have variable length depending on the actual value, so it's
  */
-export function fixedLengthByOffset(offsetString: string): number {
+export function fixedLengthByOffset(offsetString: string): 6 | 5 {
   // starts with [+-]xx:xx
   if (/^[+-]\d{2}:\d{2}/.test(offsetString)) {
     return 6
@@ -187,7 +199,7 @@ export function fill(
       return token === "A" ? p.toUpperCase() : p.toLowerCase()
     }
     if (partName === "timeZoneName") {
-      return offset ?? minsToOffset(-1 * d.getTimezoneOffset())
+      return offset ?? minsToOffset(-1 * d.getTimezoneOffset(), token)
     }
     return value
   }
@@ -281,27 +293,38 @@ function createPartMap(
 }
 
 /**
- * Converts minutes (300) to an ISO8601 compatible offset (+0400).
+ * Converts minutes (300) to an ISO8601 compatible offset (+0400 or +04:00).
  * @param timeDiffInMins - The difference in minutes between two timezones.
  * @returns
  */
-export function minsToOffset(timeDiffInMins: number): string {
+export function minsToOffset(
+  timeDiffInMins: number,
+  token: string = "Z"
+): string {
   const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(
     2,
     "0"
   )
   const mins = String(Math.abs(timeDiffInMins % 60)).padStart(2, "0")
   const sign = timeDiffInMins < 0 ? "-" : "+"
-  return `${sign}${hours}${mins}`
+
+  if (token === "ZZ") {
+    return `${sign}${hours}${mins}`
+  }
+
+  return `${sign}${hours}:${mins}`
 }
 
 /**
  * Converts an offset (-0500) to minutes (-300).
  * @param offset - The offset to convert to minutes.
+ * @param token - The timezone token format.
  */
-export function offsetToMins(offset: string): number {
-  validOffset(offset)
-  const [_, sign, hours, mins] = offset.match(/([+-])([0-3][0-9])([0-6][0-9])/)!
+export function offsetToMins(offset: string, token: TimezoneToken): number {
+  validOffset(offset, token)
+  const [_, sign, hours, mins] = offset.match(
+    /([+-])([0-3][0-9]):?([0-6][0-9])/
+  )!
   const offsetInMins = Number(hours) * 60 + Number(mins)
   return sign === "+" ? offsetInMins : -offsetInMins
 }
@@ -310,9 +333,18 @@ export function offsetToMins(offset: string): number {
  * Validates that an offset is valid according to the format:
  * [+-]HHmm or [+-]HH:mm
  * @param offset - The offset to validate.
+ * @param token - The timezone token format.
  */
-export function validOffset(offset: string) {
-  const valid = /^([+-])[0-3][0-9]:?[0-6][0-9]$/.test(offset)
+export function validOffset(offset: string, token: TimezoneToken = "Z") {
+  const valid = ((token: TimezoneToken): boolean => {
+    switch (token) {
+      case "Z":
+        return /^([+-])[0-3][0-9]:[0-6][0-9]$/.test(offset)
+      case "ZZ":
+        return /^([+-])[0-3][0-9][0-6][0-9]$/.test(offset)
+    }
+  })(token)
+
   if (!valid) throw new Error(`Invalid offset: ${offset}`)
   return offset
 }
@@ -368,4 +400,16 @@ export function validate(parts: Part[]): Part[] | never {
     lastPart = part
   }
   return parts
+}
+
+/**
+ * Returns the timezone token format from a given format.
+ * @param format - The format to check.
+ * @returns The timezone token format ("Z" or "ZZ").
+ */
+export function getOffsetFormat(format: Format): TimezoneToken {
+  if (typeof format === "string") {
+    return format.includes("ZZ") ? "ZZ" : "Z"
+  }
+  return "time" in format && format.time === "full" ? "Z" : "ZZ"
 }

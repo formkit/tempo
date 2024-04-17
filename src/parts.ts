@@ -135,7 +135,8 @@ function styleParts(
         part.type,
         part.value,
         locale,
-        part.type === "hour" ? hourType : undefined
+        part.type === "hour" ? hourType : undefined,
+        options
       )
       if (formatPattern === undefined) return
       const partValue = formatPattern[1][partName]
@@ -165,7 +166,8 @@ function guessPattern<T extends Intl.DateTimeFormatPartTypes>(
   partName: T,
   partValue: string,
   locale: string,
-  hour: T extends "hour" ? 12 | 24 : undefined
+  hour: T extends "hour" ? 12 | 24 : undefined,
+  options: Intl.DateTimeFormatOptions
 ): FormatPattern | undefined {
   const l = partValue.length
   const n = !isNaN(Number(partValue))
@@ -208,10 +210,7 @@ function guessPattern<T extends Intl.DateTimeFormatPartTypes>(
     case "literal":
       return [partValue, { literal: partValue }, new RegExp("")]
     case "timeZoneName":
-      const offset = partValue.split("-")
-      return offset.length === 2 && offset[1].length === 4
-        ? tokens.get("ZZ")
-        : tokens.get("Z")
+      return options.timeStyle === "full" ? tokens.get("Z") : tokens.get("ZZ")
     default:
       return undefined
   }

@@ -37,7 +37,7 @@ describe("formatStr", () => {
   })
 
   it("can parse en locale with long time in object format", () => {
-    expect(formatStr({ time: "long" }, "en")).toEqual("h:mm:ss A Z")
+    expect(formatStr({ time: "long" }, "en")).toEqual("h:mm:ss A ZZ")
   })
 
   it("can parse en locale with medium time in object format", () => {
@@ -56,5 +56,11 @@ describe("formatStr", () => {
     expect(format("2023-01-01T13:14Z", "MMM D \\at hh:mm A")).toBe(
       "Jan 1 at 08:14 AM"
     )
+  })
+  it("uses the ZZ token for long time", () => {
+    expect(formatStr({ time: "long" }, "en")).toBe("h:mm:ss A ZZ")
+  })
+  it("uses the Z token for full time", () => {
+    expect(formatStr({ time: "full" }, "en")).toBe("h:mm:ss A Z")
   })
 })

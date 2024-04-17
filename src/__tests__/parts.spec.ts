@@ -8,4 +8,16 @@ describe("parts", () => {
       "MMMM"
     )
   })
+  it("uses a Z format when the time style is full", () => {
+    expect(
+      parts({ time: "full" }, "en").find((p) => p.partName === "timeZoneName")
+        ?.token
+    ).toBe("Z")
+  })
+  it("uses a ZZ format when the time style is long", () => {
+    expect(
+      parts({ time: "long" }, "en").find((p) => p.partName === "timeZoneName")
+        ?.token
+    ).toBe("ZZ")
+  })
 })
