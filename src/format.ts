@@ -1,7 +1,7 @@
 import { date } from "./date"
 import { parts } from "./parts"
-import { fill } from "./common"
-import type { DateInput, Format, FormatOptions, Part } from "./types"
+import { fill, getOffsetFormat } from "./common"
+import type { DateInput, Format, FormatOptions, FormatStyle, Part } from "./types"
 import { offset } from "./offset"
 import { removeOffset } from "./removeOffset"
 import { deviceLocale } from "./deviceLocale"
@@ -72,7 +72,7 @@ export function format(
   if (format === "ISO8601") return date(inputDateOrOptions).toISOString()
 
   if (tz) {
-    forceOffset = offset(inputDateOrOptions, "utc", tz)
+    forceOffset = offset(inputDateOrOptions, "utc", tz, getOffsetFormat(format))
   }
 
   // We need to apply an offset to the date so that it can be formatted as UTC.

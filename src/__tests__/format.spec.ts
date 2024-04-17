@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest"
+import { describe, expect, it } from "vitest"
 import { format } from "../format"
 import { tzDate } from "../tzDate"
 process.env.TZ = "America/New_York"
@@ -138,7 +138,7 @@ describe("format", () => {
   it("can render a long time in Japanese", () => {
     expect(
       format("2010-06-09T04:32:00Z", { time: "full" }, "ja")
-    ).toBe("0時32分00秒 -0400")
+    ).toBe("0時32分00秒 -04:00")
   })
   it("can format the russian month of february", () => {
     expect(format("2023-03-14", { date: "medium" }, "ru")).toBe(
@@ -147,13 +147,16 @@ describe("format", () => {
   })
   it("can include the timezone of a date", () => {
     expect(format("2023-05-05T05:30:10Z", "HH:mm:ss Z", "en")).toBe(
+      "01:30:10 -04:00"
+    )
+    expect(format("2023-05-05T05:30:10Z", "HH:mm:ss ZZ", "en")).toBe(
       "01:30:10 -0400"
     )
   })
   it("uses offsets in full date formatting", () => {
     expect(
       format("2023-05-05T05:30:10Z", { date: "full", time: "full" }, "en")
-    ).toBe("Friday, May 5, 2023 at 1:30:10 AM -0400")
+    ).toBe("Friday, May 5, 2023 at 1:30:10 AM -04:00")
   })
   it("can filter out the month part", () => {
     expect(
@@ -201,6 +204,13 @@ describe("format with a timezone", () => {
         format: "Z",
         tz: "Asia/Kolkata",
       })
+    ).toBe("+05:30")
+    expect(
+      format({
+        date: "2022-10-29T11:30:50Z",
+        format: "ZZ",
+        tz: "Asia/Kolkata",
+      })
     ).toBe("+0530")
     expect(
       format({
@@ -208,11 +218,25 @@ describe("format with a timezone", () => {
         format: "D hh:mm a Z",
         tz: "America/New_York",
       })
+    ).toBe("20 10:15 am -05:00")
+    expect(
+      format({
+        date: "2023-02-20T10:15:00",
+        format: "D hh:mm a ZZ",
+        tz: "America/New_York",
+      })
     ).toBe("20 10:15 am -0500")
     expect(
       format({
         date: new Date("2024-02-16T11:00:00Z"),
         format: "YYYY-MM-DDTHH:mm:ssZ",
+        tz: "Europe/Stockholm",
+      })
+    ).toBe("2024-02-16T12:00:00+01:00")
+    expect(
+      format({
+        date: new Date("2024-02-16T11:00:00Z"),
+        format: "YYYY-MM-DDTHH:mm:ssZZ",
         tz: "Europe/Stockholm",
       })
     ).toBe("2024-02-16T12:00:00+0100")
@@ -223,6 +247,13 @@ describe("format with a timezone", () => {
       format({
         date: new Date("2024-03-10T02:30:00Z"),
         format: "HH:mm:ssZ",
+        tz: "UTC",
+      })
+    ).toBe("02:30:00+00:00")
+    expect(
+      format({
+        date: new Date("2024-03-10T02:30:00Z"),
+        format: "HH:mm:ssZZ",
         tz: "UTC",
       })
     ).toBe("02:30:00+0000")
