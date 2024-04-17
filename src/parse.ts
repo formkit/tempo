@@ -107,8 +107,8 @@ export function parse(
         parsed.set("MM", v)
       } else if (t === "a" || t === "A") {
         a = part.value.toLowerCase() === ap("am", locale).toLowerCase()
-      } else if (t === "Z") {
-        offset = validOffset(part.value)
+      } else if (t === "Z" || t === "ZZ") {
+        offset = validOffset(part.value, t)
       } else {
         const values = range(t as FormatToken, locale, genitive)
         const index = values.indexOf(part.value)

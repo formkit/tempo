@@ -88,7 +88,7 @@ export const fixedLength = {
 /**
  * token Z can have variable length depending on the actual value, so it's
  */
-export function fixedLengthByOffset(offsetString: string): number {
+export function fixedLengthByOffset(offsetString: string): 6 | 5 {
   // starts with [+-]xx:xx
   if (/^[+-]\d{2}:\d{2}/.test(offsetString)) {
     return 6
@@ -315,9 +315,10 @@ export function minsToOffset(timeDiffInMins: number, token: string = "Z"): strin
 /**
  * Converts an offset (-0500) to minutes (-300).
  * @param offset - The offset to convert to minutes.
+ * @param token - The timezone token format.
  */
-export function offsetToMins(offset: string): number {
-  validOffset(offset)
+export function offsetToMins(offset: string, token: TimezoneToken): number {
+  validOffset(offset, token)
   const [_, sign, hours, mins] = offset.match(/([+-])([0-3][0-9]):?([0-6][0-9])/)!
   const offsetInMins = Number(hours) * 60 + Number(mins)
   return sign === "+" ? offsetInMins : -offsetInMins
@@ -327,9 +328,18 @@ export function offsetToMins(offset: string): number {
  * Validates that an offset is valid according to the format:
  * [+-]HHmm or [+-]HH:mm
  * @param offset - The offset to validate.
+ * @param token - The timezone token format.
  */
-export function validOffset(offset: string) {
-  const valid = /^([+-])[0-3][0-9]:?[0-6][0-9]$/.test(offset)
+export function validOffset(offset: string, token: TimezoneToken = "Z") {
+  const valid = ((token: TimezoneToken): boolean => {
+    switch (token) {
+      case "Z":
+        return /^([+-])[0-3][0-9]:[0-6][0-9]$/.test(offset)
+      case "ZZ":
+        return /^([+-])[0-3][0-9][0-6][0-9]$/.test(offset)
+    }
+  })(token)
+
   if (!valid) throw new Error(`Invalid offset: ${offset}`)
   return offset
 }
