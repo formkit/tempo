@@ -23,6 +23,14 @@
       }
     }
   },
+  "homepage": "https://github.com/formkit/tempo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/formkit/tempo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/formkit/tempo/issues"
+  },
   "scripts": {
     "dev": "cd ./docs && pnpm nuxt dev",
     "build": "tsup",
