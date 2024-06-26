@@ -50,12 +50,14 @@ export function offset(
   utcTime: DateInput,
   tzA = "UTC",
   tzB = "device",
-  timeZoneToken: TimezoneToken = "Z" ,
+  timeZoneToken: TimezoneToken = "Z"
 ): string {
   tzB = tzB === "device" ? deviceTZ() ?? "utc" : tzB
   const d = date(utcTime)
   const timeA = relativeTime(d, tzA)
   const timeB = relativeTime(d, tzB)
-  const timeDiffInMins = (timeB.getTime() - timeA.getTime()) / 1000 / 60
+  const timeDiffInMins = Math.round(
+    (timeB.getTime() - timeA.getTime()) / 1000 / 60
+  )
   return minsToOffset(timeDiffInMins, timeZoneToken)
 }
