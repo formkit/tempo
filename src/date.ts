@@ -1,5 +1,5 @@
 import { iso8601, iso8601Match } from "./iso8601"
-import type { DateInput } from "./types"
+import type { MaybeDateInput } from "./types"
 
 /**
  * Normalizes a "short" date like 2012-01-01 to 2012-01-01T00:00:00 to prevent
@@ -18,7 +18,7 @@ function normalize(date: string) {
  * A date to parse.
  * @param date - A Date object or an ISO 8601 date.
  */
-export function date(date?: DateInput): Date {
+export function date(date?: MaybeDateInput): Date {
   if (!date) {
     date = new Date()
   }
