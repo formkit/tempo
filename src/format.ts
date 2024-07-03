@@ -1,7 +1,13 @@
 import { date } from "./date"
 import { parts } from "./parts"
 import { fill, getOffsetFormat } from "./common"
-import type { DateInput, Format, FormatOptions, FormatStyle, Part } from "./types"
+import type {
+  DateInput,
+  Format,
+  FormatOptions,
+  FormatStyle,
+  Part,
+} from "./types"
 import { offset } from "./offset"
 import { removeOffset } from "./removeOffset"
 import { deviceLocale } from "./deviceLocale"
