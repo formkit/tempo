@@ -18,4 +18,6 @@ describe("addSecond", () => {
       "2021-12-31T23:59:30.000Z"
     )
   })
+
+  // test with current time is at diffSeconds.
 })

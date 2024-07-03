@@ -10,7 +10,7 @@ import { diffRound, type DiffRoundingMethod } from "./diffRound"
  */
 export function diffDays(
   dateA: DateInput,
-  dateB: MaybeDateInput,
+  dateB?: MaybeDateInput,
   roundingMethod?: DiffRoundingMethod
 ): number
 /**

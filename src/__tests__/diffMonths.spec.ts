@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest"
 import { diffMonths } from "../diffMonths"
+import { addMonth } from "../addMonth"
 
 describe("differenceInMonths", () => {
   it("should give 11 months", () => {
@@ -28,5 +29,10 @@ describe("differenceInMonths", () => {
 
   it("should also be a negative full month when swapped", () => {
     expect(diffMonths("2024-01-31", "2024-02-29")).toBe(-1)
+  })
+
+  it("different should be 3 month compared to current time", () => {
+    const compare = addMonth(null, 3)
+    expect(diffMonths(compare)).toBe(3)
   })
 })
