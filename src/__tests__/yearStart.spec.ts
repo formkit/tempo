@@ -7,4 +7,11 @@ describe("yearStart", () => {
       "2023-01-01T05:00:00.000Z"
     )
   })
+
+  it("can give the end of the current year", () => {
+    const compare = new Date()
+    compare.setMonth(0, 1)
+    compare.setHours(0, 0, 0, 0)
+    expect(yearStart()).toEqual(compare)
+  })
 })
