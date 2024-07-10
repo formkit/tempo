@@ -3,7 +3,7 @@ import type { MaybeDateInput } from "./types"
 
 /**
  * Returns a Date object for end of the given minute.
- * @param [inputDate] - A string, Date object or nothing for current time
+ * @param [inputDate] - A string, Date object or nothing for the current time
  */
 export function minuteEnd(inputDate?: MaybeDateInput): Date {
   const d = date(inputDate)

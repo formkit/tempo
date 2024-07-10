@@ -19,5 +19,5 @@ describe("addMinute", () => {
     )
   })
 
-  // test with current time is at diffMinutes.
+  // test with the current time is at diffMinutes.
 })

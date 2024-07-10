@@ -47,7 +47,7 @@ describe("differenceInYears", () => {
     })
   })
 
-  it("different should be 3 month compared to current time", () => {
+  it("different should be 3 month compared to the current time", () => {
     const compare = addYear(null, -6)
     expect(diffYears(null, compare)).toBe(6)
   })

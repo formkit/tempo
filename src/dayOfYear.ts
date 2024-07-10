@@ -4,7 +4,7 @@ import type { MaybeDateInput } from "./types"
 /**
  * Gets the what day of the year a given date is. For example, August 1st is
  * the 213th day of the year on non- years and 214th on leap years.
- * @param [inputDate] - The input date or nothing for current day.
+ * @param [inputDate] - The input date or nothing for the current day.
  */
 export function dayOfYear(inputDate?: MaybeDateInput): number {
   const d = date(inputDate)

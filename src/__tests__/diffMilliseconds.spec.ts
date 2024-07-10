@@ -8,13 +8,13 @@ describe("diffMilliseconds", () => {
     )
   })
 
-  it("should be 5000 milleseconds difference compared to current time", () => {
+  it("should be 5000 milleseconds difference compared to the current time", () => {
     const now = new Date()
     now.setMilliseconds(5000) // because the date function sets ms to 0, the test needs to test with increments of 1000
     expect(diffMilliseconds(now)).toBe(5000)
   })
 
-  it("should be -5000 milleseconds difference compared to current time", () => {
+  it("should be -5000 milleseconds difference compared to the current time", () => {
     const now = new Date()
     now.setMilliseconds(5000)
     expect(diffMilliseconds(null, now)).toBe(-5000)

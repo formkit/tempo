@@ -6,7 +6,7 @@ import type { MaybeDateInput } from "./types"
  * @param [inputDate] - A date to increment or null to increment from the current time.
  * @param [count] - The quantity to add.
  */
-export function addHour(inputDate: MaybeDateInput, count = 1) {
+export function addHour(inputDate?: MaybeDateInput, count = 1) {
   const d = date(inputDate)
   d.setHours(d.getHours() + count)
   return d

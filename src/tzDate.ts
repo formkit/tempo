@@ -1,7 +1,7 @@
 import { offset } from "./offset"
 import { applyOffset } from "./applyOffset"
 import { date } from "./date"
-import { DateInput } from "./types"
+import { DateInput, MaybeDateInput } from "./types"
 
 /**
  * Creates a date object for the input date at the given timezone. For example
@@ -10,10 +10,12 @@ import { DateInput } from "./types"
  *
  * If given a Date object it will use local time and convert it to the given
  * timezone, thus "changing" the date.
- * @param inputDate - An iso8601 date string with no timezone
+ *
+ * if given no string or date object, it'll use the current locale time and convert to the given timezone
+ * @param [inputDate] - An iso8601 date string with no timezone
  * @param tz - A timezone string
  */
-export function tzDate(inputDate: DateInput, tz: string) {
+export function tzDate(inputDate: MaybeDateInput, tz: string) {
   const d = date(inputDate)
   return applyOffset(d, offset(d, tz))
 }

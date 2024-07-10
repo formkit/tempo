@@ -10,7 +10,7 @@ import type { DateInput, MaybeDateInput } from "./types"
  * @param [count] - The quantity to add.
  * @param [dateOverflow] - Whether or not to allow the date to overflow to another month if the inputDate’s month is out of range of the new month.
  */
-export function addMonth(inputDate: MaybeDateInput, count = 1, dateOverflow = false) {
+export function addMonth(inputDate?: MaybeDateInput, count = 1, dateOverflow = false) {
   const d = date(inputDate)
   const dayOfMonth = d.getDate()
   // If overflowing is disallowed, set the date back to the first of the month

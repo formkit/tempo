@@ -17,7 +17,7 @@ describe("differenceInDays", () => {
     ).toBe(3)
   })
 
-  it("different should be -64 hours compared to current time", () => {
+  it("different should be -64 hours compared to the current time", () => {
     const compare = addDay(null, -28)
     expect(diffDays(compare)).toBe(-28)
   })

@@ -34,5 +34,5 @@ describe("addMonth", () => {
     )
   })
 
-  // test with current time is at diffMonths.
+  // test with the current time is at diffMonths.
 })

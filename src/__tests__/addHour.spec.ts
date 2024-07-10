@@ -4,9 +4,7 @@ process.env.TZ = "America/New_York"
 
 describe("addHour", () => {
   it("can increment a normal hour", () => {
-    expect(addHour("2022-01-01T00:00:00Z").toISOString()).toBe(
-      "2022-01-01T01:00:00.000Z"
-    )
+    expect(addHour("2022-01-01T00:00:00Z").toISOString()).toBe("2022-01-01T01:00:00.000Z")
   })
   it("can increment the last hours of the day into a new day", () => {
     expect(addHour("2022-01-01T23:11:00Z", 3).toISOString()).toBe(
@@ -19,5 +17,5 @@ describe("addHour", () => {
     )
   })
 
-  // test with current time is at diffHours.
+  // test with the current time is at diffHours.
 })

@@ -31,7 +31,7 @@ describe("differenceInMonths", () => {
     expect(diffMonths("2024-01-31", "2024-02-29")).toBe(-1)
   })
 
-  it("different should be 3 month compared to current time", () => {
+  it("different should be 3 month compared to the current time", () => {
     const compare = addMonth(null, 3)
     expect(diffMonths(compare)).toBe(3)
   })

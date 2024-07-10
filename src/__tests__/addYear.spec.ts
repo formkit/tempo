@@ -17,5 +17,5 @@ describe("addYear", () => {
     expect(addYear("2000-02-29").toISOString()).toBe("2001-02-28T05:00:00.000Z")
   })
 
-  // test with current time is at diffYears
+  // test with the current time is at diffYears
 })

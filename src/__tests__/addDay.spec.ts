@@ -15,5 +15,5 @@ describe("addDay", () => {
     expect(addDay("2022-01-01", -5).toISOString()).toBe("2021-12-27T05:00:00.000Z")
   })
 
-  // test with current time is at diffDays
+  // test with the current time is at diffDays
 })

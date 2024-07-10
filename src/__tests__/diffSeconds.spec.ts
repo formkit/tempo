@@ -7,7 +7,7 @@ describe("differenceInSeconds", () => {
     expect(diffSeconds("2024-04-07T09:10:28.900Z", "2024-04-07T09:10:00.000Z")).toBe(28)
   })
 
-  it("different should be 50 seconds compared to current time", () => {
+  it("different should be 50 seconds compared to the current time", () => {
     const compare = addSecond(null, 50)
     expect(diffSeconds(compare)).toBe(50)
   })

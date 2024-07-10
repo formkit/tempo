@@ -87,7 +87,7 @@ describe("nearestDay", () => {
     )
   })
 
-  it("can find the 28th from current month", () => {
+  it("can find the 28th from the current month", () => {
     const find = new Date()
     find.setDate(28)
     find.setMilliseconds(0)

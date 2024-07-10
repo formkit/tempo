@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest"
-import { date } from "../date"
 import { monthDays } from "../monthDays"
 process.env.TZ = "America/New_York"
 
@@ -18,7 +17,7 @@ describe("monthDays", () => {
   })
 
   it("gets the amount of days of the current month", () => {
-    const compare = date()
+    const compare = new Date()
     compare.setMonth(compare.getMonth() + 1, 0) // the 0 wraps to the last day of the previous month
     expect(monthDays()).toBe(compare.getDate())
   })

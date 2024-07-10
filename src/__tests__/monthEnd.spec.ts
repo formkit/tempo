@@ -21,7 +21,7 @@ describe("monthEnd", () => {
     )
   })
 
-  it("gets the last day of current month", () => {
+  it("gets the last day of the current month", () => {
     const compare = date()
     compare.setMonth(compare.getMonth() + 1, 0)
     expect(monthEnd()).toEqual(compare)
