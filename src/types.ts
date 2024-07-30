@@ -1,4 +1,18 @@
 /**
+ * Possible options for formatting a duration.
+ */
+export type DurationFormat = "hh:mm:ss" | "mm:ss" | "hh:mm" | "DD:hh:mm:ss" | "DD:hh:mm:ss:SSS" | "hh:mm:ss,SSS" | string;
+
+/**
+ * Options for formatting or parsing durations.
+ */
+export interface DurationOptions {
+  format?: DurationFormat; // supported and custom formats
+  parse?: boolean; // whether to parse or format
+  locale?: string; // future compatibility for different locales
+}
+
+/**
  * The date format used as an input value. Either a date or an ISO8601 string.
  */
 export type DateInput = Date | string
@@ -110,6 +124,7 @@ export type FormatToken =
   | "A"
   | "ZZ"
   | "Z"
+  | "SSS"
 
 export interface ParseOptions {
   /**
