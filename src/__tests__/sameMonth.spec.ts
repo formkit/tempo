@@ -18,4 +18,10 @@ describe("sameMonth", () => {
   it("can determine different dates and time with same months", () => {
     expect(sameMonth("2023-01-01 10:10:30", "2024-01-02 11:12:00")).toBe(true)
   })
+
+  it("evaluates true with 1 date given", () => {
+    const compare = new Date()
+    compare.setMilliseconds(45)
+    expect(sameMonth(null, compare)).toBe(true)
+  })
 })

@@ -22,4 +22,9 @@ describe("sameDay", () => {
   it("evaluates false for two adjacent days", () => {
     expect(sameDay("2020-11-17", new Date("2020-11-18T10:00:00Z"))).toBe(false)
   })
+  it("evaluates true with 1 date given", () => {
+    const compare = new Date()
+    compare.setHours(3)
+    expect(sameDay(null, compare)).toBe(true)
+  })
 })

@@ -1,13 +1,21 @@
 import { date } from "./date"
-import { DateInput } from "./types"
+import type { DateInput, MaybeDateInput } from "./types"
 import { monthDays } from "./monthDays"
 
 /**
  * Returns the difference between 2 dates in months.
- * @param dateA A date to compare with the dateB date
- * @param dateB A date to compare with the dateA date
+ * @param dateA - A date to compare with the dateB date
+ * @param [dateB] - A date to compare with the dateA date or nothing to compare with the current time
  */
-export function diffMonths(dateA: DateInput, dateB: DateInput): number {
+export function diffMonths(dateA: DateInput, dateB?: MaybeDateInput): number
+/**
+ * Returns the difference between 2 dates in months.
+ * @param [dateA] - A date to compare with the dateB date or null to compare with the current time
+ * @param dateB - A date to compare with the dateA date
+ */
+export function diffMonths(dateA: MaybeDateInput, dateB: DateInput): number
+
+export function diffMonths(dateA: MaybeDateInput, dateB?: MaybeDateInput): number {
   const l = date(dateA)
   const r = date(dateB)
   // if the dateB one is bigger, we switch them around as it's easier to do
@@ -17,8 +25,7 @@ export function diffMonths(dateA: DateInput, dateB: DateInput): number {
   }
 
   // we first get the amount of calendar months
-  let months =
-    (l.getFullYear() - r.getFullYear()) * 12 + (l.getMonth() - r.getMonth())
+  let months = (l.getFullYear() - r.getFullYear()) * 12 + (l.getMonth() - r.getMonth())
 
   const ld = l.getDate()
   const rd = r.getDate()

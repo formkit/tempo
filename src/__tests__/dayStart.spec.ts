@@ -8,4 +8,10 @@ describe("dayStart", () => {
       "2023-02-22T05:00:00.000Z"
     )
   })
+
+  it("gets the start of the day", () => {
+    const compare = new Date()
+    compare.setHours(0, 0, 0, 0)
+    expect(dayStart()).toEqual(compare)
+  })
 })

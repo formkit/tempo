@@ -8,6 +8,7 @@ import type {
   Part,
   FilledPart,
   Format,
+  MaybeDateInput,
 } from "./types"
 
 /**
@@ -128,12 +129,7 @@ export const dayPeriodMap: Map<string, { am?: string; pm?: string }> = new Map()
 /**
  * An array of all available date styles.
  */
-export const styles: ReadonlyArray<FormatStyle> = [
-  "full",
-  "long",
-  "medium",
-  "short",
-]
+export const styles: ReadonlyArray<FormatStyle> = ["full", "long", "medium", "short"]
 
 /**
  * Creates a leading zero string of 2 digits.
@@ -150,9 +146,7 @@ export const four = (n: number) => String(n).padStart(2, "0")
  * Normalizes a given part to NFKC.
  * @param part - The part to normalize.
  */
-export function normStr(
-  part: Intl.DateTimeFormatPart
-): Intl.DateTimeFormatPart {
+export function normStr(part: Intl.DateTimeFormatPart): Intl.DateTimeFormatPart {
   if (part.type === "literal") {
     part.value = part.value.normalize("NFKC")
   }
@@ -161,14 +155,14 @@ export function normStr(
 
 /**
  * Returns the parts filled with pertinent values.
- * @param inputDate - The date to fill parts for
+ * @param [inputDate] - The date to fill parts for
  * @param parts - An array of parts to fill
  * @param locale - The locale to fill with.
  * @param genitive - Whether to use genitive tokens values or not.
  * @param offset - The explicit offset to fill with (ignores the date’s true offset).
  */
 export function fill(
-  inputDate: DateInput,
+  inputDate: MaybeDateInput,
   parts: Part[],
   locale: string,
   genitive = false,
@@ -214,13 +208,13 @@ export function fill(
 
 /**
  * Creates a map of part names to their respective values.
- * @param inputDate - The date to format
+ * @param [inputDate] - The date to format
  * @param parts - The individual parts the need to be formatted.
  * @param locale - The locale to format the parts with.
  * @param genitive - Whether to use genitive tokens values or not.
  */
 function createPartMap(
-  inputDate: DateInput,
+  inputDate: MaybeDateInput,
   parts: Part[],
   locale: string,
   genitive = false
@@ -272,9 +266,7 @@ function createPartMap(
               .map(normStr)
             break
         }
-        const genitiveFormattedPart = formattedParts.find(
-          (p) => p.type === part.partName
-        )
+        const genitiveFormattedPart = formattedParts.find((p) => p.type === part.partName)
         const index = valueParts.findIndex((p) => p.type === part.partName)
         if (genitiveFormattedPart && index > -1) {
           valueParts[index] = genitiveFormattedPart
@@ -297,14 +289,8 @@ function createPartMap(
  * @param timeDiffInMins - The difference in minutes between two timezones.
  * @returns
  */
-export function minsToOffset(
-  timeDiffInMins: number,
-  token: string = "Z"
-): string {
-  const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(
-    2,
-    "0"
-  )
+export function minsToOffset(timeDiffInMins: number, token: string = "Z"): string {
+  const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(2, "0")
   const mins = String(Math.abs(timeDiffInMins % 60)).padStart(2, "0")
   const sign = timeDiffInMins < 0 ? "-" : "+"
 
@@ -322,9 +308,7 @@ export function minsToOffset(
  */
 export function offsetToMins(offset: string, token: TimezoneToken): number {
   validOffset(offset, token)
-  const [_, sign, hours, mins] = offset.match(
-    /([+-])([0-3][0-9]):?([0-6][0-9])/
-  )!
+  const [_, sign, hours, mins] = offset.match(/([+-])([0-3][0-9]):?([0-6][0-9])/)!
   const offsetInMins = Number(hours) * 60 + Number(mins)
   return sign === "+" ? offsetInMins : -offsetInMins
 }
@@ -382,19 +366,13 @@ export function validate(parts: Part[]): Part[] | never {
     if (part.partName === "literal" && !isNaN(parseFloat(part.partValue))) {
       throw new Error(`Numbers in format (${part.partValue}).`)
     }
-    if (
-      lastPart &&
-      lastPart.partName !== "literal" &&
-      part.partName !== "literal"
-    ) {
+    if (lastPart && lastPart.partName !== "literal" && part.partName !== "literal") {
       if (
         !(lastPart.token in fixedLength) &&
         !(part.token in fixedLength) &&
         !(isNumeric(lastPart) && part.token.toLowerCase() === "a")
       ) {
-        throw new Error(
-          `Illegal adjacent tokens (${lastPart.token}, ${part.token})`
-        )
+        throw new Error(`Illegal adjacent tokens (${lastPart.token}, ${part.token})`)
       }
     }
     lastPart = part

@@ -18,4 +18,10 @@ describe("sameMinute", () => {
   it("can determine different dates and time with same minutes", () => {
     expect(sameMinute("2024-01-01 10:10:30", "2024-02-02 20:10:00")).toBe(true)
   })
+
+  it("evaluates true with 1 date given", () => {
+    const compare = new Date()
+    compare.setSeconds(45)
+    expect(sameMinute(compare)).toBe(true)
+  })
 })

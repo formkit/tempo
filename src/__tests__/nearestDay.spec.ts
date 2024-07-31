@@ -5,17 +5,11 @@ process.env.TZ = "America/New_York"
 describe("nearestDay", () => {
   it("can find the nearest day to a date", () => {
     expect(
-      nearestDay(
-        "2023-02-22",
-        (d) => d.getDay() === 6 || d.getDay() === 0
-      )!.toISOString()
+      nearestDay("2023-02-22", (d) => d.getDay() === 6 || d.getDay() === 0)!.toISOString()
     ).toBe("2023-02-25T05:00:00.000Z")
 
     expect(
-      nearestDay(
-        "2023-02-21",
-        (d) => d.getDay() === 6 || d.getDay() === 0
-      )!.toISOString()
+      nearestDay("2023-02-21", (d) => d.getDay() === 6 || d.getDay() === 0)!.toISOString()
     ).toBe("2023-02-19T05:00:00.000Z")
   })
   it("searches following the pattern 0, 1, -1, 2, -2, 3 -3 and so on", () => {
@@ -72,10 +66,8 @@ describe("nearestDay", () => {
   })
   it("can constrain itself to a year, not moving forwards", () => {
     const search = (d: Date): boolean => {
-      if (d.getFullYear() === 2023 && d.getMonth() === 0 && d.getDate() === 1)
-        return true
-      if (d.getFullYear() === 2024 && d.getMonth() === 1 && d.getDate() === 1)
-        return true
+      if (d.getFullYear() === 2023 && d.getMonth() === 0 && d.getDate() === 1) return true
+      if (d.getFullYear() === 2024 && d.getMonth() === 1 && d.getDate() === 1) return true
       return false
     }
     expect(nearestDay("2023-11-03", search, "year")!.toISOString()).toBe(
@@ -93,5 +85,14 @@ describe("nearestDay", () => {
     expect(nearestDay("2023-01-01", search, "year")!.toISOString()).toBe(
       "2023-12-31T05:00:00.000Z"
     )
+  })
+
+  it("can find the 28th from the current month", () => {
+    const find = new Date()
+    find.setDate(28)
+    find.setMilliseconds(0)
+    const search = (d: Date) => d.getDate() == 28
+    //
+    expect(nearestDay(null, search, "month")).toEqual(find)
   })
 })
