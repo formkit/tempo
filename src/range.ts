@@ -1,6 +1,7 @@
 import { format } from "./format"
 import { ap } from "./ap"
 import type { FormatToken } from "./types"
+
 /**
  * Returns an array of options for a given token in a given locale.
  * @param token - Get the full range of options for a given token
@@ -58,5 +59,6 @@ export function range(
     return r(12, (i) => `${token === "hh" && i < 9 ? "0" : ""}${i + 1}`)
   if (token.startsWith("m") || token.startsWith("s"))
     return r(60, (i) => `${token.length > 1 && i < 10 ? "0" : ""}${i}`)
+  if (token === "SSS") return r(1000, (i) => `${i}`.padStart(3, "0"))
   return []
 }

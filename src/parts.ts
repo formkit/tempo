@@ -17,7 +17,9 @@ import type {
   FormatPattern,
   NamedFormats,
   NamedFormatOption,
+  ExtendedDateTimeFormatPartTypes,
 } from "./types"
+
 /**
  * Given a format string, produce an array of matching "parts", each part
  * contains a regular expression and the corresponding
@@ -59,8 +61,8 @@ export function parts(format: Format, locale: string): Part[] {
     hour12: boolean,
     [token, option, exp]: FormatPattern
   ): Part {
-    const partName = Object.keys(option)[0] as Intl.DateTimeFormatPartTypes
-    const partValue = option[partName] as string
+    const partName = Object.keys(option)[0] as ExtendedDateTimeFormatPartTypes;
+    const partValue = option[partName] as string;
     return {
       option,
       partName,
@@ -68,7 +70,7 @@ export function parts(format: Format, locale: string): Part[] {
       token,
       pattern: exp as RegExp,
       hour12,
-    }
+    };
   }
 
   const found24Patterns = clockAgnostic
@@ -162,7 +164,7 @@ function styleParts(
  * @param partName - The part name to guess for, like 'year' or 'month'
  * @param partValue - The current value, it is assumed this is the smallest denom.
  */
-function guessPattern<T extends Intl.DateTimeFormatPartTypes>(
+function guessPattern<T extends ExtendedDateTimeFormatPartTypes>(
   partName: T,
   partValue: string,
   locale: string,
@@ -205,6 +207,8 @@ function guessPattern<T extends Intl.DateTimeFormatPartTypes>(
       return l === 1 ? tokens.get("m") : tokens.get("mm")
     case "second":
       return l === 1 ? tokens.get("s") : tokens.get("ss")
+    case "millisecond":
+      return tokens.get("SSS")
     case "dayPeriod":
       return /^[A-Z]+$/u.test(partValue) ? tokens.get("A") : tokens.get("a")
     case "literal":

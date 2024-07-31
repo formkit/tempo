@@ -1,33 +1,37 @@
-import { DurationOptions, FormatToken, DurationFormat } from './types';
+import { Format, FormatToken } from "./types"
+import { validate } from "./common"
+import { formatStr } from "./formatStr"
+import { parts } from "./parts"
 
-/**
- * Formats or parses a duration.
- * @param input - Duration in milliseconds to format or a string to parse.
- * @param options - Options to define formatting or parsing behavior.
- * @returns A formatted duration string or duration in milliseconds.
- */
-export function formatOrParseDuration(input: number | string, options: DurationOptions = {}): string | number {
-  const { format = 'hh:mm:ss', parse = false, locale } = options;
-
-  // Determine whether to parse or format based on the input type and options.
-  if (parse && typeof input === 'string') {
-    return parseDuration(input, format);
-  }
-
-  if (!parse && typeof input === 'number') {
-    return formatDuration(input, format);
-  }
-
-  throw new Error('Invalid input or options.');
+interface DurationOptions {
+  format?: Format // supported and custom formats
+  parse?: boolean // whether to parse or format
+  locale?: string // locale for formatting and parsing
 }
 
-/**
- * Formats a duration given in milliseconds to a string in the specified format.
- * @param durationInMs - Duration in milliseconds.
- * @param format - The format string.
- * @returns A string representing the duration.
- */
-function formatDuration(durationInMs: number, format: DurationFormat): string {
+export function formatOrParseDuration(
+  input: number | string,
+  options: DurationOptions = {}
+): string | number {
+  const { format = "hh:mm:ss", parse = false, locale = "en" } = options
+
+  // Determine whether to parse or format based on the input type and options.
+  if (parse && typeof input === "string") {
+    return parseDuration(input, format, locale)
+  }
+
+  if (!parse && typeof input === "number") {
+    return formatDuration(input, format, locale)
+  }
+
+  throw new Error("Invalid input or options.")
+}
+
+function formatDuration(
+  durationInMs: number,
+  format: Format,
+  locale: string
+): string {
   const parts: Partial<Record<FormatToken, number>> = {
     // Calculate days from milliseconds.
     DD: Math.floor(durationInMs / 86400000),
@@ -39,49 +43,72 @@ function formatDuration(durationInMs: number, format: DurationFormat): string {
     ss: Math.floor((durationInMs % 60000) / 1000),
     // Calculate milliseconds.
     SSS: durationInMs % 1000,
-  };
-
-  // Replace format tokens with corresponding values from the parts object.
-  return format.replace(/DD|hh|mm|ss|SSS/g, (match) => {
-    return String(parts[match as FormatToken]).padStart(match === 'SSS' ? 3 : 2, '0');
-  });
-}
-
-/**
- * Parses a duration string in the specified format to milliseconds.
- * @param durationString - Duration string.
- * @param format - The format string.
- * @returns The duration in milliseconds.
- */
-function parseDuration(durationString: string, format: DurationFormat): number {
-  // Create a regular expression to extract the numeric values based on the format.
-  const regex = new RegExp(format.replace(/DD|hh|mm|ss|SSS/g, '(\\d{2,3})'));
-  const matches = durationString.match(regex);
-
-  if (!matches) {
-    throw new Error('Invalid duration string.');
   }
 
-  // Convert the extracted numeric values to an array of numbers.
-  const parts = matches.slice(1).map(Number);
-  let durationInMs = 0;
+  return formatStr(format, locale).replace(/DD|hh|mm|ss|SSS/g, (match) => {
+    return String(parts[match as FormatToken]).padStart(
+      match === "SSS" ? 3 : 2,
+      "0"
+    )
+  })
+}
 
-  // Calculate the total duration in milliseconds based on the format.
-  format.split(/[^a-zA-Z]/).forEach((part, index) => {
-    switch (part) {
-      // Add days to duration.
-      case 'DD': durationInMs += parts[index] * 86400000; break;
-      // Add hours to duration.
-      case 'hh': durationInMs += parts[index] * 3600000; break;
-      // Add minutes to duration.
-      case 'mm': durationInMs += parts[index] * 60000; break;
-      // Add seconds to duration.
-      case 'ss': durationInMs += parts[index] * 1000; break;
-      // Add milliseconds to duration.
-      case 'SSS': durationInMs += parts[index]; break;
-      default: break;
+function parseDuration(
+  durationString: string,
+  format: Format,
+  locale: string
+): number {
+  const formatParts = validate(parts(format, locale))
+  const regexPattern = formatParts
+    .map((part) => {
+      if (part.partName === "literal") {
+         // Escape special regex characters
+        return part.partValue.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      }
+      if (part.token === "SSS") {
+        return "(\\d{1,3})"
+      }
+      return "(\\d{1,2})"
+    })
+    .join("")
+
+  const regex = new RegExp(`^${regexPattern}$`)
+  const matches = durationString.match(regex)
+
+  if (!matches) {
+    throw new Error("Invalid duration string.")
+  }
+
+  const partsValues = matches.slice(1).map(Number)
+
+  let durationInMs = 0
+
+  let valueIndex = 0
+  formatParts.forEach((part) => {
+    if (part.partName === "literal") {
+      return
     }
-  });
+    const value = partsValues[valueIndex++]
+    switch (part.token) {
+      case "DD":
+        durationInMs += value * 86400000
+        break
+      case "hh":
+        durationInMs += value * 3600000
+        break
+      case "mm":
+        durationInMs += value * 60000
+        break
+      case "ss":
+        durationInMs += value * 1000
+        break
+      case "SSS":
+        durationInMs += value
+        break
+      default:
+        throw new Error(`Unknown format token: ${part.token}`)
+    }
+  })
 
-  return durationInMs;
+  return durationInMs
 }

@@ -1,5 +1,13 @@
 import { date } from "./date"
-import { validate, styles, fixedLength, four, two, validOffset, fixedLengthByOffset } from "./common"
+import {
+  validate,
+  styles,
+  fixedLength,
+  four,
+  two,
+  validOffset,
+  fixedLengthByOffset,
+} from "./common"
 import { formatStr } from "./formatStr"
 import { fourDigitYear } from "./fourDigitYear"
 import { ap } from "./ap"
@@ -71,6 +79,7 @@ export function parse(
     ["HH", 0],
     ["mm", 0],
     ["ss", 0],
+    ["SSS", 0],
   ])
   let a: null | boolean = null
   let offset = ""
@@ -79,7 +88,7 @@ export function parse(
     if (part.token === part.value) return invalid()
     const v = Number(part.value)
     if (parsed.has(part.token)) {
-      // Parse for YYYY, MM, DD, HH, hh, mm, ss, Z
+      // Parse for YYYY, MM, DD, HH, hh, mm, ss, SSS, Z
       parsed.set(part.token, v)
     } else if (part.token === "YY") {
       // Parse for YY
@@ -133,7 +142,7 @@ export function parse(
   }
   parsed.set("MM", (parsed.get("MM") || 1) - 1)
   // eslint-disable-next-line prefer-const
-  let [Y, M, D, h, m, s] = Array.from(parsed.values())
+  let [Y, M, D, h, m, s, SSS] = Array.from(parsed.values())
 
   // Determine if the date is valid for the month.
   const maxDaysInMonth = monthDays(new Date(`${four(Y)}-${two(M + 1)}-10`))
@@ -144,7 +153,7 @@ export function parse(
   // Create the date.
   const isoString = `${four(Y)}-${two(M + 1)}-${two(D)}T${two(h)}:${two(
     m
-  )}:${two(s)}${offset}`
+  )}:${two(s)}.${SSS}${offset}`
   const d = new Date(isoString)
   if (isFinite(+d)) return d
   return invalid()

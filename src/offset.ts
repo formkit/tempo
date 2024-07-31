@@ -22,6 +22,7 @@ function relativeTime(d: Date, timeZone: string): Date {
   })
     .formatToParts(d)
     .map(normStr)
+
   const parts: {
     year?: string
     month?: string
@@ -29,12 +30,18 @@ function relativeTime(d: Date, timeZone: string): Date {
     hour?: string
     minute?: string
     second?: string
+    millisecond?: string
   } = {}
+
   utcParts.forEach((part) => {
     parts[part.type as keyof typeof parts] = part.value
   })
+
+  // Include milliseconds manually
+  parts.millisecond = d.getMilliseconds().toString().padStart(3, "0")
+
   return new Date(
-    `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}Z`
+    `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}.${parts.millisecond}Z`
   )
 }
 

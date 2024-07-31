@@ -1,21 +1,19 @@
 /**
- * Possible options for formatting a duration.
- */
-export type DurationFormat = "hh:mm:ss" | "mm:ss" | "hh:mm" | "DD:hh:mm:ss" | "DD:hh:mm:ss:SSS" | "hh:mm:ss,SSS" | string;
-
-/**
- * Options for formatting or parsing durations.
- */
-export interface DurationOptions {
-  format?: DurationFormat; // supported and custom formats
-  parse?: boolean; // whether to parse or format
-  locale?: string; // future compatibility for different locales
-}
-
-/**
  * The date format used as an input value. Either a date or an ISO8601 string.
  */
 export type DateInput = Date | string
+
+/**
+ *  Extend Intl.DateTimeFormatPartTypes to include "millisecond"
+ */
+export type ExtendedDateTimeFormatPartTypes = Intl.DateTimeFormatPartTypes | "millisecond";
+
+/**
+ *  Extend Intl.DateTimeFormatPartTypesRegistry to include "millisecond"
+ */
+export interface ExtendedDateTimeFormatPartTypesRegistry extends Intl.DateTimeFormatPartTypesRegistry {
+  millisecond: string;
+}
 
 /**
  * Format parts with text names use these descriptors:
@@ -49,7 +47,7 @@ export interface Part {
    * day, dayPeriod, era, hour, literal, minute, month, second, timeZoneName,
    * weekday, year
    */
-  partName: Intl.DateTimeFormatPartTypes
+  partName: ExtendedDateTimeFormatPartTypes
   /**
    * The value of a given part. For example "2-digit", or "narrow".
    */
@@ -78,7 +76,7 @@ export type FilledPart = Part & { value: string }
  */
 export type FormatPattern = [
   pattern: FormatToken | string,
-  option: Partial<Record<Intl.DateTimeFormatPartTypes, string>>,
+  option: Partial<Record<ExtendedDateTimeFormatPartTypes, string>>,
   exp?: RegExp
 ]
 
