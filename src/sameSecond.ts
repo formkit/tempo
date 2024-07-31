@@ -12,8 +12,11 @@ export function sameSecond(inputDateA: DateInput, inputDateB?: MaybeDateInput): 
  * @param [inputDateA] - First date to compare or the current time if null given
  * @param inputDateB - Second date to compare
  */
-export function sameSecond(inputDateA: DateInput, inputDateB: DateInput): boolean
-export function sameSecond(inputDateA: DateInput, inputDateB?: MaybeDateInput): boolean {
+export function sameSecond(inputDateA: MaybeDateInput, inputDateB: DateInput): boolean
+export function sameSecond(
+  inputDateA: MaybeDateInput,
+  inputDateB?: MaybeDateInput
+): boolean {
   const a = date(inputDateA)
   const b = date(inputDateB)
   return a.getSeconds() === b.getSeconds()
