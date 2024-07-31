@@ -23,9 +23,8 @@ export function date(date?: DateInput): Date {
     date = new Date()
   }
   if (date instanceof Date) {
-    const d = new Date(date)
-    d.setMilliseconds(0)
-    return d
+    // Preserve the milliseconds from the existing Date object
+    return new Date(date.getTime())
   }
   date = date.trim()
   if (iso8601(date)) {

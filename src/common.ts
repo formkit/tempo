@@ -8,6 +8,7 @@ import type {
   Part,
   FilledPart,
   Format,
+  ExtendedDateTimeFormatPartTypesRegistry,
 } from "./types"
 
 /**
@@ -39,6 +40,7 @@ export const clockAgnostic: FormatPattern[] = [
   ["m", { minute: "numeric" }],
   ["ss", { second: "2-digit" }],
   ["s", { second: "numeric" }],
+  ["SSS", { millisecond: "numeric" }],
   ["ZZ", { timeZoneName: "long" }],
   ["Z", { timeZoneName: "short" }],
 ]
@@ -54,7 +56,7 @@ const timeZoneTokens = ["Z", "ZZ"] as const
 export type TimezoneToken = (typeof timeZoneTokens)[number]
 
 /**
- * 24 hour click format patterns.
+ * 24 hour clock format patterns.
  */
 export const clock24: FormatPattern[] = [
   ["HH", { hour: "2-digit" }],
@@ -83,6 +85,7 @@ export const fixedLength = {
   hh: 2,
   mm: 2,
   ss: 2,
+  SSS: 3,
 }
 
 /**
@@ -103,7 +106,7 @@ export function fixedLengthByOffset(offsetString: string): 6 | 5 {
 }
 
 /**
- * Tokens that are genitive — in that they can have "possession" when used in
+ * Tokens that are genitive — in that they can have "possession" when used in
  * a date phrase, "March’s 4th day" (but not in english).
  *
  * When computing a range for these, the range can be either genitive or not.
@@ -144,7 +147,7 @@ export const two = (n: number) => String(n).padStart(2, "0")
  * Creates a leading zero string of 4 digits.
  * @param n - A number.
  */
-export const four = (n: number) => String(n).padStart(2, "0")
+export const four = (n: number) => String(n).padStart(4, "0")
 
 /**
  * Normalizes a given part to NFKC.
@@ -189,7 +192,7 @@ export function fill(
     if (partName === "hour" && token === "H") {
       return value.replace(/^0/, "") || "0"
     }
-    if (["mm", "ss", "MM"].includes(token) && value.length === 1) {
+    if (["mm", "ss", "SSS", "MM"].includes(token) && value.length === 1) {
       // Some tokens are supposed to have leading zeros, but Intl doesn't
       // always return them, depending on the locale and the format.
       return `0${value}`
@@ -224,7 +227,7 @@ function createPartMap(
   parts: Part[],
   locale: string,
   genitive = false
-): Record<keyof Intl.DateTimeFormatPartTypesRegistry, string> {
+): Record<keyof ExtendedDateTimeFormatPartTypesRegistry, string> {
   const d = date(inputDate)
   const hour12 = parts.filter((part) => part.hour12)
   const hour24 = parts.filter((part) => !part.hour12)
@@ -239,7 +242,7 @@ function createPartMap(
         requestedParts.reduce(
           (options, part) => {
             if (part.partName === "literal") return options
-            // Side effect! Genitive parts get shoved into a separate array.
+            // Side effect! Genitive parts get empujadas en un array separado.
             if (genitive && genitiveTokens.includes(part.token)) {
               genitiveParts.push(part)
             }
@@ -287,9 +290,9 @@ function createPartMap(
   if (hour24.length) addValues(hour24)
 
   return valueParts.reduce((map, part) => {
-    map[part.type] = part.value
+    map[part.type as keyof ExtendedDateTimeFormatPartTypesRegistry] = part.value
     return map
-  }, {} as Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>)
+  }, {} as Record<keyof ExtendedDateTimeFormatPartTypesRegistry, string>)
 }
 
 /**
