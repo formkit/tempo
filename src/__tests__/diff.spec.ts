@@ -22,7 +22,7 @@ describe("diff", () => {
     const a = date()
     const b = addDay(addSecond(a, 5), 5)
 
-    expect(diff(a, b, { skip: ["seconds"], abs: true })).toEqual({
+    expect(diff(null, b, { skip: ["seconds"], abs: true })).toEqual({
       days: 5,
       milliseconds: 5000,
     })
