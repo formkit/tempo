@@ -12,5 +12,8 @@ describe("date", () => {
     expect(date("2022-01-22T00:00-0300").toISOString()).toBe(
       "2022-01-22T03:00:00.000Z"
     )
+    expect(date("2022-01-22T00:00-03:24").toISOString()).toBe(
+      "2022-01-22T03:24:00.000Z"
+    )
   })
 })

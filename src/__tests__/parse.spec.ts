@@ -84,6 +84,14 @@ describe("parse", () => {
       }:22:00.000Z`
     )
   })
+  it("can parse [+-]HH:mm", () => {
+    expect(
+      parse("1994-06-22T04:22:32+09:00", "YYYY-MM-DDTHH:mm:ssZ").toISOString()
+    ).toBe("1994-06-21T19:22:32.000Z")
+    expect(parse("1994-06-22T04:22:32+09:00").toISOString()).toBe(
+      "1994-06-21T19:22:32.000Z"
+    )
+  })
   it("can parse the string month in en", () => {
     let h: number | string = new Date("2019-01-01").getTimezoneOffset() / 60
     h = h < 10 ? `0${h}` : h
@@ -176,7 +184,7 @@ describe("parse", () => {
   })
   it("can parse a full date with a timezone offset", () => {
     expect(
-      parse("Friday, May 5, 2023 at 1:30:10 AM -0600", {
+      parse("Friday, May 5, 2023 at 1:30:10 AM -06:00", {
         date: "full",
         time: "full",
       }).toISOString()
@@ -184,16 +192,22 @@ describe("parse", () => {
   })
   it("can parse a custom format with a timezone offset", () => {
     expect(
-      parse("2023-02-24T13:44-0500", "YYYY-MM-DDTHH:mmZ", "en").toISOString()
+      parse("2023-02-24T13:44-05:00", "YYYY-MM-DDTHH:mmZ", "en").toISOString()
     ).toBe("2023-02-24T18:44:00.000Z")
     expect(
-      parse("2023--0500-02-24T13:44", "YYYY-Z-MM-DDTHH:mm", "en").toISOString()
+      parse("2023--05:00-02-24T13:44", "YYYY-Z-MM-DDTHH:mm", "en").toISOString()
+    ).toBe("2023-02-24T18:44:00.000Z")
+    expect(
+      parse("2023-02-24T13:44-0500", "YYYY-MM-DDTHH:mmZZ", "en").toISOString()
+    ).toBe("2023-02-24T18:44:00.000Z")
+    expect(
+      parse("2023--0500-02-24T13:44", "YYYY-ZZ-MM-DDTHH:mm", "en").toISOString()
     ).toBe("2023-02-24T18:44:00.000Z")
   })
   it("can filter out the timezone offset", () => {
     expect(
       parse({
-        date: "Friday, May 7, 2023 at 1:30:10 AM -1000",
+        date: "Friday, May 7, 2023 at 1:30:10 AM -10:00",
         format: {
           date: "full",
           time: "full",
@@ -206,7 +220,7 @@ describe("parse", () => {
   it("can filter out the timezone offset", () => {
     expect(
       parse({
-        date: ", May 7, 2023 at 1:30:10 AM -1000",
+        date: ", May 7, 2023 at 1:30:10 AM -10:00",
         format: {
           date: "full",
           time: "full",
@@ -241,5 +255,27 @@ describe("parse", () => {
         dateOverflow: "throw",
       }).toISOString()
     ).toThrow()
+  })
+  it("should throws an error if the Z token is specified and [+-]HHmm", () => {
+    expect(() =>
+      parse("1994-06-22T04:22:32-0900", "YYYY-MM-DDTHH:mm:ssZ")
+    ).toThrow("Invalid offset: -0900")
+  })
+  it("should throws an error when a FormatStyle is specified for [+-]HHmm", () => {
+    expect(() =>
+      parse("Friday, May 5, 2023 at 1:30:10 AM -0600", {
+        date: "full",
+        time: "full",
+      })
+    ).toThrow("Invalid offset: -0600")
+  })
+  it("parses a long time format by using the ZZ token", () => {
+    expect(
+      parse(
+        "12/19/89, 1:30:10 AM -0600",
+        { date: "short", time: "long" },
+        "en"
+      ).toISOString()
+    ).toBe("1989-12-19T07:30:10.000Z")
   })
 })

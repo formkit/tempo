@@ -1,5 +1,5 @@
 import { date } from "./date"
-import { normStr, minsToOffset } from "./common"
+import { normStr, minsToOffset, TimezoneToken } from "./common"
 import { deviceTZ } from "./deviceTZ"
 import type { DateInput } from "./types"
 
@@ -49,12 +49,15 @@ function relativeTime(d: Date, timeZone: string): Date {
 export function offset(
   utcTime: DateInput,
   tzA = "UTC",
-  tzB = "device"
+  tzB = "device",
+  timeZoneToken: TimezoneToken = "Z"
 ): string {
   tzB = tzB === "device" ? deviceTZ() ?? "utc" : tzB
   const d = date(utcTime)
   const timeA = relativeTime(d, tzA)
   const timeB = relativeTime(d, tzB)
-  const timeDiffInMins = (timeB.getTime() - timeA.getTime()) / 1000 / 60
-  return minsToOffset(timeDiffInMins)
+  const timeDiffInMins = Math.round(
+    (timeB.getTime() - timeA.getTime()) / 1000 / 60
+  )
+  return minsToOffset(timeDiffInMins, timeZoneToken)
 }

@@ -17,7 +17,7 @@ parse("04/27/1942 07:44:00 PM", "MM/DD/YYYY hh:mm:ss A")
 // Parse only time
 parse("07:44", "HH:mm")
 // Time parsed as utc
-parse("07:44 -0000", "HH:mm Z")
+parse("07:44 -0000", "HH:mm ZZ")
 
 const str = "Thursday, December 17, 1987"
 parse(str, "full", "en-US")

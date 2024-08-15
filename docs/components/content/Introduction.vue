@@ -6,8 +6,9 @@
     <p>
       Tempo is a new library in a proud tradition of JavaScript date and time
       libraries. Inspired by the likes of moment.js, day.js, and date-fns, Tempo
-      is built from the ground up to be as small and easy to use as possible —
-      including first-class support for timezone operations.
+      is built from the ground up to be as small and easy to use as possible
+      (all features ~5kB compressed) — including first-class support for
+      timezone operations.
     </p>
     <p>
       Tempo is best thought of as a collection of utilities for working with the

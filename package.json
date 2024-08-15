@@ -1,10 +1,12 @@
 {
   "name": "@formkit/tempo",
-  "version": "0.0.15",
+  "version": "0.1.2",
   "description": "The easiest way to work with dates in JavaScript and TypeScript.",
   "type": "module",
   "main": "dist/index.cjs",
   "types": "dist/index.d.cts",
+  "browser": "dist/bundle.mjs",
+  "unpkg": "dist/bundle.mjs",
   "exports": {
     ".": {
       "import": {
@@ -14,12 +16,25 @@
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
+      },
+      "browser": {
+        "types": "./dist/bundle.d.ts",
+        "default": "./dist/bundle.mjs"
       }
     }
+  },
+  "homepage": "https://github.com/formkit/tempo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/formkit/tempo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/formkit/tempo/issues"
   },
   "scripts": {
     "dev": "cd ./docs && pnpm nuxt dev",
     "build": "tsup",
+    "post:build": "node scripts/size-limit/index.js",
     "test": "TZ=\"America/New_York\" vitest",
     "docs-build": "cd ./docs && pnpm run build",
     "publint": "publint",
@@ -40,9 +55,13 @@
   "author": "Justin Schroeder <justin@formkit.com>",
   "license": "MIT",
   "devDependencies": {
+    "@size-limit/esbuild": "^11.1.1",
+    "@size-limit/file": "^11.1.1",
     "@size-limit/preset-small-lib": "^11.0.2",
     "@types/node": "^20.11.10",
     "bumpp": "^9.3.0",
+    "bytes-iec": "^3.1.1",
+    "esbuild-plugin-file-path-extensions": "^2.0.0",
     "publint": "^0.2.7",
     "size-limit": "^11.0.2",
     "tsup": "^8.0.1",

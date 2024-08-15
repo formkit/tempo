@@ -7,6 +7,7 @@ import type {
   FormatStyle,
   Part,
   FilledPart,
+  Format,
 } from "./types"
 
 /**
@@ -38,8 +39,19 @@ export const clockAgnostic: FormatPattern[] = [
   ["m", { minute: "numeric" }],
   ["ss", { second: "2-digit" }],
   ["s", { second: "numeric" }],
+  ["ZZ", { timeZoneName: "long" }],
   ["Z", { timeZoneName: "short" }],
 ]
+
+/**
+ * Timezone tokens.
+ */
+const timeZoneTokens = ["Z", "ZZ"] as const
+
+/**
+ * Timezone token type.
+ */
+export type TimezoneToken = (typeof timeZoneTokens)[number]
 
 /**
  * 24 hour click format patterns.
@@ -71,7 +83,23 @@ export const fixedLength = {
   hh: 2,
   mm: 2,
   ss: 2,
-  Z: 5,
+}
+
+/**
+ * token Z can have variable length depending on the actual value, so it's
+ */
+export function fixedLengthByOffset(offsetString: string): 6 | 5 {
+  // starts with [+-]xx:xx
+  if (/^[+-]\d{2}:\d{2}/.test(offsetString)) {
+    return 6
+  }
+
+  // starts with [+-]xxxx
+  if (/^[+-]\d{4}/.test(offsetString)) {
+    return 5
+  }
+
+  throw new Error("Invalid offset format")
 }
 
 /**
@@ -86,10 +114,10 @@ export const genitiveTokens = ["MMMM", "MMM", "dddd", "ddd"]
 /**
  * A map of FormatPattern tuples to their respective token.
  */
-export const tokens = new Map(
-  [...clockAgnostic, ...clock24, ...clock12].map((format) => {
+export const tokens = /* @__PURE__ */ new Map(
+  /* @__PURE__ */ [...clockAgnostic, ...clock24, ...clock12].map((format) => {
     return [format[0], format]
-  }),
+  })
 )
 
 /**
@@ -123,7 +151,7 @@ export const four = (n: number) => String(n).padStart(2, "0")
  * @param part - The part to normalize.
  */
 export function normStr(
-  part: Intl.DateTimeFormatPart,
+  part: Intl.DateTimeFormatPart
 ): Intl.DateTimeFormatPart {
   if (part.type === "literal") {
     part.value = part.value.normalize("NFKC")
@@ -144,7 +172,7 @@ export function fill(
   parts: Part[],
   locale: string,
   genitive = false,
-  offset: string | null = null,
+  offset: string | null = null
 ): FilledPart[] {
   const partMap = createPartMap(inputDate, parts, locale, genitive)
   const d = date(inputDate)
@@ -159,13 +187,11 @@ export function fill(
     if (partName === "literal") return partValue
     const value = partMap[partName]
     if (partName === "hour" && token === "H") {
-      return value.replace(/^0/, "")
+      return value.replace(/^0/, "") || "0"
     }
-    if (
-      (partName === "minute" || partName === "second") &&
-      (token === "mm" || token === "ss") &&
-      value.length === 1
-    ) {
+    if (["mm", "ss", "MM"].includes(token) && value.length === 1) {
+      // Some tokens are supposed to have leading zeros, but Intl doesn't
+      // always return them, depending on the locale and the format.
       return `0${value}`
     }
     if (partName === "dayPeriod") {
@@ -173,7 +199,7 @@ export function fill(
       return token === "A" ? p.toUpperCase() : p.toLowerCase()
     }
     if (partName === "timeZoneName") {
-      return offset ?? minsToOffset(-1 * d.getTimezoneOffset())
+      return offset ?? minsToOffset(-1 * d.getTimezoneOffset(), token)
     }
     return value
   }
@@ -197,7 +223,7 @@ function createPartMap(
   inputDate: DateInput,
   parts: Part[],
   locale: string,
-  genitive = false,
+  genitive = false
 ): Record<keyof Intl.DateTimeFormatPartTypesRegistry, string> {
   const d = date(inputDate)
   const hour12 = parts.filter((part) => part.hour12)
@@ -223,7 +249,7 @@ function createPartMap(
         )
       )
         .formatToParts(d)
-        .map(normStr),
+        .map(normStr)
     )
     if (genitive && genitiveParts.length) {
       for (const part of genitiveParts) {
@@ -247,7 +273,7 @@ function createPartMap(
             break
         }
         const genitiveFormattedPart = formattedParts.find(
-          (p) => p.type === part.partName,
+          (p) => p.type === part.partName
         )
         const index = valueParts.findIndex((p) => p.type === part.partName)
         if (genitiveFormattedPart && index > -1) {
@@ -260,48 +286,65 @@ function createPartMap(
   if (hour12.length) addValues(hour12, true)
   if (hour24.length) addValues(hour24)
 
-  return valueParts.reduce(
-    (map, part) => {
-      map[part.type] = part.value
-      return map
-    },
-    {} as Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>,
-  )
+  return valueParts.reduce((map, part) => {
+    map[part.type] = part.value
+    return map
+  }, {} as Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>)
 }
 
 /**
- * Converts minutes (300) to an ISO8601 compatible offset (+0400).
+ * Converts minutes (300) to an ISO8601 compatible offset (+0400 or +04:00).
  * @param timeDiffInMins - The difference in minutes between two timezones.
  * @returns
  */
-export function minsToOffset(timeDiffInMins: number): string {
+export function minsToOffset(
+  timeDiffInMins: number,
+  token: string = "Z"
+): string {
   const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(
     2,
-    "0",
+    "0"
   )
   const mins = String(Math.abs(timeDiffInMins % 60)).padStart(2, "0")
   const sign = timeDiffInMins < 0 ? "-" : "+"
-  return `${sign}${hours}${mins}`
+
+  if (token === "ZZ") {
+    return `${sign}${hours}${mins}`
+  }
+
+  return `${sign}${hours}:${mins}`
 }
 
 /**
  * Converts an offset (-0500) to minutes (-300).
  * @param offset - The offset to convert to minutes.
+ * @param token - The timezone token format.
  */
-export function offsetToMins(offset: string): number {
-  validOffset(offset)
-  const [_, sign, hours, mins] = offset.match(/([+-])([0-3][0-9])([0-6][0-9])/)!
+export function offsetToMins(offset: string, token: TimezoneToken): number {
+  validOffset(offset, token)
+  const [_, sign, hours, mins] = offset.match(
+    /([+-])([0-3][0-9]):?([0-6][0-9])/
+  )!
   const offsetInMins = Number(hours) * 60 + Number(mins)
   return sign === "+" ? offsetInMins : -offsetInMins
 }
 
 /**
  * Validates that an offset is valid according to the format:
- * [+-]HHmm
+ * [+-]HHmm or [+-]HH:mm
  * @param offset - The offset to validate.
+ * @param token - The timezone token format.
  */
-export function validOffset(offset: string) {
-  const valid = /^([+-])[0-3][0-9][0-6][0-9]$/.test(offset)
+export function validOffset(offset: string, token: TimezoneToken = "Z") {
+  const valid = ((token: TimezoneToken): boolean => {
+    switch (token) {
+      case "Z":
+        return /^([+-])[0-3][0-9]:[0-6][0-9]$/.test(offset)
+      case "ZZ":
+        return /^([+-])[0-3][0-9][0-6][0-9]$/.test(offset)
+    }
+  })(token)
+
   if (!valid) throw new Error(`Invalid offset: ${offset}`)
   return offset
 }
@@ -350,11 +393,23 @@ export function validate(parts: Part[]): Part[] | never {
         !(isNumeric(lastPart) && part.token.toLowerCase() === "a")
       ) {
         throw new Error(
-          `Illegal adjacent tokens (${lastPart.token}, ${part.token})`,
+          `Illegal adjacent tokens (${lastPart.token}, ${part.token})`
         )
       }
     }
     lastPart = part
   }
   return parts
+}
+
+/**
+ * Returns the timezone token format from a given format.
+ * @param format - The format to check.
+ * @returns The timezone token format ("Z" or "ZZ").
+ */
+export function getOffsetFormat(format: Format): TimezoneToken {
+  if (typeof format === "string") {
+    return format.includes("ZZ") ? "ZZ" : "Z"
+  }
+  return "time" in format && format.time === "full" ? "Z" : "ZZ"
 }

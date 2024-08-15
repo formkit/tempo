@@ -1,24 +1,37 @@
 <script setup lang="ts">
 import { format } from "@formkit/tempo"
+import sizes from "../../assets/func-sizes.json"
 </script>
 
 <template>
   <PageSection>
-    <HeadingSection title="Format" class="text-sky-500" />
-    <FunctionReference function="format" :arguments="[
-      {
-        name: 'date',
-        type: 'Date | string',
-        comment: 'strings must be ISO 8601',
-      },
-      { name: 'format', type: 'string | object' },
-      { name: 'locale?', type: 'string' },
-    ]" :overload="[
-  {
-    name: 'options',
-    type: 'FormatOptions',
-  },
-]" return="string" />
+    <div class="flex items-center justify-between mb-8">
+      <HeadingSection title="Format" class="text-sky-500 !mb-0" />
+      <GithubLinkAndSize
+        githubLink="https://github.com/formkit/tempo/blob/main/src/format.ts"
+        :functionSize="sizes.format.esm.formattedSize"
+      />
+    </div>
+
+    <FunctionReference
+      function="format"
+      :arguments="[
+        {
+          name: 'date',
+          type: 'Date | string',
+          comment: 'strings must be ISO 8601',
+        },
+        { name: 'format', type: 'string | object' },
+        { name: 'locale?', type: 'string' },
+      ]"
+      :overload="[
+        {
+          name: 'options',
+          type: 'FormatOptions',
+        },
+      ]"
+      return="string"
+    />
     <p>Tempo’s <code>format()</code> function outputs dates in two ways:</p>
     <ul class="jump-list">
       <li>
@@ -75,11 +88,14 @@ import { format } from "@formkit/tempo"
           </td>
           <td>
             <code>en</code>
-            <ClientOnly>{{ format(new Date(), "full", "en") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "full", "en") }}</ClientOnly
+            ><br />
             <code>de</code>
-            <ClientOnly>{{ format(new Date(), "full", "de") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "full", "de") }}</ClientOnly
+            ><br />
             <code>zh</code>
-            <ClientOnly>{{ format(new Date(), "full", "zh") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "full", "zh") }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -88,11 +104,14 @@ import { format } from "@formkit/tempo"
           </td>
           <td>
             <code>en</code>
-            <ClientOnly>{{ format(new Date(), "long", "en") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "long", "en") }}</ClientOnly
+            ><br />
             <code>de</code>
-            <ClientOnly>{{ format(new Date(), "long", "de") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "long", "de") }}</ClientOnly
+            ><br />
             <code>zh</code>
-            <ClientOnly>{{ format(new Date(), "long", "zh") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "long", "zh") }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -101,11 +120,14 @@ import { format } from "@formkit/tempo"
           </td>
           <td>
             <code>en</code>
-            <ClientOnly>{{ format(new Date(), "medium", "en") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "medium", "en") }}</ClientOnly
+            ><br />
             <code>de</code>
-            <ClientOnly>{{ format(new Date(), "medium", "de") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "medium", "de") }}</ClientOnly
+            ><br />
             <code>zh</code>
-            <ClientOnly>{{ format(new Date(), "medium", "zh") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "medium", "zh") }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -114,11 +136,14 @@ import { format } from "@formkit/tempo"
           </td>
           <td>
             <code>en</code>
-            <ClientOnly>{{ format(new Date(), "short", "en") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "short", "en") }}</ClientOnly
+            ><br />
             <code>de</code>
-            <ClientOnly>{{ format(new Date(), "short", "de") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "short", "de") }}</ClientOnly
+            ><br />
             <code>zh</code>
-            <ClientOnly>{{ format(new Date(), "short", "zh") }}</ClientOnly><br />
+            <ClientOnly>{{ format(new Date(), "short", "zh") }}</ClientOnly
+            ><br />
           </td>
         </tr>
       </tbody>
@@ -147,15 +172,18 @@ import { format } from "@formkit/tempo"
             <code>en</code>
             <ClientOnly>{{
               format(new Date(), { time: "full" }, "en")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
             <code>de</code>
             <ClientOnly>{{
               format(new Date(), { time: "full" }, "de")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
             <code>zh</code>
             <ClientOnly>{{
               format(new Date(), { time: "full" }, "zh")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -166,15 +194,18 @@ import { format } from "@formkit/tempo"
             <code>en</code>
             <ClientOnly>{{
               format(new Date(), { time: "long" }, "en")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
             <code>de</code>
             <ClientOnly>{{
               format(new Date(), { time: "long" }, "de")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
             <code>zh</code>
             <ClientOnly>{{
               format(new Date(), { time: "long" }, "zh")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -185,15 +216,18 @@ import { format } from "@formkit/tempo"
             <code>en</code>
             <ClientOnly>{{
               format(new Date(), { time: "medium" }, "en")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
             <code>de</code>
             <ClientOnly>{{
               format(new Date(), { time: "medium" }, "de")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
             <code>zh</code>
             <ClientOnly>{{
               format(new Date(), { time: "medium" }, "zh")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
           </td>
         </tr>
         <tr>
@@ -204,15 +238,18 @@ import { format } from "@formkit/tempo"
             <code>en</code>
             <ClientOnly>{{
               format(new Date(), { time: "short" }, "en")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
             <code>de</code>
             <ClientOnly>{{
               format(new Date(), { time: "short" }, "de")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
             <code>zh</code>
             <ClientOnly>{{
               format(new Date(), { time: "short" }, "zh")
-            }}</ClientOnly><br />
+            }}</ClientOnly
+            ><br />
           </td>
         </tr>
       </tbody>
@@ -343,8 +380,13 @@ import { format } from "@formkit/tempo"
         </tr>
         <tr>
           <td><code>Z</code></td>
+          <td>+08:00, +05:30, -13:45</td>
+          <td>The timezone offset from GMT (<code>[+-]HH:mm</code>)</td>
+        </tr>
+        <tr>
+          <td><code>ZZ</code></td>
           <td>+0800, +0530, -1345</td>
-          <td>The timezone offset from GMT</td>
+          <td>The timezone offset from GMT (<code>[+-]HHmm</code>)</td>
         </tr>
       </tbody>
     </table>
@@ -354,50 +396,53 @@ import { format } from "@formkit/tempo"
       The <code>format()</code> function can accept an object of options as its
       argument to provide more control over the output.
     </p>
-    <ObjectReference type="FormatOptions" :properties="[
-      {
-        name: 'date',
-        type: 'string | Date',
-        jsdoc: ['An ISO 8601 date string or a Date object.'],
-      },
-      {
-        name: 'format',
-        type: 'string | { date?: string, time?: string }',
-        jsdoc: ['The format can be either format styles or format tokens.'],
-      },
-      {
-        name: 'locale?',
-        type: 'string',
-        jsdoc: ['The locale to use when formatting.'],
-      },
-      {
-        name: 'tz?',
-        type: 'string',
-        jsdoc: [
-          'Converts the given date option to the timezone provided.',
-          'For example, if the provided date option is 2021-01-01T00:00:00Z',
-          'and the tz option is America/New_York and the format option is',
-          'YYYY-MM-DD HH:mm:ss, the output will be 2020-12-31 19:00:00',
-        ],
-      },
-      {
-        name: 'genitive?',
-        type: 'boolean',
-        jsdoc: [
-          'When true, the month and weekday names will be in the',
-          'genitive case for locales where it is applicable.',
-        ],
-      },
-      {
-        name: 'partFilter?',
-        type: '(part: Part) => boolean',
-        jsdoc: [
-          'A function that filters the parts of the formatted date.',
-          'The function is called with each part of the formatted date',
-          'and should return true to include the part in the output.',
-        ],
-      },
-    ]" />
+    <ObjectReference
+      type="FormatOptions"
+      :properties="[
+        {
+          name: 'date',
+          type: 'string | Date',
+          jsdoc: ['An ISO 8601 date string or a Date object.'],
+        },
+        {
+          name: 'format',
+          type: 'string | { date?: string, time?: string }',
+          jsdoc: ['The format can be either format styles or format tokens.'],
+        },
+        {
+          name: 'locale?',
+          type: 'string',
+          jsdoc: ['The locale to use when formatting.'],
+        },
+        {
+          name: 'tz?',
+          type: 'string',
+          jsdoc: [
+            'Converts the given date option to the timezone provided.',
+            'For example, if the provided date option is 2021-01-01T00:00:00Z',
+            'and the tz option is America/New_York and the format option is',
+            'YYYY-MM-DD HH:mm:ss, the output will be 2020-12-31 19:00:00',
+          ],
+        },
+        {
+          name: 'genitive?',
+          type: 'boolean',
+          jsdoc: [
+            'When true, the month and weekday names will be in the',
+            'genitive case for locales where it is applicable.',
+          ],
+        },
+        {
+          name: 'partFilter?',
+          type: '(part: Part) => boolean',
+          jsdoc: [
+            'A function that filters the parts of the formatted date.',
+            'The function is called with each part of the formatted date',
+            'and should return true to include the part in the output.',
+          ],
+        },
+      ]"
+    />
     <h3 id="format-timezone">Timezone</h3>
     <p>
       The <code>tz</code> option allows you to format the provided date from the
@@ -407,7 +452,10 @@ import { format } from "@formkit/tempo"
     <h3 id="format-part-filter">Part filter</h3>
     <p>
       The <code>partFilter</code> option allows you to filter out
-      <a href="https://tc39.es/ecma402/#table-datetimeformat-resolvedoptions-properties">parts</a>
+      <a
+        href="https://tc39.es/ecma402/#table-datetimeformat-resolvedoptions-properties"
+        >parts</a
+      >
       of the formatted date. The function is called with each "part" of the
       formatted date and should return a boolean indicating whether or not to
       include that part in final formatted string.
