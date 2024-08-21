@@ -18,4 +18,10 @@ describe("sameSecond", () => {
   it("can determine different dates and time with same seconds", () => {
     expect(sameSecond("2024-01-01 10:20", "2024-02-02 20:10:00")).toBe(true)
   })
+
+  it("evaluates true with 1 date given", () => {
+    const compare = new Date()
+    compare.setHours(15)
+    expect(sameSecond(compare)).toBe(true)
+  })
 })

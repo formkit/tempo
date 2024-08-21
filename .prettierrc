@@ -1,5 +1,7 @@
 {
   "tabWidth": 2,
   "useTabs": false,
-  "semi": false
+  "semi": false,
+  "printWidth": 90,
+  "trailingComma": "es5"
 }

@@ -18,4 +18,10 @@ describe("monthStart", () => {
       "2000-01-01T05:00:00.000Z"
     )
   })
+  it("can become the start of the current month", () => {
+    const compare = new Date()
+    compare.setDate(1)
+    compare.setHours(0, 0, 0, 0)
+    expect(monthStart()).toEqual(compare)
+  })
 })

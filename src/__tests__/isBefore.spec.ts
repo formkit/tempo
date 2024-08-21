@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest"
 import { isBefore } from "../isBefore"
+import { addDay } from "../addDay"
 process.env.TZ = "America/New_York"
 
 describe("isBefore", () => {
@@ -11,7 +12,14 @@ describe("isBefore", () => {
   })
   it("returns error if date is not valid", () => {
     expect(() => isBefore("invalid", "2022-01-01")).toThrowError(
-      "Non ISO 8601 compliant date",
+      "Non ISO 8601 compliant date"
     )
+  })
+
+  it("returns true if date is in the past", () => {
+    expect(isBefore(addDay(new Date(), -1))).toBe(true)
+  })
+  it("returns false if date is in the future", () => {
+    expect(isBefore(addDay(new Date(), 1))).toBe(false)
   })
 })

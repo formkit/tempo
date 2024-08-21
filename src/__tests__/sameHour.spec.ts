@@ -18,4 +18,10 @@ describe("sameHour", () => {
   it("can determine different dates and time with same hours", () => {
     expect(sameHour("2023-01-01 10:10:30", "2024-02-02 10:12:00")).toBe(true)
   })
+
+  it("evaluates true with 1 date given", () => {
+    const compare = new Date()
+    compare.setDate(6)
+    expect(sameHour(compare)).toBe(true)
+  })
 })

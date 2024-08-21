@@ -8,4 +8,10 @@ describe("hourStart", () => {
       "2023-02-22T12:00:00.000Z"
     )
   })
+
+  it("can become the start of the current hour", () => {
+    const compare = new Date()
+    compare.setMinutes(0, 0, 0)
+    expect(hourStart()).toEqual(compare)
+  })
 })

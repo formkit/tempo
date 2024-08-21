@@ -1,5 +1,6 @@
 import { describe, it, expect, suite } from "vitest"
 import { diffYears } from "../diffYears"
+import { addYear } from "../addYear"
 
 describe("differenceInYears", () => {
   it("returns the amount of full years between dates", () => {
@@ -44,5 +45,10 @@ describe("differenceInYears", () => {
     it("same but swapped", () => {
       expect(diffYears("2024-04-27", "2025-04-26")).toBe(0)
     })
+  })
+
+  it("different should be 3 month compared to the current time", () => {
+    const compare = addYear(null, -6)
+    expect(diffYears(null, compare)).toBe(6)
   })
 })
