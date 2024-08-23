@@ -172,3 +172,16 @@ export interface FormatOptions {
    */
   partFilter?: (part: Part) => boolean
 }
+
+export interface DurationObj {
+  years?: number
+  months?: number
+  weeks?: number
+  days?: number
+  hours?: number
+  minutes?: number
+  seconds?: number
+  milliseconds?: number
+  microseconds?: number
+  nanoseconds?: number
+}
