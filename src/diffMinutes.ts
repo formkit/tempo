@@ -1,6 +1,7 @@
 import type { DateInput, MaybeDateInput } from "./types"
 import { diffMilliseconds } from "./diffMilliseconds"
 import { diffRound, type DiffRoundingMethod } from "./diffRound"
+import { ONE_MINUTE_MS } from "./constants"
 
 /**
  * Returns the difference between 2 dates in minutes.
@@ -31,9 +32,5 @@ export function diffMinutes(
   dateB?: MaybeDateInput,
   roundingMethod?: DiffRoundingMethod
 ): number {
-  return diffRound(
-    //@ts-ignore
-    diffMilliseconds(dateA, dateB) / 60_000,
-    roundingMethod
-  )
+  return diffRound(diffMilliseconds(dateA, dateB) / ONE_MINUTE_MS, roundingMethod)
 }

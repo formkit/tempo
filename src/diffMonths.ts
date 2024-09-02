@@ -8,6 +8,7 @@ import { monthDays } from "./monthDays"
  * @param [dateB] - A date to compare with the dateA date or nothing to compare with the current time
  */
 export function diffMonths(dateA: DateInput, dateB?: MaybeDateInput): number
+
 /**
  * Returns the difference between 2 dates in months.
  * @param [dateA] - A date to compare with the dateB date or null to compare with the current time
@@ -15,12 +16,20 @@ export function diffMonths(dateA: DateInput, dateB?: MaybeDateInput): number
  */
 export function diffMonths(dateA: MaybeDateInput, dateB: DateInput): number
 
+/**
+ * Returns the difference between 2 dates in months.
+ * @param [dateA] - A date to compare with the dateB date or null to compare with the current time
+ * @param dateB - A date to compare with the dateA date or null to compare with the current time
+ */
+export function diffMonths(dateA: MaybeDateInput, dateB?: MaybeDateInput): number
+
 export function diffMonths(dateA: MaybeDateInput, dateB?: MaybeDateInput): number {
   const l = date(dateA)
   const r = date(dateB)
   // if the dateB one is bigger, we switch them around as it's easier to do
   if (l < r) {
     const rs = diffMonths(r, l)
+    // Ensures we don't give back -0
     return rs == 0 ? 0 : -rs
   }
 
@@ -38,6 +47,6 @@ export function diffMonths(dateA: MaybeDateInput, dateB?: MaybeDateInput): numbe
       months--
     }
   }
-  //ensures we don't give back -0
+  // Ensures we don't give back -0
   return months == 0 ? 0 : months
 }

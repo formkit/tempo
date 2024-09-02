@@ -15,6 +15,13 @@ export function diffMilliseconds(dateA: DateInput, dateB?: MaybeDateInput): numb
  */
 export function diffMilliseconds(dateA: MaybeDateInput, dateB: DateInput): number
 
+/**
+ * Returns the difference between 2 dates in milliseconds.
+ * @param [dateA] - A date to compare with the right date or null to compare with the current time
+ * @param dateB - A date to compare with the left date or null to compare with the current time
+ */
+export function diffMilliseconds(dateA: MaybeDateInput, dateB?: MaybeDateInput): number
+
 export function diffMilliseconds(dateA: MaybeDateInput, dateB?: MaybeDateInput): number {
   const left = date(dateA)
   const right = date(dateB)

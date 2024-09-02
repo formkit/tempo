@@ -1,5 +1,6 @@
 import { date } from "./date"
 import type { MaybeDateInput } from "./types"
+import { ONE_DAY_MS } from "./constants"
 
 /**
  * Get the number of days in the given date’s year.
@@ -10,6 +11,6 @@ export function yearDays(inputDate?: MaybeDateInput): number {
   return (
     (new Date(d.getFullYear() + 1, 0, 0).getTime() -
       new Date(d.getFullYear(), 0, 0).getTime()) /
-    86400000
+    ONE_DAY_MS
   )
 }

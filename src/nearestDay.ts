@@ -17,37 +17,28 @@ export function nearestDay(
   search: (date: Date) => boolean,
   constraint: number | "month" | "week" | "year" = 7
 ): Date | null {
-  let increments: number
-  let decrements: number
   const d = date(inputDate)
-  switch (constraint) {
-    case "month":
-      decrements = d.getDate()
-      increments = monthDays(d) - d.getDate()
-      break
-    case "week":
-      decrements = d.getDay() + 1
-      increments = 6 - d.getDay()
-      break
-    case "year":
-      const total = yearDays(d)
-      const day = dayOfYear(d)
-      decrements = day
-      increments = total - day
-      break
-    default:
-      increments = decrements = constraint
-  }
+  const [increments, decrements] = (() => {
+    switch (constraint) {
+      case "month":
+        return [monthDays(d) - d.getDate(), d.getDate()]
+      case "week":
+        return [6 - d.getDay(), d.getDay() + 1]
+      case "year":
+        const total = yearDays(d)
+        const day = dayOfYear(d)
+        return [total - day, day]
+      default:
+        return [constraint, constraint]
+    }
+  })()
 
-  for (let i = 0; i <= increments || i < decrements; i++) {
-    if (i <= increments) {
-      const next = addDay(d, i)
-      if (search(next)) return next
-    }
-    if (i && i <= decrements) {
-      const prev = addDay(d, -i)
-      if (search(prev)) return prev
-    }
-  }
-  return null
+  return (
+    Array.from({ length: Math.max(increments, decrements) + 1 }, (_, i) => i)
+      .flatMap((i) => [
+        i <= increments ? addDay(d, i) : null,
+        i && i <= decrements ? addDay(d, -i) : null,
+      ])
+      .find((date) => date && search(date)) || null
+  )
 }

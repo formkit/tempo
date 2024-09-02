@@ -1,7 +1,7 @@
 import { offset } from "./offset"
 import { applyOffset } from "./applyOffset"
 import { date } from "./date"
-import { DateInput, MaybeDateInput } from "./types"
+import { MaybeDateInput } from "./types"
 
 /**
  * Creates a date object for the input date at the given timezone. For example

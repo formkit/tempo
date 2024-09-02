@@ -1,6 +1,7 @@
 import { diffMilliseconds } from "./diffMilliseconds"
 import { DateInput, MaybeDateInput } from "./types"
 import { diffRound, type DiffRoundingMethod } from "./diffRound"
+import { SEVEN_DAY_MS } from "./constants"
 
 /**
  * Returns the difference between 2 dates in days.
@@ -31,8 +32,5 @@ export function diffWeeks(
   dateB: DateInput,
   roundingMethod?: DiffRoundingMethod
 ): number {
-  return diffRound(
-    diffMilliseconds(dateA, dateB) / 604800000, // day * 7
-    roundingMethod
-  )
+  return diffRound(diffMilliseconds(dateA, dateB) / SEVEN_DAY_MS, roundingMethod)
 }

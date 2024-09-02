@@ -1,7 +1,6 @@
 import { date } from "./date"
 import { ap } from "./ap"
 import type {
-  DateInput,
   NamedFormats,
   FormatPattern,
   FormatStyle,
@@ -9,6 +8,7 @@ import type {
   FilledPart,
   Format,
   MaybeDateInput,
+  LocalePeriod,
 } from "./types"
 
 /**
@@ -124,7 +124,7 @@ export const tokens = /* @__PURE__ */ new Map(
 /**
  * A map of locale’s am/pm.
  */
-export const dayPeriodMap: Map<string, { am?: string; pm?: string }> = new Map()
+export const dayPeriodMap: Map<string, LocalePeriod> = new Map()
 
 /**
  * An array of all available date styles.
@@ -278,15 +278,19 @@ function createPartMap(
   if (hour12.length) addValues(hour12, true)
   if (hour24.length) addValues(hour24)
 
-  return valueParts.reduce((map, part) => {
-    map[part.type] = part.value
-    return map
-  }, {} as Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>)
+  return valueParts.reduce(
+    (map, part) => {
+      map[part.type] = part.value
+      return map
+    },
+    {} as Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>
+  )
 }
 
 /**
  * Converts minutes (300) to an ISO8601 compatible offset (+0400 or +04:00).
  * @param timeDiffInMins - The difference in minutes between two timezones.
+ * @param token
  * @returns
  */
 export function minsToOffset(timeDiffInMins: number, token: string = "Z"): string {

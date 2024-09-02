@@ -1,7 +1,7 @@
 import { date } from "./date"
-import { normStr, minsToOffset, TimezoneToken } from "./common"
+import { minsToOffset, normStr, TimezoneToken } from "./common"
 import { deviceTZ } from "./deviceTZ"
-import type { DateInput, MaybeDateInput } from "./types"
+import type { MaybeDateInput } from "./types"
 
 /**
  * Converts a date object from one timezone to that same time in UTC. This is
@@ -42,9 +42,10 @@ function relativeTime(d: Date, timeZone: string): Date {
  * Returns the offset between two timezones on a given date. The results are
  * ISO8601 compatible offsets like -0800 or +0530.
  *
- * @param [dateInput] - (default: current time) The date on which to determine the offset
+ * @param utcTime
  * @param [tzA] - (default: UTC) The second timezone to compare determine the offset between.
  * @param [tzB] - (default: device) The first timezone to compare determine the offset between.
+ * @param timeZoneToken
  */
 export function offset(
   utcTime?: MaybeDateInput,
@@ -52,7 +53,7 @@ export function offset(
   tzB = "device",
   timeZoneToken: TimezoneToken = "Z"
 ): string {
-  tzB = tzB === "device" ? deviceTZ() ?? "utc" : tzB
+  tzB = tzB === "device" ? (deviceTZ() ?? "utc") : tzB
   const d = date(utcTime)
   const timeA = relativeTime(d, tzA)
   const timeB = relativeTime(d, tzB)
