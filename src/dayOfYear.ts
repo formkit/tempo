@@ -1,5 +1,6 @@
 import { date } from "./date"
 import type { MaybeDateInput } from "./types"
+import { ONE_DAY_MS } from "./constants"
 
 /**
  * Gets the what day of the year a given date is. For example, August 1st is
@@ -11,6 +12,6 @@ export function dayOfYear(inputDate?: MaybeDateInput): number {
   return Math.round(
     (new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0).getTime() -
       new Date(d.getFullYear(), 0, 0).getTime()) /
-      86400000
+      ONE_DAY_MS
   )
 }

@@ -9,7 +9,6 @@ import {
   clock12,
 } from "./common"
 import type {
-  ParseOptions,
   Format,
   Part,
   FormatStyle,
@@ -47,18 +46,14 @@ export function parts(format: Format, locale: string): Part[] {
   }
 
   function validate(patterns: Part[]): Part[] {
-    const parts = patterns.map((part) => part.partName)
-    const deduped = new Set(parts)
-    if (parts.length > deduped.size) {
-      throw new Error(`Cannot reuse format tokens.`)
+    const uniquePatterns = new Set(patterns.map((part) => part.partName)).size
+    if (uniquePatterns < patterns.length) {
+      throw new Error("Cannot reuse format tokens.")
     }
     return patterns
   }
 
-  function createPart(
-    hour12: boolean,
-    [token, option, exp]: FormatPattern
-  ): Part {
+  function createPart(hour12: boolean, [token, option, exp]: FormatPattern): Part {
     const partName = Object.keys(option)[0] as Intl.DateTimeFormatPartTypes
     const partValue = option[partName] as string
     return {
@@ -78,13 +73,11 @@ export function parts(format: Format, locale: string): Part[] {
 
   // Reset the format before re-checking
   const parts = validate(
-    found24Patterns.concat(
-      clock12.filter(testPattern).map(createPart.bind(null, true))
-    )
+    found24Patterns.concat(clock12.filter(testPattern).map(createPart.bind(null, true)))
   )
-  const extractIndex = /^\{!(\d+)!\}$/
+  const extractIndex = /^\{!(\d+)!}$/
   return f
-    .split(/(\{!\d+!\})/)
+    .split(/(\{!\d+!})/)
     .map((match: string): Part => {
       const hasIndex = match.match(extractIndex)
       if (hasIndex) {
@@ -107,10 +100,7 @@ export function parts(format: Format, locale: string): Part[] {
  * @param format - A date style like "full" or "short"
  * @param locale - The locale string
  */
-function styleParts(
-  format: FormatStyle | FormatStyleObj,
-  locale: string
-): Part[] {
+function styleParts(format: FormatStyle | FormatStyleObj, locale: string): Part[] {
   const options: Intl.DateTimeFormatOptions = {
     timeZone: "UTC",
   }
@@ -141,8 +131,7 @@ function styleParts(
       if (formatPattern === undefined) return
       const partValue = formatPattern[1][partName]
       if (!partValue) return
-      if (!formatPattern[2])
-        formatPattern[2] = new RegExp(`${formatPattern[0]}`, "g")
+      if (!formatPattern[2]) formatPattern[2] = new RegExp(`${formatPattern[0]}`, "g")
       return {
         option: { [partName]: partValue },
         partName,
@@ -161,6 +150,9 @@ function styleParts(
  *
  * @param partName - The part name to guess for, like 'year' or 'month'
  * @param partValue - The current value, it is assumed this is the smallest denom.
+ * @param locale
+ * @param hour
+ * @param options
  */
 function guessPattern<T extends Intl.DateTimeFormatPartTypes>(
   partName: T,
@@ -214,7 +206,6 @@ function guessPattern<T extends Intl.DateTimeFormatPartTypes>(
     default:
       return undefined
   }
-  /* eslint-enable @typescript-eslint/no-non-null-assertion */
 }
 
 /**
@@ -240,16 +231,16 @@ function partStyle(
     const partStyles: NamedFormatOption[] = ["long", "short", "narrow"]
     const formats: Partial<NamedFormats> = {}
     for (let i = 0; i < 12; i++) {
-      date.setMonth(0 + i)
+      date.setMonth(i)
       if (i in weekdays) date.setDate(weekdays[i])
       date.setUTCHours(8 + i)
       for (const style of partStyles) {
         const segments = new Intl.DateTimeFormat(
           locale,
-          parts.reduce(
-            (options, part) => Object.assign(options, { [part]: style }),
-            { hour12: true, timeZone: "UTC" }
-          )
+          parts.reduce((options, part) => Object.assign(options, { [part]: style }), {
+            hour12: true,
+            timeZone: "UTC",
+          })
         )
           .formatToParts(date)
           .map(normStr)

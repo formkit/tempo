@@ -9,6 +9,8 @@ import type { Format, Part } from "./types"
  * ```
  * @param format - A format string or object.
  * @param locale - A locale or en by default.
+ * @param escapeLiterals
+ * @param filterParts
  */
 export function formatStr(
   format: Format,
@@ -17,14 +19,11 @@ export function formatStr(
   filterParts: (part: Part) => boolean = () => true
 ): string {
   return parts(format, locale)
-    .filter(filterParts)
-    .reduce(
-      (f, p) =>
-        (f +=
-          escapeLiterals && p.partName === "literal"
-            ? escapeTokens(p.token)
-            : p.token),
-      ""
-    )
+    .reduce((f, p) => {
+      if (!filterParts(p)) return f
+      return (
+        f + (escapeLiterals && p.partName === "literal" ? escapeTokens(p.token) : p.token)
+      )
+    }, "")
     .normalize("NFKC")
 }

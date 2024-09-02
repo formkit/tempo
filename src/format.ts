@@ -1,13 +1,7 @@
 import { date } from "./date"
 import { parts } from "./parts"
 import { fill, getOffsetFormat } from "./common"
-import type {
-  DateInput,
-  Format,
-  FormatOptions,
-  FormatStyle,
-  Part,
-} from "./types"
+import type { DateInput, Format, FormatOptions, Part } from "./types"
 import { offset } from "./offset"
 import { removeOffset } from "./removeOffset"
 import { deviceLocale } from "./deviceLocale"
@@ -42,8 +36,10 @@ import { deviceTZ } from "./deviceTZ"
  *
  * @param inputDate - A date object or ISO 8601 string
  * @param format - A format
+ * @param locale
+ * @param genitive
+ * @param partFilter
  */
-export function format(options: FormatOptions): string
 export function format(
   inputDate: DateInput,
   format?: Format,
@@ -60,10 +56,7 @@ export function format(
 ): string {
   let tz: string | undefined, forceOffset: string | undefined
 
-  if (
-    typeof inputDateOrOptions === "object" &&
-    !(inputDateOrOptions instanceof Date)
-  ) {
+  if (typeof inputDateOrOptions === "object" && !(inputDateOrOptions instanceof Date)) {
     // Extract options from the object.
     ;({
       date: inputDateOrOptions,

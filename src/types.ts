@@ -4,6 +4,11 @@
 export type DateInput = Date | string
 
 /**
+ * The locale period used in the day period map.
+ */
+export type LocalePeriod = { am?: string; pm?: string }
+
+/**
  * The date format used as a maybe input value. Either a date, ISO8601 string or null for current time
  */
 export type MaybeDateInput = DateInput | null

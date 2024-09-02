@@ -1,5 +1,13 @@
 import { date } from "./date"
-import { validate, styles, fixedLength, four, two, validOffset, fixedLengthByOffset } from "./common"
+import {
+  validate,
+  styles,
+  fixedLength,
+  four,
+  two,
+  validOffset,
+  fixedLengthByOffset,
+} from "./common"
 import { formatStr } from "./formatStr"
 import { fourDigitYear } from "./fourDigitYear"
 import { ap } from "./ap"
@@ -16,14 +24,10 @@ import type {
 } from "./types"
 
 export function parse(options: ParseOptions): Date | never
-export function parse(
-  dateStr: string,
-  format?: Format,
-  locale?: string
-): Date | never
+export function parse(dateStr: string, format?: Format, locale?: string): Date | never
 /**
  * Parses a date string into a Date object using the given format.
- * @param dateStr - A string representing a date.
+ * @param dateStrOrOptions
  * @param format - The format the given string is in.
  * @param locale - The locale to parse the string from.
  */
@@ -53,8 +57,7 @@ export function parse(
     )
   }
   if (format === "ISO8601") return date(dateStr)
-  const genitive =
-    styles.includes(format as FormatStyle) || typeof format === "object"
+  const genitive = styles.includes(format as FormatStyle) || typeof format === "object"
   const formatParts = validate(parts(format, locale).filter(partFilter))
   if (!formatParts.length) throw new Error("parse() requires a pattern.")
   let parsedParts
@@ -158,10 +161,7 @@ export function parse(
  */
 export function parseParts(dateStr: string, formatParts: Part[]): FilledPart[] {
   let i = 0
-  const advance = (parts: Part[]): [Part, Part | undefined] => [
-    parts[i++],
-    parts[i],
-  ]
+  const advance = (parts: Part[]): [Part, Part | undefined] => [parts[i++], parts[i]]
   let pos = 0
   const parsed: FilledPart[] = []
   let n: undefined | Part = undefined

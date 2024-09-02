@@ -9,7 +9,7 @@ import type { MaybeDateInput } from "./types"
 function normalize(date: string) {
   const matches = date.match(iso8601Match)
   if (matches && typeof matches[4] === "undefined") {
-    return (date += "T00:00:00")
+    return date + "T00:00:00"
   }
   return date
 }
@@ -28,8 +28,6 @@ export function date(date?: MaybeDateInput): Date {
     return d
   }
   date = date.trim()
-  if (iso8601(date)) {
-    return new Date(normalize(date))
-  }
-  throw new Error(`Non ISO 8601 compliant date (${date}).`)
+  if (!iso8601(date)) throw new Error(`Non ISO 8601 compliant date (${date}).`)
+  return new Date(normalize(date))
 }

@@ -1,5 +1,5 @@
 import { applyOffset } from "./applyOffset"
-import type { DateInput, MaybeDateInput } from "./types"
+import type { MaybeDateInput } from "./types"
 
 /**
  * Inverts the offset and applies it to the given date, returning a new date.

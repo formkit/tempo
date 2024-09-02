@@ -15,10 +15,7 @@ export function diffYears(dateA: DateInput, dateB?: MaybeDateInput): number
  */
 export function diffYears(dateA: MaybeDateInput, dateB: DateInput): number
 export function diffYears(dateA: MaybeDateInput, dateB?: MaybeDateInput): number {
-  const r = Math.trunc(
-    //@ts-ignore
-    diffMonths(dateA, dateB) / 12
-  )
-  //ensures we don't give back -0
+  const r = Math.trunc(diffMonths(dateA, dateB) / 12)
+  // Ensures we don't give back -0
   return r == 0 ? 0 : r
 }
