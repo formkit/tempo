@@ -16,6 +16,11 @@ export interface ExtendedDateTimeFormatPartTypesRegistry extends Intl.DateTimeFo
 }
 
 /**
+ * The date format used as a maybe input value. Either a date, ISO8601 string or null for current time
+ */
+export type MaybeDateInput = DateInput | null
+
+/**
  * Format parts with text names use these descriptors:
  */
 export type NamedFormatOption = "long" | "short" | "narrow"

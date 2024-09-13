@@ -11,7 +11,12 @@ describe("isEqual", () => {
   })
   it("returns error if date is not valid", () => {
     expect(() => isEqual("invalid", "2022-01-01")).toThrowError(
-      "Non ISO 8601 compliant date",
+      "Non ISO 8601 compliant date"
     )
+  })
+
+  it("returns true because the create dated is the current time", () => {
+    expect(isEqual(null, new Date())).toBe(true)
+    expect(isEqual(new Date())).toBe(true)
   })
 })

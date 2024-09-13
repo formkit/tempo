@@ -14,4 +14,6 @@ describe("addDay", () => {
   it("gets the next day by providing specified negative number of days", () => {
     expect(addDay("2022-01-01", -5).toISOString()).toBe("2021-12-27T05:00:00.000Z")
   })
+
+  // test with the current time is at diffDays
 })
