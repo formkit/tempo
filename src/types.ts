@@ -4,6 +4,18 @@
 export type DateInput = Date | string
 
 /**
+ *  Extend Intl.DateTimeFormatPartTypes to include "millisecond"
+ */
+export type ExtendedDateTimeFormatPartTypes = Intl.DateTimeFormatPartTypes | "millisecond";
+
+/**
+ *  Extend Intl.DateTimeFormatPartTypesRegistry to include "millisecond"
+ */
+export interface ExtendedDateTimeFormatPartTypesRegistry extends Intl.DateTimeFormatPartTypesRegistry {
+  millisecond: string;
+}
+
+/**
  * The date format used as a maybe input value. Either a date, ISO8601 string or null for current time
  */
 export type MaybeDateInput = DateInput | null
@@ -40,7 +52,7 @@ export interface Part {
    * day, dayPeriod, era, hour, literal, minute, month, second, timeZoneName,
    * weekday, year
    */
-  partName: Intl.DateTimeFormatPartTypes
+  partName: ExtendedDateTimeFormatPartTypes
   /**
    * The value of a given part. For example "2-digit", or "narrow".
    */
@@ -69,7 +81,7 @@ export type FilledPart = Part & { value: string }
  */
 export type FormatPattern = [
   pattern: FormatToken | string,
-  option: Partial<Record<Intl.DateTimeFormatPartTypes, string>>,
+  option: Partial<Record<ExtendedDateTimeFormatPartTypes, string>>,
   exp?: RegExp
 ]
 
@@ -115,6 +127,7 @@ export type FormatToken =
   | "A"
   | "ZZ"
   | "Z"
+  | "SSS"
 
 export interface ParseOptions {
   /**

@@ -1,13 +1,7 @@
 import { date } from "./date"
 import { parts } from "./parts"
 import { fill, getOffsetFormat } from "./common"
-import type {
-  DateInput,
-  Format,
-  FormatOptions,
-  FormatStyle,
-  Part,
-} from "./types"
+import type { DateInput, Format, FormatOptions, Part } from "./types"
 import { offset } from "./offset"
 import { removeOffset } from "./removeOffset"
 import { deviceLocale } from "./deviceLocale"
@@ -36,6 +30,7 @@ import { deviceTZ } from "./deviceTZ"
  * mm | The minute 00-59
  * s | The second 0-59
  * ss | The second 00-59
+ * SSS | The millisecond 000-999
  * a | am/pm
  * A | AM/PM
  * Z | +0800, +0530, -1345
