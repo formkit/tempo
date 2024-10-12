@@ -18,7 +18,6 @@ export function handleOverflow(
   const dayOfMonth = d.getDate()
   // If overflowing is disallowed, set the date back to the first of the month
   if (!dateOverflow) d.setDate(1)
-  // d.setMonth(d.getMonth() + count)
 
   action(d)
   // If overflowing is disallowed, we need to set the date back to the proper
