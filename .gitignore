@@ -8,3 +8,4 @@ temp
 /.aws/credentials
 .yalc
 .idea
+.node_modules_tmp
