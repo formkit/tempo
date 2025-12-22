@@ -12,8 +12,7 @@ describe("differenceInMinutes", () => {
     ).toBe(19)
   })
 
-  it("different should be 23 minutes compared to the current time", () => {
-    const compare = addMinute(null, 23)
-    expect(diffMinutes(compare)).toBe(23)
+  it("difference should be 23 minutes", () => {
+    expect(diffMinutes("2024-04-07T09:33:00.000Z", "2024-04-07T09:10:00.000Z")).toBe(23)
   })
 })
