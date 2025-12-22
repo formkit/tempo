@@ -87,15 +87,26 @@ export const fixedLength = {
 }
 
 /**
- * token Z can have variable length depending on the actual value, so it's
+ * Determines the length of a timezone offset string.
+ * Supports offsets with optional seconds component.
  */
-export function fixedLengthByOffset(offsetString: string): 6 | 5 {
-  // starts with [+-]xx:xx
+export function fixedLengthByOffset(offsetString: string): 9 | 8 | 6 | 5 {
+  // starts with [+-]xx:xx:xx (9 chars, Z format with seconds)
+  if (/^[+-]\d{2}:\d{2}:\d{2}/.test(offsetString)) {
+    return 9
+  }
+
+  // starts with [+-]xxxxxx (8 chars, ZZ format with seconds)
+  if (/^[+-]\d{6}/.test(offsetString)) {
+    return 8
+  }
+
+  // starts with [+-]xx:xx (6 chars, Z format)
   if (/^[+-]\d{2}:\d{2}/.test(offsetString)) {
     return 6
   }
 
-  // starts with [+-]xxxx
+  // starts with [+-]xxxx (5 chars, ZZ format)
   if (/^[+-]\d{4}/.test(offsetString)) {
     return 5
   }
@@ -285,20 +296,49 @@ function createPartMap(
 }
 
 /**
+ * Converts total seconds to an ISO8601 compatible offset (+04:00 or +0400).
+ * Only includes seconds in output if they are non-zero.
+ * @param totalSecs - The total offset in seconds (can be negative).
+ * @param token - "Z" for +HH:mm[:ss] or "ZZ" for +HHmm[ss]
+ */
+export function secsToOffset(totalSecs: number, token: string = "Z"): string {
+  const sign = totalSecs < 0 ? "-" : "+"
+  const absSecs = Math.abs(totalSecs)
+  const hours = String(Math.floor(absSecs / 3600)).padStart(2, "0")
+  const mins = String(Math.floor((absSecs % 3600) / 60)).padStart(2, "0")
+  const secs = Math.round(absSecs % 60)
+
+  if (token === "ZZ") {
+    return secs === 0
+      ? `${sign}${hours}${mins}`
+      : `${sign}${hours}${mins}${String(secs).padStart(2, "0")}`
+  }
+  return secs === 0
+    ? `${sign}${hours}:${mins}`
+    : `${sign}${hours}:${mins}:${String(secs).padStart(2, "0")}`
+}
+
+/**
  * Converts minutes (300) to an ISO8601 compatible offset (+0400 or +04:00).
  * @param timeDiffInMins - The difference in minutes between two timezones.
  * @returns
  */
 export function minsToOffset(timeDiffInMins: number, token: string = "Z"): string {
-  const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(2, "0")
-  const mins = String(Math.abs(timeDiffInMins % 60)).padStart(2, "0")
-  const sign = timeDiffInMins < 0 ? "-" : "+"
+  return secsToOffset(timeDiffInMins * 60, token)
+}
 
-  if (token === "ZZ") {
-    return `${sign}${hours}${mins}`
-  }
-
-  return `${sign}${hours}:${mins}`
+/**
+ * Converts an offset (-05:32:11 or -053211) to total seconds.
+ * Supports offsets with optional seconds component.
+ * @param offset - The offset to convert to seconds.
+ * @param token - The timezone token format.
+ */
+export function offsetToSecs(offset: string, token: TimezoneToken): number {
+  validOffset(offset, token)
+  const match = offset.match(/([+-])([0-3][0-9]):?([0-5][0-9])(?::?([0-5][0-9]))?/)!
+  const [_, sign, hours, mins, secs = "0"] = match
+  const totalSecs = Number(hours) * 3600 + Number(mins) * 60 + Number(secs)
+  return sign === "+" ? totalSecs : -totalSecs
 }
 
 /**
@@ -307,15 +347,13 @@ export function minsToOffset(timeDiffInMins: number, token: string = "Z"): strin
  * @param token - The timezone token format.
  */
 export function offsetToMins(offset: string, token: TimezoneToken): number {
-  validOffset(offset, token)
-  const [_, sign, hours, mins] = offset.match(/([+-])([0-3][0-9]):?([0-6][0-9])/)!
-  const offsetInMins = Number(hours) * 60 + Number(mins)
-  return sign === "+" ? offsetInMins : -offsetInMins
+  return Math.round(offsetToSecs(offset, token) / 60)
 }
 
 /**
  * Validates that an offset is valid according to the format:
- * [+-]HHmm or [+-]HH:mm
+ * [+-]HH:mm or [+-]HH:mm:ss (Z token)
+ * [+-]HHmm or [+-]HHmmss (ZZ token)
  * @param offset - The offset to validate.
  * @param token - The timezone token format.
  */
@@ -323,9 +361,9 @@ export function validOffset(offset: string, token: TimezoneToken = "Z") {
   const valid = ((token: TimezoneToken): boolean => {
     switch (token) {
       case "Z":
-        return /^([+-])[0-3][0-9]:[0-6][0-9]$/.test(offset)
+        return /^([+-])[0-3][0-9]:[0-5][0-9](?::[0-5][0-9])?$/.test(offset)
       case "ZZ":
-        return /^([+-])[0-3][0-9][0-6][0-9]$/.test(offset)
+        return /^([+-])[0-3][0-9][0-5][0-9](?:[0-5][0-9])?$/.test(offset)
     }
   })(token)
 

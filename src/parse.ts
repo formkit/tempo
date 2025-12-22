@@ -1,5 +1,5 @@
 import { date } from "./date"
-import { validate, styles, fixedLength, four, two, validOffset, fixedLengthByOffset } from "./common"
+import { validate, styles, fixedLength, four, two, validOffset, fixedLengthByOffset, offsetToSecs, TimezoneToken } from "./common"
 import { formatStr } from "./formatStr"
 import { fourDigitYear } from "./fourDigitYear"
 import { ap } from "./ap"
@@ -142,9 +142,22 @@ export function parse(
   D = dateOverflow === "backward" ? Math.min(D, maxDaysInMonth) : D
 
   // Create the date.
-  const isoString = `${four(Y)}-${two(M + 1)}-${two(D)}T${two(h)}:${two(
-    m
-  )}:${two(s)}${offset}`
+  // If there's an offset, we need to handle it manually because JavaScript's Date
+  // doesn't support seconds in timezone offsets (e.g., -05:32:11).
+  if (offset) {
+    // Create the date in UTC, then apply the offset manually
+    const isoStringUtc = `${four(Y)}-${two(M + 1)}-${two(D)}T${two(h)}:${two(m)}:${two(s)}Z`
+    const d = new Date(isoStringUtc)
+    if (!isFinite(+d)) return invalid()
+
+    const len = fixedLengthByOffset(offset)
+    const token: TimezoneToken = len === 5 || len === 8 ? "ZZ" : "Z"
+    const offsetSecs = offsetToSecs(offset, token)
+    return new Date(d.getTime() - offsetSecs * 1000)
+  }
+
+  // No offset - create date in local time (original behavior)
+  const isoString = `${four(Y)}-${two(M + 1)}-${two(D)}T${two(h)}:${two(m)}:${two(s)}`
   const d = new Date(isoString)
   if (isFinite(+d)) return d
   return invalid()

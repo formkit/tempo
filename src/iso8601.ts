@@ -1,10 +1,10 @@
 /**
  * Matches a given date with ISO 8601 compliance. Allows the "T" to be missing
  * and only requires year and month, other params are required with increasing
- * specificity.
+ * specificity. Supports timezone offsets with optional seconds (e.g., +05:32:11).
  */
 export const iso8601Match =
-  /^([0-9]{4})-([0-1][0-9])(?:-([0-3][0-9]))?(?:[T ]?([0-2][0-9])(?::([0-5][0-9]))?(?::([0-5][0-9]))?)?(?:\.[0-9]+)?(Z|(?:\+|\-)[0-9]{2}:?[0-9]{2})?$/
+  /^([0-9]{4})-([0-1][0-9])(?:-([0-3][0-9]))?(?:[T ]?([0-2][0-9])(?::([0-5][0-9]))?(?::([0-5][0-9]))?)?(?:\.[0-9]+)?(Z|(?:\+|\-)[0-9]{2}:?[0-9]{2}(?::?[0-9]{2})?)?$/
 
 /**
  * True when the date string is valid ISO 8601.

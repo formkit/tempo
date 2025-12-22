@@ -1,5 +1,5 @@
 import { date } from "./date"
-import { normStr, minsToOffset, TimezoneToken } from "./common"
+import { normStr, secsToOffset, TimezoneToken } from "./common"
 import { deviceTZ } from "./deviceTZ"
 import type { DateInput, MaybeDateInput } from "./types"
 
@@ -56,6 +56,6 @@ export function offset(
   const d = date(utcTime)
   const timeA = relativeTime(d, tzA)
   const timeB = relativeTime(d, tzB)
-  const timeDiffInMins = Math.round((timeB.getTime() - timeA.getTime()) / 1000 / 60)
-  return minsToOffset(timeDiffInMins, timeZoneToken)
+  const timeDiffInSecs = Math.round((timeB.getTime() - timeA.getTime()) / 1000)
+  return secsToOffset(timeDiffInSecs, timeZoneToken)
 }
