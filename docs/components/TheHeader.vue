@@ -53,7 +53,7 @@ onMounted(() => {
       </h1>
       <HeaderButtons :base-delay="baseDelay" />
 
-      <KickStartCallout :base-delay="baseDelay" class="mt-16" />
+      <!-- <KickStartCallout :base-delay="baseDelay" class="mt-16" /> -->
     </header>
     <TheSearch :base-delay="baseDelay" />
   </ContainerSection>

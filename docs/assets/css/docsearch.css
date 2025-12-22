@@ -71,7 +71,7 @@ button.DocSearch-Button {
   @apply dark:text-purple-500;
 }
 .DocSearch-Button-Placeholder {
-  @apply sr-only;
+  @apply text-slate-400 dark:text-purple-600;
 }
 .DocSearch-Button-Keys {
   @apply text-sm px-2 text-slate-400 border rounded space-x-1;
