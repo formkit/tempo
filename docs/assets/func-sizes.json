@@ -19,6 +19,16 @@
       "formattedSize": "5.46 kB"
     }
   },
+  "addMillisecond": {
+    "esm": {
+      "size": 335,
+      "formattedSize": "335 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
   "addMinute": {
     "esm": {
       "size": 330,
@@ -119,6 +129,106 @@
       "formattedSize": "5.46 kB"
     }
   },
+  "deviceLocale": {
+    "esm": {
+      "size": 176,
+      "formattedSize": "176 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "deviceTZ": {
+    "esm": {
+      "size": 162,
+      "formattedSize": "162 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "diffDays": {
+    "esm": {
+      "size": 358,
+      "formattedSize": "358 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "diffHours": {
+    "esm": {
+      "size": 365,
+      "formattedSize": "365 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "diffMilliseconds": {
+    "esm": {
+      "size": 264,
+      "formattedSize": "264 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "diffMinutes": {
+    "esm": {
+      "size": 350,
+      "formattedSize": "350 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "diffMonths": {
+    "esm": {
+      "size": 617,
+      "formattedSize": "617 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "diffSeconds": {
+    "esm": {
+      "size": 351,
+      "formattedSize": "351 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "diffWeeks": {
+    "esm": {
+      "size": 343,
+      "formattedSize": "343 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "diffYears": {
+    "esm": {
+      "size": 271,
+      "formattedSize": "271 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
   "format": {
     "esm": {
       "size": 2864,
@@ -196,6 +306,26 @@
     },
     "cjs": {
       "size": 5457,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "isFuture": {
+    "esm": {
+      "size": 182,
+      "formattedSize": "182 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "isPast": {
+    "esm": {
+      "size": 177,
+      "formattedSize": "177 B"
+    },
+    "cjs": {
+      "size": 5456,
       "formattedSize": "5.46 kB"
     }
   },
@@ -349,6 +479,16 @@
       "formattedSize": "5.46 kB"
     }
   },
+  "sameMillisecond": {
+    "esm": {
+      "size": 334,
+      "formattedSize": "334 B"
+    },
+    "cjs": {
+      "size": 5456,
+      "formattedSize": "5.46 kB"
+    }
+  },
   "sameMinute": {
     "esm": {
       "size": 333,
@@ -356,6 +496,16 @@
     },
     "cjs": {
       "size": 5457,
+      "formattedSize": "5.46 kB"
+    }
+  },
+  "sameMonth": {
+    "esm": {
+      "size": 334,
+      "formattedSize": "334 B"
+    },
+    "cjs": {
+      "size": 5456,
       "formattedSize": "5.46 kB"
     }
   },
