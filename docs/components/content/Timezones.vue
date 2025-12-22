@@ -41,8 +41,15 @@
       Tempo uses the <code>Intl.DateTimeFormat</code> API to extract timezone
       information, that makes working with timezones as simple as possible. The
       <code>offset()</code> function calculates the amount of offset between any
-      two timezones (given in <code>+-HHmm</code>).
+      two timezones (given in <code>+-HH:mm</code> or <code>+-HH:mm:ss</code> for
+      historical timezones with sub-minute precision).
     </p>
+    <CalloutInfo>
+      Historical timezones (before standardization) had offsets based on local
+      mean time, which could include seconds. For example, America/Detroit in
+      1904 had an offset of <code>-05:32:11</code>. Tempo fully supports these
+      sub-minute offsets in both formatting and parsing.
+    </CalloutInfo>
     <CodeExample file="offset" />
     <h3 id="timezones-remove-offset">Removing offsets</h3>
     <p>

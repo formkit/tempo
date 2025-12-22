@@ -380,13 +380,13 @@ import sizes from "../../assets/func-sizes.json"
         </tr>
         <tr>
           <td><code>Z</code></td>
-          <td>+08:00, +05:30, -13:45</td>
-          <td>The timezone offset from GMT (<code>[+-]HH:mm</code>)</td>
+          <td>+08:00, +05:30, -05:32:11</td>
+          <td>The timezone offset from GMT (<code>[+-]HH:mm[:ss]</code>). Seconds are included for historical timezones with sub-minute offsets.</td>
         </tr>
         <tr>
           <td><code>ZZ</code></td>
-          <td>+0800, +0530, -1345</td>
-          <td>The timezone offset from GMT (<code>[+-]HHmm</code>)</td>
+          <td>+0800, +0530, -053211</td>
+          <td>The timezone offset from GMT (<code>[+-]HHmm[ss]</code>). Seconds are included for historical timezones with sub-minute offsets.</td>
         </tr>
       </tbody>
     </table>
