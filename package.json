@@ -38,7 +38,7 @@
     "test": "TZ=\"America/New_York\" vitest",
     "docs-build": "cd ./docs && pnpm run build",
     "publint": "publint",
-    "release": "pnpm build && bumpp && pnpm publish",
+    "release": "pnpm build && bumpp --push",
     "size": "npm run build && size-limit"
   },
   "files": [
