@@ -16,18 +16,14 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 body.DocSearch--active::before {
+  display: none;
+}
+body.DocSearch--active::after {
   z-index: 99;
   content: "";
   position: fixed;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-body.DocSearch--active > *:not(.DocSearch-Container) {
-  filter: blur(5px);
 }
 
 .DocSearch-NoResults {
@@ -73,6 +69,9 @@ button.DocSearch-Button {
 .DocSearch-Button-Container {
   @apply flex flex-grow gap-2 text-slate-400 items-center;
   @apply dark:text-purple-500;
+}
+.DocSearch-Button-Placeholder {
+  @apply sr-only;
 }
 .DocSearch-Button-Keys {
   @apply text-sm px-2 text-slate-400 border rounded space-x-1;
@@ -143,6 +142,12 @@ button.DocSearch-Button {
   align-items: center;
   padding: 0.75em 1em;
   border-radius: 0.5em;
+}
+.DocSearch-MagnifierLabel {
+  @apply text-[0px] flex items-center;
+}
+.DocSearch-MagnifierLabel svg {
+  @apply w-5 h-5;
 }
 
 .DocSearch-SearchBar form input {

@@ -49,11 +49,15 @@ html.dark body::before {
 }
 
 .DocSearch-SearchBar {
-  @apply grid grid-cols-[minmax(0,1fr)_auto];
+  @apply flex items-center;
 }
 
 .DocSearch-SearchBar form {
-  @apply grid grid-cols-[auto_0_minmax(0,1fr)_auto];
+  @apply flex flex-1 items-center gap-2;
+}
+
+.DocSearch-SearchBar form input {
+  @apply flex-1;
 }
 
 .monaco-editor,
