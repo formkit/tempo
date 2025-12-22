@@ -62,6 +62,22 @@ const fns: Record<
       },
     ],
   },
+  addMillisecond: {
+    name: "add-millisecond",
+    description:
+      "Returns a new Date object with a positive or negative number of milliseconds applied to date argument. To subtract milliseconds, use a negative number.",
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date",
+      },
+      {
+        name: "amount",
+        type: "number",
+      },
+    ],
+  },
   addMonth: {
     name: "add-month",
     description: `Returns a new Date object with a positive or negative number of

@@ -13,6 +13,6 @@ export function weekStart(inputDate?: MaybeDateInput, startOfWeekDay = 0): Date 
   let diff = startOfWeekDay - d.getDay()
   if (diff > 0) diff = diff - 7
   d.setDate(d.getDate() + diff)
-  d.setHours(0, 0, 0)
+  d.setHours(0, 0, 0, 0)
   return d
 }

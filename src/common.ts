@@ -9,6 +9,7 @@ import type {
   FilledPart,
   Format,
   MaybeDateInput,
+  ExtendedPartTypes,
 } from "./types"
 
 /**
@@ -73,6 +74,13 @@ export const clock12: FormatPattern[] = [
 ]
 
 /**
+ * Fractional seconds patterns.
+ */
+export const fractionalSeconds: FormatPattern[] = [
+  ["SSS", { fractionalSecond: "3-digit" }],
+]
+
+/**
  * Tokens that have a fixed length.
  */
 export const fixedLength = {
@@ -127,7 +135,7 @@ export const genitiveTokens = ["MMMM", "MMM", "dddd", "ddd"]
  * A map of FormatPattern tuples to their respective token.
  */
 export const tokens = /* @__PURE__ */ new Map(
-  /* @__PURE__ */ [...clockAgnostic, ...clock24, ...clock12].map((format) => {
+  /* @__PURE__ */ [...clockAgnostic, ...clock24, ...clock12, ...fractionalSeconds].map((format) => {
     return [format[0], format]
   })
 )
@@ -203,6 +211,9 @@ export function fill(
       const p = ap(d.getUTCHours() < 12 ? "am" : "pm", locale)
       return token === "A" ? p.toUpperCase() : p.toLowerCase()
     }
+    if (partName === "fractionalSecond") {
+      return String(d.getUTCMilliseconds()).padStart(3, "0")
+    }
     if (partName === "timeZoneName") {
       return offset ?? minsToOffset(-1 * d.getTimezoneOffset(), token)
     }
@@ -229,7 +240,7 @@ function createPartMap(
   parts: Part[],
   locale: string,
   genitive = false
-): Record<keyof Intl.DateTimeFormatPartTypesRegistry, string> {
+): Record<ExtendedPartTypes, string> {
   const d = date(inputDate)
   const hour12 = parts.filter((part) => part.hour12)
   const hour24 = parts.filter((part) => !part.hour12)
@@ -290,9 +301,9 @@ function createPartMap(
   if (hour24.length) addValues(hour24)
 
   return valueParts.reduce((map, part) => {
-    map[part.type] = part.value
+    map[part.type as ExtendedPartTypes] = part.value
     return map
-  }, {} as Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>)
+  }, {} as Record<ExtendedPartTypes, string>)
 }
 
 /**
@@ -380,6 +391,7 @@ export function escapeTokens(str: string): string {
   return clockAgnostic
     .concat(clock24)
     .concat(clock12)
+    .concat(fractionalSeconds)
     .sort((a, b) => (a[0].length > b[0].length ? 1 : -1))
     .reduce((target, part) => {
       return target.replace(part[0], `\\${part[0]}`)
@@ -408,7 +420,8 @@ export function validate(parts: Part[]): Part[] | never {
       if (
         !(lastPart.token in fixedLength) &&
         !(part.token in fixedLength) &&
-        !(isNumeric(lastPart) && part.token.toLowerCase() === "a")
+        !(isNumeric(lastPart) && part.token.toLowerCase() === "a") &&
+        lastPart.token !== "SSS" // SSS can be followed by anything (greedy digit consumer)
       ) {
         throw new Error(`Illegal adjacent tokens (${lastPart.token}, ${part.token})`)
       }

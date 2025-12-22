@@ -14,6 +14,11 @@ export type MaybeDateInput = DateInput | null
 export type NamedFormatOption = "long" | "short" | "narrow"
 
 /**
+ * Extended part types that include custom tokens not in Intl.DateTimeFormatPartTypes.
+ */
+export type ExtendedPartTypes = Intl.DateTimeFormatPartTypes | "fractionalSecond"
+
+/**
  * A registry of named format parts. Each type of part has every option.
  */
 export interface NamedFormats {
@@ -36,11 +41,11 @@ export interface Part {
   option: FormatPattern[1]
   /**
    * The name of the part, these must be valid parts of a date format as
-   * specified in Intl.DateTimeFormatPartTypes. Valid values are:
-   * day, dayPeriod, era, hour, literal, minute, month, second, timeZoneName,
-   * weekday, year
+   * specified in Intl.DateTimeFormatPartTypes, plus custom extensions.
+   * Valid values are: day, dayPeriod, era, hour, literal, minute, month,
+   * second, timeZoneName, weekday, year, fractionalSecond
    */
-  partName: Intl.DateTimeFormatPartTypes
+  partName: ExtendedPartTypes
   /**
    * The value of a given part. For example "2-digit", or "narrow".
    */
@@ -69,7 +74,7 @@ export type FilledPart = Part & { value: string }
  */
 export type FormatPattern = [
   pattern: FormatToken | string,
-  option: Partial<Record<Intl.DateTimeFormatPartTypes, string>>,
+  option: Partial<Record<ExtendedPartTypes, string>>,
   exp?: RegExp
 ]
 
@@ -107,6 +112,7 @@ export type FormatToken =
   | "m"
   | "ss"
   | "s"
+  | "SSS"
   | "HH"
   | "H"
   | "hh"

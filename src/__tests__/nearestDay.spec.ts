@@ -88,11 +88,10 @@ describe("nearestDay", () => {
   })
 
   it("can find the 28th from the current month", () => {
-    const find = new Date()
-    find.setDate(28)
-    find.setMilliseconds(0)
-    const search = (d: Date) => d.getDate() == 28
-    //
-    expect(nearestDay(null, search, "month")).toEqual(find)
+    const search = (d: Date) => d.getDate() === 28
+    const result = nearestDay(null, search, "month")!
+    expect(result.getDate()).toBe(28)
+    expect(result.getMonth()).toBe(new Date().getMonth())
+    expect(result.getFullYear()).toBe(new Date().getFullYear())
   })
 })

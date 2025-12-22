@@ -8,15 +8,15 @@ describe("diffMilliseconds", () => {
     )
   })
 
-  it("should be 5000 milleseconds difference compared to the current time", () => {
-    const now = new Date()
-    now.setMilliseconds(5000) // because the date function sets ms to 0, the test needs to test with increments of 1000
-    expect(diffMilliseconds(now)).toBe(5000)
+  it("should be 5000 milleseconds difference compared to a specific time", () => {
+    const base = new Date("2024-01-01T00:00:00.000Z")
+    const later = new Date("2024-01-01T00:00:05.000Z") // 5000ms later
+    expect(diffMilliseconds(later, base)).toBe(5000)
   })
 
-  it("should be -5000 milleseconds difference compared to the current time", () => {
-    const now = new Date()
-    now.setMilliseconds(5000)
-    expect(diffMilliseconds(null, now)).toBe(-5000)
+  it("should be -5000 milleseconds difference compared to a specific time", () => {
+    const base = new Date("2024-01-01T00:00:00.000Z")
+    const later = new Date("2024-01-01T00:00:05.000Z")
+    expect(diffMilliseconds(base, later)).toBe(-5000)
   })
 })

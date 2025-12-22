@@ -9,7 +9,7 @@ export function yearStart(inputDate?: MaybeDateInput): Date {
   const d = date(inputDate)
 
   d.setMonth(0, 1)
-  d.setHours(0, 0, 0)
+  d.setHours(0, 0, 0, 0)
 
   return d
 }

@@ -369,6 +369,11 @@ import sizes from "../../assets/func-sizes.json"
           <td>The second 00-59</td>
         </tr>
         <tr>
+          <td><code>SSS</code></td>
+          <td>007, 123, 789</td>
+          <td>The millisecond, 3 digits (000-999). When parsing, accepts variable-length fractional seconds (1-9 digits).</td>
+        </tr>
+        <tr>
           <td><code>a</code></td>
           <td>{{ format(new Date(), "a") }}</td>
           <td>am/pm</td>
@@ -391,6 +396,14 @@ import sizes from "../../assets/func-sizes.json"
       </tbody>
     </table>
     <CodeExample file="format-tokens" />
+    <h3 id="milliseconds">Milliseconds</h3>
+    <p>
+      The <code>SSS</code> token formats milliseconds as 3 digits (000-999).
+      When parsing, it graciously accepts variable-length fractional seconds
+      (1-9 digits), making it compatible with high-precision timestamps like
+      those from databases or APIs.
+    </p>
+    <CodeExample file="milliseconds" />
     <h3 id="format-options">Format options</h3>
     <p>
       The <code>format()</code> function can accept an object of options as its

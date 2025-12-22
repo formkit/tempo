@@ -7,6 +7,7 @@ import {
   clock24,
   specDate,
   clock12,
+  fractionalSeconds,
 } from "./common"
 import type {
   ParseOptions,
@@ -74,6 +75,7 @@ export function parts(format: Format, locale: string): Part[] {
   const found24Patterns = clockAgnostic
     .filter(testPattern)
     .concat(clock24.filter(testPattern))
+    .concat(fractionalSeconds.filter(testPattern))
     .map(createPart.bind(null, false))
 
   // Reset the format before re-checking

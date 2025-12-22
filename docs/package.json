@@ -11,19 +11,19 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxtjs/color-mode": "^3.3.2",
-    "@nuxtjs/tailwindcss": "^6.11.2",
-    "@types/node": "^18.17.0",
-    "@vueuse/core": "^10.7.2",
-    "@vueuse/nuxt": "^10.7.2",
-    "nuxt": "^3.10.0",
-    "nuxt-fathom": "^0.0.1",
-    "vitest": "^1.2.2"
+    "@nuxtjs/color-mode": "^4.0.0",
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "@types/node": "^25.0.3",
+    "@vueuse/core": "^14.1.0",
+    "@vueuse/nuxt": "^14.1.0",
+    "nuxt": "^4.2.2",
+    "nuxt-fathom": "^0.0.3",
+    "vitest": "^4.0.16"
   },
   "dependencies": {
-    "@docsearch/js": "3",
-    "@formkit/auto-animate": "^0.8.1",
+    "@docsearch/js": "^4.3.2",
+    "@formkit/auto-animate": "^0.9.0",
     "@formkit/tempo": "workspace:*",
-    "monaco-editor": "^0.40.0"
+    "monaco-editor": "^0.55.1"
   }
 }

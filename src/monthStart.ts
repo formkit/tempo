@@ -8,6 +8,6 @@ import type { MaybeDateInput } from "./types"
 export function monthStart(inputDate?: MaybeDateInput): Date {
   const d = date(inputDate)
   d.setDate(1)
-  d.setHours(0, 0, 0)
+  d.setHours(0, 0, 0, 0)
   return d
 }

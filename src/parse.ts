@@ -71,6 +71,7 @@ export function parse(
     ["HH", 0],
     ["mm", 0],
     ["ss", 0],
+    ["SSS", 0],
   ])
   let a: null | boolean = null
   let offset = ""
@@ -78,8 +79,13 @@ export function parse(
     if (part.partName === "literal") return
     if (part.token === part.value) return invalid()
     const v = Number(part.value)
-    if (parsed.has(part.token)) {
-      // Parse for YYYY, MM, DD, HH, hh, mm, ss, Z
+    // Handle SSS specially - convert variable-length fractional seconds to milliseconds
+    if (part.token === "SSS") {
+      // "1" -> 100, "12" -> 120, "123" -> 123, "123456" -> 123
+      const digits = part.value.padEnd(3, "0").slice(0, 3)
+      parsed.set("SSS", Number(digits))
+    } else if (parsed.has(part.token)) {
+      // Parse for YYYY, MM, DD, HH, hh, mm, ss
       parsed.set(part.token, v)
     } else if (part.token === "YY") {
       // Parse for YY
@@ -133,7 +139,7 @@ export function parse(
   }
   parsed.set("MM", (parsed.get("MM") || 1) - 1)
   // eslint-disable-next-line prefer-const
-  let [Y, M, D, h, m, s] = Array.from(parsed.values())
+  let [Y, M, D, h, m, s, ms] = Array.from(parsed.values())
 
   // Determine if the date is valid for the month.
   const maxDaysInMonth = monthDays(new Date(`${four(Y)}-${two(M + 1)}-10`))
@@ -144,9 +150,10 @@ export function parse(
   // Create the date.
   // If there's an offset, we need to handle it manually because JavaScript's Date
   // doesn't support seconds in timezone offsets (e.g., -05:32:11).
+  const msStr = String(ms).padStart(3, "0")
   if (offset) {
     // Create the date in UTC, then apply the offset manually
-    const isoStringUtc = `${four(Y)}-${two(M + 1)}-${two(D)}T${two(h)}:${two(m)}:${two(s)}Z`
+    const isoStringUtc = `${four(Y)}-${two(M + 1)}-${two(D)}T${two(h)}:${two(m)}:${two(s)}.${msStr}Z`
     const d = new Date(isoStringUtc)
     if (!isFinite(+d)) return invalid()
 
@@ -157,7 +164,7 @@ export function parse(
   }
 
   // No offset - create date in local time (original behavior)
-  const isoString = `${four(Y)}-${two(M + 1)}-${two(D)}T${two(h)}:${two(m)}:${two(s)}`
+  const isoString = `${four(Y)}-${two(M + 1)}-${two(D)}T${two(h)}:${two(m)}:${two(s)}.${msStr}`
   const d = new Date(isoString)
   if (isFinite(+d)) return d
   return invalid()
@@ -187,6 +194,13 @@ export function parseParts(dateStr: string, formatParts: Part[]): FilledPart[] {
       len = current.partValue.length
     } else if (current.partName === "timeZoneName") {
       len = fixedLengthByOffset(dateStr.substring(pos))
+    } else if (current.token === "SSS") {
+      // Variable length: consume all consecutive digits (gracious parsing)
+      let end = pos
+      while (end < dateStr.length && /\d/.test(dateStr.charAt(end))) {
+        end++
+      }
+      len = end - pos
     } else if (current.token in fixedLength) {
       // Fixed length parse
       len = fixedLength[current.token as keyof typeof fixedLength]

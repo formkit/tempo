@@ -23,9 +23,7 @@ export function date(date?: MaybeDateInput): Date {
     date = new Date()
   }
   if (date instanceof Date) {
-    const d = new Date(date)
-    d.setMilliseconds(0)
-    return d
+    return new Date(date)
   }
   date = date.trim()
   if (iso8601(date)) {

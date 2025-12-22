@@ -7,6 +7,6 @@ import type { MaybeDateInput } from "./types"
  */
 export function hourStart(inputDate?: MaybeDateInput): Date {
   const d = date(inputDate)
-  d.setMinutes(0, 0)
+  d.setMinutes(0, 0, 0)
   return d
 }

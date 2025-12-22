@@ -209,6 +209,21 @@ const fns: Record<
     ],
     example: "isEqual",
   },
+  sameMillisecond: {
+    description:
+      "Checks if two dates have the same millisecond value (0-999). This compares only the millisecond component, ignoring the rest of the timestamp.",
+    arguments: [
+      {
+        name: "dateA",
+        type: "Date",
+      },
+      {
+        name: "dateB",
+        type: "Date",
+      },
+    ],
+    return: "boolean",
+  },
   sameSecond: {
     description:
       "Checks if two dates are the same second. This function is useful for comparing dates but ignoring the milliseconds.",

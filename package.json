@@ -55,17 +55,17 @@
   "author": "Justin Schroeder <justin@formkit.com>",
   "license": "MIT",
   "devDependencies": {
-    "@size-limit/esbuild": "^11.1.1",
-    "@size-limit/file": "^11.1.1",
-    "@size-limit/preset-small-lib": "^11.0.2",
-    "@types/node": "^20.11.10",
-    "bumpp": "^9.3.0",
+    "@size-limit/esbuild": "^12.0.0",
+    "@size-limit/file": "^12.0.0",
+    "@size-limit/preset-small-lib": "^12.0.0",
+    "@types/node": "^25.0.3",
+    "bumpp": "^10.3.2",
     "bytes-iec": "^3.1.1",
-    "esbuild-plugin-file-path-extensions": "^2.0.0",
-    "publint": "^0.2.7",
-    "size-limit": "^11.0.2",
-    "tsup": "^8.0.1",
-    "typescript": "^5.3.3",
-    "vitest": "^1.2.1"
+    "esbuild-plugin-file-path-extensions": "^2.1.4",
+    "publint": "^0.3.16",
+    "size-limit": "^12.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16"
   }
 }
