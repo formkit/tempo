@@ -1,5 +1,4 @@
-import { date } from "./date"
-import { monthDays } from "./monthDays"
+import { handleOverflow } from "./handleDateOverflow"
 import type { MaybeDateInput } from "./types"
 
 /**
@@ -11,18 +10,9 @@ import type { MaybeDateInput } from "./types"
  * @param [dateOverflow] - Whether or not to allow the date to overflow to another month if the inputDate’s month is out of range of the new month.
  */
 export function addYear(inputDate?: MaybeDateInput, count = 1, dateOverflow = false) {
-  const d = date(inputDate)
-  const dayOfMonth = d.getDate()
-  // If overflowing is disallowed, set the date back to the first of the month
-  if (!dateOverflow) d.setDate(1)
-
-  d.setFullYear(d.getFullYear() + count)
-
-  // If overflowing is disallowed, we need to set the date back to the proper
-  // day or the last day of the month.
-  if (!dateOverflow) {
-    const daysInMonth = monthDays(d)
-    d.setDate(daysInMonth < dayOfMonth ? daysInMonth : dayOfMonth)
-  }
-  return d
+  return handleOverflow(
+    inputDate,
+    (d) => d.setFullYear(d.getFullYear() + count),
+    dateOverflow
+  )
 }
