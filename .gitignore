@@ -8,4 +8,6 @@ temp
 /.aws/credentials
 .yalc
 .idea
+.pnpm-store/
+docs/node-compile-cache/
 .node_modules_tmp
