@@ -1,7 +1,7 @@
 import { date } from "./date"
-import { normStr, secsToOffset, TimezoneToken } from "./common"
+import { secsToOffset, TimezoneToken } from "./common"
 import { deviceTZ } from "./deviceTZ"
-import type { DateInput, MaybeDateInput } from "./types"
+import type { MaybeDateInput } from "./types"
 
 /**
  * Converts a date object from one timezone to that same time in UTC. This is
@@ -11,31 +11,27 @@ import type { DateInput, MaybeDateInput } from "./types"
  */
 function relativeTime(d: Date, timeZone: string): Date {
   const utcParts = new Intl.DateTimeFormat("en-US", {
+    era: "short",
     year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
     timeZone,
     hourCycle: "h23",
-  })
-    .formatToParts(d)
-    .map(normStr)
-  const parts: {
-    year?: string
-    month?: string
-    day?: string
-    hour?: string
-    minute?: string
-    second?: string
-  } = {}
+  }).formatToParts(d)
+  const p: Record<string, string> = {}
   utcParts.forEach((part) => {
-    parts[part.type as keyof typeof parts] = part.value
+    if (part.type !== "literal") p[part.type] = part.value
   })
-  return new Date(
-    `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}Z`
-  )
+  // BC year N in Intl = ISO year (1 - N), e.g. 1 BC = year 0, 2 BC = year -1
+  const year = p.era === "BC" ? 1 - Number(p.year) : Number(p.year)
+  const result = new Date(Date.UTC(0, 0, 1, Number(p.hour), Number(p.minute), Number(p.second)))
+  // setUTCFullYear with year, month, day together avoids Date.UTC's 0-99 year mapping
+  // and ensures leap day validation uses the correct year
+  result.setUTCFullYear(year, Number(p.month) - 1, Number(p.day))
+  return result
 }
 
 /**

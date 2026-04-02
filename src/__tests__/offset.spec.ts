@@ -31,6 +31,16 @@ describe("offset", () => {
       "+1100"
     )
   })
+  it("can determine the offset with non 4-digit year dates", () => {
+    expect(offset("0001-01-01", "UTC", "UTC")).toBe("+00:00")
+    expect(offset("0001-01-01")).not.toContain("NaN")
+    expect(offset("0200-06-15", "UTC", "UTC")).toBe("+00:00")
+    expect(offset("0200-06-15")).not.toContain("NaN")
+    expect(offset("0001-01-01T00:00:00Z", "UTC", "Etc/GMT+5")).toBe("-05:00")
+    expect(offset("0001-01-01T00:00:00Z", "UTC", "Etc/GMT-5")).toBe("+05:00")
+    expect(offset("0000-01-01T00:00:00Z", "UTC", "UTC")).toBe("+00:00")
+    expect(offset("0000-01-01T00:00:00Z", "UTC", "Etc/GMT+5")).toBe("-05:00")
+  })
   it("can determine the offset to a non full-hour offset timezone", () => {
     expect(offset("2023-02-22", "Europe/London", "Pacific/Chatham")).toBe(
       "+13:45"
