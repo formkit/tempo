@@ -25,6 +25,21 @@ function negateDuration(duration: Duration): Duration {
   return negated
 }
 
+function calendarDiff(
+  current: Date,
+  target: Date,
+  diffUnit: (dateA: Date, dateB: Date) => number,
+  addUnit: (date: Date, count: number) => Date
+): [number, Date] {
+  let amount = diffUnit(current, target)
+  let next = addUnit(current, -amount)
+  while (amount > 0 && next < target) {
+    amount--
+    next = addUnit(current, -amount)
+  }
+  return [amount, next]
+}
+
 /**
  * Options for `diff` function
  */
@@ -86,14 +101,14 @@ export function diff(
   const duration: Duration = {}
 
   if (!skip.has("years")) {
-    const years = diffYears(a, b)
-    a = addYear(a, -years)
+    const [years, next] = calendarDiff(a, b, diffYears, addYear)
+    a = next
     if (years) duration.years = years
   }
 
   if (!skip.has("months")) {
-    const months = diffMonths(a, b)
-    a = addMonth(a, -months)
+    const [months, next] = calendarDiff(a, b, diffMonths, addMonth)
+    a = next
     if (months) duration.months = months
   }
 

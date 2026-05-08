@@ -1,9 +1,13 @@
 import { afterEach, describe, expect, it, vi } from "vitest"
-import { addDay, addSecond, date, diff } from "../index"
+import { add, addDay, addSecond, date, diff } from "../index"
 
 afterEach(() => {
   vi.useRealTimers()
 })
+
+function expectAllPositive(duration: Record<string, number>) {
+  expect(Object.values(duration).every((value) => value > 0)).toBe(true)
+}
 
 describe("diff", () => {
   it("returns a duration with calendar and time units", () => {
@@ -62,5 +66,36 @@ describe("diff", () => {
       days: 27,
       minutes: 245,
     })
+  })
+
+  it("does not emit mixed signs when calendar units clamp", () => {
+    const duration = diff("2025-02-28", "2024-02-29", { abs: true })
+
+    expect(duration).toEqual({
+      months: 11,
+      weeks: 3,
+      days: 7,
+    })
+    expectAllPositive(duration)
+  })
+
+  it("keeps leap-day calendar boundary durations round-trippable", () => {
+    const start = "2024-02-29"
+    const end = "2025-02-28"
+
+    expect(add(start, diff(end, start))).toEqual(date(end))
+    expect(add(end, diff(start, end))).toEqual(date(start))
+  })
+
+  it("uses days instead of negative fields when weeks are skipped", () => {
+    const duration = diff("2025-02-28", "2024-02-29", { skip: ["weeks"] })
+
+    expect(duration).toEqual({
+      months: 11,
+      days: 27,
+      hours: 24,
+    })
+    expectAllPositive(duration)
+    expect(add("2024-02-29", duration)).toEqual(date("2025-02-28"))
   })
 })
