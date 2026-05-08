@@ -1,63 +1,58 @@
-# Nuxt 3 Minimal Starter
+# Tempo Docs
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This app is part of the Tempo workspace and depends on the root package via
+`workspace:*`. Install dependencies from the repository root, not from
+`docs/`.
 
-## Setup
+## Requirements
 
-Make sure to install the dependencies:
+- Node `^20.19.0 || >=22.12.0`
+- Corepack-enabled `pnpm`
+
+## Install
+
+From the repository root:
 
 ```bash
-# npm
-npm install
-
-# pnpm
+corepack enable
 pnpm install
-
-# yarn
-yarn install
 ```
 
-## Development Server
+Running `npm install` in the repository root or inside `docs/` will not set up
+the docs app correctly because the local `@formkit/tempo` dependency is
+resolved through the pnpm workspace.
 
-Start the development server on `http://localhost:3000`:
+## Development
+
+From the repository root:
 
 ```bash
-# npm
+pnpm dev
+
+# or
+
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
 ```
 
-## Production
+The docs app runs on `http://localhost:3000`.
 
-Build the application for production:
+## Production Build
+
+From the repository root:
 
 ```bash
-# npm
-npm run build
+pnpm docs-build
 
-# pnpm
-pnpm run build
+# or
 
-# yarn
-yarn build
+npm run docs-build
 ```
 
-Locally preview production build:
+## Preview
+
+After installing from the repository root, you can preview directly from the
+docs app:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
+npm --prefix ./docs run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

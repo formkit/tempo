@@ -12,6 +12,27 @@ Tempo is best thought of as a collection of utilities for working with `Date` ob
 
 Tempo is tiny tree-shakable framework, you can only take what you need. You can work with timezones with only a few bytes of library code, or perform full international date formatting for ~2Kb (minified and brotlied). [Size Limit](https://github.com/ai/size-limit) controls the size.
 
+## Development
+
+Install from the repository root with `pnpm`:
+
+```bash
+corepack enable
+pnpm install
+```
+
+Build the library:
+
+```bash
+pnpm build
+```
+
+Build the docs app:
+
+```bash
+pnpm docs-build
+```
+
 <a href="https://tempo.formkit.com">
 <img src="docs/public/read-the-docs.png" alt="Read the docs" width="200" height="43">
 </a>

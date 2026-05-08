@@ -33,11 +33,11 @@
     "url": "https://github.com/formkit/tempo/issues"
   },
   "scripts": {
-    "dev": "cd ./docs && pnpm nuxt dev",
+    "dev": "npm --prefix ./docs run dev",
     "build": "tsup",
     "post:build": "node scripts/size-limit/index.js || echo 'Size limit check skipped'",
     "test": "TZ=\"America/New_York\" vitest",
-    "docs-build": "cd ./docs && pnpm run build",
+    "docs-build": "npm --prefix ./docs run build",
     "publint": "publint",
     "release": "pnpm build && bumpp --push",
     "size": "npm run build && size-limit"
