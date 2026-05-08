@@ -1,6 +1,11 @@
-import { describe, it, expect, suite } from "vitest"
+import { afterEach, describe, it, expect, suite, vi } from "vitest"
 import { diffYears } from "../diffYears"
 import { addYear } from "../addYear"
+import { date } from "../date"
+
+afterEach(() => {
+  vi.useRealTimers()
+})
 
 describe("differenceInYears", () => {
   it("returns the amount of full years between dates", () => {
@@ -48,7 +53,10 @@ describe("differenceInYears", () => {
   })
 
   it("different should be 3 month compared to the current time", () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(date("2024-04-07T09:10:00.000Z"))
     const compare = addYear(null, -6)
+
     expect(diffYears(null, compare)).toBe(6)
   })
 })
