@@ -1,35 +1,40 @@
-import { describe, expect, it } from "vitest"
+import { afterEach, describe, expect, it, vi } from "vitest"
 import { setMonth } from "../setMonth"
 import { date } from "../date"
 
+afterEach(() => {
+  vi.useRealTimers()
+})
+
 describe("setMonth", () => {
-  it("should set month to Feb", () => {
+  it("sets the zero-based month", () => {
     expect(setMonth("2019-10-10", 1)).toEqual(date("2019-02-10"))
   })
 
-  it("should prevent overflow in leap year", () => {
+  it("prevents day overflow in leap years", () => {
     expect(setMonth("2024-03-31", 1)).toEqual(date("2024-02-29"))
   })
 
-  it("should prevent overflow in none leap year", () => {
+  it("prevents day overflow in non-leap years", () => {
     expect(setMonth("2023-03-31", 1)).toEqual(date("2023-02-28"))
   })
 
-  it("should overflow when month has less days", () => {
+  it("allows day overflow when requested", () => {
     expect(setMonth("2023-03-31", 3, true)).toEqual(date("2023-05-01"))
   })
 
-  it("should overflow in months when given more than 11", () => {
+  it("allows month overflow", () => {
     expect(setMonth("2020-01-05", 13)).toEqual(date("2021-02-05"))
   })
 
-  it("should undeflow in months when giving negative", () => {
+  it("allows month underflow", () => {
     expect(setMonth("2020-01-05", -3)).toEqual(date("2019-10-05"))
   })
 
-  it("should set month to July with current time", () => {
-    const d = date()
-    d.setMonth(7)
-    expect(setMonth(null, 7)).toEqual(d)
+  it("uses the current time when input is null", () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(date("2024-05-06 10:15:30.400"))
+
+    expect(setMonth(null, 7)).toEqual(date("2024-08-06 10:15:30.400"))
   })
 })

@@ -1,6 +1,17 @@
 <script lang="ts" setup>
 import sizes from "../../assets/func-sizes.json"
-import type { FunctionRef } from "../../src/types"
+import type { FunctionRef, ObjectRef } from "../../src/types"
+
+const durationProperties: ObjectRef["properties"] = [
+  { name: "years?", type: "number", jsdoc: ["Years to add."] },
+  { name: "months?", type: "number", jsdoc: ["Months to add."] },
+  { name: "weeks?", type: "number", jsdoc: ["Weeks to add."] },
+  { name: "days?", type: "number", jsdoc: ["Days to add."] },
+  { name: "hours?", type: "number", jsdoc: ["Hours to add."] },
+  { name: "minutes?", type: "number", jsdoc: ["Minutes to add."] },
+  { name: "seconds?", type: "number", jsdoc: ["Seconds to add."] },
+  { name: "milliseconds?", type: "number", jsdoc: ["Milliseconds to add."] },
+]
 
 const fns: Record<
   string,
@@ -13,6 +24,28 @@ const fns: Record<
     tip?: string
   }
 > = {
+  add: {
+    name: "add",
+    description:
+      "Returns a new Date object with a duration object applied. To subtract time, use negative values. Month and year overflow behavior matches <code>addMonth</code> and <code>addYear</code>.",
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date | null",
+      },
+      {
+        name: "duration",
+        type: "Duration",
+      },
+      {
+        name: "dateOverflow",
+        type: "boolean",
+        comment: "default: false",
+      },
+    ],
+    example: "add",
+  },
   addDay: {
     name: "add-day",
     description:
@@ -282,6 +315,138 @@ const fns: Record<
       },
     ],
   },
+  setDayOfMonth: {
+    name: "set-day-of-month",
+    description:
+      "Returns a new Date object with the day of the month set. By default, days beyond the end of the month clamp to the last day; set <code>dateOverflow</code> to <code>true</code> to allow overflow.",
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date | null",
+      },
+      {
+        name: "day",
+        type: "number",
+      },
+      {
+        name: "dateOverflow",
+        type: "boolean",
+        comment: "default: false",
+      },
+    ],
+  },
+  setHour: {
+    name: "set-hour",
+    description:
+      "Returns a new Date object with the hour set. Values outside 0-23 use the native Date overflow behavior.",
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date | null",
+      },
+      {
+        name: "hour",
+        type: "number",
+        comment: "0-23",
+      },
+    ],
+  },
+  setMilliseconds: {
+    name: "set-milliseconds",
+    description:
+      "Returns a new Date object with the millisecond value set. Values outside 0-999 use the native Date overflow behavior.",
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date | null",
+      },
+      {
+        name: "milliseconds",
+        type: "number",
+        comment: "0-999",
+      },
+    ],
+  },
+  setMinutes: {
+    name: "set-minutes",
+    description:
+      "Returns a new Date object with the minute set. Values outside 0-59 use the native Date overflow behavior.",
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date | null",
+      },
+      {
+        name: "minute",
+        type: "number",
+        comment: "0-59",
+      },
+    ],
+  },
+  setMonth: {
+    name: "set-month",
+    description:
+      "Returns a new Date object with the zero-based month set. By default, invalid days clamp to the last day of the target month; set <code>dateOverflow</code> to <code>true</code> to allow overflow.",
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date | null",
+      },
+      {
+        name: "month",
+        type: "number",
+        comment: "0-11, 0 is January",
+      },
+      {
+        name: "dateOverflow",
+        type: "boolean",
+        comment: "default: false",
+      },
+    ],
+  },
+  setSeconds: {
+    name: "set-seconds",
+    description:
+      "Returns a new Date object with the second set. Values outside 0-59 use the native Date overflow behavior.",
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date | null",
+      },
+      {
+        name: "second",
+        type: "number",
+        comment: "0-59",
+      },
+    ],
+  },
+  setYear: {
+    name: "set-year",
+    description:
+      "Returns a new Date object with the year set. By default, invalid leap days clamp to the last day of the target month; set <code>dateOverflow</code> to <code>true</code> to allow overflow.",
+    return: "Date",
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date | null",
+      },
+      {
+        name: "year",
+        type: "number",
+      },
+      {
+        name: "dateOverflow",
+        type: "boolean",
+        comment: "default: false",
+      },
+    ],
+  },
   tzDate: {
     name: "tz-date",
     description: `Converts an ISO 8601 like string into a Date object with a timezone applied. For example, <code>tzDate('2021-01-01T00:00', 'America/Los_Angeles')</code> will return a Date object representing 2021-01-01 00:00 in L.A.`,
@@ -382,6 +547,11 @@ const fns: Record<
         :function="fn"
         :arguments="def.arguments"
         :return="def.return"
+      />
+      <ObjectReference
+        v-if="fn === 'add'"
+        type="Duration"
+        :properties="durationProperties"
       />
       <p v-html="def.description" />
       <CodeExample v-if="def.example" :file="def.example" />

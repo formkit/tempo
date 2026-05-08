@@ -1,6 +1,30 @@
 <script lang="ts" setup>
 import sizes from "../../assets/func-sizes.json"
-import type { FunctionRef } from "../../src/types"
+import type { FunctionRef, ObjectRef } from "../../src/types"
+
+const durationProperties: ObjectRef["properties"] = [
+  { name: "years?", type: "number", jsdoc: ["Years in the duration."] },
+  { name: "months?", type: "number", jsdoc: ["Months in the duration."] },
+  { name: "weeks?", type: "number", jsdoc: ["Weeks in the duration."] },
+  { name: "days?", type: "number", jsdoc: ["Days in the duration."] },
+  { name: "hours?", type: "number", jsdoc: ["Hours in the duration."] },
+  { name: "minutes?", type: "number", jsdoc: ["Minutes in the duration."] },
+  { name: "seconds?", type: "number", jsdoc: ["Seconds in the duration."] },
+  { name: "milliseconds?", type: "number", jsdoc: ["Milliseconds in the duration."] },
+]
+
+const diffOptionsProperties: ObjectRef["properties"] = [
+  {
+    name: "abs?",
+    type: "boolean",
+    jsdoc: ["Return absolute values instead of signed values."],
+  },
+  {
+    name: "skip?",
+    type: "Array<keyof Duration> | Set<keyof Duration>",
+    jsdoc: ["Units to omit while calculating the duration."],
+  },
+]
 
 const fns: Record<
   string,
@@ -12,6 +36,27 @@ const fns: Record<
     tip?: string
   }
 > = {
+  diff: {
+    description:
+      "Returns the difference between two dates as a duration object. The result can be passed to <code>add</code> or formatted with <code>Intl.DurationFormat</code>.",
+    return: "Duration",
+    arguments: [
+      {
+        name: "dateA",
+        type: "string | Date | null",
+      },
+      {
+        name: "dateB",
+        type: "string | Date",
+      },
+      {
+        name: "options",
+        type: "DiffOptions",
+        comment: "abs, skip",
+      },
+    ],
+    example: "diff",
+  },
   diffMilliseconds: {
     description:
       "Returns the number of milliseconds difference between two date objects.",
@@ -326,6 +371,10 @@ const fns: Record<
         :arguments="def.arguments"
         :return="def.return"
       />
+      <template v-if="fn === 'diff'">
+        <ObjectReference type="Duration" :properties="durationProperties" />
+        <ObjectReference type="DiffOptions" :properties="diffOptionsProperties" />
+      </template>
       <p v-html="def.description" />
       <CodeExample v-if="def.example" :file="def.example" />
       <CalloutInfo v-if="def.tip">

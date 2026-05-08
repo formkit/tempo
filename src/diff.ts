@@ -13,16 +13,22 @@ import { diffMonths } from "./diffMonths"
 import { diffSeconds } from "./diffSeconds"
 import { diffWeeks } from "./diffWeeks"
 import { diffYears } from "./diffYears"
-import type { DateInput, DurationObj, MaybeDateInput } from "./types"
+import type { DateInput, Duration, MaybeDateInput } from "./types"
 
-type DurationKeys = keyof Omit<DurationObj, "microseconds" | "nanoseconds">
+type DurationKey = keyof Duration
 
-// DiffFnOptions is called with `Fn` to prevent confusion with the other diff* function
+function negateDuration(duration: Duration): Duration {
+  const negated: Duration = {}
+  for (const unit of Object.keys(duration) as DurationKey[]) {
+    negated[unit] = -duration[unit]!
+  }
+  return negated
+}
 
 /**
  * Options for `diff` function
  */
-export interface DiffFnOptions {
+export interface DiffOptions {
   /**
    * whether the difference should be absolute (not negative)
    */
@@ -30,7 +36,7 @@ export interface DiffFnOptions {
   /**
    * units you want to skip, for example weeks
    */
-  skip?: DurationKeys[] | Set<DurationKeys>
+  skip?: DurationKey[] | Set<DurationKey>
 }
 
 /**
@@ -45,8 +51,8 @@ export interface DiffFnOptions {
 export function diff(
   dateA: DateInput,
   dateB?: MaybeDateInput,
-  options?: DiffFnOptions
-): DurationObj
+  options?: DiffOptions
+): Duration
 
 /**
  * Returns the difference between 2 dates in an object
@@ -60,24 +66,24 @@ export function diff(
 export function diff(
   dateA: MaybeDateInput,
   dateB: DateInput,
-  options?: DiffFnOptions
-): DurationObj
+  options?: DiffOptions
+): Duration
 
 export function diff(
   dateA: MaybeDateInput,
   dateB?: MaybeDateInput,
-  options?: DiffFnOptions
-): DurationObj {
+  options?: DiffOptions
+): Duration {
   let a = date(dateA)
   let b = date(dateB)
 
-  if (options?.abs && a < b) {
-    const d = diff(b, a, options)
-    return d
+  if (a < b) {
+    const duration = diff(b, a, options)
+    return options?.abs ? duration : negateDuration(duration)
   }
 
   const skip = new Set(options?.skip)
-  const duration: DurationObj = {}
+  const duration: Duration = {}
 
   if (!skip.has("years")) {
     const years = diffYears(a, b)

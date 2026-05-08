@@ -1,13 +1,10 @@
 import { describe, expect, it } from "vitest"
-import { add } from "../add"
-import { date } from "../date"
+import { add, date, diff } from "../index"
 
 describe("add", () => {
-  it("should add to result into 2025-04-16 14:08:40", () => {
-    const a = "2024-01-01 12:00:00"
-
+  it("adds multiple duration units", () => {
     expect(
-      add(a, {
+      add("2024-01-01 12:00:00", {
         years: 1,
         months: 3,
         days: 15,
@@ -18,23 +15,27 @@ describe("add", () => {
     ).toEqual(date("2025-04-16 14:08:40"))
   })
 
-  it("should overflow", () => {
-    expect(
-      add(
-        "2024-01-30",
-        {
-          months: 1,
-        },
-        true
-      )
-    ).toEqual(date("2024-03-01"))
+  it("allows month overflow when requested", () => {
+    expect(add("2024-01-30", { months: 1 }, true)).toEqual(date("2024-03-01"))
   })
 
-  it("should remove 5 weeks", () => {
-    expect(
-      add("2024-02-05", {
-        weeks: -5,
-      })
-    ).toEqual(date("2024-01-01"))
+  it("adds weeks and milliseconds", () => {
+    expect(add("2024-02-05 10:00:00.250", { weeks: -5, milliseconds: 100 })).toEqual(
+      date("2024-01-01 10:00:00.350")
+    )
+  })
+
+  it("round-trips a positive duration returned by diff", () => {
+    const start = "2024-01-30"
+    const end = "2024-03-01"
+
+    expect(add(start, diff(end, start))).toEqual(date(end))
+  })
+
+  it("round-trips a negative duration returned by diff", () => {
+    const start = "2024-01-30"
+    const end = "2024-03-01"
+
+    expect(add(end, diff(start, end))).toEqual(date(start))
   })
 })

@@ -1,5 +1,5 @@
 import { date } from "./date"
-import { MaybeDateInput } from "./types"
+import type { MaybeDateInput } from "./types"
 import { handleOverflow } from "./handleDateOverflow"
 
 /**

@@ -1,26 +1,30 @@
-import { describe, expect, it } from "vitest"
-import { diff } from "../diff"
-import { date } from "../date"
-import { addSecond } from "../addSecond"
-import { addDay } from "../addDay"
+import { afterEach, describe, expect, it, vi } from "vitest"
+import { addDay, addSecond, date, diff } from "../index"
+
+afterEach(() => {
+  vi.useRealTimers()
+})
 
 describe("diff", () => {
-  it("should give 1 year, 3 months & 50 seconds", () => {
-    const a = "2025-04-01 12:00:50"
-    const b = "2024-01-01 12:00:00"
-    expect(diff(a, b)).toEqual({ years: 1, months: 3, seconds: 50 })
+  it("returns a duration with calendar and time units", () => {
+    expect(diff("2025-04-01 12:00:50", "2024-01-01 12:00:00")).toEqual({
+      years: 1,
+      months: 3,
+      seconds: 50,
+    })
   })
 
-  it("should give -3 weeks, -6 days, -4 hours & -5 minutes", () => {
+  it("returns negative duration units", () => {
     const a = "2024-01-28 12:00:00"
     const b = "2024-01-01 07:55:00"
 
     expect(diff(b, a)).toEqual({ weeks: -3, days: -6, hours: -4, minutes: -5 })
   })
 
-  it("should give abs 5 days & 5070 milliseconds from current time", () => {
-    const a = date()
-    const b = addDay(addSecond(a, 5), 5)
+  it("uses the current time when input is null", () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(date("2024-01-01 12:00:00"))
+    const b = addDay(addSecond(null, 5), 5)
 
     expect(diff(null, b, { skip: ["seconds"], abs: true })).toEqual({
       days: 5,
@@ -28,16 +32,29 @@ describe("diff", () => {
     })
   })
 
-  it("should give 18 months & 60 seconds while skipping years & minutes", () => {
-    const a = "2025-07-01 12:01:00"
-    const b = "2024-01-01 12:00:00"
-    expect(diff(a, b, { skip: ["years", "minutes"] })).toEqual({
+  it("can skip duration units with an array", () => {
+    expect(
+      diff("2025-07-01 12:01:00", "2024-01-01 12:00:00", {
+        skip: ["years", "minutes"],
+      })
+    ).toEqual({
       months: 18,
       seconds: 60,
     })
   })
 
-  it("should give 27 days and 245 minutes while using abs and skipping weeks and hours", () => {
+  it("can skip duration units with a set", () => {
+    expect(
+      diff("2025-07-01 12:01:00", "2024-01-01 12:00:00", {
+        skip: new Set(["years", "minutes"]),
+      })
+    ).toEqual({
+      months: 18,
+      seconds: 60,
+    })
+  })
+
+  it("can return absolute duration units", () => {
     const a = "2024-01-28 12:00:00"
     const b = "2024-01-01 07:55:00"
 

@@ -1,6 +1,6 @@
 import { date } from "./date"
 import { monthDays } from "./monthDays"
-import { MaybeDateInput } from "./types"
+import type { MaybeDateInput } from "./types"
 
 /**
  * set the day of the month in a date object
@@ -12,7 +12,7 @@ export function setDayOfMonth(
   inputDate: MaybeDateInput,
   day: number,
   dateOverflow = false
-) {
+): Date {
   const d = date(inputDate)
   const daysInMonth = monthDays(d)
   if (!dateOverflow) {

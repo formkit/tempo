@@ -1,6 +1,11 @@
-import { describe, it, expect } from "vitest"
+import { afterEach, describe, it, expect, vi } from "vitest"
 import { diffMonths } from "../diffMonths"
 import { addMonth } from "../addMonth"
+import { date } from "../date"
+
+afterEach(() => {
+  vi.useRealTimers()
+})
 
 describe("differenceInMonths", () => {
   it("should give 11 months", () => {
@@ -32,7 +37,10 @@ describe("differenceInMonths", () => {
   })
 
   it("different should be 3 month compared to the current time", () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(date("2024-04-07T09:10:00.000Z"))
     const compare = addMonth(null, 3)
+
     expect(diffMonths(compare)).toBe(3)
   })
 })

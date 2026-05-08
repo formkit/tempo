@@ -1,6 +1,11 @@
-import { describe, expect, it } from "vitest"
+import { afterEach, describe, expect, it, vi } from "vitest"
 import { diffDays } from "../diffDays"
 import { addDay } from "../addDay"
+import { date } from "../date"
+
+afterEach(() => {
+  vi.useRealTimers()
+})
 
 describe("differenceInDays", () => {
   it("difference is 3 days", () => {
@@ -18,7 +23,10 @@ describe("differenceInDays", () => {
   })
 
   it("different should be -64 hours compared to the current time", () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(date("2024-04-07T09:10:00.000Z"))
     const compare = addDay(null, -28)
+
     expect(diffDays(compare)).toBe(-28)
   })
 })

@@ -1,51 +1,58 @@
 import { addDay } from "./addDay"
 import { addHour } from "./addHour"
+import { addMillisecond } from "./addMillisecond"
 import { addMinute } from "./addMinute"
 import { addMonth } from "./addMonth"
 import { addSecond } from "./addSecond"
 import { addYear } from "./addYear"
 import { date } from "./date"
-import type { DurationObj, MaybeDateInput } from "./types"
+import type { Duration, MaybeDateInput } from "./types"
 
 /**
- * returns a new date object with the added amount of time after the original date.
+ * Returns a new Date object with the duration applied.
  * @param [inputDate] - A date to increment or null to increment from the current time.
- * @param add - An object with values for the amount of time to add to the original date.
- * @param [dateOverflow] - Whether or not to allow the date to overflow to another month if the inputDate’s month is out of range of the new month
+ * @param duration - An object with values for the amount of time to add to the original date.
+ * @param [dateOverflow] - Whether to allow month/year changes to overflow into a later month.
  */
 export function add(
   inputDate: MaybeDateInput,
-  add: Omit<DurationObj, "microseconds" | "nanoseconds">,
+  duration: Duration,
   dateOverflow = false
 ) {
   let d = date(inputDate)
-  if (add.weeks) {
-    d = addDay(d, add.weeks * 7)
+  const applyFixedUnits = () => {
+    if (duration.weeks) {
+      d = addDay(d, duration.weeks * 7)
+    }
+    if (duration.days) {
+      d = addDay(d, duration.days)
+    }
+    if (duration.hours) {
+      d = addHour(d, duration.hours)
+    }
+    if (duration.minutes) {
+      d = addMinute(d, duration.minutes)
+    }
+    if (duration.seconds) {
+      d = addSecond(d, duration.seconds)
+    }
+    if (duration.milliseconds) {
+      d = addMillisecond(d, duration.milliseconds)
+    }
   }
-  if (add.days) {
-    d = addDay(d, add.days)
+  const applyCalendarUnits = () => {
+    if (duration.months) {
+      d = addMonth(d, duration.months, dateOverflow)
+    }
+    if (duration.years) {
+      d = addYear(d, duration.years, dateOverflow)
+    }
   }
-  if (add.hours) {
-    d = addHour(d, add.hours)
-  }
-  if (add.minutes) {
-    d = addMinute(d, add.minutes)
-  }
-  if (add.seconds) {
-    d = addSecond(d, add.seconds)
-  }
+  const calendarFirst = (duration.months ?? 0) < 0 || (duration.years ?? 0) < 0
 
-  if (add.milliseconds) {
-    d.setMilliseconds(d.getMilliseconds() + add.milliseconds)
-  }
-
-  // doing years & months due to the dateOverflow option, it might be that the other units already resolved the overflow
-  if (add.months) {
-    d = addMonth(d, add.months, dateOverflow)
-  }
-  if (add.years) {
-    d = addYear(d, add.years, dateOverflow)
-  }
+  if (calendarFirst) applyCalendarUnits()
+  applyFixedUnits()
+  if (!calendarFirst) applyCalendarUnits()
 
   return d
 }
