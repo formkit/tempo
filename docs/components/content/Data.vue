@@ -17,7 +17,7 @@ const fns: Record<
   ap: {
     name: "ap",
     description: "Returns either am or pm but in any given locale.",
-    return: "Date",
+    return: "string",
     arguments: [
       {
         name: "amOrPm",
@@ -80,7 +80,7 @@ const fns: Record<
         type: "Date",
       },
     ],
-    return: "string",
+    return: "boolean",
   },
   monthDays: {
     name: "month-days",
