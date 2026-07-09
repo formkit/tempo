@@ -271,4 +271,13 @@ describe("format with a timezone", () => {
       })
     ).toBe("12/19/89, 1:30:10 AM -0600")
   })
+  it("does not throw when locale already contains a Unicode extension subtag (#68)", () => {
+    // ar-u-nu-arab requests Arabic-Indic numerals via BCP 47 Unicode extension.
+    // Previously, format() appended "-u-hc-h23" producing the invalid tag
+    // "ar-u-nu-arab-u-hc-h23" which throws "Invalid language tag".
+    expect(() => format("2024-01-15", "YYYY/MM/DD", "ar-u-nu-arab")).not.toThrow()
+    // The formatted output should use Arabic-Indic digits (٢٠٢٤, etc.)
+    const result = format("2024-01-15", "YYYY/MM/DD", "ar-u-nu-arab")
+    expect(result).toBe("٢٠٢٤/٠١/١٥")
+  })
 })
