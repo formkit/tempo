@@ -278,4 +278,12 @@ describe("parse", () => {
       ).toISOString()
     ).toBe("1989-12-19T07:30:10.000Z")
   })
+  it("parses an ISO date whose year is before 1000", () => {
+    // Regression: the `four` helper padded to 2 digits, so a valid
+    // zero-padded year like "0087" produced an invalid ISO string and
+    // parse() threw instead of returning the date.
+    const d = parse("0087-06-15", "YYYY-MM-DD")
+    expect(Number.isNaN(+d)).toBe(false)
+    expect(d.getUTCFullYear()).toBe(87)
+  })
 })

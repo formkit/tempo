@@ -159,7 +159,7 @@ export const two = (n: number) => String(n).padStart(2, "0")
  * Creates a leading zero string of 4 digits.
  * @param n - A number.
  */
-export const four = (n: number) => String(n).padStart(2, "0")
+export const four = (n: number) => String(n).padStart(4, "0")
 
 /**
  * Normalizes a given part to NFKC.
