@@ -248,7 +248,14 @@ function createPartMap(
   const genitiveParts: Part[] = []
 
   function addValues(requestedParts: Part[], hour12 = false) {
-    const preciseLocale = `${locale}-u-hc-${hour12 ? "h12" : "h23"}`
+    // Use Intl.Locale to merge the hourCycle extension into the locale tag.
+    // Plain string concatenation (e.g. `${locale}-u-hc-h23`) produces an
+    // invalid BCP 47 tag when the locale already contains a Unicode extension
+    // block (e.g. "ar-u-nu-arab"), because a tag may only have one "-u-" block.
+    // Intl.Locale merges extensions correctly into a single "-u-" subtag.
+    const preciseLocale = new Intl.Locale(locale, {
+      hourCycle: hour12 ? "h12" : "h23",
+    }).toString()
     valueParts.push(
       ...new Intl.DateTimeFormat(
         preciseLocale,
