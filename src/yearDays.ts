@@ -7,9 +7,9 @@ import type { MaybeDateInput } from "./types"
  */
 export function yearDays(inputDate?: MaybeDateInput): number {
   const d = date(inputDate)
+  // Use UTC boundaries: local midnights can be shifted by DST/offset changes,
+  // which would make the difference a non-integer number of days.
   return (
-    (new Date(d.getFullYear() + 1, 0, 0).getTime() -
-      new Date(d.getFullYear(), 0, 0).getTime()) /
-    86400000
+    (Date.UTC(d.getFullYear() + 1, 0, 0) - Date.UTC(d.getFullYear(), 0, 0)) / 86400000
   )
 }
