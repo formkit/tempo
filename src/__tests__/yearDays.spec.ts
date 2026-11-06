@@ -18,4 +18,21 @@ describe("yearDays", () => {
     const end = yearEnd()
     expect(yearDays()).toBe(diffDays(end, start) + 1)
   })
+
+  it("returns whole days in zones with DST changes at midnight or skipped days", () => {
+    const original = process.env.TZ
+    try {
+      for (const [tz, input, expected] of [
+        ["America/Sao_Paulo", "2019-06-15", 365],
+        ["America/Nuuk", "2023-06-15", 365],
+        ["Pacific/Apia", "2011-06-15", 365],
+        ["America/Sao_Paulo", "2020-06-15", 366],
+      ] as const) {
+        process.env.TZ = tz
+        expect(yearDays(input), `${tz} ${input}`).toBe(expected)
+      }
+    } finally {
+      process.env.TZ = original
+    }
+  })
 })
