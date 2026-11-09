@@ -286,4 +286,18 @@ describe("parse", () => {
     expect(Number.isNaN(+d)).toBe(false)
     expect(d.getUTCFullYear()).toBe(87)
   })
+  it("parses numeric minute (m) and second (s) tokens", () => {
+    const d1 = parse("2024-05-10 14:5:7", "YYYY-MM-DD HH:m:s")
+    expect(d1.getMinutes()).toBe(5)
+    expect(d1.getSeconds()).toBe(7)
+
+    const d2 = parse("2024-05-10 14:35:45", "YYYY-MM-DD HH:m:s")
+    expect(d2.getMinutes()).toBe(35)
+    expect(d2.getSeconds()).toBe(45)
+
+    const d3 = parse("2:5:7 pm", "h:m:s a")
+    expect(d3.getHours()).toBe(14)
+    expect(d3.getMinutes()).toBe(5)
+    expect(d3.getSeconds()).toBe(7)
+  })
 })
