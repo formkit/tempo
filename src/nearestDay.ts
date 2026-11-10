@@ -22,24 +22,24 @@ export function nearestDay(
   const d = date(inputDate)
   switch (constraint) {
     case "month":
-      decrements = d.getDate()
+      decrements = d.getDate() - 1
       increments = monthDays(d) - d.getDate()
       break
     case "week":
-      decrements = d.getDay() + 1
+      decrements = d.getDay()
       increments = 6 - d.getDay()
       break
     case "year":
       const total = yearDays(d)
       const day = dayOfYear(d)
-      decrements = day
+      decrements = day - 1
       increments = total - day
       break
     default:
       increments = decrements = constraint
   }
 
-  for (let i = 0; i <= increments || i < decrements; i++) {
+  for (let i = 0; i <= increments || i <= decrements; i++) {
     if (i <= increments) {
       const next = addDay(d, i)
       if (search(next)) return next
