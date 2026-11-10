@@ -94,4 +94,18 @@ describe("nearestDay", () => {
     expect(result.getMonth()).toBe(new Date().getMonth())
     expect(result.getFullYear()).toBe(new Date().getFullYear())
   })
+
+  it("does not return dates from the previous month when constrained to a month", () => {
+    const search = (d: Date) => d.getMonth() === 3 && d.getDate() === 30
+    expect(nearestDay("2024-05-10", search, "month")).toBeNull()
+  })
+  it("does not return dates from the previous week when constrained to a week", () => {
+    const search = (d: Date) => d.getMonth() === 4 && d.getDate() === 4
+    expect(nearestDay("2024-05-05", search, "week")).toBeNull()
+  })
+  it("does not return dates from the previous year when constrained to a year", () => {
+    const search = (d: Date) =>
+      d.getFullYear() === 2023 && d.getMonth() === 11 && d.getDate() === 31
+    expect(nearestDay("2024-01-10", search, "year")).toBeNull()
+  })
 })
