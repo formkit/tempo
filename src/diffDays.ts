@@ -1,4 +1,4 @@
-import { diffMilliseconds } from "./diffMilliseconds"
+import { date } from "./date"
 import type { DateInput, MaybeDateInput } from "./types"
 import { diffRound, type DiffRoundingMethod } from "./diffRound"
 
@@ -30,9 +30,9 @@ export function diffDays(
   dateB?: MaybeDateInput,
   roundingMethod?: DiffRoundingMethod
 ): number {
-  return diffRound(
-    // @ts-ignore
-    diffMilliseconds(dateA, dateB) / 86_400_000, // hour * 24
-    roundingMethod
-  )
+  const left = date(dateA)
+  const right = date(dateB)
+  // Count local days: a DST change makes one day 23 or 25 hours long.
+  const offset = (right.getTimezoneOffset() - left.getTimezoneOffset()) * 60_000
+  return diffRound((+left - +right + offset) / 86_400_000, roundingMethod) // hour * 24
 }

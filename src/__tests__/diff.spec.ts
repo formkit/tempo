@@ -73,8 +73,7 @@ describe("diff", () => {
 
     expect(duration).toEqual({
       months: 11,
-      weeks: 3,
-      days: 7,
+      weeks: 4,
     })
     expectAllPositive(duration)
   })
@@ -92,8 +91,7 @@ describe("diff", () => {
 
     expect(duration).toEqual({
       months: 11,
-      days: 27,
-      hours: 24,
+      days: 28,
     })
     expectAllPositive(duration)
     expect(add("2024-02-29", duration)).toEqual(date("2025-02-28"))
