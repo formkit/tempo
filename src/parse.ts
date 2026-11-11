@@ -116,15 +116,17 @@ export function parse(
       } else if (t === "Z" || t === "ZZ") {
         offset = validOffset(part.value, t)
       } else {
-        const values = range(t as FormatToken, locale, genitive)
-        const index = values.indexOf(part.value)
-        if (index !== -1) {
-          switch (t) {
-            case "MMM":
-            case "MMMM":
-              parsed.set("MM", index + 1)
-              break
-          }
+        // format() can write either the standalone or the in-context month
+        // name (ru "январь" / "января"), so accept both.
+        let index = range(t as FormatToken, locale, genitive).indexOf(part.value)
+        if (index === -1)
+          index = range(t as FormatToken, locale, !genitive).indexOf(part.value)
+        switch (t) {
+          case "MMM":
+          case "MMMM":
+            if (index === -1) return invalid()
+            parsed.set("MM", index + 1)
+            break
         }
       }
     }
