@@ -280,4 +280,12 @@ describe("format with a timezone", () => {
     const result = format("2024-01-15", "YYYY/MM/DD", "ar-u-nu-arab")
     expect(result).toBe("٢٠٢٤/٠١/١٥")
   })
+
+  it("pads the minute with the locale's zero digit in 12-hour formats", () => {
+    const d = new Date(2024, 0, 6, 10, 4, 5)
+    expect(format(d, "h:mm", "bn")).toBe("১০:০৪")
+    expect(format(d, "h:mm", "ar-EG")).toBe("١٠:٠٤")
+    expect(format(d, "hh:mm:ss", "fa")).toBe("۱۰:۰۴:۰۵")
+    expect(format(d, "h:mm", "en")).toBe("10:04")
+  })
 })

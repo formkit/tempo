@@ -189,6 +189,7 @@ export function fill(
 ): FilledPart[] {
   const partMap = createPartMap(inputDate, parts, locale, genitive)
   const d = date(inputDate)
+  const zero = new Intl.NumberFormat(locale, { useGrouping: false }).format(0)
 
   /**
    * Not all values get returned "properly" as our tokens would suggest. For
@@ -205,7 +206,8 @@ export function fill(
     if (["mm", "ss", "MM"].includes(token) && value.length === 1) {
       // Some tokens are supposed to have leading zeros, but Intl doesn't
       // always return them, depending on the locale and the format.
-      return `0${value}`
+      // Use the locale's own zero digit (e.g. "০" for bn, "٠" for ar-EG).
+      return `${zero}${value}`
     }
     if (partName === "dayPeriod") {
       const p = ap(d.getUTCHours() < 12 ? "am" : "pm", locale)
