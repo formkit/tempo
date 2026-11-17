@@ -299,4 +299,31 @@ describe("parse", () => {
       "2023-05-05T01:57:59.000Z"
     )
   })
+  it("rejects mismatched separators and trailing characters (#99)", () => {
+    expect(() => parse("2026/11/12", "YYYY-MM-DD", "en")).toThrow(
+      "does not match format"
+    )
+    expect(() => parse("2026-11-120", "YYYY-MM-DD", "en")).toThrow(
+      "does not match format"
+    )
+    expect(() =>
+      parse({
+        date: "2026/11/12",
+        format: "YYYY-MM-DD",
+        locale: "en",
+        dateOverflow: "throw",
+      })
+    ).toThrow("does not match format")
+    expect(parse("2026-11-12", "YYYY-MM-DD", "en").getDate()).toBe(12)
+  })
+  it("matches literals leniently on whitespace and case (#99)", () => {
+    const d = new Date(2024, 0, 6, 22, 4)
+    // Intl renders a narrow no-break space before the day period
+    expect(parse(format(d, "h:mm a", "en"), "h:mm a", "en").getHours()).toBe(22)
+    expect(parse("10:04 pm", "h:mm a", "en").getMinutes()).toBe(4)
+    expect(parse("10:04\u00a0PM", "h:mm A", "en").getHours()).toBe(22)
+    expect(
+      parse("JANUARY 6, 2024", "MMMM D, YYYY", "en").getFullYear()
+    ).toBe(2024)
+  })
 })
