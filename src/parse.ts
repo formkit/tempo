@@ -111,6 +111,10 @@ export function parse(
         parsed.set("HH", v)
       } else if (t === "M") {
         parsed.set("MM", v)
+      } else if (t === "m") {
+        parsed.set("mm", v)
+      } else if (t === "s") {
+        parsed.set("ss", v)
       } else if (t === "a" || t === "A") {
         a = part.value.toLowerCase() === ap("am", locale).toLowerCase()
       } else if (t === "Z" || t === "ZZ") {
