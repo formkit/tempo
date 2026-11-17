@@ -286,4 +286,17 @@ describe("parse", () => {
     expect(Number.isNaN(+d)).toBe(false)
     expect(d.getUTCFullYear()).toBe(87)
   })
+  it("parses single digit minute and second tokens (#89)", () => {
+    const d = parse("2024-05-10 14:35:45", "YYYY-MM-DD HH:m:s", "en")
+    expect([d.getMinutes(), d.getSeconds()]).toEqual([35, 45])
+    const d2 = parse("2:5:7 pm", "h:m:s a", "en")
+    expect([d2.getHours(), d2.getMinutes(), d2.getSeconds()]).toEqual([
+      14, 5, 7,
+    ])
+  })
+  it("parses iso strings with second offsets (#94)", () => {
+    expect(parse("2023-05-05T07:30:10+05:32:11").toISOString()).toBe(
+      "2023-05-05T01:57:59.000Z"
+    )
+  })
 })
