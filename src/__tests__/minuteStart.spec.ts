@@ -14,4 +14,9 @@ describe("minuteStart", () => {
     compare.setSeconds(0, 0)
     expect(minuteStart()).toEqual(compare)
   })
+
+  it("keeps the second occurrence of a repeated hour (DST fall-back)", () => {
+    // 2026-11-01 01:30 America/New_York happens twice; 06:30Z is the second (EST)
+    expect(minuteStart("2026-11-01T06:30:15.123Z").toISOString()).toBe("2026-11-01T06:30:00.000Z")
+  })
 })
