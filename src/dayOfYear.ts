@@ -8,9 +8,10 @@ import type { MaybeDateInput } from "./types"
  */
 export function dayOfYear(inputDate?: MaybeDateInput): number {
   const d = date(inputDate)
-  return Math.round(
-    (new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0).getTime() -
-      new Date(d.getFullYear(), 0, 0).getTime()) /
+  // Count calendar days independently of local offset changes or skipped dates.
+  return (
+    (Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) -
+      Date.UTC(d.getFullYear(), 0, 0)) /
       86400000
   )
 }
