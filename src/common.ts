@@ -432,8 +432,18 @@ export function isNumeric(part: Part) {
  */
 export function validate(parts: Part[]): Part[] | never {
   let lastPart: Part | undefined = undefined
-  for (const part of parts) {
-    if (part.partName === "literal" && !isNaN(parseFloat(part.partValue))) {
+  // A literal containing digits is only unambiguous to parse when the parts
+  // around it have a known width: fixed-length tokens (YYYY, MM, DD…), other
+  // literals, or the start/end of the format. E.g. "YYYY-MM-01" is fine, but
+  // "M01D" is not (formkit/formkit#1134).
+  const knownWidth = (p?: Part) =>
+    !p || p.partName === "literal" || p.token in fixedLength
+  for (const [i, part] of parts.entries()) {
+    if (
+      part.partName === "literal" &&
+      !isNaN(parseFloat(part.partValue)) &&
+      !(knownWidth(parts[i - 1]) && knownWidth(parts[i + 1]))
+    ) {
       throw new Error(`Numbers in format (${part.partValue}).`)
     }
     if (lastPart && lastPart.partName !== "literal" && part.partName !== "literal") {

@@ -326,4 +326,17 @@ describe("parse", () => {
       parse("JANUARY 6, 2024", "MMMM D, YYYY", "en").getFullYear()
     ).toBe(2024)
   })
+  it("allows numeric literals between fixed-width parts (formkit/formkit#1134)", () => {
+    const d = new Date(2024, 4, 17)
+    expect(format(d, "YYYY-MM-01", "en")).toBe("2024-05-01")
+    const parsed = parse("2024-05-01", "YYYY-MM-01", "en")
+    expect([parsed.getFullYear(), parsed.getMonth()]).toEqual([2024, 4])
+    expect(format(d, "01/MM/YYYY", "en")).toBe("01/05/2024")
+    expect(() => parse("2024-05-02", "YYYY-MM-01", "en")).toThrow(
+      "does not match format"
+    )
+  })
+  it("still rejects numeric literals next to variable-width tokens", () => {
+    expect(() => parse("1011", "M01D", "en")).toThrow("Numbers in format")
+  })
 })
