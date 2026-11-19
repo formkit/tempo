@@ -12,6 +12,11 @@ describe("differenceInDays", () => {
     expect(diffDays("2024-04-10", "2024-04-07")).toBe(3)
   })
 
+  it("counts whole days across a DST change", () => {
+    // the suite runs in America/New_York, DST starts 2026-03-08
+    expect(diffDays("2026-03-15", "2026-03-01")).toBe(14)
+  })
+
   it("difference is 2 days", () => {
     expect(diffDays("2024-04-10T09:50:00.000Z", "2024-04-07T15:28:00.000Z")).toBe(2)
   })
