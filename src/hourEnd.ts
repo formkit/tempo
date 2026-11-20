@@ -15,7 +15,8 @@ export function hourEnd(inputDate?: MaybeDateInput): Date {
       (999 - d.getMilliseconds())
   )
   // A sub-hour offset change (e.g. 30 min in Lord_Howe) breaks the shift.
-  if (shifted.getMinutes() === 59) return shifted
+  if (shifted.getMinutes() === 59 && shifted.getHours() === d.getHours())
+    return shifted
   d.setMinutes(59, 59, 999)
   return d
 }

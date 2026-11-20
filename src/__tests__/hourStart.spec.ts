@@ -31,4 +31,17 @@ describe("hourStart", () => {
       process.env.TZ = tz
     }
   })
+
+  it("stays in the input's local hour across a non-hourly offset change (Chatham)", () => {
+    const tz = process.env.TZ
+    process.env.TZ = "Pacific/Chatham"
+    try {
+      const input = new Date("2026-04-04T13:18:13.123Z") // 03:03:13 +13:45
+      const r = hourStart(input)
+      expect(r.getHours()).toBe(input.getHours())
+      expect(r.getMinutes()).toBe(0)
+    } finally {
+      process.env.TZ = tz
+    }
+  })
 })
