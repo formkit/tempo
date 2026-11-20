@@ -36,6 +36,13 @@ describe("differenceInMonths", () => {
     expect(diffMonths("2024-01-31", "2024-02-29")).toBe(-1)
   })
 
+  it("should not count a month that is a few hours short", () => {
+    expect(diffMonths("2024-03-15T09:00:00", "2024-02-15T10:00:00")).toBe(0)
+    expect(diffMonths("2024-02-15T10:00:00", "2024-03-15T09:00:00")).toBe(0)
+    expect(diffMonths("2024-03-15T10:00:00", "2024-02-15T10:00:00")).toBe(1)
+    expect(diffMonths("2025-02-15T09:00:00", "2024-02-15T10:00:00")).toBe(11)
+  })
+
   it("different should be 3 month compared to the current time", () => {
     vi.useFakeTimers()
     vi.setSystemTime(date("2024-04-07T09:10:00.000Z"))
