@@ -7,6 +7,10 @@ import type { MaybeDateInput } from "./types"
  */
 export function minuteEnd(inputDate?: MaybeDateInput): Date {
   const d = date(inputDate)
-  d.setSeconds(59, 999)
+  // Shift the timestamp instead of using local setters, which pick the first
+  // occurrence of a repeated hour (DST fall-back).
+  d.setTime(
+    d.getTime() + (59 - d.getSeconds()) * 1000 + (999 - d.getMilliseconds())
+  )
   return d
 }

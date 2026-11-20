@@ -7,6 +7,8 @@ import type { MaybeDateInput } from "./types"
  */
 export function minuteStart(inputDate?: MaybeDateInput): Date {
   const d = date(inputDate)
-  d.setSeconds(0, 0)
+  // Shift the timestamp instead of using local setters, which pick the first
+  // occurrence of a repeated hour (DST fall-back).
+  d.setTime(d.getTime() - d.getSeconds() * 1000 - d.getMilliseconds())
   return d
 }
