@@ -172,6 +172,19 @@ export function normStr(part: Intl.DateTimeFormatPart): Intl.DateTimeFormatPart 
   return part
 }
 
+const zeros: Record<string, string> = {}
+
+/**
+ * The zero digit in a locale’s default numbering system (e.g. "০" for bn), so
+ * padded values never mix Latin and native digits.
+ * @param locale - The locale to get the zero digit for.
+ */
+function localeZero(locale: string): string {
+  return (
+    zeros[locale] || (zeros[locale] = new Intl.NumberFormat(locale).format(0))
+  )
+}
+
 /**
  * Returns the parts filled with pertinent values.
  * @param [inputDate] - The date to fill parts for
@@ -205,7 +218,7 @@ export function fill(
     if (["mm", "ss", "MM"].includes(token) && value.length === 1) {
       // Some tokens are supposed to have leading zeros, but Intl doesn't
       // always return them, depending on the locale and the format.
-      return `0${value}`
+      return `${localeZero(locale)}${value}`
     }
     if (partName === "dayPeriod") {
       const p = ap(d.getUTCHours() < 12 ? "am" : "pm", locale)
@@ -419,8 +432,18 @@ export function isNumeric(part: Part) {
  */
 export function validate(parts: Part[]): Part[] | never {
   let lastPart: Part | undefined = undefined
-  for (const part of parts) {
-    if (part.partName === "literal" && !isNaN(parseFloat(part.partValue))) {
+  // A literal containing digits is only unambiguous to parse when the parts
+  // around it have a known width: fixed-length tokens (YYYY, MM, DD…), other
+  // literals, or the start/end of the format. E.g. "YYYY-MM-01" is fine, but
+  // "M01D" is not (formkit/formkit#1134).
+  const knownWidth = (p?: Part) =>
+    !p || p.partName === "literal" || p.token in fixedLength
+  for (const [i, part] of parts.entries()) {
+    if (
+      part.partName === "literal" &&
+      !isNaN(parseFloat(part.partValue)) &&
+      !(knownWidth(parts[i - 1]) && knownWidth(parts[i + 1]))
+    ) {
       throw new Error(`Numbers in format (${part.partValue}).`)
     }
     if (lastPart && lastPart.partName !== "literal" && part.partName !== "literal") {

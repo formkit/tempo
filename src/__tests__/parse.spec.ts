@@ -286,4 +286,57 @@ describe("parse", () => {
     expect(Number.isNaN(+d)).toBe(false)
     expect(d.getUTCFullYear()).toBe(87)
   })
+  it("parses single digit minute and second tokens (#89)", () => {
+    const d = parse("2024-05-10 14:35:45", "YYYY-MM-DD HH:m:s", "en")
+    expect([d.getMinutes(), d.getSeconds()]).toEqual([35, 45])
+    const d2 = parse("2:5:7 pm", "h:m:s a", "en")
+    expect([d2.getHours(), d2.getMinutes(), d2.getSeconds()]).toEqual([
+      14, 5, 7,
+    ])
+  })
+  it("parses iso strings with second offsets (#94)", () => {
+    expect(parse("2023-05-05T07:30:10+05:32:11").toISOString()).toBe(
+      "2023-05-05T01:57:59.000Z"
+    )
+  })
+  it("rejects mismatched separators and trailing characters (#99)", () => {
+    expect(() => parse("2026/11/12", "YYYY-MM-DD", "en")).toThrow(
+      "does not match format"
+    )
+    expect(() => parse("2026-11-120", "YYYY-MM-DD", "en")).toThrow(
+      "does not match format"
+    )
+    expect(() =>
+      parse({
+        date: "2026/11/12",
+        format: "YYYY-MM-DD",
+        locale: "en",
+        dateOverflow: "throw",
+      })
+    ).toThrow("does not match format")
+    expect(parse("2026-11-12", "YYYY-MM-DD", "en").getDate()).toBe(12)
+  })
+  it("matches literals leniently on whitespace and case (#99)", () => {
+    const d = new Date(2024, 0, 6, 22, 4)
+    // Intl renders a narrow no-break space before the day period
+    expect(parse(format(d, "h:mm a", "en"), "h:mm a", "en").getHours()).toBe(22)
+    expect(parse("10:04 pm", "h:mm a", "en").getMinutes()).toBe(4)
+    expect(parse("10:04\u00a0PM", "h:mm A", "en").getHours()).toBe(22)
+    expect(
+      parse("JANUARY 6, 2024", "MMMM D, YYYY", "en").getFullYear()
+    ).toBe(2024)
+  })
+  it("allows numeric literals between fixed-width parts (formkit/formkit#1134)", () => {
+    const d = new Date(2024, 4, 17)
+    expect(format(d, "YYYY-MM-01", "en")).toBe("2024-05-01")
+    const parsed = parse("2024-05-01", "YYYY-MM-01", "en")
+    expect([parsed.getFullYear(), parsed.getMonth()]).toEqual([2024, 4])
+    expect(format(d, "01/MM/YYYY", "en")).toBe("01/05/2024")
+    expect(() => parse("2024-05-02", "YYYY-MM-01", "en")).toThrow(
+      "does not match format"
+    )
+  })
+  it("still rejects numeric literals next to variable-width tokens", () => {
+    expect(() => parse("1011", "M01D", "en")).toThrow("Numbers in format")
+  })
 })

@@ -55,11 +55,18 @@ export function parse(
   if (format === "ISO8601") return date(dateStr)
   const genitive =
     styles.includes(format as FormatStyle) || typeof format === "object"
-  const formatParts = validate(parts(format, locale).filter(partFilter))
+  const allParts = parts(format, locale)
+  const formatParts = validate(allParts.filter(partFilter))
   if (!formatParts.length) throw new Error("parse() requires a pattern.")
   let parsedParts
   try {
-    parsedParts = parseParts(dateStr, formatParts)
+    // When parts are filtered out the input may legitimately contain text the
+    // remaining format doesn't describe, so only match strictly otherwise.
+    parsedParts = parseParts(
+      dateStr,
+      formatParts,
+      formatParts.length === allParts.length
+    )
   } catch {
     return invalid()
   }
@@ -111,6 +118,10 @@ export function parse(
         parsed.set("HH", v)
       } else if (t === "M") {
         parsed.set("MM", v)
+      } else if (t === "m") {
+        parsed.set("mm", v)
+      } else if (t === "s") {
+        parsed.set("ss", v)
       } else if (t === "a" || t === "A") {
         a = part.value.toLowerCase() === ap("am", locale).toLowerCase()
       } else if (t === "Z" || t === "ZZ") {
@@ -176,7 +187,20 @@ export function parse(
  * @param dateStr - A string to parse.
  * @param formatParts - The expected parts of the given string.
  */
-export function parseParts(dateStr: string, formatParts: Part[]): FilledPart[] {
+/**
+ * Normalize a literal for comparison: Intl uses narrow/no-break spaces and
+ * compatibility characters, so compare case-insensitively with any whitespace
+ * treated as a plain space.
+ */
+function normalizeLiteral(literal: string): string {
+  return literal.normalize("NFKC").replace(/\s/g, " ").toLowerCase()
+}
+
+export function parseParts(
+  dateStr: string,
+  formatParts: Part[],
+  strict = false
+): FilledPart[] {
   let i = 0
   const advance = (parts: Part[]): [Part, Part | undefined] => [
     parts[i++],
@@ -228,8 +252,19 @@ export function parseParts(dateStr: string, formatParts: Part[]): FilledPart[] {
       len = dateStr.length
     }
 
-    parsed.push({ ...current, value: dateStr.substring(pos, pos + len) })
+    const value = dateStr.substring(pos, pos + len)
+    if (
+      strict &&
+      current.partName === "literal" &&
+      normalizeLiteral(value) !== normalizeLiteral(current.partValue)
+    ) {
+      // A separator that doesn't match the format (#99)
+      throw new Error()
+    }
+    parsed.push({ ...current, value })
     pos += len
   } while (n)
+  // Trailing characters the format doesn't account for (#99)
+  if (strict && pos < dateStr.length) throw new Error()
   return parsed
 }

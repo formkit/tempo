@@ -329,6 +329,21 @@ const fns: Record<
     ],
     return: "boolean",
   },
+  sameMonth: {
+    description:
+      "Checks if two dates are in the same month of the same year. This function is useful for comparing dates but ignoring the day and time.",
+    arguments: [
+      {
+        name: "dateA",
+        type: "Date",
+      },
+      {
+        name: "dateB",
+        type: "Date",
+      },
+    ],
+    return: "boolean",
+  },
   sameYear: {
     description:
       "Checks if two dates are the same year. This function is useful for comparing dates but ignoring the month, day, and time.",

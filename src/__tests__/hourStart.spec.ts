@@ -14,4 +14,34 @@ describe("hourStart", () => {
     compare.setMinutes(0, 0, 0)
     expect(hourStart()).toEqual(compare)
   })
+
+  it("keeps the second occurrence of a repeated hour (DST fall-back)", () => {
+    // 2026-11-01 01:30 America/New_York happens twice; 06:30Z is the second (EST)
+    expect(hourStart("2026-11-01T06:30:15.123Z").toISOString()).toBe("2026-11-01T06:00:00.000Z")
+  })
+
+  it("handles a 30-minute DST fall-back (Lord_Howe)", () => {
+    const tz = process.env.TZ
+    process.env.TZ = "Australia/Lord_Howe"
+    try {
+      const r = hourStart("2026-04-04T15:15:15.123Z")
+      expect(r.getMinutes()).toBe(0)
+      expect(r.getSeconds()).toBe(0)
+    } finally {
+      process.env.TZ = tz
+    }
+  })
+
+  it("stays in the input's local hour across a non-hourly offset change (Chatham)", () => {
+    const tz = process.env.TZ
+    process.env.TZ = "Pacific/Chatham"
+    try {
+      const input = new Date("2026-04-04T13:18:13.123Z") // 03:03:13 +13:45
+      const r = hourStart(input)
+      expect(r.getHours()).toBe(input.getHours())
+      expect(r.getMinutes()).toBe(0)
+    } finally {
+      process.env.TZ = tz
+    }
+  })
 })
