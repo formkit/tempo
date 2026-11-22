@@ -41,6 +41,25 @@ const fns: Record<
     ],
     return: "number",
   },
+  weekNumber: {
+    name: "week-number",
+    description: `Gets the week of the year (1–53) for a given date. Defaults to ISO 8601 numbering: weeks start on Monday and week 1 is the week containing January 4th, so a date near New Year can belong to the neighbouring year's week (2024-12-30 is week 1). Pass a different <code>startOfWeekDay</code> (0 = Sunday) and <code>firstWeekContainsDate</code> (e.g. 1 for US-style weeks where week 1 contains January 1st) for other conventions.`,
+    arguments: [
+      {
+        name: "date?",
+        type: "Date | string",
+      },
+      {
+        name: "startOfWeekDay?",
+        type: "number",
+      },
+      {
+        name: "firstWeekContainsDate?",
+        type: "number",
+      },
+    ],
+    return: "number",
+  },
   formatStr: {
     name: "format-str",
     description:
