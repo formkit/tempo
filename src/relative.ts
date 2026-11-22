@@ -1,6 +1,4 @@
 import { date } from "./date"
-import { dayStart } from "./dayStart"
-import { diffDays } from "./diffDays"
 import { diffMonths } from "./diffMonths"
 import { diffYears } from "./diffYears"
 import { deviceLocale } from "./deviceLocale"
@@ -31,23 +29,40 @@ export interface RelativeOptions {
 const formatters: Record<string, Intl.RelativeTimeFormat> = {}
 
 /**
- * The amount of the given unit between the date and the base. Days, weeks,
- * months and years count calendar boundaries in local time, so 11pm last
- * night is "yesterday" and a DST change can't shift the result.
+ * The local wall-clock time of a date as a UTC timestamp, so differences are
+ * measured the way a person reads a clock (a DST change doesn't add or remove
+ * an hour).
+ */
+function wall(d: Date, dateOnly = false): number {
+  const w = new Date(0)
+  w.setUTCFullYear(d.getFullYear(), d.getMonth(), d.getDate())
+  if (!dateOnly) {
+    w.setUTCHours(d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds())
+  }
+  return +w
+}
+
+/**
+ * The (truncated) amount of the given unit from base to the date. Hours use
+ * the wall clock, days and weeks count calendar dates, months and years are
+ * completed months/years (like diffMonths/diffYears).
  */
 function amount(unit: RelativeUnit, d: Date, base: Date): number {
-  const ms = +d - +base
   switch (unit) {
     case "second":
-      return Math.trunc(ms / 1000)
+      return Math.trunc((+d - +base) / 1000)
     case "minute":
-      return Math.trunc(ms / 60_000)
-    case "hour":
-      return Math.trunc(ms / 3_600_000)
+      return Math.trunc((+d - +base) / 60_000)
+    case "hour": {
+      // Wall-clock hours, except inside a repeated (fall-back) hour where the
+      // wall clock reads the same twice: fall back to elapsed hours.
+      const hours = Math.trunc((wall(d) - wall(base)) / 3_600_000)
+      return hours || Math.trunc((+d - +base) / 3_600_000)
+    }
     case "day":
-      return diffDays(dayStart(d), dayStart(base))
+      return Math.round((wall(d, true) - wall(base, true)) / 86_400_000)
     case "week":
-      return Math.trunc(diffDays(dayStart(d), dayStart(base)) / 7)
+      return Math.trunc(amount("day", d, base) / 7)
     case "month":
       return diffMonths(d, base)
     case "year":
@@ -63,12 +78,15 @@ function amount(unit: RelativeUnit, d: Date, base: Date): number {
  * relative(addMinute(new Date(), -5)) // "5 minutes ago"
  * relative(addDay(new Date(), -1)) // "yesterday"
  * relative("2030-01-01", { locale: "fr" }) // "dans 3 ans"
- * relative(d, { numeric: "always", style: "short" }) // "1 day ago" → "1 day ago"
  * ```
  *
- * Under 1 minute it uses seconds, under 1 hour minutes, under 1 day hours,
- * under 1 week calendar days, under 1 month weeks, under 1 year months,
- * otherwise years.
+ * - under a minute: seconds; under an hour: minutes
+ * - under 24 wall-clock hours: hours
+ * - otherwise calendar days (under 7), then weeks (under a completed month),
+ *   completed months (under 12), then completed years.
+ *
+ * Amounts are truncated toward zero (59.9 minutes is "59 minutes"), and are
+ * computed in the device's local time zone.
  *
  * @param inputDate - The date to describe
  * @param [options] - base, locale, numeric, style or a fixed unit
@@ -79,32 +97,28 @@ export function relative(
 ): string {
   const d = date(inputDate)
   const base = date(options.base)
-  const locale = !options.locale || options.locale === "device" ? deviceLocale() : options.locale
+  const locale =
+    !options.locale || options.locale === "device" ? deviceLocale() : options.locale
   const numeric = options.numeric ?? "auto"
   const style = options.style ?? "long"
   let unit = options.unit
-  let value = 0
-  if (unit) {
-    value = amount(unit, d, base)
-  } else {
+  if (!unit) {
     const ms = Math.abs(+d - +base)
     if (ms < 60_000) unit = "second"
     else if (ms < 3_600_000) unit = "minute"
-    else if (ms < 86_400_000) unit = "hour"
+    else if (Math.abs(wall(d) - wall(base)) < 86_400_000) unit = "hour"
+    else if (Math.abs(amount("day", d, base)) < 7) unit = "day"
     else {
       const months = amount("month", d, base)
-      const days = amount("day", d, base)
-      if (Math.abs(months) >= 12) unit = "year"
-      else if (months !== 0) unit = "month"
-      else if (Math.abs(days) >= 7) unit = "week"
-      else unit = "day"
+      unit = months === 0 ? "week" : Math.abs(months) < 12 ? "month" : "year"
     }
-    value = amount(unit, d, base)
   }
+  let value = amount(unit, d, base)
+  // Keep the direction for zero amounts: "0 days ago" vs "in 0 days".
+  if (value === 0) value = +d < +base ? -0 : 0
   const key = `${locale}|${numeric}|${style}`
   const rtf =
     formatters[key] ??
     (formatters[key] = new Intl.RelativeTimeFormat(locale, { numeric, style }))
-  // Avoid "-0" ("0 seconds ago") vs "0" ("now") inconsistencies.
-  return rtf.format(value === 0 ? 0 : value, unit)
+  return rtf.format(value, unit)
 }

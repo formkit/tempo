@@ -40,13 +40,11 @@ export function diffMonths(dateA: MaybeDateInput, dateB?: MaybeDateInput): numbe
   const ld = l.getDate()
   const rd = r.getDate()
 
-  // if no full month has passed we may subtract a month from the calendar months so we get the amount of full months
-  if (ld < rd || (ld == rd && timeOfDay(l) < timeOfDay(r))) {
-    // in case dateA date is the last day of the month & the dateB date is higher, we don't subtract as a full month did actually pass
-    const lm = monthDays(l)
-    if (!(lm == ld && lm < rd)) {
-      months--
-    }
+  // A month is complete once the anniversary (clamped to the month's length,
+  // so Jan 31 → Feb 28) and its time of day have been reached.
+  const anniversary = Math.min(rd, monthDays(l))
+  if (ld < anniversary || (ld == anniversary && timeOfDay(l) < timeOfDay(r))) {
+    months--
   }
   //ensures we don't give back -0
   return months == 0 ? 0 : months

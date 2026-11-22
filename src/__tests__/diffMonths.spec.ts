@@ -51,3 +51,13 @@ describe("differenceInMonths", () => {
     expect(diffMonths(compare)).toBe(3)
   })
 })
+
+describe("diffMonths month-end anniversaries", () => {
+  it("respects the time of day on a clamped anniversary", () => {
+    expect(diffMonths("2026-02-28T01:00:00", "2026-01-31T23:00:00")).toBe(0)
+    expect(diffMonths("2026-02-28T23:00:00", "2026-01-31T23:00:00")).toBe(1)
+    expect(diffMonths("2026-02-28T00:00:00", "2026-01-31T00:00:00")).toBe(1)
+    expect(diffMonths("2025-02-28T01:00:00", "2024-02-29T23:00:00")).toBe(11)
+    expect(diffMonths("2026-01-31T23:00:00", "2026-02-28T01:00:00")).toBe(0)
+  })
+})

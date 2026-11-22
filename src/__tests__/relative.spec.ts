@@ -19,20 +19,39 @@ describe("relative", () => {
     expect(relative(at("2023-01-01T00:00:00"), o)).toBe("3 years ago")
   })
 
-  it("counts calendar days, not 24h blocks", () => {
-    // 11pm the night before is yesterday, even though it is only 13h earlier…
-    const late = new Date("2026-03-10T23:30:00")
-    expect(relative(at("2026-03-09T23:00:00"), { base: late, locale: "en" })).toBe("yesterday")
-    // …and 30h earlier across one midnight is still yesterday, not "2 days ago"
+  it("uses the wall clock for hours and calendar dates for days", () => {
+    // under 24 wall-clock hours stays in hours, even across midnight
+    const late = new Date("2026-03-10T01:00:00")
+    expect(relative(at("2026-03-09T23:30:00"), { base: late, locale: "en" })).toBe("1 hour ago")
+    // 30h earlier across one midnight is yesterday, not "2 days ago"
     expect(relative(at("2026-03-09T06:00:00"), { base, locale: "en" })).toBe("yesterday")
     // 26h earlier across two midnights is 2 days ago
-    const early = new Date("2026-03-10T01:00:00")
-    expect(relative(at("2026-03-08T23:00:00"), { base: early, locale: "en" })).toBe("2 days ago")
+    expect(relative(at("2026-03-08T23:00:00"), { base: late, locale: "en" })).toBe("2 days ago")
   })
 
-  it("is not shifted by DST (2026-03-08 in New York)", () => {
-    const after = new Date("2026-03-09T00:30:00")
-    expect(relative(at("2026-03-07T23:30:00"), { base: after, locale: "en" })).toBe("2 days ago")
+  it("is not shifted by DST", () => {
+    // New York springs forward 2026-03-08: noon → next noon is 23h elapsed
+    expect(relative(at("2026-03-08T12:00:00"), { base: at("2026-03-07T12:00:00"), locale: "en" })).toBe("tomorrow")
+    expect(relative(at("2026-03-07T12:00:00"), { base: at("2026-03-08T12:00:00"), locale: "en" })).toBe("yesterday")
+    // falls back 2026-11-01: midnight → 23:30 same day is 24.5h elapsed
+    expect(relative(at("2026-11-01T23:30:00"), { base: at("2026-11-01T00:00:00"), locale: "en" })).toBe("in 23 hours")
+    // inside the repeated hour the wall clock reads the same twice
+    expect(relative(at("2026-11-01T01:30:00-05:00"), { base: at("2026-11-01T01:30:00-04:00"), locale: "en", numeric: "always" })).toBe("in 1 hour")
+    expect(relative(at("2026-11-01T01:30:00-04:00"), { base: at("2026-11-01T01:30:00-05:00"), locale: "en", numeric: "always" })).toBe("1 hour ago")
+    // skipped midnight (São Paulo 2018-11-04) still counts one day
+    process.env.TZ = "America/Sao_Paulo"
+    expect(relative(new Date(2018, 10, 5, 12), { base: new Date(2018, 10, 4, 12), locale: "en", unit: "day", numeric: "always" })).toBe("in 1 day")
+    process.env.TZ = "America/New_York"
+  })
+
+  it("keeps direction for zero amounts and never auto-picks a zero unit", () => {
+    expect(relative(new Date(+base - 1), { base, locale: "en", numeric: "always" })).toBe("0 seconds ago")
+    expect(relative(new Date(+base + 1), { base, locale: "en", numeric: "always" })).toBe("in 0 seconds")
+    expect(relative(at("2026-03-12T12:00:00"), { base, locale: "en", unit: "month", numeric: "always" })).toBe("in 0 months")
+    const o = { base, locale: "en", numeric: "always" as const }
+    for (let h = -24 * 800; h <= 24 * 800; h += 7) {
+      expect(relative(new Date(+base + h * 3_600_000), o)).not.toMatch(/\b0 /)
+    }
   })
 
   it("supports numeric, style, unit and locale", () => {
