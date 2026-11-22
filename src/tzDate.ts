@@ -22,7 +22,8 @@ function wallClock(inputDate: MaybeDateInput, d: Date): number {
   const match =
     typeof inputDate === "string" ? inputDate.trim().match(iso8601Match) : null
   const wall = new Date(0)
-  if (match && !match[7]) {
+  // The offset (Z or ±hh:mm) is always the last group of iso8601Match.
+  if (match && !match[match.length - 1]) {
     wall.setUTCFullYear(+match[1], +match[2] - 1, +(match[3] ?? 1))
     wall.setUTCHours(
       +(match[4] ?? 0),

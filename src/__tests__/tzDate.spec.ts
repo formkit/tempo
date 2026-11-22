@@ -39,6 +39,26 @@ describe("tzDate", () => {
       "2024-03-09T17:30:00.000Z"
     )
   })
+  it("reads a string with Z or an offset as an instant", () => {
+    // 01:30Z is 21:30 on the device (New York), so it becomes 21:30 in Amsterdam.
+    for (const input of [
+      "2024-10-27T01:30Z",
+      "2024-10-27T03:30+02:00",
+      "2024-10-27T01:30:00.000Z",
+    ]) {
+      expect(tzDate(input, "Europe/Amsterdam").toISOString()).toBe(
+        "2024-10-26T19:30:00.000Z"
+      )
+    }
+    expect(
+      tzDate("2024-07-01T12:00:00.123-04:00", "Asia/Tokyo").toISOString()
+    ).toBe("2024-07-01T03:00:00.123Z")
+  })
+  it("keeps a zoneless wall time with fractional seconds", () => {
+    expect(tzDate("2024-03-10T02:30:00.500", "Asia/Tokyo").toISOString()).toBe(
+      "2024-03-09T17:30:00.500Z"
+    )
+  })
   it("uses the local time of a Date object", () => {
     expect(
       tzDate(new Date(2024, 9, 27, 1, 30), "Europe/Amsterdam").toISOString()
