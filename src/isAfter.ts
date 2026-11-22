@@ -2,11 +2,6 @@ import { date } from "./date"
 import type { DateInput, MaybeDateInput } from "./types"
 
 /**
- * @name isAfter
- * @category Common Helpers
- * @summary Is the first date after the second one or the current time?
- *
- * @description
  * Is the first date after the second one or the current time?
  *
  * @param inputDate - The date that should be after the other one to return true
@@ -14,7 +9,17 @@ import type { DateInput, MaybeDateInput } from "./types"
  *
  * @returns The first date is after the second date or the current time.
  */
-export function isAfter(inputDate: DateInput, dateToCompare?: MaybeDateInput) {
+export function isAfter(inputDate: DateInput, dateToCompare?: MaybeDateInput): boolean
+/**
+ * Is the current time after the given date?
+ *
+ * @param inputDate - null to use the current time
+ * @param dateToCompare - The date to compare with
+ *
+ * @returns The current time is after the given date.
+ */
+export function isAfter(inputDate: MaybeDateInput, dateToCompare: DateInput): boolean
+export function isAfter(inputDate: MaybeDateInput, dateToCompare?: MaybeDateInput): boolean {
   const _date = date(inputDate)
   const _dateToCompare = date(dateToCompare)
 
