@@ -12,6 +12,10 @@ describe("differenceInYears", () => {
     expect(diffYears("2025-04-20", "2024-03-31")).toBe(1)
   })
 
+  it("does not count a year that is a few hours short", () => {
+    expect(diffYears("2025-02-15T09:00:00", "2024-02-15T10:00:00")).toBe(0)
+    expect(diffYears("2025-02-15T10:00:00", "2024-02-15T10:00:00")).toBe(1)
+  })
   it("returns a negative number when swapped around as the first is now smaller", () => {
     expect(diffYears("2024-03-31", "2025-04-20")).toBe(-1)
   })

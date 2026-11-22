@@ -3,6 +3,16 @@ import type { DateInput, MaybeDateInput } from "./types"
 import { monthDays } from "./monthDays"
 
 /**
+ * Milliseconds since local midnight.
+ */
+function timeOfDay(d: Date): number {
+  return (
+    ((d.getHours() * 60 + d.getMinutes()) * 60 + d.getSeconds()) * 1000 +
+    d.getMilliseconds()
+  )
+}
+
+/**
  * Returns the difference between 2 dates in months.
  * @param dateA - A date to compare with the dateB date
  * @param [dateB] - A date to compare with the dateA date or nothing to compare with the current time
@@ -31,7 +41,7 @@ export function diffMonths(dateA: MaybeDateInput, dateB?: MaybeDateInput): numbe
   const rd = r.getDate()
 
   // if no full month has passed we may subtract a month from the calendar months so we get the amount of full months
-  if (ld < rd) {
+  if (ld < rd || (ld == rd && timeOfDay(l) < timeOfDay(r))) {
     // in case dateA date is the last day of the month & the dateB date is higher, we don't subtract as a full month did actually pass
     const lm = monthDays(l)
     if (!(lm == ld && lm < rd)) {
