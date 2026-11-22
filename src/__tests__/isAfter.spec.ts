@@ -23,3 +23,10 @@ describe("isAfter", () => {
     expect(isAfter(addDay(new Date(), 1))).toBe(true)
   })
 })
+
+describe("isAfter with the current time", () => {
+  it("accepts null as the first date to compare now with a date", () => {
+    expect(isAfter(null, new Date(Date.now() - 60_000))).toBe(true)
+    expect(isAfter(null, new Date(Date.now() + 60_000))).toBe(false)
+  })
+})
