@@ -16,4 +16,23 @@ describe("dayOfYear", () => {
     const start = yearStart()
     expect(dayOfYear()).toBe(diffDays(null, start) + 1)
   })
+
+  it("counts calendar days across skipped dates", () => {
+    const original = process.env.TZ
+    try {
+      for (const [tz, input, expected] of [
+        ["Pacific/Apia", "2011-12-31", 365],
+        ["Pacific/Kwajalein", "1993-12-31", 365],
+        ["Pacific/Apia", "2011-01-01", 1],
+        ["America/New_York", "2020-12-31", 366],
+        ["UTC", "2011-12-31", 365],
+      ] as const) {
+        process.env.TZ = tz
+        expect(dayOfYear(input), `${tz} ${input}`).toBe(expected)
+      }
+    } finally {
+      process.env.TZ = original
+    }
+  })
+
 })
