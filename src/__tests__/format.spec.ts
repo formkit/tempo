@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { format } from "../format"
+import { parse } from "../parse"
 import { tzDate } from "../tzDate"
 process.env.TZ = "America/New_York"
 
@@ -286,5 +287,23 @@ describe("format with a timezone", () => {
     expect(format(d, "h:mm A", "ar-EG")).toMatch(/^١٠:٠٤ /)
     expect(format(d, "hh:mm:ss a", "fa")).toMatch(/^۱۰:۰۴:۰۰ /)
     expect(format(d, "h:mm a", "en")).toBe("10:04 am")
+  })
+})
+
+describe("format device offset", () => {
+  it("prints the offset of the actual instant around DST changes", () => {
+    process.env.TZ = "America/New_York"
+    expect(format("2026-03-08T07:30:00Z", "YYYY-MM-DD HH:mm Z")).toBe("2026-03-08 03:30 -04:00")
+    expect(format("2026-11-01T06:30:00Z", "YYYY-MM-DD HH:mm Z")).toBe("2026-11-01 01:30 -05:00")
+    expect(format("2026-11-01T05:30:00Z", "HH:mm ZZ")).toBe("01:30 -0400")
+    expect(format("2026-07-01T12:00:00Z", "HH:mm Z")).toBe("08:00 -04:00")
+  })
+  it("keeps second-precision historical offsets so format → parse round-trips (#67)", () => {
+    process.env.TZ = "America/Detroit"
+    const d = new Date("1904-06-01T05:32:11Z")
+    const s = format(d, "YYYY-MM-DD HH:mm:ss Z")
+    expect(s).toBe("1904-06-01 00:00:00 -05:32:11")
+    expect(parse(s, "YYYY-MM-DD HH:mm:ss Z").toISOString()).toBe(d.toISOString())
+    process.env.TZ = "America/New_York"
   })
 })

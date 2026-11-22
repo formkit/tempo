@@ -1,6 +1,6 @@
 import { date } from "./date"
 import { parts } from "./parts"
-import { fill, getOffsetFormat } from "./common"
+import { fill, getOffsetFormat, secsToOffset } from "./common"
 import type {
   DateInput,
   Format,
@@ -79,6 +79,11 @@ export function format(
 
   if (tz) {
     forceOffset = offset(inputDateOrOptions, "utc", tz, getOffsetFormat(format))
+  } else if (typeof format === "string" ? format.includes("Z") : "time" in format) {
+    // Read the device offset from the real instant: the shifted date below can
+    // land on the other side of a DST change, and getTimezoneOffset() drops
+    // the seconds of historical offsets like Detroit's -05:32:11 (#67).
+    forceOffset = deviceOffset(date(inputDateOrOptions), getOffsetFormat(format))
   }
 
   // We need to apply an offset to the date so that it can be formatted as UTC.
@@ -103,4 +108,15 @@ export function format(
   )
     .map((p) => p.value)
     .join("")
+}
+
+/**
+ * The device's offset at the given instant, to the second, read from the
+ * local date fields (no Intl call needed).
+ */
+function deviceOffset(d: Date, token: "Z" | "ZZ"): string {
+  const wall = new Date(0)
+  wall.setUTCFullYear(d.getFullYear(), d.getMonth(), d.getDate())
+  wall.setUTCHours(d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds())
+  return secsToOffset(Math.round((+wall - +d) / 1000), token)
 }
