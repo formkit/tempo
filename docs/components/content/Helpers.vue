@@ -206,6 +206,21 @@ const fns: Record<
       },
     ],
   },
+  relative: {
+    name: "relative",
+    description: `Formats a date relative to now (or <code>base</code>) with <code>Intl.RelativeTimeFormat</code>, picking the largest sensible unit: seconds under a minute, minutes under an hour, hours under a day, then calendar days, weeks, months and years — so 11pm last night is "yesterday", and DST changes don't shift the result. Options: <code>base</code>, <code>locale</code>, <code>numeric</code> (<code>"auto"</code> gives "yesterday", <code>"always"</code> gives "1 day ago"), <code>style</code> (<code>"long"</code> | <code>"short"</code> | <code>"narrow"</code>) and a fixed <code>unit</code>.`,
+    arguments: [
+      {
+        name: "date",
+        type: "string | Date",
+      },
+      {
+        name: "options?",
+        type: "{ base?, locale?, numeric?, style?, unit? }",
+      },
+    ],
+    return: "string",
+  },
   isAfter: {
     description:
       "Returns true if the first date is after the second date, otherwise false.",
