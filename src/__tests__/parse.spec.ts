@@ -118,6 +118,11 @@ describe("parse", () => {
     const str = format(d, { date: "long" }, "ko")
     expect(parse(str, { date: "long" }, "ko")).toEqual(d)
   })
+  it("parses an upper-case month name", () => {
+    expect(parse("JANUARY 6, 2024", "MMMM D, YYYY", "en")).toEqual(
+      new Date(2024, 0, 6)
+    )
+  })
   it("throws on an unknown month name", () => {
     expect(() => parse("9 Foo 2026", "D MMMM YYYY", "en")).toThrow()
   })

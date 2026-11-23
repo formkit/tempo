@@ -129,9 +129,13 @@ export function parse(
       } else {
         // format() can write either the standalone or the in-context month
         // name (ru "январь" / "января"), so accept both.
-        let index = range(t as FormatToken, locale, genitive).indexOf(part.value)
-        if (index === -1)
-          index = range(t as FormatToken, locale, !genitive).indexOf(part.value)
+        const value = normalizeLiteral(part.value)
+        const find = (g: boolean) =>
+          range(t as FormatToken, locale, g).findIndex(
+            (name) => normalizeLiteral(name) === value
+          )
+        let index = find(genitive)
+        if (index === -1) index = find(!genitive)
         switch (t) {
           case "MMM":
           case "MMMM":
