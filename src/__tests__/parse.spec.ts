@@ -106,6 +106,26 @@ describe("parse", () => {
       `2020-01-13T${h}:00:00.000Z`
     )
   })
+  it("can parse the month name format() writes in ru and pl", () => {
+    const d = new Date(2026, 0, 9)
+    for (const locale of ["ru", "pl"]) {
+      const str = format(d, "D MMMM YYYY", locale)
+      expect(parse(str, "D MMMM YYYY", locale)).toEqual(d)
+    }
+  })
+  it("can parse the ko long date", () => {
+    const d = new Date(2026, 0, 9)
+    const str = format(d, { date: "long" }, "ko")
+    expect(parse(str, { date: "long" }, "ko")).toEqual(d)
+  })
+  it("parses an upper-case month name", () => {
+    expect(parse("JANUARY 6, 2024", "MMMM D, YYYY", "en")).toEqual(
+      new Date(2024, 0, 6)
+    )
+  })
+  it("throws on an unknown month name", () => {
+    expect(() => parse("9 Foo 2026", "D MMMM YYYY", "en")).toThrow()
+  })
   it("can parse 4pm August 15, 99", () => {
     expect(
       parse("4pm on August 15, 99", "ha on MMMM D, YY").toISOString()
