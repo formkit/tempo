@@ -206,6 +206,21 @@ const fns: Record<
       },
     ],
   },
+  formatDuration: {
+    name: "format-duration",
+    description: `Formats a duration for people — <code>"1 hour, 5 minutes"</code>, <code>"1 hr, 5 min"</code>, <code>"1h 5m"</code> or <code>"1:05:00"</code> — using <code>Intl.DurationFormat</code> (with a fallback for older runtimes). Pass milliseconds (split into days, hours, minutes and seconds; use <code>smallest</code> to include milliseconds or stop at minutes) or an object like <code>{ hours: 1, minutes: 5 }</code>. Zero formats as "0 seconds".`,
+    arguments: [
+      {
+        name: "duration",
+        type: "number | { years?, months?, weeks?, days?, hours?, minutes?, seconds?, milliseconds? }",
+      },
+      {
+        name: "options?",
+        type: "{ locale?, style?: 'long' | 'short' | 'narrow' | 'digital', smallest? }",
+      },
+    ],
+    return: "string",
+  },
   relative: {
     name: "relative",
     description: `Formats a date relative to now (or <code>base</code>) with <code>Intl.RelativeTimeFormat</code>, picking the largest sensible unit: seconds under a minute, minutes under an hour, hours under 24 wall-clock hours, then calendar days (under 7 — so "yesterday" / "in 2 days"), weeks, completed months and completed years. Amounts are truncated toward zero and computed in the device's local time zone, so DST changes don't shift the result. Options: <code>base</code>, <code>locale</code>, <code>numeric</code> (<code>"auto"</code> gives "yesterday", <code>"always"</code> gives "1 day ago"), <code>style</code> (<code>"long"</code> | <code>"short"</code> | <code>"narrow"</code>) and a fixed <code>unit</code>.`,
