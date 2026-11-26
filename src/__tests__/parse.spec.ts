@@ -359,4 +359,11 @@ describe("parse", () => {
   it("still rejects numeric literals next to variable-width tokens", () => {
     expect(() => parse("1011", "M01D", "en")).toThrow("Numbers in format")
   })
+  it("parses a month name followed directly by a fixed-width number", () => {
+    const d = new Date(2024, 0, 15)
+    expect(format(d, "DDMMMYYYY", "en")).toBe("15Jan2024")
+    expect(parse("15Jan2024", "DDMMMYYYY", "en")).toEqual(d)
+    expect(parse("2024 January15", "YYYY MMMMDD", "en")).toEqual(d)
+    expect(parse("15 Jan2024", "DD MMMYYYY", "en")).toEqual(d)
+  })
 })
