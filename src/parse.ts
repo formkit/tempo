@@ -252,7 +252,7 @@ export function parseParts(
         // Our validator guarantees the next is either not a number or it
         // will be the end of the string
         const nextChar = dateStr.substring(pos).search(/\d/)
-        if (nextChar !== -1) len = pos + nextChar
+        if (nextChar !== -1) len = nextChar
       }
     } else {
       len = dateStr.length
