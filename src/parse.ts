@@ -2,6 +2,7 @@ import { date } from "./date"
 import { validate, styles, fixedLength, four, two, validOffset, fixedLengthByOffset, offsetToSecs, TimezoneToken } from "./common"
 import { formatStr } from "./formatStr"
 import { fourDigitYear } from "./fourDigitYear"
+import { deviceLocale } from "./deviceLocale"
 import { ap } from "./ap"
 import { range } from "./range"
 import { monthDays } from "./monthDays"
@@ -82,6 +83,8 @@ export function parse(
   ])
   let a: null | boolean = null
   let offset = ""
+  // format() writes years in the locale's calendar, which may be Buddhist (th).
+  const eraOffset = yearOffset(locale)
   parsedParts.forEach((part): void | never => {
     if (part.partName === "literal") return
     if (part.token === part.value) return invalid()
@@ -91,12 +94,15 @@ export function parse(
       // "1" -> 100, "12" -> 120, "123" -> 123, "123456" -> 123
       const digits = part.value.padEnd(3, "0").slice(0, 3)
       parsed.set("SSS", Number(digits))
+    } else if (part.token === "YYYY") {
+      parsed.set("YYYY", v - eraOffset)
     } else if (parsed.has(part.token)) {
-      // Parse for YYYY, MM, DD, HH, hh, mm, ss
+      // Parse for MM, DD, HH, hh, mm, ss
       parsed.set(part.token, v)
     } else if (part.token === "YY") {
       // Parse for YY
-      parsed.set("YYYY", fourDigitYear(part.value))
+      const currentYear = now.getFullYear() + eraOffset
+      parsed.set("YYYY", fourDigitYear(part.value, currentYear) - eraOffset)
     } else {
       /* MMM - Short name Jan-Dec
        * MMMM - Full name January - December
@@ -185,6 +191,18 @@ export function parse(
   const d = new Date(isoString)
   if (isFinite(+d)) return d
   return invalid()
+}
+
+/**
+ * The number of years the locale's calendar is ahead of the Gregorian one.
+ * Only the Buddhist calendar is handled, it differs from Gregorian by the year.
+ * @param locale - The locale to parse from.
+ */
+function yearOffset(locale: string): number {
+  const { calendar } = new Intl.DateTimeFormat(
+    !locale || locale === "device" ? deviceLocale() : locale
+  ).resolvedOptions()
+  return calendar === "buddhist" ? 543 : 0
 }
 
 /**

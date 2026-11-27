@@ -359,4 +359,19 @@ describe("parse", () => {
   it("still rejects numeric literals next to variable-width tokens", () => {
     expect(() => parse("1011", "M01D", "en")).toThrow("Numbers in format")
   })
+
+  it("reads back the Buddhist calendar years format() writes for th (#110)", () => {
+    const day = new Date(2024, 1, 29)
+    for (const f of ["YYYY-MM-DD", { date: "long" }, { date: "short" }] as const) {
+      expect(parse(format(day, f, "th"), f, "th")).toEqual(day)
+    }
+    expect(parse("1/3/33", "D/M/YY", "th")).toEqual(new Date(1990, 2, 1))
+    expect(parse("2024-02-29", "YYYY-MM-DD", "th-TH-u-ca-gregory")).toEqual(day)
+  })
+
+  it("does not shift the default year for a th format without one", () => {
+    expect(parse("03-08", "MM-DD", "th").getFullYear()).toBe(
+      new Date().getFullYear()
+    )
+  })
 })
