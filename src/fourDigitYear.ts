@@ -4,9 +4,12 @@
  * the past.
  *
  * @param value - 2 digits in string format
+ * @param y - The current year, in the calendar the value is written in
  */
-export function fourDigitYear(value: string): number {
-  const y = new Date().getFullYear()
+export function fourDigitYear(
+  value: string,
+  y = new Date().getFullYear()
+): number {
   const currentYear = y % 100
   const century = Math.floor(y / 100)
   const parsedYear = Number(value)
